@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.ai)
     implementation(libs.room.runtime)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.lifecycle.viewmodel)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
