@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.ui.adapters.HymnalAdapter;
+import com.lhavanguane.tisimu.utils.SelectionManager;
 import com.lhavanguane.tisimu.viewmodels.HymnalViewModel;
 
 public class HymnalSelectionActivity extends AppCompatActivity {
@@ -108,12 +109,17 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         }
     }
 
+    // In HymnalSelectionActivity.java, update the btnContinue click listener:
+
     private void setupListeners() {
         btnContinue.setOnClickListener(v -> {
             if (selectedCount > 0) {
-                // Navigate to SongListActivity (to be implemented)
-                Intent intent = new Intent(HymnalSelectionActivity.this, MainActivity.class);
-                intent.putExtra("SELECTED_COUNT", selectedCount);
+                // Save that user has made selections
+                SelectionManager.getInstance(this).setHasSelectedHymnals(true);
+
+                // Navigate to SongListActivity
+                Intent intent = new Intent(HymnalSelectionActivity.this, SongListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             } else {

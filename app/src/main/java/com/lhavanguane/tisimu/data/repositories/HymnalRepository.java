@@ -4,17 +4,19 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lhavanguane.tisimu.data.database.TisimuDatabase;
 import com.lhavanguane.tisimu.data.database.daos.HymnalDao;
 import com.lhavanguane.tisimu.data.database.daos.UserHymnalSelectionDao;
 import com.lhavanguane.tisimu.data.database.entities.Hymnal;
+import com.lhavanguane.tisimu.data.database.entities.Section;
+import com.lhavanguane.tisimu.data.database.entities.Song;
 import com.lhavanguane.tisimu.data.database.entities.UserHymnalSelection;
 
 import java.util.List;
 public class HymnalRepository {
-
     private TisimuDatabase database;
     private FirebaseAuth mAuth;
 
@@ -33,6 +35,25 @@ public class HymnalRepository {
 
     public LiveData<Integer> getSelectedCount() {
         return database.hymnalDao().getSelectedCount();
+    }
+
+    public LiveData<List<Integer>> getSelectedHymnalIds() {
+        String userId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "temp_user";
+        return database.userHymnalSelectionDao().getSelectedHymnalIds(userId);
+    }
+
+    public LiveData<List<Section>> getSectionsForSelectedHymnals(List<Integer> hymnalIds) {
+        if (hymnalIds == null || hymnalIds.isEmpty()) {
+            return new MutableLiveData<>();
+        }
+        return database.sectionDao().getSectionsForSelectedHymnals(hymnalIds);
+    }
+
+    public LiveData<List<Song>> getSongsForSelectedHymnals(List<Integer> hymnalIds) {
+        if (hymnalIds == null || hymnalIds.isEmpty()) {
+            return new MutableLiveData<>();
+        }
+        return database.songDao().getSongsForSelectedHymnals(hymnalIds);
     }
 
     public void updateHymnalSelection(int hymnalId, boolean isSelected) {

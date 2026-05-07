@@ -11,19 +11,50 @@ public class Song {
     private int sectionId;
     private int number;
     private String title;
-    private String lyricsText;  // could be replaced by verses relationship
+    private String lyrics;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getComposer() {
+        return composer;
+    }
+
+    public void setComposer(String composer) {
+        this.composer = composer;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private String author;
+    private String composer;
     private boolean isOfficial;
     private Integer userId;  // null if official
+    private String createdAt;
 
-    public Song(int id, int hymnalId, int sectionId, int number, String title, String lyricsText, boolean isOfficial, Integer userId) {
-        this.id = id;
+    public Song(int hymnalId, int sectionId, int number, String title, String lyrics,
+                String author, String composer, boolean isOfficial, Integer userId, String createdAt) {
         this.hymnalId = hymnalId;
         this.sectionId = sectionId;
         this.number = number;
         this.title = title;
-        this.lyricsText = lyricsText;
+        this.lyrics = lyrics;
+        this.author = author;
+        this.composer = composer;
         this.isOfficial = isOfficial;
         this.userId = userId;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -66,12 +97,12 @@ public class Song {
         this.title = title;
     }
 
-    public String getLyricsText() {
-        return lyricsText;
+    public String getLyrics() {
+        return lyrics;
     }
 
-    public void setLyricsText(String lyricsText) {
-        this.lyricsText = lyricsText;
+    public void setLyrics(String lyricsText) {
+        this.lyrics = lyricsText;
     }
 
     public boolean isOfficial() {
