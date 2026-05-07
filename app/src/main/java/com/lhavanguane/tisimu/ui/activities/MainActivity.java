@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
         }
 
+        // Navigate to Hymnal Selection after login
+        // Add a small delay to show welcome message
+        findViewById(android.R.id.content).postDelayed(() -> {
+            Intent intent = new Intent(MainActivity.this, HymnalSelectionActivity.class);
+            startActivity(intent);
+            finish();
+        }, 1500);
+
         new Handler().postDelayed(() -> {
             checkUserLoginStatus();
         }, SPLASH_DELAY);

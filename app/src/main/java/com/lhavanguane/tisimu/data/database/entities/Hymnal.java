@@ -10,17 +10,20 @@ public class Hymnal {
     private String description;
     private String language;
     private int totalSongs;
+
+    private String coverImageUrl;
     private boolean isActive;
     private boolean isCollaborative;
+    private boolean isSelected;
 
-    public Hymnal(int id, String name, String description, String language, int totalSongs, boolean isActive, boolean isCollaborative) {
-        this.id = id;
+    public Hymnal(String name, String description, String language, int totalSongs) {
         this.name = name;
         this.description = description;
         this.language = language;
         this.totalSongs = totalSongs;
-        this.isActive = isActive;
-        this.isCollaborative = isCollaborative;
+        this.isActive = true;
+        this.isCollaborative = true;
+        this.isSelected = true;
     }
 
     public int getId() {
@@ -51,6 +54,14 @@ public class Hymnal {
         return language;
     }
 
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
+    }
+
     public void setLanguage(String language) {
         this.language = language;
     }
@@ -73,6 +84,14 @@ public class Hymnal {
 
     public boolean isCollaborative() {
         return isCollaborative;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public void setCollaborative(boolean collaborative) {

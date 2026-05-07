@@ -30,7 +30,7 @@
             android:name=".ui.activities.SongListActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.HymnalSelectorActivity"
+            android:name=".ui.activities.HymnalSelectionActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.RegisterActivity"
