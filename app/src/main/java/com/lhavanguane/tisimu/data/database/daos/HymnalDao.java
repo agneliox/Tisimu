@@ -35,4 +35,11 @@ public interface HymnalDao {
 
     @Query("SELECT COUNT(*) FROM hymnals WHERE isSelected = 1")
     LiveData<Integer> getSelectedCount();
+
+    // Add this synchronous method for checking data
+    @Query("SELECT COUNT(*) FROM hymnals")
+    int getCountSync();
+
+    @Query("DELETE FROM hymnals")
+    void deleteAll();
 }

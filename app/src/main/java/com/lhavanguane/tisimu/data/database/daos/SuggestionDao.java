@@ -1,4 +1,14 @@
 package com.lhavanguane.tisimu.data.database.daos;
 
-public class SuggestionDao {
+
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+
+import com.lhavanguane.tisimu.data.database.entities.Suggestion;
+
+@Dao
+public interface SuggestionDao {
+    @Insert
+    void insert(Suggestion suggestion);
 }

@@ -22,9 +22,6 @@ public class HymnalViewModel extends AndroidViewModel {
         allHymnals = repository.getAllHymnals();
         selectedHymnals = repository.getSelectedHymnals();
         selectedCount = repository.getSelectedCount();
-
-        // Insert sample data (only once)
-        repository.insertSampleHymnals();
     }
     public LiveData<List<Hymnal>> getAllHymnals() {
         return allHymnals;

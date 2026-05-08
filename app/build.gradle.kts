@@ -58,5 +58,10 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
 
+    // For audio playback
+    implementation(libs.exoplayer.core)
+    implementation(libs.exoplayer.ui)
+    // For image loading
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 }

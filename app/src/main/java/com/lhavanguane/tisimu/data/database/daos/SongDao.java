@@ -5,6 +5,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.lhavanguane.tisimu.data.database.entities.Comment;
+import com.lhavanguane.tisimu.data.database.entities.MelodyProposal;
 import com.lhavanguane.tisimu.data.database.entities.Song;
 
 import java.util.List;
@@ -14,6 +16,13 @@ public interface SongDao {
 
     @Insert
     void insert(Song song);
+
+    @Query("SELECT * FROM comments WHERE songId = :songId ORDER BY createdAt DESC")
+    LiveData<List<Comment>> getCommentsBySongId(int songId);
+
+
+    @Query("UPDATE comments SET likesCount = likesCount + 1 WHERE id = :commentId")
+    void likeComment(int commentId);
 
     @Insert
     void insertAll(List<Song> songs);
@@ -35,4 +44,13 @@ public interface SongDao {
 
     @Query("SELECT * FROM songs WHERE (title LIKE '%' || :query || '%' OR number LIKE '%' || :query || '%') AND hymnalId IN (:hymnalIds)")
     LiveData<List<Song>> searchSongsInSelectedHymnals(String query, List<Integer> hymnalIds);
+
+    @Query("SELECT * FROM songs WHERE id = :songId")
+    Song getSongByIdSync(int songId);
+
+    @Query("SELECT * FROM comments WHERE songId = :songId ORDER BY createdAt DESC")
+    List<Comment> getCommentsBySongIdSync(int songId);
+
+    @Query("SELECT * FROM melody_proposals WHERE songId = :songId ORDER BY likesCount DESC")
+    List<MelodyProposal> getMelodyProposalsBySongIdSync(int songId);
 }

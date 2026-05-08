@@ -2,6 +2,7 @@ package com.lhavanguane.tisimu.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.lhavanguane.tisimu.R;
+import com.lhavanguane.tisimu.data.database.TisimuDatabase;
 import com.lhavanguane.tisimu.ui.adapters.HymnalAdapter;
 import com.lhavanguane.tisimu.utils.SelectionManager;
 import com.lhavanguane.tisimu.viewmodels.HymnalViewModel;
@@ -45,6 +47,8 @@ public class HymnalSelectionActivity extends AppCompatActivity {
             return insets;
         });
 
+        Log.d("HymnalSelection", "Activity created");
+
         initViews();
         setupToolbar();
         setupRecyclerView();
@@ -52,6 +56,20 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         observeData();
         setupListeners();
 
+        // Debug: Check database
+        checkDatabaseContents();
+    }
+
+    private void checkDatabaseContents() {
+        new Thread(() -> {
+            TisimuDatabase db = TisimuDatabase.getInstance(this);
+            int count = db.hymnalDao().getCountSync();
+            Log.d("HymnalSelection", "Hymnals in database: " + count);
+
+            if (count == 0) {
+                Log.e("HymnalSelection", "No hymnals found in database!");
+            }
+        }).start();
     }
 
     private void initViews() {
