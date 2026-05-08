@@ -119,7 +119,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
             @Override
             public void onFailure(String error) {
                 progressDialog.dismiss();
-                Toast.makeText(HymnalSelectionActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
+//                Toast.makeText(HymnalSelectionActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
             }
         });
     }

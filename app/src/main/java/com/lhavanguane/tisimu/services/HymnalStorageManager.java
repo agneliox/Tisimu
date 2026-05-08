@@ -31,8 +31,8 @@ public class HymnalStorageManager {
 
     // TODO: Replace with your GitHub username
     private static final String GITHUB_USERNAME = "agneliox";
-    private static final String REPO_NAME = "tisimu";
-    private static final String BRANCH = "main";
+    private static final String REPO_NAME = "Tisimu";
+    private static final String BRANCH = "master";
     private static final String HYMNAL_DIR = "hymnals";
 
     private static final String MANIFEST_URL = "https://raw.githubusercontent.com/" +
@@ -85,8 +85,11 @@ public class HymnalStorageManager {
                         .build();
 
                 try (Response response = client.newCall(request).execute()) {
+                    Log.d(TAG, "Fetching response?: " +  response.body().string());
+
                     if (response.isSuccessful() && response.body() != null) {
                         String json = response.body().string();
+
                         HymnalManifest manifest = gson.fromJson(json, HymnalManifest.class);
 
                         // Update downloaded status

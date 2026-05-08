@@ -1,7 +1,7 @@
 {
   "version": 1,
   "lastUpdated": "2025-01-15T10:00:00Z",
-  "baseUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/tisimu/main/hymnals/",
+  "baseUrl": "https://raw.githubusercontent.com/agneliox/tisimu/main/hymnals/",
   "hymnals": [
     {
       "id": "harpa_crista",
@@ -9,8 +9,8 @@
       "description": "Traditional Brazilian gospel hymnal with 640 hymns",
       "language": "Portuguese",
       "totalSongs": 640,
-      "fileUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/tisimu/main/hymnals/harpa_crista.json",
-      "coverUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/tisimu/main/hymnals/covers/harpa_crista.jpg",
+      "fileUrl": "https://raw.githubusercontent.com/agneliox/tisimu/main/hymnals/harpa_crista.json",
+      "coverUrl": "https://raw.githubusercontent.com/agneliox/tisimu/main/hymnals/covers/harpa_crista.jpg",
       "fileSize": 2450000,
       "version": 1,
       "author": "Various Authors"
@@ -21,8 +21,8 @@
       "description": "Classic Portuguese hymns collection",
       "language": "Portuguese",
       "totalSongs": 520,
-      "fileUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/tisimu/main/hymnals/cantor_cristao.json",
-      "coverUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/tisimu/main/hymnals/covers/cantor_cristao.jpg",
+      "fileUrl": "https://raw.githubusercontent.com/agneliox/tisimu/main/hymnals/cantor_cristao.json",
+      "coverUrl": "https://raw.githubusercontent.com/agneliox/tisimu/main/hymnals/covers/cantor_cristao.jpg",
       "fileSize": 1800000,
       "version": 1,
       "author": "Various Authors"
