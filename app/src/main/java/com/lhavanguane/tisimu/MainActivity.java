@@ -1,8 +1,9 @@
-package com.lhavanguane.tisimu.ui.activities;
+package com.lhavanguane.tisimu;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lhavanguane.tisimu.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private static final int SPLASH_DELAY = 2000; // 2 seconds
     private FirebaseAuth mAuth;
 
@@ -22,14 +22,20 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_splash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_splash), (v, insets) -> {
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
         mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        }
 
         new Handler().postDelayed(() -> {
             checkUserLoginStatus();
@@ -40,16 +46,13 @@ public class SplashActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            // User is logged in, go to MainActivity
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            // User is logged in, stay in MainActivity or do nothing
+            // If this was a splash activity, we would navigate to MainActivity
         } else {
             // User is not logged in, go to LoginActivity
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
     }
-
 }

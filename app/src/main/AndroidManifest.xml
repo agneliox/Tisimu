@@ -33,16 +33,16 @@
             android:name=".ui.activities.HymnalSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

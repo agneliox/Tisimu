@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu.ui.activities;
+package com.lhavanguane.tisimu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,25 +14,22 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lhavanguane.tisimu.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-
-    private TextInputEditText etEmail, etPassword;
-    private MaterialButton btnLogin, btnGoogleSignIn;
-    private TextView tvForgotPassword, tvRegisterLink;
+    private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword;
+    private MaterialButton btnRegister;
+    private TextView tvLoginLink;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_login), (v, insets) -> {
+        setContentView(R.layout.activity_register);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_register), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -42,42 +39,40 @@ public class LoginActivity extends AppCompatActivity {
 
         initViews();
         setupClickListeners();
-
     }
 
     private void initViews() {
+        etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
-        tvRegisterLink = findViewById(R.id.tvRegisterLink);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        tvLoginLink = findViewById(R.id.tvLoginLink);
     }
 
     private void setupClickListeners() {
-        btnLogin.setOnClickListener(v -> loginUser());
+        btnRegister.setOnClickListener(v -> registerUser());
 
-        tvRegisterLink.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        tvLoginLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
-        });
-
-        tvForgotPassword.setOnClickListener(v -> {
-            // TODO: Implement password reset
-            Toast.makeText(LoginActivity.this, "Password reset coming soon", Toast.LENGTH_SHORT).show();
-        });
-
-        btnGoogleSignIn.setOnClickListener(v -> {
-            // TODO: Implement Google Sign In
-            Toast.makeText(LoginActivity.this, "Google Sign In coming soon", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 
-    private void loginUser() {
+    private void registerUser() {
+        String fullName = etFullName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
 
         // Validation
+        if (TextUtils.isEmpty(fullName)) {
+            etFullName.setError("Full name is required");
+            etFullName.requestFocus();
+            return;
+        }
+
         if (TextUtils.isEmpty(email)) {
             etEmail.setError("Email is required");
             etEmail.requestFocus();
@@ -96,32 +91,41 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Show loading
-        btnLogin.setEnabled(false);
-        btnLogin.setText("Logging in...");
+        if (!password.equals(confirmPassword)) {
+            etConfirmPassword.setError("Passwords do not match");
+            etConfirmPassword.requestFocus();
+            return;
+        }
 
-        // Authenticate with Firebase
-        mAuth.signInWithEmailAndPassword(email, password)
+        // Show loading
+        btnRegister.setEnabled(false);
+        btnRegister.setText("Creating account...");
+
+        // Create user with Firebase
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    btnLogin.setEnabled(true);
-                    btnLogin.setText(R.string.login);
+                    btnRegister.setEnabled(true);
+                    btnRegister.setText(R.string.register);
 
                     if (task.isSuccessful()) {
-                        // Login success
+                        // Registration success
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(LoginActivity.this, "Welcome back, " + (user != null ? user.getEmail() : ""), Toast.LENGTH_SHORT).show();
+
+                        // TODO: Save user profile (fullName) to Firebase Firestore or Realtime Database
+
+                        Toast.makeText(RegisterActivity.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
 
                         // Navigate to MainActivity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Login failed
+                        // Registration failed
                         String errorMessage = task.getException() != null ?
                                 task.getException().getMessage() :
-                                "Authentication failed";
-                        Toast.makeText(LoginActivity.this, "Login failed: " + errorMessage, Toast.LENGTH_LONG).show();
+                                "Registration failed";
+                        Toast.makeText(RegisterActivity.this, "Registration failed: " + errorMessage, Toast.LENGTH_LONG).show();
                     }
                 });
     }

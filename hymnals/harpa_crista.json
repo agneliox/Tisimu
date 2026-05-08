@@ -1,0 +1,58 @@
+{
+  "id": "harpa_crista",
+  "name": "Harpa Cristã",
+  "version": 1,
+  "metadata": {
+    "description": "Traditional Brazilian gospel hymnal",
+    "language": "Portuguese",
+    "totalSongs": 640,
+    "year": 1922,
+    "publisher": "Editora Betânia"
+  },
+  "sections": [
+    {
+      "id": 1,
+      "sequence": 1,
+      "name": "Louvor e Adoração",
+      "startNumber": 1,
+      "endNumber": 150
+    },
+    {
+      "id": 2,
+      "sequence": 2,
+      "name": "Natal",
+      "startNumber": 151,
+      "endNumber": 200
+    },
+    {
+      "id": 3,
+      "sequence": 3,
+      "name": "Páscoa",
+      "startNumber": 201,
+      "endNumber": 250
+    },
+    {
+      "id": 4,
+      "sequence": 4,
+      "name": "Fé e Esperança",
+      "startNumber": 251,
+      "endNumber": 350
+    }
+  ],
+  "songs": [
+    {
+      "number": 1,
+      "title": "Grandioso És Tu",
+      "lyrics": "Grandioso és Tu, Senhor da criação...\n\nOs céus proclamam Tua glória infinita\nAs estrelas cantam Teu poder sem igual\n\nGrandioso és Tu, grandioso és Tu\nTodo meu ser Te adora, meu Rei\nGrandioso és Tu, grandioso és Tu\nPra sempre eu Te louvarei",
+      "author": "Carl Boberg",
+      "composer": "Traditional Swedish"
+    },
+    {
+      "number": 2,
+      "title": "Santo, Santo, Santo",
+      "lyrics": "Santo, Santo, Santo,\nSenhor Onipotente,\nCedo de manhã\nCantaremos Teu louvor...\n\nSanto, Santo, Santo,\nTão santo é o Senhor,\nDeus em três pessoas,\nBendita Trindade",
+      "author": "Reginald Heber",
+      "composer": "John B. Dykes"
+    }
+  ]
+}

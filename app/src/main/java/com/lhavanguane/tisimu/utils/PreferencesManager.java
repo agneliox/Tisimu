@@ -3,25 +3,25 @@ package com.lhavanguane.tisimu.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharedPrefsManager {
+public class PreferencesManager {
     private static final String PREF_NAME = "TisimuPrefs";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_USER_ID = "userId";
     private static final String KEY_USER_EMAIL = "userEmail";
     private static final String KEY_USER_NAME = "userName";
 
-    private static SharedPrefsManager instance;
+    private static PreferencesManager instance;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private SharedPrefsManager(Context context) {
+    private PreferencesManager(Context context) {
         sharedPreferences = context.getApplicationContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
-    public static synchronized SharedPrefsManager getInstance(Context context) {
+    public static synchronized PreferencesManager getInstance(Context context) {
         if (instance == null) {
-            instance = new SharedPrefsManager(context);
+            instance = new PreferencesManager(context);
         }
         return instance;
     }
