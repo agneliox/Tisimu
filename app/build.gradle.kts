@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.implementation
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
@@ -62,6 +60,12 @@ dependencies {
     implementation(libs.exoplayer.core)
     implementation(libs.exoplayer.ui)
     // For image loading
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
+    implementation(libs.gson)
+    // Define a BOM to manage versions
+    implementation(platform(libs.okhttp.bom))
+
+    // Add the core OkHttp library
+    implementation(libs.okhttp)
 
 }

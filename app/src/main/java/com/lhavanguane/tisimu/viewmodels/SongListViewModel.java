@@ -4,14 +4,12 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.lhavanguane.tisimu.data.database.entities.Section;
 import com.lhavanguane.tisimu.data.database.entities.Song;
-import com.lhavanguane.tisimu.data.models.SectionWithSongs;
+import com.lhavanguane.tisimu.models.SectionWithSongs;
 import com.lhavanguane.tisimu.data.repositories.HymnalRepository;
-import com.lhavanguane.tisimu.data.repositories.SongRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

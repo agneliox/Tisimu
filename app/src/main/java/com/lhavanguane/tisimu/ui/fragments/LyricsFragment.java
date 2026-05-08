@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.data.database.entities.Song;
-import com.lhavanguane.tisimu.data.models.Verse;
+import com.lhavanguane.tisimu.models.Verse;
 import com.lhavanguane.tisimu.ui.adapters.VersesAdapter;
 import com.lhavanguane.tisimu.viewmodels.SongDetailViewModel;
 

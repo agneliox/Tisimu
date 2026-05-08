@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.data.models.Verse;
+import com.lhavanguane.tisimu.models.Verse;
 
 import java.util.ArrayList;
 import java.util.List;

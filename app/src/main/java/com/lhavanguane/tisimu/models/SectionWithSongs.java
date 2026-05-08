@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu.data.models;
+package com.lhavanguane.tisimu.models;
 
 import com.lhavanguane.tisimu.data.database.entities.Section;
 import com.lhavanguane.tisimu.data.database.entities.Song;

@@ -7,49 +7,49 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.data.database.entities.Hymnal;
+import com.lhavanguane.tisimu.models.HymnalManifest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.HymnalViewHolder> {
-    private List<Hymnal> hymnals = new ArrayList<>();
-    private OnHymnalSelectionListener selectionListener;
+public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder> {
 
-    public HymnalAdapter() {
+    private List<HymnalManifest.HymnalInfo> hymnals = new ArrayList<>();
+    private OnHymnalActionListener listener;
 
+    public interface OnHymnalActionListener {
+        void onDownloadClick(HymnalManifest.HymnalInfo hymnal);
+        void onDeleteClick(HymnalManifest.HymnalInfo hymnal);
+        void onSelectClick(HymnalManifest.HymnalInfo hymnal, boolean isSelected);
     }
 
-    public void setOnHymnalSelectionListener(OnHymnalSelectionListener listener) {
-        this.selectionListener = listener;
+    public void setOnHymnalActionListener(OnHymnalActionListener listener) {
+        this.listener = listener;
     }
 
-    public interface OnHymnalSelectionListener {
-        void onHymnalSelected(Hymnal hymnalId, boolean isSelected);
-    }
-
-    public void setHymnals(List<Hymnal> hymnals) {
+    public void setHymnals(List<HymnalManifest.HymnalInfo> hymnals) {
         this.hymnals = hymnals;
         notifyDataSetChanged();
     }
-    public HymnalAdapter(OnHymnalSelectionListener listener) {
-        selectionListener = listener;
-    }
+
     @NonNull
     @Override
-    public HymnalAdapter.HymnalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_hymnal, parent, false);
-        return new HymnalViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HymnalAdapter.HymnalViewHolder holder, int position) {
-        Hymnal hymnal = hymnals.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        HymnalManifest.HymnalInfo hymnal = hymnals.get(position);
         holder.bind(hymnal);
     }
 
@@ -58,39 +58,64 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.HymnalView
         return hymnals.size();
     }
 
-    public class HymnalViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivHymnalIcon;
-        private TextView tvHymnalName;
-        private TextView tvHymnalDescription;
-        private TextView tvSongCount;
-        private MaterialCheckBox cbSelectHymnal;
-        public HymnalViewHolder(@NonNull View itemView) {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private CardView cardView;
+        private ImageView ivCover;
+        private TextView tvName, tvDescription, tvDetails;
+        private MaterialButton btnAction;
+        private MaterialCheckBox cbSelect;
+
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivHymnalIcon = itemView.findViewById(R.id.ivHymnalIcon);
-            tvHymnalName = itemView.findViewById(R.id.tvHymnalName);
-            tvHymnalDescription = itemView.findViewById(R.id.tvHymnalDescription);
-            tvSongCount = itemView.findViewById(R.id.tvSongCount);
-            cbSelectHymnal = itemView.findViewById(R.id.cbSelectHymnal);
+            cardView = itemView.findViewById(R.id.cardView);
+            ivCover = itemView.findViewById(R.id.ivCover);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvDetails = itemView.findViewById(R.id.tvDetails);
+            btnAction = itemView.findViewById(R.id.btnAction);
+            cbSelect = itemView.findViewById(R.id.cbSelect);
         }
 
-        public void bind(Hymnal hymnal) {
-            tvHymnalName.setText(hymnal.getName());
-            tvHymnalDescription.setText(hymnal.getDescription());
-            tvSongCount.setText(hymnal.getTotalSongs() + " songs");
-            cbSelectHymnal.setChecked(hymnal.isSelected());
+        void bind(HymnalManifest.HymnalInfo hymnal) {
+            tvName.setText(hymnal.getName());
+            tvDescription.setText(hymnal.getDescription());
+            tvDetails.setText(hymnal.getTotalSongs() + " songs • " +
+                    String.format("%.1f", hymnal.getFileSize() / 1024.0 / 1024.0) + " MB");
 
-            cbSelectHymnal.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (selectionListener != null) {
-                    selectionListener.onHymnalSelected(hymnal, isChecked);
+            // Load cover if available
+            if (hymnal.getCoverUrl() != null && !hymnal.getCoverUrl().isEmpty()) {
+                Glide.with(itemView.getContext())
+                        .load(hymnal.getCoverUrl())
+                        .placeholder(R.drawable.ic_hymn_book)
+                        .into(ivCover);
+            }
+
+            // Update UI based on download status
+            if (hymnal.isDownloaded()) {
+                btnAction.setText("DELETE");
+                btnAction.setBackgroundTintList(
+                        itemView.getContext().getColorStateList(com.google.android.material.R.color.material_divider_color));
+                cbSelect.setVisibility(View.VISIBLE);
+            } else {
+                btnAction.setText("DOWNLOAD");
+                btnAction.setBackgroundTintList(
+                        itemView.getContext().getColorStateList(R.color.primary));
+                cbSelect.setVisibility(View.GONE);
+            }
+
+            btnAction.setOnClickListener(v -> {
+                if (listener != null) {
+                    if (hymnal.isDownloaded()) {
+                        listener.onDeleteClick(hymnal);
+                    } else {
+                        listener.onDownloadClick(hymnal);
+                    }
                 }
             });
 
-            // Make entire card clickable to toggle selection
-            itemView.setOnClickListener(v -> {
-                boolean newState = !cbSelectHymnal.isChecked();
-                cbSelectHymnal.setChecked(newState);
-                if (selectionListener != null) {
-                    selectionListener.onHymnalSelected(hymnal, newState);
+            cbSelect.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (listener != null) {
+                    listener.onSelectClick(hymnal, isChecked);
                 }
             });
         }

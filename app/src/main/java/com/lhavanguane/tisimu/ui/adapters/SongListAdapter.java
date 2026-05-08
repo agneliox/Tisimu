@@ -7,11 +7,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.data.database.entities.Song;
-import com.lhavanguane.tisimu.data.models.SectionWithSongs;
+import com.lhavanguane.tisimu.models.SectionWithSongs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,13 +136,13 @@ public class SongListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class SongViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout llSongItem;
+        private CardView llSongItem;
         private TextView tvSongNumber;
         private TextView tvSongTitle;
 
         SongViewHolder(@NonNull View itemView) {
             super(itemView);
-            llSongItem = itemView.findViewById(R.id.llSongItem);
+            llSongItem = itemView.findViewById(R.id.cardViewSongItem);
             tvSongNumber = itemView.findViewById(R.id.tvSongNumber);
             tvSongTitle = itemView.findViewById(R.id.tvSongTitle);
         }

@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu.data.models;
+package com.lhavanguane.tisimu.models;
 
 public class Verse {
     private String text;

@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.ui.activities.HymnalSelectionActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -115,8 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(RegisterActivity.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
 
-                        // Navigate to MainActivity
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        // Navigate to HymnalSelectionActivity
+                        Intent intent = new Intent(RegisterActivity.this, HymnalSelectionActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
