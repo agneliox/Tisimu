@@ -1,5 +1,6 @@
 package com.lhavanguane.tisimu.ui.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder> {
-
+    private static final String TAG = "HymnalAdapter";
     private List<HymnalManifest.HymnalInfo> hymnals = new ArrayList<>();
     private OnHymnalActionListener listener;
 
@@ -36,6 +37,7 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
 
     public void setHymnals(List<HymnalManifest.HymnalInfo> hymnals) {
         this.hymnals = hymnals;
+        Log.d(TAG, "Setting hymnals: " + (hymnals != null ? hymnals.size() : 0) + " items");
         notifyDataSetChanged();
     }
 
@@ -50,12 +52,15 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HymnalManifest.HymnalInfo hymnal = hymnals.get(position);
+        Log.d(TAG, "Binding hymnal at position " + position + ": " + hymnal.getName());
         holder.bind(hymnal);
     }
 
     @Override
     public int getItemCount() {
-        return hymnals.size();
+        int count = hymnals.size();
+        Log.d(TAG, "Item count: " + count);
+        return count;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,15 +84,21 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
         void bind(HymnalManifest.HymnalInfo hymnal) {
             tvName.setText(hymnal.getName());
             tvDescription.setText(hymnal.getDescription());
-            tvDetails.setText(hymnal.getTotalSongs() + " songs • " +
-                    String.format("%.1f", hymnal.getFileSize() / 1024.0 / 1024.0) + " MB");
 
+            String detailsText = hymnal.getTotalSongs() + " songs";
+            if (hymnal.getFileSize() > 0) {
+                detailsText += " • " + String.format("%.1f", hymnal.getFileSize() / 1024.0 / 1024.0) + " MB";
+            }
+            tvDetails.setText(detailsText);
             // Load cover if available
             if (hymnal.getCoverUrl() != null && !hymnal.getCoverUrl().isEmpty()) {
                 Glide.with(itemView.getContext())
                         .load(hymnal.getCoverUrl())
                         .placeholder(R.drawable.ic_hymn_book)
+                        .error(R.drawable.ic_hymn_book)
                         .into(ivCover);
+            } else {
+                ivCover.setImageResource(R.drawable.ic_hymn_book);
             }
 
             // Update UI based on download status

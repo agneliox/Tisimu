@@ -1,6 +1,8 @@
 package com.lhavanguane.tisimu.services;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -14,8 +16,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +29,7 @@ import okhttp3.Response;
 public class HymnalStorageManager {
     private static final String TAG = "HymnalStorage";
 
-    // TODO: Replace with your GitHub username
+    // Update this with your GitHub username
     private static final String GITHUB_USERNAME = "agneliox";
     private static final String REPO_NAME = "Tisimu";
     private static final String BRANCH = "master";
@@ -43,6 +43,7 @@ public class HymnalStorageManager {
     private OkHttpClient client;
     private ExecutorService executorService;
     private File hymnalDirectory;
+    private Handler mainHandler;
 
     public interface ManifestCallback {
         void onSuccess(HymnalManifest manifest);
@@ -62,6 +63,10 @@ public class HymnalStorageManager {
 
     public HymnalStorageManager(Context context) {
         this.context = context.getApplicationContext();
+        this.mainHandler = new Handler(Looper.getMainLooper());
+        Log.d(TAG, "HymnalStorageManager constructor called");
+
+        // Initialize all fields in constructor
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         this.client = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
@@ -71,11 +76,22 @@ public class HymnalStorageManager {
 
         this.hymnalDirectory = new File(context.getFilesDir(), HYMNAL_DIR);
         if (!hymnalDirectory.exists()) {
-            hymnalDirectory.mkdirs();
+            boolean created = hymnalDirectory.mkdirs();
+            Log.d(TAG, "Hymnal directory created: " + created);
         }
+
+        Log.d(TAG, "HymnalStorageManager initialized successfully");
     }
 
     public void fetchManifest(ManifestCallback callback) {
+        if (executorService == null) {
+            Log.e(TAG, "executorService is null!");
+            if (callback != null) {
+                mainHandler.post(() -> callback.onFailure("Service not initialized"));
+            }
+            return;
+        }
+
         executorService.execute(() -> {
             try {
                 Log.d(TAG, "Fetching manifest from: " + MANIFEST_URL);
@@ -85,40 +101,61 @@ public class HymnalStorageManager {
                         .build();
 
                 try (Response response = client.newCall(request).execute()) {
-                    Log.d(TAG, "Fetching response?: " +  response.body().string());
+                    Log.d(TAG, "Response code: " + response.code());
 
                     if (response.isSuccessful() && response.body() != null) {
                         String json = response.body().string();
+                        Log.d(TAG, "JSON received, length: " + json.length());
 
                         HymnalManifest manifest = gson.fromJson(json, HymnalManifest.class);
 
-                        // Update downloaded status
-                        for (HymnalManifest.HymnalInfo hymnal : manifest.getHymnals()) {
-                            hymnal.setDownloaded(isHymnalDownloaded(hymnal.getId()));
-                        }
+                        if (manifest != null && manifest.getHymnals() != null) {
+                            Log.d(TAG, "Parsed " + manifest.getHymnals().size() + " hymnals");
 
-                        if (callback != null) {
-                            callback.onSuccess(manifest);
+                            // Update downloaded status
+                            for (HymnalManifest.HymnalInfo hymnal : manifest.getHymnals()) {
+                                hymnal.setDownloaded(isHymnalDownloaded(hymnal.getId()));
+                                Log.d(TAG, "Hymnal: " + hymnal.getName() + " - Downloaded: " + hymnal.isDownloaded());
+                            }
+
+                            // Callback on main thread
+                            if (callback != null) {
+                                mainHandler.post(() -> callback.onSuccess(manifest));
+                            }
+                        } else {
+                            Log.e(TAG, "Manifest or hymnals list is null");
+                            if (callback != null) {
+                                mainHandler.post(() -> callback.onFailure("Invalid manifest format"));
+                            }
                         }
                     } else {
+                        String error = "HTTP " + response.code();
+                        Log.e(TAG, error);
                         if (callback != null) {
-                            callback.onFailure("Failed to fetch manifest: " + response.code());
+                            mainHandler.post(() -> callback.onFailure(error));
                         }
                     }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error fetching manifest", e);
                 if (callback != null) {
-                    callback.onFailure(e.getMessage());
+                    mainHandler.post(() -> callback.onFailure(e.getMessage()));
                 }
             }
         });
     }
 
     public void downloadHymnal(HymnalManifest.HymnalInfo metadata, DownloadCallback callback) {
+        if (executorService == null) {
+            if (callback != null) {
+                mainHandler.post(() -> callback.onFailure("Service not initialized"));
+            }
+            return;
+        }
+
         executorService.execute(() -> {
             try {
-                Log.d(TAG, "Downloading: " + metadata.getName());
+                Log.d(TAG, "Downloading: " + metadata.getName() + " from " + metadata.getFileUrl());
 
                 Request request = new Request.Builder()
                         .url(metadata.getFileUrl())
@@ -140,7 +177,7 @@ public class HymnalStorageManager {
 
                                 if (callback != null && contentLength > 0) {
                                     int progress = (int) ((downloaded * 100) / contentLength);
-                                    callback.onProgress(progress);
+                                    mainHandler.post(() -> callback.onProgress(progress));
                                 }
                             }
                         }
@@ -156,31 +193,42 @@ public class HymnalStorageManager {
                         HymnalData hymnal = gson.fromJson(json, HymnalData.class);
                         metadata.setDownloaded(true);
 
+                        Log.d(TAG, "Download complete: " + metadata.getName());
+
                         if (callback != null) {
-                            callback.onSuccess(hymnal);
+                            mainHandler.post(() -> callback.onSuccess(hymnal));
                         }
                     } else {
+                        String error = "Download failed: " + response.code();
+                        Log.e(TAG, error);
                         if (callback != null) {
-                            callback.onFailure("Download failed: " + response.code());
+                            mainHandler.post(() -> callback.onFailure(error));
                         }
                     }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error downloading hymnal", e);
                 if (callback != null) {
-                    callback.onFailure(e.getMessage());
+                    mainHandler.post(() -> callback.onFailure(e.getMessage()));
                 }
             }
         });
     }
 
     public void loadHymnal(String hymnalId, HymnalLoadCallback callback) {
+        if (executorService == null) {
+            if (callback != null) {
+                mainHandler.post(() -> callback.onFailure("Service not initialized"));
+            }
+            return;
+        }
+
         executorService.execute(() -> {
             try {
                 File hymnalFile = new File(hymnalDirectory, hymnalId + ".json");
                 if (!hymnalFile.exists()) {
                     if (callback != null) {
-                        callback.onFailure("Hymnal not found");
+                        mainHandler.post(() -> callback.onFailure("Hymnal not found"));
                     }
                     return;
                 }
@@ -197,13 +245,13 @@ public class HymnalStorageManager {
                     HymnalData hymnal = gson.fromJson(jsonBuilder.toString(), HymnalData.class);
 
                     if (callback != null) {
-                        callback.onSuccess(hymnal);
+                        mainHandler.post(() -> callback.onSuccess(hymnal));
                     }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error loading hymnal", e);
                 if (callback != null) {
-                    callback.onFailure(e.getMessage());
+                    mainHandler.post(() -> callback.onFailure(e.getMessage()));
                 }
             }
         });
@@ -227,8 +275,8 @@ public class HymnalStorageManager {
     public void deleteHymnal(String hymnalId) {
         File hymnalFile = new File(hymnalDirectory, hymnalId + ".json");
         if (hymnalFile.exists()) {
-            hymnalFile.delete();
-            Log.d(TAG, "Deleted: " + hymnalId);
+            boolean deleted = hymnalFile.delete();
+            Log.d(TAG, "Deleted hymnal " + hymnalId + ": " + deleted);
         }
     }
 
@@ -244,6 +292,8 @@ public class HymnalStorageManager {
     }
 
     public void shutdown() {
-        executorService.shutdown();
+        if (executorService != null && !executorService.isShutdown()) {
+            executorService.shutdown();
+        }
     }
 }
