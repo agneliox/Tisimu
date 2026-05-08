@@ -1,0 +1,30 @@
+{
+  "id": "test",
+  "name": "Test Hymnal",
+  "version": 1,
+  "metadata": {
+    "description": "Test hymnal for debugging",
+    "language": "English",
+    "totalSongs": 1,
+    "year": 2024,
+    "publisher": "Test"
+  },
+  "sections": [
+    {
+      "id": 1,
+      "sequence": 1,
+      "name": "Test Section",
+      "startNumber": 1,
+      "endNumber": 1
+    }
+  ],
+  "songs": [
+    {
+      "number": 1,
+      "title": "Test Song",
+      "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
+      "author": "Tester",
+      "composer": "Tester"
+    }
+  ]
+}

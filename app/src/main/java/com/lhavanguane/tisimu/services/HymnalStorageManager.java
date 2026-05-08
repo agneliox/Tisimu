@@ -155,13 +155,27 @@ public class HymnalStorageManager {
 
         executorService.execute(() -> {
             try {
-                Log.d(TAG, "Downloading: " + metadata.getName() + " from " + metadata.getFileUrl());
+                String fileUrl = metadata.getFileUrl();
+                Log.d(TAG, "========== DOWNLOAD DEBUG ==========");
+                Log.d(TAG, "Hymnal Name: " + metadata.getName());
+                Log.d(TAG, "Hymnal ID: " + metadata.getId());
+                Log.d(TAG, "File URL: " + fileUrl);
+                Log.d(TAG, "====================================");
+                Log.d(TAG, "========== DOWNLOAD DEBUG ==========");
+
+//                Log.d(TAG, "Downloading: " + metadata.getName() + " from " + metadata.getFileUrl());
+
+                String altUrl = "https://raw.githubusercontent.com/agneliox/Tisimu/main/hymnals/" + metadata.getId() + ".json";
+                Log.d(TAG, "Alternative URL: " + altUrl);
 
                 Request request = new Request.Builder()
                         .url(metadata.getFileUrl())
                         .build();
 
                 try (Response response = client.newCall(request).execute()) {
+                    Log.d(TAG, "Response Code: " + response.code());
+                    Log.d(TAG, "Response Message: " + response.message());
+
                     if (response.isSuccessful() && response.body() != null) {
                         long contentLength = response.body().contentLength();
                         long downloaded = 0;
