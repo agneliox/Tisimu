@@ -27,11 +27,11 @@
       "composer": "Tester"
     },
     {
-      "number": 1,
-      "title": "Test Song",
+      "number": 2,
+      "title": "Test Song 2",
       "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
-      "author": "Tester",
-      "composer": "Tester"
+      "author": "Tester 2",
+      "composer": "Tester 2"
     }
   ]
 }
