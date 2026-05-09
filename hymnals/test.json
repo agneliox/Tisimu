@@ -25,6 +25,13 @@
       "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
       "author": "Tester",
       "composer": "Tester"
+    },
+    {
+      "number": 1,
+      "title": "Test Song",
+      "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
+      "author": "Tester",
+      "composer": "Tester"
     }
   ]
 }

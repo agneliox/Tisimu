@@ -1,5 +1,6 @@
 package com.lhavanguane.tisimu.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         this.listener = listener;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setSongs(List<HymnalData.Song> songs) {
         this.songs = songs;
         notifyDataSetChanged();
@@ -52,7 +54,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNumber, tvTitle;
+        private final TextView tvNumber;
+        private final TextView tvTitle;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,8 +63,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             tvTitle = itemView.findViewById(R.id.tvSongTitle);
 
             itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onSongClick(songs.get(getAdapterPosition()));
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && listener != null) {
+                    listener.onSongClick(songs.get(position));
                 }
             });
         }

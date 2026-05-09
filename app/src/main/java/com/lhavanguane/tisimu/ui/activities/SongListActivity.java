@@ -1,10 +1,16 @@
 package com.lhavanguane.tisimu.ui.activities;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +35,10 @@ public class SongListActivity extends AppCompatActivity {
     private SongAdapter adapter;
     private List<HymnalData.Song> allSongs;
     private List<HymnalData.Song> filteredSongs;
+    private String currentHymnalId;
+    private HymnalData currentHymnal;
+
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,27 +80,37 @@ public class SongListActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Loading " + selectedIds.size() + " hymnals...", Toast.LENGTH_SHORT).show();
 
-        for (String hymnalId : selectedIds) {
-            storageManager.loadHymnal(hymnalId, new HymnalStorageManager.HymnalLoadCallback() {
-                @Override
-                public void onSuccess(HymnalData hymnal) {
-                    allSongs.addAll(hymnal.getSongs());
+        // For now, load the first selected hymnal
+        // In a more advanced version, you could load multiple
+        currentHymnalId = selectedIds.iterator().next();
 
-                    if (allSongs.size() == getTotalSongsCount(selectedIds)) {
-                        // All hymnals loaded
-                        filteredSongs.clear();
-                        filteredSongs.addAll(allSongs);
-                        adapter.setSongs(filteredSongs);
-                        toolbar.setSubtitle(allSongs.size() + " songs");
+        storageManager.loadHymnal(currentHymnalId, new HymnalStorageManager.HymnalLoadCallback() {
+            @Override
+            public void onSuccess(HymnalData hymnal) {
+                currentHymnal = hymnal;
+                allSongs.clear();
+                allSongs.addAll(hymnal.getSongs());
+                filteredSongs.clear();
+                filteredSongs.addAll(allSongs);
+
+                runOnUiThread(() -> {
+                    adapter.setSongs(filteredSongs);
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(hymnal.getName());
+                        getSupportActionBar().setSubtitle(hymnal.getSongs().size() + " songs");
                     }
-                }
+                });
+            }
 
-                @Override
-                public void onFailure(String error) {
-                    Toast.makeText(SongListActivity.this, "Failed to load: " + error, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            @Override
+            public void onFailure(String error) {
+                Log.e(TAG, "Failed to load hymnal: " + error);
+                runOnUiThread(() -> {
+                    Toast.makeText(SongListActivity.this, "Failed to load hymnal: " + error, Toast.LENGTH_LONG).show();
+                    finish();
+                });
+            }
+        });
     }
 
     private int getTotalSongsCount(Set<String> hymnalIds) {
@@ -113,6 +133,69 @@ public class SongListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.song_list_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterSongs(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterSongs(newText);
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    private void filterSongs(String query) {
+        filteredSongs.clear();
+
+        if (query == null || query.trim().isEmpty()) {
+            filteredSongs.addAll(allSongs);
+        } else {
+            String lowerQuery = query.toLowerCase().trim();
+            for (HymnalData.Song song : allSongs) {
+                if (song.getTitle().toLowerCase().contains(lowerQuery) ||
+                        String.valueOf(song.getNumber()).contains(lowerQuery)) {
+                    filteredSongs.add(song);
+                }
+            }
+        }
+
+        adapter.setSongs(filteredSongs);
+
+        if (filteredSongs.isEmpty()) {
+            Toast.makeText(this, "No songs found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Toast.makeText(this, "Home pressed...", Toast.LENGTH_SHORT).show();
+            onBackPressed();
+            return true;
+        } else if (item.getItemId() == R.id.action_change_hymnals) {
+            Toast.makeText(this, "Changing hymns...", Toast.LENGTH_SHORT).show();
+            // Go back to hymnal selection
+            Intent intent = new Intent(SongListActivity.this, HymnalSelectionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

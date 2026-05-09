@@ -16,4 +16,6 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="welcome_to_tisimu">Welcome to Tisimu!</string>
     <string name="_0_hymnals_selected">0 hymnals selected</string>
+    <string name="search">Search</string>
+    <string name="change_hymnals">Change Hymnals</string>
 </resources>

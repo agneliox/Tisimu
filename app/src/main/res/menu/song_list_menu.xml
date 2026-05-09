@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
         android:id="@+id/action_change_hymnals"
-        android:title="Change Hymnals"
-        android:icon="@drawable/ic_chevron_right"
+        android:title="@string/change_hymnals"
+        android:icon="@drawable/ic_hymnal_switch"
         app:showAsAction="ifRoom" />
 
 </menu>
