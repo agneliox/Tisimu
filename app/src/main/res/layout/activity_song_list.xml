@@ -56,6 +56,15 @@
         android:layout_marginTop="32dp"
         android:visibility="gone" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        app:tabGravity="fill"
+        app:tabSelectedTextColor="@color/primary"
+        app:tabTextColor="@color/dark_gray"
+        app:tabIndicatorColor="@color/primary" />
     <!-- Songs List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSongs"

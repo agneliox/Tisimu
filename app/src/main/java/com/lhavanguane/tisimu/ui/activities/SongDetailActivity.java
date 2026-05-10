@@ -44,6 +44,7 @@ public class SongDetailActivity extends AppCompatActivity {
     private String songLyrics;
     private String songAuthor;
     private String songComposer;
+    private String hymnalName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class SongDetailActivity extends AppCompatActivity {
             return insets;
         });
         // Get data from intent
+
+        // Get hymnal name from intent
+        hymnalName = getIntent().getStringExtra("HYMNAL_NAME");
+
         getIntentData();
 
         initViews();
@@ -71,6 +76,7 @@ public class SongDetailActivity extends AppCompatActivity {
         songLyrics = getIntent().getStringExtra("SONG_LYRICS");
         songAuthor = getIntent().getStringExtra("SONG_AUTHOR");
         songComposer = getIntent().getStringExtra("SONG_COMPOSER");
+        hymnalName = getIntent().getStringExtra("HYMNAL_NAME");
 
         // Set default values if null
         if (songTitle == null) songTitle = "Unknown Title";
@@ -93,6 +99,10 @@ public class SongDetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("");
+
+            if (hymnalName != null && !hymnalName.isEmpty()) {
+                toolbar.setSubtitle(hymnalName);
+            }
         }
     }
 

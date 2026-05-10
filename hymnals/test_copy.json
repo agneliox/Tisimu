@@ -1,0 +1,37 @@
+{
+  "id": "test copy",
+  "name": "Test Hymnal Copy",
+  "version": 1,
+  "metadata": {
+    "description": "Test hymnal for debugging - Copy",
+    "language": "English",
+    "totalSongs": 2,
+    "year": 2024,
+    "publisher": "Test"
+  },
+  "sections": [
+    {
+      "id": 1,
+      "sequence": 1,
+      "name": "Test Section Copy",
+      "startNumber": 1,
+      "endNumber": 1
+    }
+  ],
+  "songs": [
+    {
+      "number": 1,
+      "title": "Test Song Copy",
+      "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
+      "author": "Tester",
+      "composer": "Tester"
+    },
+    {
+      "number": 2,
+      "title": "Test Song 2 Copy",
+      "lyrics": "This is a test song.\n\nTesting 1, 2, 3.",
+      "author": "Tester 2",
+      "composer": "Tester 2"
+    }
+  ]
+}

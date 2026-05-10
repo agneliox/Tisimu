@@ -38,6 +38,18 @@
       "fileSize": 5000,
       "version": 1,
       "author": "Tester"
+    },
+    {
+      "id": "test copy",
+      "name": "Test Hymnal Copy",
+      "description": "Test hymnal for debugging - Copy",
+      "language": "English",
+      "totalSongs": 2,
+      "fileUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/test_copy.json",
+      "coverUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/covers/test.jpg",    
+      "fileSize": 5000,
+      "version": 1,
+      "author": "Tester"
     }
   ]
 }

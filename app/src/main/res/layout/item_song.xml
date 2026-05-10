@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="1dp"
-    android:id="@+id/cardViewSongItem">
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,15 +24,31 @@
             android:textColor="@color/primary"
             android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tvSongTitle"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Song Title"
-            android:textSize="16sp"
-            android:textColor="@color/primary_dark"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSongTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Song Title"
+                android:textSize="16sp"
+                android:textColor="@color/primary_dark" />
+
+            <TextView
+                android:id="@+id/tvSongSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hymnal Name"
+                android:textSize="12sp"
+                android:textColor="@color/dark_gray"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <ImageView
             android:layout_width="24dp"

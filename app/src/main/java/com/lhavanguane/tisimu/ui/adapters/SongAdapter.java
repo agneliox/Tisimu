@@ -1,6 +1,5 @@
 package com.lhavanguane.tisimu.ui.adapters;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.models.HymnalData;
+import com.lhavanguane.tisimu.models.SongItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
-    private List<HymnalData.Song> songs = new ArrayList<>();
+    private List<SongItem> songs = new ArrayList<>();
     private OnSongClickListener listener;
 
     public interface OnSongClickListener {
-        void onSongClick(HymnalData.Song song);
+        void onSongClick(SongItem songItem);
     }
 
     public void setOnSongClickListener(OnSongClickListener listener) {
         this.listener = listener;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void setSongs(List<HymnalData.Song> songs) {
+    public void setSongs(List<SongItem> songs) {
         this.songs = songs;
         notifyDataSetChanged();
     }
@@ -44,8 +42,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HymnalData.Song song = songs.get(position);
-        holder.bind(song);
+        SongItem item = songs.get(position);
+        holder.bind(item);
     }
 
     @Override
@@ -54,13 +52,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvNumber;
-        private final TextView tvTitle;
+        private TextView tvNumber, tvTitle, tvSubtitle;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNumber = itemView.findViewById(R.id.tvSongNumber);
             tvTitle = itemView.findViewById(R.id.tvSongTitle);
+            tvSubtitle = itemView.findViewById(R.id.tvSongSubtitle);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -70,9 +68,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             });
         }
 
-        void bind(HymnalData.Song song) {
-            tvNumber.setText(String.format("%03d", song.getNumber()));
-            tvTitle.setText(song.getTitle());
+        void bind(SongItem item) {
+            tvNumber.setText(String.format("%03d", item.getSong().getNumber()));
+            tvTitle.setText(item.getSong().getTitle());
+
+            if (item.getHymnalName() != null && !item.getHymnalName().isEmpty()) {
+                tvSubtitle.setText(item.getHymnalName());
+                tvSubtitle.setVisibility(View.VISIBLE);
+            } else {
+                tvSubtitle.setVisibility(View.GONE);
+            }
         }
     }
 }
