@@ -22,6 +22,7 @@ firebaseAi = "17.12.0"
 roomRuntime = "2.8.4"
 roomCompiler = "2.8.4"
 lifecycle = "2.10.0"
+googleFirebaseAppdistribution = "5.2.1"
 
 [libraries]
 exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayerCore" }
@@ -52,4 +53,5 @@ lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmode
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "googleFirebaseAppdistribution" }
 
