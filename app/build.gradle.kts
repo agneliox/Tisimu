@@ -1,3 +1,4 @@
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
@@ -23,12 +24,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                serviceCredentialsFile="$rootDir/tisimu-app-firebase-adminsdk-fbsvc-f3de8eaede.json"
+                testers="tester1@example.com, tester2@example.com"
+                releaseNotes="Debug build for internal testing"
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {

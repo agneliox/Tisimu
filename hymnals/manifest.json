@@ -4,6 +4,18 @@
   
   "hymnals": [
     {
+      "id": "mhalamhala",
+      "name": "Mhalamhala Ya Evangeli",
+      "description": "Classic Tsonga hymns collection",
+      "language": "Tsonga",
+      "totalSongs": 223,
+      "fileUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/mhalamhala.json",
+      "coverUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/covers/mhalamhala.jpg",    
+      "fileSize": 310320,
+      "version": 1,
+      "author": "Various Authors!"
+    },
+    {
       "id": "harpa_crista",
       "name": "Harpa Cristã",
       "description": "Traditional Brazilian gospel hymnal with 640 hymns",
