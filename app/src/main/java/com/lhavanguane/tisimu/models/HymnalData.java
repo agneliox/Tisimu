@@ -74,23 +74,22 @@ public class HymnalData {
         public void setEndNumber(int endNumber) { this.endNumber = endNumber; }
     }
 
+
     public static class Song {
         private int number;
         private String title;
-        private String lyrics;
         private String author;
         private String composer;
         private String key;
         private String timeSignature;
+        private List<LyricsSection> verses;  // Changed from String lyrics
 
+        // Getters and setters
         public int getNumber() { return number; }
         public void setNumber(int number) { this.number = number; }
 
         public String getTitle() { return title; }
         public void setTitle(String title) { this.title = title; }
-
-        public String getLyrics() { return lyrics; }
-        public void setLyrics(String lyrics) { this.lyrics = lyrics; }
 
         public String getAuthor() { return author; }
         public void setAuthor(String author) { this.author = author; }
@@ -103,5 +102,49 @@ public class HymnalData {
 
         public String getTimeSignature() { return timeSignature; }
         public void setTimeSignature(String timeSignature) { this.timeSignature = timeSignature; }
+
+        public List<LyricsSection> getVerses() { return verses; }
+        public void setVerses(List<LyricsSection> verses) { this.verses = verses; }
+
+        // Helper method for backward compatibility
+        public String getLyrics() {
+            StringBuilder sb = new StringBuilder();
+            for (LyricsSection section : verses) {
+                sb.append(section.getLabel() != null ? section.getLabel() + "\n" : "");
+                for (String line : section.getLines()) {
+                    sb.append(line).append("\n");
+                }
+                sb.append("\n");
+            }
+            return sb.toString().trim();
+        }
     }
+
+    public static class LyricsSection {
+        private String type;  // "verse", "chorus", "bridge", "intro", "outro"
+        private Integer number;  // For numbered verses
+        private String label;    // Display label (e.g., "1", "Coro", "Estribilho")
+        private List<String> lines;
+
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+
+        public Integer getNumber() { return number; }
+        public void setNumber(Integer number) { this.number = number; }
+
+        public String getLabel() { return label; }
+        public void setLabel(String label) { this.label = label; }
+
+        public List<String> getLines() { return lines; }
+        public void setLines(List<String> lines) { this.lines = lines; }
+
+        public String getFormattedText() {
+            StringBuilder sb = new StringBuilder();
+            for (String line : lines) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString().trim();
+        }
+    }
+
 }

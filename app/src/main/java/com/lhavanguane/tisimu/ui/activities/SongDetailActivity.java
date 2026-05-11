@@ -9,9 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.models.Verse;
+import com.lhavanguane.tisimu.models.HymnalData;
 import com.lhavanguane.tisimu.ui.adapters.VerseAdapter;
 
 import java.util.ArrayList;
@@ -36,7 +33,7 @@ public class SongDetailActivity extends AppCompatActivity {
     private MaterialButton btnShare, btnCopyAll;
 
     private VerseAdapter verseAdapter;
-    private List<Verse> verses;
+    private List<HymnalData.LyricsSection> sections;
 
     // Song data
     private int songNumber;
@@ -45,28 +42,21 @@ public class SongDetailActivity extends AppCompatActivity {
     private String songAuthor;
     private String songComposer;
     private String hymnalName;
+    private List<HymnalData.LyricsSection> structuredVerses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_detail);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_song_detail), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         // Get data from intent
-
-        // Get hymnal name from intent
-        hymnalName = getIntent().getStringExtra("HYMNAL_NAME");
-
         getIntentData();
 
         initViews();
         setupToolbar();
         setupRecyclerView();
         displaySongInfo();
-        parseAndDisplayLyrics();
+        displayLyrics();
         setupListeners();
     }
 
@@ -77,6 +67,9 @@ public class SongDetailActivity extends AppCompatActivity {
         songAuthor = getIntent().getStringExtra("SONG_AUTHOR");
         songComposer = getIntent().getStringExtra("SONG_COMPOSER");
         hymnalName = getIntent().getStringExtra("HYMNAL_NAME");
+
+        // Get structured verses if available
+        structuredVerses = (List<HymnalData.LyricsSection>) getIntent().getSerializableExtra("STRUCTURED_VERSES");
 
         // Set default values if null
         if (songTitle == null) songTitle = "Unknown Title";
@@ -99,7 +92,6 @@ public class SongDetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("");
-
             if (hymnalName != null && !hymnalName.isEmpty()) {
                 toolbar.setSubtitle(hymnalName);
             }
@@ -107,21 +99,27 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        verses = new ArrayList<>();
+        sections = new ArrayList<>();
         verseAdapter = new VerseAdapter();
         rvVerses.setLayoutManager(new LinearLayoutManager(this));
         rvVerses.setAdapter(verseAdapter);
 
+        // Complete implementation of both interface methods
         verseAdapter.setOnVerseActionListener(new VerseAdapter.OnVerseActionListener() {
             @Override
-            public void onVerseLongClick(Verse verse, int position) {
-                // Verse already copied in adapter, just show additional feedback
-                Toast.makeText(SongDetailActivity.this, "Verse " + verse.getNumber() + " copied!", Toast.LENGTH_SHORT).show();
+            public void onVerseLongClick(HymnalData.LyricsSection section, int position) {
+                // Long press already copies in adapter, just show confirmation
+                String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+                Toast.makeText(SongDetailActivity.this,
+                        type + " " + section.getLabel() + " copied!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onVerseClick(Verse verse, int position) {
-                // Verse selection handled in adapter
+            public void onVerseClick(HymnalData.LyricsSection section, int position) {
+                // Handle verse selection (already highlighted in adapter)
+                String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+                Toast.makeText(SongDetailActivity.this,
+                        type + " " + section.getLabel() + " selected", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -133,11 +131,27 @@ public class SongDetailActivity extends AppCompatActivity {
         if (songAuthor != null && !songAuthor.isEmpty() && !songAuthor.equals("null")) {
             tvAuthor.setText("Words by: " + songAuthor);
             tvAuthor.setVisibility(View.VISIBLE);
+        } else {
+            tvAuthor.setVisibility(View.GONE);
         }
 
         if (songComposer != null && !songComposer.isEmpty() && !songComposer.equals("null")) {
             tvComposer.setText("Music by: " + songComposer);
             tvComposer.setVisibility(View.VISIBLE);
+        } else {
+            tvComposer.setVisibility(View.GONE);
+        }
+    }
+
+    private void displayLyrics() {
+        // Try to use structured verses first
+        if (structuredVerses != null && !structuredVerses.isEmpty()) {
+            sections.clear();
+            sections.addAll(structuredVerses);
+            verseAdapter.setSections(sections);
+        } else {
+            // Fallback to parsing plain text lyrics
+            parseAndDisplayLyrics();
         }
     }
 
@@ -145,11 +159,23 @@ public class SongDetailActivity extends AppCompatActivity {
         String[] lines = songLyrics.split("\n");
         List<String> verseTexts = new ArrayList<>();
         StringBuilder currentVerse = new StringBuilder();
+        int verseNumber = 1;
 
         for (String line : lines) {
             if (line.trim().isEmpty()) {
                 if (currentVerse.length() > 0) {
-                    verseTexts.add(currentVerse.toString().trim());
+                    // Create a verse section
+                    HymnalData.LyricsSection section = new HymnalData.LyricsSection();
+                    section.setType("verse");
+                    section.setNumber(verseNumber);
+                    section.setLabel(String.valueOf(verseNumber));
+
+                    List<String> verseLines = new ArrayList<>();
+                    verseLines.add(currentVerse.toString().trim());
+                    section.setLines(verseLines);
+
+                    sections.add(section);
+                    verseNumber++;
                     currentVerse = new StringBuilder();
                 }
             } else {
@@ -162,29 +188,47 @@ public class SongDetailActivity extends AppCompatActivity {
 
         // Add the last verse
         if (currentVerse.length() > 0) {
-            verseTexts.add(currentVerse.toString().trim());
+            HymnalData.LyricsSection section = new HymnalData.LyricsSection();
+            section.setType("verse");
+            section.setNumber(verseNumber);
+            section.setLabel(String.valueOf(verseNumber));
+
+            List<String> verseLines = new ArrayList<>();
+            verseLines.add(currentVerse.toString().trim());
+            section.setLines(verseLines);
+
+            sections.add(section);
         }
 
-        // If no empty lines were found, treat each line as a separate verse part
-        if (verseTexts.isEmpty() && lines.length > 0) {
+        // If no empty lines were found, treat as single verse
+        if (sections.isEmpty() && lines.length > 0) {
+            HymnalData.LyricsSection section = new HymnalData.LyricsSection();
+            section.setType("verse");
+            section.setNumber(1);
+            section.setLabel("1");
+
+            List<String> verseLines = new ArrayList<>();
+            StringBuilder singleVerse = new StringBuilder();
             for (String line : lines) {
-                if (!line.trim().isEmpty()) {
-                    verseTexts.add(line.trim());
-                }
+                if (singleVerse.length() > 0) singleVerse.append("\n");
+                singleVerse.append(line);
             }
+            verseLines.add(singleVerse.toString());
+            section.setLines(verseLines);
+
+            sections.add(section);
         }
 
-        // Create Verse objects
-        for (int i = 0; i < verseTexts.size(); i++) {
-            verses.add(new Verse(i + 1, verseTexts.get(i)));
-        }
-
-        verseAdapter.setVerses(verses);
+        verseAdapter.setSections(sections);
     }
 
     private void setupListeners() {
         btnShare.setOnClickListener(v -> shareAllLyrics());
-        btnCopyAll.setOnClickListener(v -> verseAdapter.copyAllVersesToClipboard(this));
+        btnCopyAll.setOnClickListener(v -> {
+            if (verseAdapter != null) {
+                verseAdapter.copyAllSectionsToClipboard(this);
+            }
+        });
     }
 
     private void shareAllLyrics() {
@@ -196,7 +240,12 @@ public class SongDetailActivity extends AppCompatActivity {
             shareContent.append("By: ").append(songAuthor).append("\n\n");
         }
 
-        shareContent.append(verseAdapter.getAllVersesText());
+        if (verseAdapter != null) {
+            shareContent.append(verseAdapter.getAllSectionsText());
+        } else {
+            shareContent.append(songLyrics);
+        }
+
         shareContent.append("\n\nShared via Tisimu App");
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -204,20 +253,6 @@ public class SongDetailActivity extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, songTitle);
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
         startActivity(Intent.createChooser(shareIntent, "Share via"));
-    }
-
-    private void shareVerse(int verseNumber, String verseText) {
-        StringBuilder shareContent = new StringBuilder();
-        shareContent.append(songTitle).append("\n");
-        shareContent.append("Verse ").append(verseNumber).append("\n\n");
-        shareContent.append(verseText);
-        shareContent.append("\n\nShared via Tisimu App");
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, songTitle + " - Verse " + verseNumber);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
-        startActivity(Intent.createChooser(shareIntent, "Share verse via"));
     }
 
     @Override

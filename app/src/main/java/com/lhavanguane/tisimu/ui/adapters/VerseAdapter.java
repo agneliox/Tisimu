@@ -14,61 +14,77 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.models.Verse;
+import com.lhavanguane.tisimu.models.HymnalData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> {
 
-    private List<Verse> verses = new ArrayList<>();
+    private List<HymnalData.LyricsSection> sections = new ArrayList<>();
     private OnVerseActionListener listener;
     private int selectedPosition = -1;
 
     public interface OnVerseActionListener {
-        void onVerseLongClick(Verse verse, int position);
-        void onVerseClick(Verse verse, int position);
+        void onVerseLongClick(HymnalData.LyricsSection section, int position);
+        void onVerseClick(HymnalData.LyricsSection section, int position);
     }
 
     public void setOnVerseActionListener(OnVerseActionListener listener) {
         this.listener = listener;
     }
 
-    public void setVerses(List<Verse> verses) {
-        this.verses = verses;
+    public void setSections(List<HymnalData.LyricsSection> sections) {
+        this.sections = sections;
         notifyDataSetChanged();
     }
 
-    public void copyVerseToClipboard(Context context, int position) {
-        if (position >= 0 && position < verses.size()) {
-            Verse verse = verses.get(position);
+    public void copySectionToClipboard(Context context, int position) {
+        if (position >= 0 && position < sections.size()) {
+            HymnalData.LyricsSection section = sections.get(position);
+            String label = section.getLabel() != null ? section.getLabel() + ":\n" : "";
+            String text = label + section.getFormattedText();
+
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("verse", verse.getText());
+            ClipData clip = ClipData.newPlainText("verse", text);
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(context, "Verse " + verse.getNumber() + " copied to clipboard", Toast.LENGTH_SHORT).show();
+
+            String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+            Toast.makeText(context, type + " " + section.getLabel() + " copied", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void copyAllVersesToClipboard(Context context) {
-        StringBuilder allVerses = new StringBuilder();
-        for (Verse verse : verses) {
-            allVerses.append("Verse ").append(verse.getNumber()).append(":\n");
-            allVerses.append(verse.getText()).append("\n\n");
+    public void copyAllSectionsToClipboard(Context context) {
+        StringBuilder allText = new StringBuilder();
+        for (int i = 0; i < sections.size(); i++) {
+            HymnalData.LyricsSection section = sections.get(i);
+            String label = section.getLabel() != null ? section.getLabel() : "";
+            if ("chorus".equals(section.getType())) {
+                label = "【" + label + "】";
+            } else if (i > 0) {
+                label = label + ".";
+            }
+            allText.append(label).append("\n");
+            allText.append(section.getFormattedText()).append("\n\n");
         }
 
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("all_verses", allVerses.toString());
+        ClipData clip = ClipData.newPlainText("all_verses", allText.toString());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(context, "All verses copied to clipboard", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "All lyrics copied to clipboard", Toast.LENGTH_SHORT).show();
     }
 
-    public String getAllVersesText() {
-        StringBuilder allVerses = new StringBuilder();
-        for (Verse verse : verses) {
-            allVerses.append("Verse ").append(verse.getNumber()).append(":\n");
-            allVerses.append(verse.getText()).append("\n\n");
+    public String getAllSectionsText() {
+        StringBuilder allText = new StringBuilder();
+        for (HymnalData.LyricsSection section : sections) {
+            String label = section.getLabel() != null ? section.getLabel() : "";
+            if ("chorus".equals(section.getType())) {
+                label = "【" + label + "】";
+            }
+            allText.append(label).append("\n");
+            allText.append(section.getFormattedText()).append("\n\n");
         }
-        return allVerses.toString();
+        return allText.toString().trim();
     }
 
     @NonNull
@@ -81,13 +97,13 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Verse verse = verses.get(position);
-        holder.bind(verse, position);
+        HymnalData.LyricsSection section = sections.get(position);
+        holder.bind(section, position);
 
-        // Highlight selected verse
+        // Highlight selected section
         if (selectedPosition == position) {
             holder.itemView.setBackgroundResource(R.color.primary_light);
-            holder.itemView.setAlpha(0.9f);
+            holder.itemView.setAlpha(0.95f);
         } else {
             holder.itemView.setBackgroundResource(0);
             holder.itemView.setAlpha(1f);
@@ -96,7 +112,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return verses.size();
+        return sections.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -111,36 +127,41 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
             tvVerseText = itemView.findViewById(R.id.tvVerseText);
         }
 
-        void bind(Verse verse, int position) {
-            tvVerseLabel.setText("Verse " + verse.getNumber());
-            tvVerseText.setText(verse.getText());
+        void bind(HymnalData.LyricsSection section, int position) {
+            // Set label based on section type
+            String label = "";
+            if ("verse".equals(section.getType())) {
+                label = "Verse " + section.getLabel();
+            } else if ("chorus".equals(section.getType())) {
+                label = "Chorus: " + section.getLabel();
+            } else {
+                label = section.getLabel() != null ? section.getLabel() : "";
+            }
 
-            // Single click - select verse
+            tvVerseLabel.setText(label);
+            tvVerseText.setText(section.getFormattedText());
+
+            // Single click - select section
             llVerseContainer.setOnClickListener(v -> {
-                // Update selected position
                 int oldPosition = selectedPosition;
                 selectedPosition = position;
 
-                // Notify both positions to update highlight
                 if (oldPosition != -1) {
                     notifyItemChanged(oldPosition);
                 }
                 notifyItemChanged(position);
 
                 if (listener != null) {
-                    listener.onVerseClick(verse, position);
+                    listener.onVerseClick(section, position);
                 }
-
-                // Show toast with verse reference
-                Toast.makeText(v.getContext(), "Verse " + verse.getNumber() + " selected. Long press to copy.", Toast.LENGTH_SHORT).show();
             });
 
-            // Long press - copy verse
+            // Long press - copy section
             llVerseContainer.setOnLongClickListener(v -> {
                 if (listener != null) {
-                    listener.onVerseLongClick(verse, position);
+                    listener.onVerseLongClick(section, position);
                 }
-                copyVerseToClipboard(v.getContext(), position);
+                copySectionToClipboard(v.getContext(), position);
                 return true;
             });
         }
