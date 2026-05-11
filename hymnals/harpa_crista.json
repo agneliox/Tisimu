@@ -122,6 +122,71 @@
           ]
         }
       ]
+    },
+    {
+      "number": 55,
+      "title": "I Yesu l'a nga ndzi ntshunxa",
+      "author": "",
+      "composer": "",
+      "key": "",
+      "timeSignature": "",
+      "verses": [
+        {
+          "type": "verse",
+          "number": 1,
+          "label": "1",
+          "lines": [
+            "Loko a ndzi famba eswidyohwen',",
+            "Lok' a ndzi pasiwa entlhan'win',",
+            "Loko a ndzi nga tsakanga mbilwin'.",
+            "I Yesu, l'a nga ndzi ntshunxa."
+          ]
+        },
+        {
+          "type": "chorus",
+          "label": "Coro",
+          "lines": [
+            "I Yesu l'a nga ndzi ntshunxa,",
+            "I Yesu l'a nga ndzi ntshunxa,",
+            "Timpentchana ti tshoviwa tona",
+            "I Yesu l'a nga ndzi ntshunxa."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "label": "2",
+          "lines": [
+            "Loko a ndzi biwa hi mapfalo,",
+            "Lok' a ndzi lava ku hela mbilu,",
+            "Loko a ndzi nga swi kote nchumu,",
+            "I Yesu l'a nga ndzi ntshunxa."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "label": "3",
+          "lines": [
+            "Lok' a ndzi khunguvanyeka",
+            "endlelen',",
+            "Lok' a ndzi hulumetela khumbin',",
+            "Ndzi nga tive ta vutomi tilwen',",
+            "I Yesu l'a nga ndzi ntshunxa."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "label": "4",
+          "lines": [
+            "Ndzi ta tlangela hi ku tsaka",
+            "Tintswalo ta lo'ya nga ndzi rhandza",
+            "A ko a fa matshan'win' ya mina",
+            "I Yesu l'a nga ndzi ntshunxa."
+          ]
+        }
+      ]
     }
   ]
 }
