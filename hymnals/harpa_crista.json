@@ -1,7 +1,7 @@
 {
   "id": "harpa_crista",
   "name": "Harpa Cristã",
-  "version": 1,
+  "version": 2,
   "metadata": {
     "description": "Traditional Brazilian gospel hymnal",
     "language": "Portuguese",
@@ -16,43 +16,112 @@
       "name": "Louvor e Adoração",
       "startNumber": 1,
       "endNumber": 150
-    },
-    {
-      "id": 2,
-      "sequence": 2,
-      "name": "Natal",
-      "startNumber": 151,
-      "endNumber": 200
-    },
-    {
-      "id": 3,
-      "sequence": 3,
-      "name": "Páscoa",
-      "startNumber": 201,
-      "endNumber": 250
-    },
-    {
-      "id": 4,
-      "sequence": 4,
-      "name": "Fé e Esperança",
-      "startNumber": 251,
-      "endNumber": 350
     }
   ],
   "songs": [
     {
       "number": 1,
       "title": "Grandioso És Tu",
-      "lyrics": "Grandioso és Tu, Senhor da criação...\n\nOs céus proclamam Tua glória infinita\nAs estrelas cantam Teu poder sem igual\n\nGrandioso és Tu, grandioso és Tu\nTodo meu ser Te adora, meu Rei\nGrandioso és Tu, grandioso és Tu\nPra sempre eu Te louvarei",
       "author": "Carl Boberg",
-      "composer": "Traditional Swedish"
+      "composer": "Traditional Swedish",
+      "key": "G",
+      "timeSignature": "4/4",
+      "verses": [
+        {
+          "type": "verse",
+          "number": 1,
+          "label": "1",
+          "lines": [
+            "Grandioso és Tu, Senhor da criação,",
+            "Que os céus e a terra formaste com amor;",
+            "As estrelas, os montes, o mar e o sertão,",
+            "Revelam Teu poder, Teu esplendor."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "label": "2",
+          "lines": [
+            "Quando admiro o céu, obra de Tuas mãos,",
+            "A lua e as estrelas que ali puseste também,",
+            "Penso: Que é o homem, que tão grande és Tu,",
+            "Que dele Te lembras e o amas também."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "label": "3",
+          "lines": [
+            "Quando pecador, perdido e sem Jesus,",
+            "Cristo por mim morreu lá na cruz;",
+            "Ressurgiu, hoje vive, intercede por mim,",
+            "Voltará para me levar ao fim."
+          ]
+        },
+        {
+          "type": "chorus",
+          "label": "Coro",
+          "lines": [
+            "Grandioso és Tu, grandioso és Tu!",
+            "Todo meu ser Te adora, meu Rei!",
+            "Grandioso és Tu, grandioso és Tu!",
+            "Pra sempre eu Te louvarei, amém!"
+          ]
+        }
+      ]
     },
     {
       "number": 2,
       "title": "Santo, Santo, Santo",
-      "lyrics": "Santo, Santo, Santo,\nSenhor Onipotente,\nCedo de manhã\nCantaremos Teu louvor...\n\nSanto, Santo, Santo,\nTão santo é o Senhor,\nDeus em três pessoas,\nBendita Trindade",
       "author": "Reginald Heber",
-      "composer": "John B. Dykes"
+      "composer": "John B. Dykes",
+      "verses": [
+        {
+          "type": "verse",
+          "number": 1,
+          "label": "1",
+          "lines": [
+            "Santo, Santo, Santo,",
+            "Senhor Onipotente,",
+            "Cedo de manhã",
+            "Cantaremos Teu louvor."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "label": "2",
+          "lines": [
+            "Santo, Santo, Santo,",
+            "Tão santo é o Senhor,",
+            "Deus em três pessoas,",
+            "Bendita Trindade."
+          ]
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "label": "3",
+          "lines": [
+            "Santo, Santo, Santo,",
+            "Todas as obras Tuas",
+            "Louvam-Te, Senhor,",
+            "Deus de amor e poder!"
+          ]
+        },
+        {
+          "type": "chorus",
+          "label": "Estribilho",
+          "lines": [
+            "Santo, Santo, Santo!",
+            "Santo é o Senhor Deus!",
+            "Que era, e é, e há de vir,",
+            "Santo é o Senhor!"
+          ]
+        }
+      ]
     }
   ]
 }
