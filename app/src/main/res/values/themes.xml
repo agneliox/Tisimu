@@ -7,10 +7,35 @@
 
 <!--    <style name="Theme.Tisimu" parent="Base.Theme.Tisimu" />-->
 
-    <style name="Theme.Tisimu" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:statusBarColor">@color/primary_dark</item>
+    <style name="Theme.Tisimu" parent="Theme.Material3.Light.NoActionBar">
+<!--        <item name="colorPrimary">@color/primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/primary_dark</item>-->
+<!--        <item name="colorAccent">@color/accent</item>-->
+<!--        <item name="android:statusBarColor">@color/primary_dark</item>-->
+        <!-- Customize your light theme here. -->
+        <!--                 <item name="colorPrimary">#00000000</item>-->
+        <!--        <item name="android:statusBarColor">-->
+        <!--            @android:color/transparent-->
+        <!--        </item>-->
+        <!-- Primary color for status bar and toolbar -->
+        <item name="colorPrimary">@color/md_theme_light_surface</item>
+        <!-- Text color on primary surfaces (white background) -->
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <!-- Background color (light grey) -->
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <!-- Text color on background -->
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <!-- Text color on surfaces (e.g., cards, dialogs) -->
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/md_theme_light_surface</item>
+        <!-- Status bar text color -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Navigation bar color -->
+        <item name="android:navigationBarColor">@color/md_theme_light_surface</item>
+        <!-- Navigation bar text color -->
+        <!--        <item name="android:windowLightNavigationBar">true</item>-->
+
+
     </style>
 </resources>

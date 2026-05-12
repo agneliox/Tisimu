@@ -9,10 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Melody Proposal"
+        android:text="@string/add_melody_proposal"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/md_theme_light_primary"
         android:layout_marginBottom="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,7 +95,7 @@
                 android:id="@+id/etVideoUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="YouTube URL" />
+                android:hint="@string/youtube_url" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +111,7 @@
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description (optional)"
+            android:hint="@string/description_optional"
             android:inputType="textMultiLine"
             android:maxLines="2" />
 
@@ -127,7 +127,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
+            android:textColor="@color/md_theme_light_onSurface"
             android:textAllCaps="false"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
@@ -136,9 +137,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textAllCaps="false"
-            android:backgroundTint="@color/primary" />
+            android:backgroundTint="@color/md_theme_light_primary" />
 
     </LinearLayout>
 

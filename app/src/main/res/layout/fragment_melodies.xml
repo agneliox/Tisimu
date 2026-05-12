@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:contentDescription="@string/todo"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/primary" />
+        app:backgroundTint="@color/md_theme_light_primary" />
 
 </FrameLayout>

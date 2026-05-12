@@ -18,10 +18,10 @@
             android:id="@+id/tvSongNumber"
             android:layout_width="56dp"
             android:layout_height="wrap_content"
-            android:text="001"
+            android:text="@string/hymn_001"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/primary"
+            android:textColor="@color/md_theme_light_primary"
             android:gravity="center" />
 
         <LinearLayout
@@ -35,17 +35,17 @@
                 android:id="@+id/tvSongTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Song Title"
+                android:text="@string/song_title"
                 android:textSize="16sp"
-                android:textColor="@color/primary_dark" />
+                android:textColor="@color/md_theme_light_primary" />
 
             <TextView
                 android:id="@+id/tvSongSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hymnal Name"
+                android:text="@string/hymnal_name"
                 android:textSize="12sp"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/md_theme_light_primary"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -54,7 +54,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_chevron_right"
-            android:contentDescription="Open" />
+            android:contentDescription="@string/open"/>
 
     </LinearLayout>
 

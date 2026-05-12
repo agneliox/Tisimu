@@ -9,10 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Suggest Correction"
+        android:text="@string/suggest_correction"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/md_theme_light_primary"
         android:layout_marginBottom="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -25,7 +25,7 @@
             android:id="@+id/etVerseNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Verse Number"
+            android:hint="@string/verse_number"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -40,7 +40,7 @@
             android:id="@+id/etCurrentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Current Text"
+            android:hint="@string/current_text"
             android:inputType="textMultiLine"
             android:maxLines="3" />
 
@@ -56,7 +56,7 @@
             android:id="@+id/etSuggestedText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Suggested Text"
+            android:hint="@string/suggested_text"
             android:inputType="textMultiLine"
             android:maxLines="3" />
 
@@ -72,7 +72,7 @@
             android:id="@+id/etJustification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Justification (optional)"
+            android:hint="@string/justification_optional"
             android:inputType="textMultiLine"
             android:maxLines="2" />
 
@@ -88,7 +88,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
+            android:textColor="@color/md_theme_light_onSurface"
             android:textAllCaps="false"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
@@ -97,9 +98,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textAllCaps="false"
-            android:backgroundTint="@color/primary" />
+            android:backgroundTint="@color/md_theme_light_primary" />
 
     </LinearLayout>
 

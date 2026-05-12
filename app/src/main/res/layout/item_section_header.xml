@@ -21,7 +21,7 @@
             android:layout_height="24dp"
             android:text="▼"
             android:textSize="18sp"
-            android:textColor="@color/primary"
+            android:textColor="@color/md_theme_light_primary"
             android:gravity="center" />
 
         <LinearLayout
@@ -35,18 +35,18 @@
                 android:id="@+id/tvSectionName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Section Name"
+                android:text="@string/section_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/primary" />
+                android:textColor="@color/md_theme_light_primary" />
 
             <TextView
                 android:id="@+id/tvSongRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1-150"
+                android:text="@string/song_range"
                 android:textSize="12sp"
-                android:textColor="@color/dark_gray" />
+                android:textColor="@color/md_theme_light_primary" />
 
         </LinearLayout>
 
@@ -54,9 +54,9 @@
             android:id="@+id/tvSongCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 songs"
+            android:text="@string/_0_songs"
             android:textSize="12sp"
-            android:textColor="@color/primary_light" />
+            android:textColor="@color/md_theme_light_primary" />
 
     </LinearLayout>
 

@@ -4,24 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/md_theme_light_surface">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
+        android:background="@color/md_theme_light_background"
+        app:title="@string/select_hymnals"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/md_theme_light_onSurface" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Download hymnals to your library"
+        android:text="@string/download_hymnals_to_your_library"
         android:textSize="14sp"
-        android:textColor="@color/dark_gray"
-        android:padding="16dp"
-        android:background="@color/light_gray" />
+        android:textColor="@color/md_theme_light_primary"
+        android:padding="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHymnals"
@@ -35,10 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="16dp"
-        android:text="Continue"
+        android:text="@string/continue_text"
+        android:textColor="@color/md_theme_light_onPrimary"
         android:textAllCaps="false"
         app:cornerRadius="8dp"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/md_theme_light_primary"
         android:enabled="false" />
 
 </LinearLayout>
