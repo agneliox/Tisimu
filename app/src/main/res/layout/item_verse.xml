@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_verse"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="1dp"
-    app:cardUseCompatPadding="true">
+    android:layout_marginBottom="16dp">
 
     <LinearLayout
         android:id="@+id/llVerseContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="?attr/selectableItemBackground">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <!-- Verse Label -->
         <TextView
             android:id="@+id/tvVerseLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/verse_1"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/md_theme_light_primary"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_verse_label"
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
-            android:layout_marginBottom="12dp" />
+            android:text="@string/verse_1"
+            android:textColor="@color/md_theme_light_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <!-- Verse Text -->
         <TextView
             android:id="@+id/tvVerseText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Verse text goes here..."
-            android:textSize="18sp"
+            android:fontFamily="sans-serif"
             android:lineSpacingExtra="6dp"
+            android:text="Verse text goes here..."
             android:textColor="@color/md_theme_light_primary"
-            android:fontFamily="sans-serif" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

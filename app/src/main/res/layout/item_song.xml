@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_song"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
     app:cardElevation="1dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:background="?attr/selectableItemBackground">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvSongNumber"
             android:layout_width="56dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/hymn_001"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/md_theme_light_primary"
-            android:gravity="center" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -36,16 +41,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/song_title"
-                android:textSize="16sp"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textColor="@color/md_theme_light_primary"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvSongSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hymnal_name"
-                android:textSize="12sp"
                 android:textColor="@color/md_theme_light_primary"
+                android:textSize="12sp"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -53,9 +58,9 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_chevron_right"
-            android:contentDescription="@string/open"/>
+            android:contentDescription="@string/open"
+            android:src="@drawable/ic_chevron_right" />
 
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

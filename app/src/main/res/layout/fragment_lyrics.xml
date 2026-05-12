@@ -12,7 +12,7 @@
 
         <!-- Song Number Badge -->
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipSongNumber"
+            android:id="@+id/tvSongLyricsNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -63,13 +63,6 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/md_theme_light_primary"
-            android:layout_marginVertical="24dp" />
 
         <!-- Verses RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView

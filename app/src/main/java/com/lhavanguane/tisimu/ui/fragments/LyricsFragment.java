@@ -72,7 +72,7 @@ public class LyricsFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        chipSongNumber = view.findViewById(R.id.chipSongNumber);
+//        chipSongNumber = view.findViewById(R.id.tvSongDetailNumber);
         tvSongTitle = view.findViewById(R.id.tvSongTitle);
         tvAuthor = view.findViewById(R.id.tvAuthor);
         tvComposer = view.findViewById(R.id.tvComposer);

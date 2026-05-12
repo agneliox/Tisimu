@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/md_theme_light_background"
+    android:fitsSystemWindows="true"
     android:id="@+id/activity_song_detail">
 
     <!-- Toolbar -->
@@ -12,8 +13,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/md_theme_light_surface"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/md_theme_light_surface"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="@color/md_theme_light_onSurface"
         app:title="@string/song_title"
@@ -30,17 +31,15 @@
             android:orientation="vertical">
 
             <!-- Song Number Badge -->
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSongNumber"
+            <TextView
+                android:id="@+id/tvSongDetailNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/hymn_001"
-                app:chipBackgroundColor="@color/md_theme_light_primary"
-                app:chipStrokeColor="@color/md_theme_light_primary"
-                android:textColor="@color/md_theme_light_primary"
-                app:chipIcon="@drawable/ic_music_note"
-                app:chipIconTint="@color/md_theme_light_primary" />
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_theme_light_primary" />
 
             <!-- Song Title -->
             <TextView
@@ -49,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/song_title"
                 android:textSize="28sp"
-                android:textStyle="bold"
                 android:textColor="@color/md_theme_light_primary"
                 android:gravity="center"
                 android:layout_marginTop="16dp"
@@ -83,13 +81,6 @@
                     android:visibility="gone" />
 
             </LinearLayout>
-
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/md_theme_light_primary"
-                android:layout_marginVertical="24dp" />
 
             <!-- Lyrics Container -->
             <androidx.recyclerview.widget.RecyclerView

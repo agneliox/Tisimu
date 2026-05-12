@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.HymnalData;
@@ -25,7 +24,7 @@ import java.util.List;
 public class SongDetailActivity extends AppCompatActivity {
 
     private MaterialToolbar toolbar;
-    private Chip chipSongNumber;
+    private TextView tvSongDetailNumber;
     private TextView tvSongTitle;
     private TextView tvAuthor;
     private TextView tvComposer;
@@ -78,7 +77,7 @@ public class SongDetailActivity extends AppCompatActivity {
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        chipSongNumber = findViewById(R.id.chipSongNumber);
+        tvSongDetailNumber = findViewById(R.id.tvSongDetailNumber);
         tvSongTitle = findViewById(R.id.tvSongTitle);
         tvAuthor = findViewById(R.id.tvAuthor);
         tvComposer = findViewById(R.id.tvComposer);
@@ -125,7 +124,7 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
     private void displaySongInfo() {
-        chipSongNumber.setText("Hymn " + String.format("%03d", songNumber));
+        tvSongDetailNumber.setText( String.valueOf(songNumber));
         tvSongTitle.setText(songTitle);
 
         if (songAuthor != null && !songAuthor.isEmpty() && !songAuthor.equals("null")) {

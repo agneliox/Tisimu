@@ -131,7 +131,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
             // Set label based on section type
             String label = "";
             if ("verse".equals(section.getType())) {
-                label = "Verse " + section.getLabel();
+//                label = "Verse " + section.getLabel();
             } else if ("chorus".equals(section.getType())) {
                 label = "Chorus: " + section.getLabel();
             } else {
