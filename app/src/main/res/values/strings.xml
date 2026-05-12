@@ -56,5 +56,7 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="youtube_url">YouTube URL</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="join_the_tisimu_community">Join the Tisimu community</string>
 
 </resources>

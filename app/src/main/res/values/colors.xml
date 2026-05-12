@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 
 <!--    <color name="black">#FF000000</color>-->
 <!--    <color name="white">#FFFFFFFF</color>-->
@@ -14,18 +16,18 @@
 
 
     <!-- Light Mode Colors -->
-    <color name="md_theme_light_primary">#000000</color> <!-- Black for text -->
-    <color name="md_theme_light_onPrimary">#FFFFFF</color> <!-- White for text on primary surfaces -->
-    <color name="md_theme_light_background">#FAFAFA</color> <!-- Light grey background -->
-    <color name="md_theme_light_surface">#FFFFFF</color> <!-- Pure white toolbar, status bar -->
-    <color name="md_theme_light_onBackground">#000000</color> <!-- Black text on background -->
-    <color name="md_theme_light_onSurface">#000000</color> <!-- Black text on surfaces -->
+<!--    <color name="md_theme_light_primary">#000000</color> &lt;!&ndash; Black for text &ndash;&gt;-->
+<!--    <color name="md_theme_light_onPrimary">#FFFFFF</color> &lt;!&ndash; White for text on primary surfaces &ndash;&gt;-->
+<!--    <color name="md_theme_light_background">#FAFAFA</color> &lt;!&ndash; Light grey background &ndash;&gt;-->
+<!--    <color name="md_theme_light_surface">#FFFFFF</color> &lt;!&ndash; Pure white toolbar, status bar &ndash;&gt;-->
+<!--    <color name="md_theme_light_onBackground">#000000</color> &lt;!&ndash; Black text on background &ndash;&gt;-->
+<!--    <color name="md_theme_light_onSurface">#000000</color> &lt;!&ndash; Black text on surfaces &ndash;&gt;-->
 
     <!-- Dark Mode Colors -->
-    <color name="md_theme_dark_primary">#FFFFFF</color> <!-- White for text -->
-    <color name="md_theme_dark_onPrimary">#000000</color> <!-- Black for text on primary surfaces -->
-    <color name="md_theme_dark_background">#121212</color> <!-- Dark grey background -->
-    <color name="md_theme_dark_surface">#1E1E1E</color> <!-- Darker grey toolbar, status bar -->
-    <color name="md_theme_dark_onBackground">#FFFFFF</color> <!-- White text on background -->
-    <color name="md_theme_dark_onSurface">#FFFFFF</color> <!-- White text on surfaces -->
+<!--    <color name="md_theme_dark_primary">#FFFFFF</color> &lt;!&ndash; White for text &ndash;&gt;-->
+<!--    <color name="md_theme_dark_onPrimary">#000000</color> &lt;!&ndash; Black for text on primary surfaces &ndash;&gt;-->
+<!--    <color name="md_theme_dark_background">#121212</color> &lt;!&ndash; Dark grey background &ndash;&gt;-->
+<!--    <color name="md_theme_dark_surface">#1E1E1E</color> &lt;!&ndash; Darker grey toolbar, status bar &ndash;&gt;-->
+<!--    <color name="md_theme_dark_onBackground">#FFFFFF</color> &lt;!&ndash; White text on background &ndash;&gt;-->
+<!--    <color name="md_theme_dark_onSurface">#FFFFFF</color> &lt;!&ndash; White text on surfaces &ndash;&gt;-->
 </resources>

@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/hymn_001"
-            android:textColor="@color/md_theme_light_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -41,7 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/song_title"
-                android:textColor="@color/md_theme_light_primary"
                 android:textSize="16sp" />
 
             <TextView
@@ -49,7 +47,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hymnal_name"
-                android:textColor="@color/md_theme_light_primary"
                 android:textSize="12sp"
                 android:visibility="gone" />
 

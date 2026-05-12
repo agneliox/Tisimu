@@ -17,11 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/hymn_001"
-            app:chipBackgroundColor="@color/md_theme_light_primary"
-            app:chipStrokeColor="@color/md_theme_light_primary"
-            android:textColor="@color/md_theme_light_surface"
-            app:chipIcon="@drawable/ic_music_note"
-            app:chipIconTint="@color/md_theme_light_surface" />
+            app:chipIcon="@drawable/ic_music_note" />
 
         <!-- Song Title -->
         <TextView
@@ -31,7 +27,6 @@
             android:text="@string/song_title"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/md_theme_light_surface"
             android:gravity="center"
             android:layout_marginTop="16dp" />
 
@@ -49,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/author_name"
                 android:textSize="14sp"
-                android:textColor="@color/md_theme_light_surface"
                 android:visibility="gone" />
 
             <TextView
@@ -58,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/composer_name"
                 android:textSize="12sp"
-                android:textColor="@color/md_theme_light_surface"
                 android:layout_marginTop="4dp"
                 android:visibility="gone" />
 
@@ -89,8 +82,7 @@
                 android:text="@string/share_lyrics"
                 android:textAllCaps="false"
                 android:icon="@drawable/ic_share"
-                app:iconGravity="textStart"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                app:iconGravity="textStart"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCopyAll"
@@ -101,8 +93,7 @@
                 android:text="@string/copy_all"
                 android:textAllCaps="false"
                 android:icon="@drawable/ic_copy"
-                app:iconGravity="textStart"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                app:iconGravity="textStart" />
 
         </LinearLayout>
 

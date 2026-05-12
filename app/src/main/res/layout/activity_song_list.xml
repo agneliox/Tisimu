@@ -13,40 +13,36 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="Songs"
-        app:titleTextColor="@color/md_theme_light_primary"
         app:navigationIcon="@drawable/ic_back"
          />
 
     <!-- Hymnal Name -->
-    <TextView
-        android:id="@+id/tvHymnalName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/all_selected_hymnals"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/md_theme_light_primary"
-        android:padding="16dp"
-         />
+<!--    <TextView-->
+<!--        android:id="@+id/tvHymnalName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/all_selected_hymnals"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:padding="16dp"-->
+<!--         />-->
 
-    <!-- Search Bar -->
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="2dp">
+<!--    &lt;!&ndash; Search Bar &ndash;&gt;-->
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="12dp"-->
+<!--        app:cardCornerRadius="24dp"-->
+<!--        app:cardElevation="2dp">-->
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:queryHint="Search songs by number, title, or lyrics" />
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:id="@+id/searchView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:queryHint="Search songs by number, title, or lyrics" />-->
 
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
 
     <!-- Loading Progress -->
     <ProgressBar
@@ -63,8 +59,6 @@
         android:layout_height="wrap_content"
         app:tabMode="scrollable"
         app:tabGravity="fill"
-        app:tabSelectedTextColor="@color/md_theme_light_primary"
-        app:tabTextColor="@color/md_theme_light_primary"
          />
     <!-- Songs List -->
     <androidx.recyclerview.widget.RecyclerView

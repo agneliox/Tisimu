@@ -12,7 +12,6 @@
         android:text="@string/suggest_correction"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/md_theme_light_primary"
         android:layout_marginBottom="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +88,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cancel"
-            android:textColor="@color/md_theme_light_onSurface"
             android:textAllCaps="false"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
@@ -99,8 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/submit"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/md_theme_light_primary" />
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

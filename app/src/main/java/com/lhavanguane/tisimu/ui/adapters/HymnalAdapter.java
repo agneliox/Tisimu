@@ -110,7 +110,7 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
             } else {
                 btnAction.setText("DOWNLOAD");
                 btnAction.setBackgroundTintList(
-                        itemView.getContext().getColorStateList(R.color.md_theme_light_onSurface));
+                        itemView.getContext().getColorStateList(R.color.white));
                 cbSelect.setVisibility(View.GONE);
             }
 

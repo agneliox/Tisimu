@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_light_background"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
     android:id="@+id/activity_login">
@@ -20,16 +19,14 @@
             android:text="@string/welcome_back"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/md_theme_light_primary"
             android:layout_marginTop="40dp"
             android:gravity="center" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in to continue"
+            android:text="@string/sign_in_to_continue"
             android:textSize="14sp"
-            android:textColor="@color/md_theme_light_primary"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:layout_marginBottom="48dp" />
@@ -70,7 +67,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
-            android:textColor="@color/md_theme_light_primary"
             android:textSize="12sp"
             android:layout_gravity="end"
             android:layout_marginBottom="32dp"
@@ -82,10 +78,10 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="@string/login"
+            style="@style/Widget.MaterialComponents.Button"
             android:textAllCaps="false"
             android:textSize="16sp"
-            app:cornerRadius="8dp"
-            android:backgroundTint="@color/md_theme_light_onSurface" />
+            app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogleSignIn"
@@ -95,8 +91,6 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="8dp"
-            android:backgroundTint="@color/md_theme_light_surface"
-            android:textColor="@color/md_theme_light_onSurface"
             android:layout_marginTop="12dp"
             app:icon="@drawable/ic_google"
             app:iconGravity="textStart"
@@ -113,14 +107,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_account"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/tvRegisterLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register"
-                android:textColor="@color/md_theme_light_primary"
                 android:textStyle="bold"
                 android:layout_marginStart="4dp"
                 android:padding="8dp" />

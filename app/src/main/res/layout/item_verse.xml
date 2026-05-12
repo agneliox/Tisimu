@@ -32,7 +32,6 @@
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
             android:text="@string/verse_1"
-            android:textColor="@color/md_theme_light_primary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -44,7 +43,6 @@
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="6dp"
             android:text="Verse text goes here..."
-            android:textColor="@color/md_theme_light_primary"
             android:textSize="18sp" />
 
     </LinearLayout>

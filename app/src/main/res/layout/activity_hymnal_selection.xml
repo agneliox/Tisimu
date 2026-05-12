@@ -5,23 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@color/md_theme_light_surface">
+    >
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/md_theme_light_background"
+
         app:title="@string/select_hymnals"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@color/md_theme_light_onSurface" />
+
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/download_hymnals_to_your_library"
         android:textSize="14sp"
-        android:textColor="@color/md_theme_light_primary"
         android:padding="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,10 +36,10 @@
         android:layout_height="56dp"
         android:layout_margin="16dp"
         android:text="@string/continue_text"
-        android:textColor="@color/md_theme_light_onPrimary"
+
         android:textAllCaps="false"
         app:cornerRadius="8dp"
-        android:backgroundTint="@color/md_theme_light_primary"
+
         android:enabled="false" />
 
 </LinearLayout>

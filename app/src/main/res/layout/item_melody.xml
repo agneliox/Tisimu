@@ -24,16 +24,14 @@
                 android:layout_weight="1"
                 android:text="@string/user_name"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_0_likes"
-                android:textSize="12sp"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

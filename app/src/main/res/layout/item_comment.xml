@@ -24,16 +24,14 @@
                 android:layout_weight="1"
                 android:text="@string/user_name"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvTimeAgo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/last_seen"
-                android:textSize="12sp"
-                android:textColor="@color/md_theme_light_primary" />
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -57,7 +55,6 @@
                 android:layout_height="wrap_content"
                 android:text="0 likes"
                 android:textSize="12sp"
-                android:textColor="@color/md_theme_light_primary"
                 android:layout_marginEnd="16dp" />
 
             <TextView
@@ -66,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:text="Reply"
                 android:textSize="12sp"
-                android:textColor="@color/md_theme_light_primary"
                 android:textStyle="bold" />
 
         </LinearLayout>
