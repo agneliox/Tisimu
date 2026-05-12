@@ -54,3 +54,35 @@
    git clone https://github.com/agneliox/Tisimu.git
    cd Tisimu
 
+2. **Set up Firebase**
+
+- Create a project in Firebase Console
+- Add an Android app with package name com.lhavanguane.tisimu
+- Download google-services.json and place it in the app/ directory
+- Enable Email/Password authentication in Firebase Console
+
+3. **Configure GitHub URLs**
+- Update GITHUB_USERNAME in HymnalStorageManager.java:
+   ```bash
+      java
+      private static final String GITHUB_USERNAME = "your_username";
+
+4. **Build and Run**
+   ```bash
+   ./gradlew build
+   ./gradlew installDebug
+
+### JSON Schema for Hymnals
+
+**Repository Structure**
+Create this structure in your GitHub repository:
+
+   ```text
+   your-repo/
+   └── hymnals/
+      ├── manifest.json
+      ├── hymnal_1.json
+      ├── hymnal_2.json
+      └── covers/
+         ├── cover_1.jpg
+         └── cover_2.jpg
