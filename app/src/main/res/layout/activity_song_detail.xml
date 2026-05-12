@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/md_theme_light_background"
     android:fitsSystemWindows="true"
     android:id="@+id/activity_song_detail">
 
@@ -14,9 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:background="@color/md_theme_light_surface"
         app:navigationIcon="@drawable/ic_back"
-        app:navigationIconTint="@color/md_theme_light_onSurface"
         app:title="@string/song_title"
         app:titleTextColor="@color/md_theme_light_primary" />
 
