@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initViews();
-        setupToolbar();
+//        setupToolbar();
         setupNavigation();
         setupBottomNavigation();
         setupDrawerContent();

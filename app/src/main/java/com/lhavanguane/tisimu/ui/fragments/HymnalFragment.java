@@ -3,6 +3,9 @@ package com.lhavanguane.tisimu.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -12,7 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -22,6 +28,7 @@ import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.HymnalData;
 import com.lhavanguane.tisimu.models.SongItem;
 import com.lhavanguane.tisimu.services.HymnalStorageManager;
+import com.lhavanguane.tisimu.ui.activities.HymnalSelectionActivity;
 import com.lhavanguane.tisimu.ui.activities.SongDetailActivity;
 import com.lhavanguane.tisimu.ui.adapters.SongAdapter;
 import com.lhavanguane.tisimu.utils.PreferencesManager;
@@ -36,11 +43,13 @@ public class HymnalFragment extends Fragment {
 
     private static final String TAG = "HymnalFragment";
 
+    private androidx.appcompat.widget.Toolbar toolbar;
     private TabLayout tabLayout;
     private RecyclerView rvSongs;
     private SearchView searchView;
     private ProgressBar progressBar;
     private TextView tvEmptyState;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private HymnalStorageManager storageManager;
     private PreferencesManager preferencesManager;
@@ -54,7 +63,13 @@ public class HymnalFragment extends Fragment {
     private String currentHymnalFilter; // null means show all
     private int pendingLoadCount;
     private boolean isLoading = false;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Enable menu in fragment
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,32 +84,32 @@ public class HymnalFragment extends Fragment {
         selectedHymnalIds = new ArrayList<>();
 
         initViews(view);
+        setupToolbar(view);
         setupRecyclerView();
         setupSearchView(view);
+        setupSwipeRefresh(view);
         loadSelectedHymnals();
 
         return view;
     }
 
     private void initViews(View view) {
+        toolbar = view.findViewById(R.id.toolbar);
         tabLayout = view.findViewById(R.id.tabLayout);
         rvSongs = view.findViewById(R.id.rvSongs);
         progressBar = view.findViewById(R.id.progressBar);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
-
-        // In initViews:
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            refreshHymnals();
-        });
     }
 
-    private void refreshHymnals() {
-        allSongs.clear();
-        loadedHymnals.clear();
-        selectedHymnalIds.clear();
-        loadSelectedHymnals();
-        swipeRefreshLayout.setRefreshing(false);
+    private void setupToolbar(View view) {
+        // Set up the toolbar as the action bar for this fragment
+        if (getActivity() != null) {
+            // Make sure the activity's action bar is hidden
+            ((com.lhavanguane.tisimu.MainActivity) getActivity()).setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(null); // Remove navigation icon if any
+            setHasOptionsMenu(true);
+        }
     }
 
     private void setupRecyclerView() {
@@ -131,11 +146,18 @@ public class HymnalFragment extends Fragment {
         });
     }
 
+    private void setupSwipeRefresh(View view) {
+        swipeRefreshLayout.setColorSchemeResources(R.color.md_theme_primary);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refreshHymnals();
+        });
+    }
+
     private void loadSelectedHymnals() {
         Set<String> selectedIds = preferencesManager.getSelectedHymnals();
 
         if (selectedIds.isEmpty()) {
-            showEmptyState(true, "No hymnals selected. Please go to Settings to select hymnals.");
+            showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
             return;
         }
 
@@ -266,9 +288,8 @@ public class HymnalFragment extends Fragment {
 
     private void showProgress(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        rvSongs.setVisibility(show ? View.GONE : View.VISIBLE);
-        if (show) {
-            tvEmptyState.setVisibility(View.GONE);
+        if (!show) {
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 
@@ -294,12 +315,47 @@ public class HymnalFragment extends Fragment {
         }
     }
 
+    private void refreshHymnals() {
+        allSongs.clear();
+        filteredSongs.clear();
+        loadedHymnals.clear();
+        selectedHymnalIds.clear();
+        loadSelectedHymnals();
+    }
+
+    private void openHymnalSelection() {
+        Intent intent = new Intent(requireContext(), HymnalSelectionActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.hymnal_fragment_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_select_hymnals) {
+            openHymnalSelection();
+            return true;
+        }
+//        else if (id == R.id.action_refresh) {
+//            refreshHymnals();
+//            return true;
+//        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         // Refresh hymnals when returning to this fragment
         if (selectedHymnalIds.isEmpty()) {
-            loadSelectedHymnals();
+            refreshHymnals();
         }
     }
 }

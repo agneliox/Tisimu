@@ -4,23 +4,15 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    app:statusBarBackground="?attr/colorSurface">
+    android:fitsSystemWindows="true">
 
     <!-- Main Content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="?attr/colorSurface">
+        android:orientation="vertical">
 
-        <!-- App Bar -->
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
-            app:titleTextColor="?attr/colorOnSurface" />
+        <!-- Remove the toolbar from here since fragments have their own -->
 
         <!-- Fragment Container -->
         <androidx.fragment.app.FragmentContainerView
@@ -37,7 +29,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
+            android:background="?attr/colorSurface"
             app:menu="@menu/bottom_nav_menu" />
 
     </LinearLayout>

@@ -6,13 +6,24 @@
     android:orientation="vertical"
     android:background="?attr/colorSurface">
 
+    <!-- Fragment-specific Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:title="My Hymnal"
+        app:titleTextColor="?attr/colorOnSurface"
+        app:menu="@menu/hymnal_fragment_menu" />
+
     <!-- Search Bar -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         app:cardCornerRadius="24dp"
-        app:cardElevation="2dp">
+        app:cardElevation="1dp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
@@ -56,12 +67,13 @@
         android:textColor="?attr/colorOnSurfaceVariant"
         android:visibility="gone" />
 
+    <!-- Swipe Refresh Layout -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Existing RecyclerView here -->
+        <!-- Songs RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSongs"
             android:layout_width="match_parent"
@@ -70,7 +82,5 @@
             android:clipToPadding="false" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <!-- Songs RecyclerView -->
-
 
 </LinearLayout>
