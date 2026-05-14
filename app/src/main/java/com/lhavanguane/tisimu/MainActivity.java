@@ -1,6 +1,7 @@
 package com.lhavanguane.tisimu;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Enable dynamic colors for Android 12+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            // Dynamic colors are automatically applied from the theme
+            // You can check if dynamic color is available
+            androidx.core.content.res.ResourcesCompat.FontCallback callback = new androidx.core.content.res.ResourcesCompat.FontCallback() {
+                @Override
+                public void onFontRetrieved(@NonNull Typeface typeface) {
+                    // Font loaded
+                }
+
+                @Override
+                public void onFontRetrievalFailed(int reason) {
+                    // Font failed to load
+                }
+            };
+        }
+
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();

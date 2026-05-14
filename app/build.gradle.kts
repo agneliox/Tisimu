@@ -65,6 +65,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
+    // Add splash screen API
+    implementation(libs.core.splashscreen)
 
     // For audio playback
     implementation(libs.exoplayer.core)
@@ -81,4 +83,5 @@ dependencies {
     // Navigation Component
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation("androidx.core:core-splashscreen:1.2.0")
 }

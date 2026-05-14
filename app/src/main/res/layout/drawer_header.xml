@@ -12,15 +12,16 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@drawable/ic_hymn_book"
-        android:contentDescription="Profile"
-        app:circleCrop="true" />
+        android:contentDescription="@string/profile"
+        app:circleCrop="true"
+        app:tint="?attr/colorOnSurface" />
 
     <TextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guest User"
-        android:textColor="@color/white"
+        android:text="@string/guest_user"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp" />
@@ -29,8 +30,8 @@
         android:id="@+id/tvUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user@example.com"
-        android:textColor="@color/white"
+        android:text="@string/user_email"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="12sp" />
 
 </LinearLayout>

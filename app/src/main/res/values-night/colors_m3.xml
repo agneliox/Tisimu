@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme Material Design 3 Color Scheme -->
+
+    <!-- Primary colors -->
+    <color name="md_theme_primary">#D0BCFF</color>
+    <color name="md_theme_on_primary">#381E72</color>
+    <color name="md_theme_primary_container">#4F378B</color>
+    <color name="md_theme_on_primary_container">#EADDFF</color>
+
+    <!-- Secondary colors -->
+    <color name="md_theme_secondary">#CCC2DC</color>
+    <color name="md_theme_on_secondary">#332D41</color>
+    <color name="md_theme_secondary_container">#4A4458</color>
+    <color name="md_theme_on_secondary_container">#E8DEF8</color>
+
+    <!-- Tertiary colors -->
+    <color name="md_theme_tertiary">#EFB8C8</color>
+    <color name="md_theme_on_tertiary">#492532</color>
+    <color name="md_theme_tertiary_container">#633B48</color>
+    <color name="md_theme_on_tertiary_container">#FFD8E4</color>
+
+    <!-- Error colors -->
+    <color name="md_theme_error">#FFB4AB</color>
+    <color name="md_theme_on_error">#690005</color>
+    <color name="md_theme_error_container">#93000A</color>
+    <color name="md_theme_on_error_container">#FFDAD6</color>
+
+    <!-- Surface colors -->
+    <color name="md_theme_surface">#1C1B1F</color>
+    <color name="md_theme_on_surface">#E6E1E5</color>
+    <color name="md_theme_surface_variant">#49454F</color>
+    <color name="md_theme_on_surface_variant">#CAC4D0</color>
+
+    <!-- Outline colors -->
+    <color name="md_theme_outline">#938F99</color>
+    <color name="md_theme_outline_variant">#49454F</color>
+
+    <!-- Background colors -->
+    <color name="md_theme_background">#1C1B1F</color>
+    <color name="md_theme_on_background">#E6E1E5</color>
+
+    <!-- Surface container colors -->
+    <color name="surface_container_lowest">#121216</color>
+    <color name="surface_container_low">#212026</color>
+    <color name="surface_container">#2B2930</color>
+    <color name="surface_container_high">#36343C</color>
+    <color name="surface_container_highest">#413E47</color>
+</resources>

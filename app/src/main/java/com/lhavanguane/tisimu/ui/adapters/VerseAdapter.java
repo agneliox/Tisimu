@@ -102,7 +102,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
 
         // Highlight selected section
         if (selectedPosition == position) {
-            holder.itemView.setBackgroundResource(R.color.white);
+            holder.itemView.setBackgroundResource(com.google.android.material.R.color.material_divider_color);
             holder.itemView.setAlpha(0.95f);
         } else {
             holder.itemView.setBackgroundResource(0);
