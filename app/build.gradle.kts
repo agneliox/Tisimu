@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.viewmodel)
+    implementation(libs.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

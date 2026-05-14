@@ -61,4 +61,6 @@
     <string name="profile">Profile</string>
     <string name="guest_user">Guest User</string>
     <string name="user_email">user@tisumu.com</string>
+    <string name="word">Word</string>
+    <string name="me">Me</string>
 </resources>

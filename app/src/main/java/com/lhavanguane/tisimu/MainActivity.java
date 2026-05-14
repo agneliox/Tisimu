@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle("Community");
                 }
+            } else if (destinationId == R.id.profileFragment) {
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle("Me");
+                }
             } else if (destinationId == R.id.settingsFragment) {
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle("Settings");

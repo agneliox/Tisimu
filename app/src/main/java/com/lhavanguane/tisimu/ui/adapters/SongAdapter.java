@@ -3,6 +3,7 @@ package com.lhavanguane.tisimu.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,12 +54,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvNumber, tvTitle, tvSubtitle;
+        private ImageView ivChevron;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNumber = itemView.findViewById(R.id.tvSongNumber);
             tvTitle = itemView.findViewById(R.id.tvSongTitle);
             tvSubtitle = itemView.findViewById(R.id.tvSongSubtitle);
+            ivChevron = itemView.findViewById(R.id.ivChevron);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
