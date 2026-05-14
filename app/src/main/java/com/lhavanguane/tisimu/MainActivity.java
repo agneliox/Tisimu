@@ -89,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
+    // Add these methods to MainActivity if not already present
+
+    public DrawerLayout getDrawerLayout() {
+        return drawerLayout;
+    }
+
+//    public ActionBarDrawerToggle getDrawerToggle() {
+//        return drawerToggle;
+//    }
 
     private void setupNavigation() {
         // Simply link the bottom navigation with NavController

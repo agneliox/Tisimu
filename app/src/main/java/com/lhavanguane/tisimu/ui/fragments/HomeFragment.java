@@ -12,13 +12,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.lhavanguane.tisimu.MainActivity;
 import com.lhavanguane.tisimu.R;
 
 public class HomeFragment extends Fragment {
 
     private TextView tvDailyVerse, tvVerseReference;
+    private com.google.android.material.appbar.MaterialToolbar toolbar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,9 +37,35 @@ public class HomeFragment extends Fragment {
         tvDailyVerse = view.findViewById(R.id.tvDailyVerse);
         tvVerseReference = view.findViewById(R.id.tvVerseReference);
 
+        initViews(view);
+        setupToolbar();
         loadDailyVerse();
 
         return view;
+    }
+
+    private void initViews(View view) {
+        toolbar = view.findViewById(R.id.homeToolbar);
+    }
+
+    private void setupToolbar() {
+        // Set up the toolbar
+        if (getActivity() != null) {
+            ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
+
+            // Enable navigation icon to open drawer
+            toolbar.setNavigationIcon(R.drawable.ic_menu);
+            toolbar.setNavigationOnClickListener(v -> {
+                DrawerLayout drawerLayout = ((MainActivity) requireActivity()).getDrawerLayout();
+                if (drawerLayout != null && !drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                } else if (drawerLayout != null) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+
+            toolbar.setTitle("My Hymnal");
+        }
     }
 
     private void loadDailyVerse() {

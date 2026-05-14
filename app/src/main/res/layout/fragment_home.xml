@@ -8,14 +8,16 @@
 
     <!-- Fragment-specific Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/homeToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
-        app:title="Home"
+        app:title=""
         app:titleTextColor="?attr/colorOnSurface"
-        app:menu="@menu/home_fragment_menu" />
+        app:menu="@menu/home_fragment_menu"
+        app:navigationIcon="@drawable/ic_menu"
+        app:navigationIconTint="?attr/colorOnSurface" />
 
     <ScrollView
         android:layout_width="match_parent"
