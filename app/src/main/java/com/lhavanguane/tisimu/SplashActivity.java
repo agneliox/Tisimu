@@ -29,14 +29,15 @@ public class SplashActivity extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 // User is logged in
-                PreferencesManager prefs = PreferencesManager.getInstance(this);
-                if (prefs.getSelectedHymnals().isEmpty()) {
-                    // No hymnals selected, go to selection screen
-                    startActivity(new Intent(SplashActivity.this, HymnalSelectionActivity.class));
-                } else {
-                    // Hymnals already selected, go to song list
-                    startActivity(new Intent(SplashActivity.this, SongListActivity.class));
-                }
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                PreferencesManager prefs = PreferencesManager.getInstance(this);
+//                if (prefs.getSelectedHymnals().isEmpty()) {
+//                    // No hymnals selected, go to selection screen
+//                    startActivity(new Intent(SplashActivity.this, HymnalSelectionActivity.class));
+//                } else {
+//                    // Hymnals already selected, go to song list
+//                    startActivity(new Intent(SplashActivity.this, SongListActivity.class));
+//                }
             } else {
                 // User not logged in, go to login
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));

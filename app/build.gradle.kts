@@ -78,4 +78,7 @@ dependencies {
     // Add the core OkHttp library
     implementation(libs.okhttp)
 
+    // Navigation Component
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }

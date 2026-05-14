@@ -58,5 +58,8 @@
     <string name="youtube_url">YouTube URL</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="join_the_tisimu_community">Join the Tisimu community</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
 
 </resources>

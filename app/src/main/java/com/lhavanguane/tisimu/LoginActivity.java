@@ -65,14 +65,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        
-                        PreferencesManager prefs = PreferencesManager.getInstance(this);
-                        Intent intent;
-                        if (prefs.getSelectedHymnals().isEmpty()) {
-                            intent = new Intent(LoginActivity.this, HymnalSelectionActivity.class);
-                        } else {
-                            intent = new Intent(LoginActivity.this, SongListActivity.class);
-                        }
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        PreferencesManager prefs = PreferencesManager.getInstance(this);
+//                        Intent intent;
+//                        if (prefs.getSelectedHymnals().isEmpty()) {
+//                            intent = new Intent(LoginActivity.this, HymnalSelectionActivity.class);
+//                        } else {
+//                            intent = new Intent(LoginActivity.this, SongListActivity.class);
+//                        }
                         startActivity(intent);
                         finish();
                     } else {

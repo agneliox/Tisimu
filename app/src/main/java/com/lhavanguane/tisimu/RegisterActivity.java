@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
 
                         // Navigate to HymnalSelectionActivity
-                        Intent intent = new Intent(RegisterActivity.this, HymnalSelectionActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();

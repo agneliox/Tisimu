@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_hymnal"
+            android:icon="@drawable/ic_hymn_book"
+            android:title="My Hymnal" />
+
+        <item
+            android:id="@+id/nav_community"
+            android:icon="@drawable/ic_community"
+            android:title="Community" />
+    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
+
+            <item
+                android:id="@+id/nav_language"
+                android:icon="@drawable/ic_language"
+                android:title="Change Language" />
+        </menu>
+    </item>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/nav_about_app"
+                android:icon="@drawable/ic_info"
+                android:title="About the App" />
+
+            <item
+                android:id="@+id/nav_about_publisher"
+                android:icon="@drawable/ic_person"
+                android:title="About the Publisher" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_share"
+        android:title="Share the App" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+
+</menu>
