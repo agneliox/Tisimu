@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/homeFragment"
             android:icon="@drawable/ic_home"
             android:title="Home" />
 
         <item
-            android:id="@+id/nav_hymnal"
+            android:id="@+id/hymnalFragment"
             android:icon="@drawable/ic_hymn_book"
             android:title="My Hymnal" />
 
         <item
-            android:id="@+id/nav_community"
+            android:id="@+id/communityFragment"
             android:icon="@drawable/ic_community"
             android:title="Community" />
     </group>
@@ -21,7 +21,7 @@
     <item android:title="Settings">
         <menu>
             <item
-                android:id="@+id/nav_settings"
+                android:id="@+id/settingsFragment"
                 android:icon="@drawable/ic_settings"
                 android:title="Settings" />
 

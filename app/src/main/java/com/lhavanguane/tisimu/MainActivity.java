@@ -2,22 +2,19 @@ package com.lhavanguane.tisimu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,56 +23,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int SPLASH_DELAY = 2000; // 2 seconds
-    private FirebaseAuth mAuth;
+
+    private static final String TAG = "MainActivity";
+
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
-
+    private FirebaseAuth mAuth;
+    private boolean isNavigating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         mAuth = FirebaseAuth.getInstance();
-
-        // Check if user is logged in
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Toast.makeText(this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
-        }
-
-        new Handler().postDelayed(() -> {
-            checkUserLoginStatus();
-        }, SPLASH_DELAY);
 
         initViews();
         setupToolbar();
         setupNavigation();
+        setupBottomNavigation();
         setupDrawerContent();
         updateUserInfo();
-    }
-
-    private void checkUserLoginStatus() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            // User is logged in, stay in MainActivity or do nothing
-            // If this was a splash activity, we would navigate to MainActivity
-        } else {
-            // User is not logged in, go to LoginActivity
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private void initViews() {
@@ -93,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar));
-
+//
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, findViewById(R.id.toolbar),
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -102,41 +72,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavigation() {
-        // Setup bottom navigation
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.hymnalFragment, R.id.communityFragment)
-                .setOpenableLayout(drawerLayout)
-                .build();
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        // Simply link the bottom navigation with NavController
+        // Don't add additional listeners that cause recursion
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // Update toolbar title when destination changes
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (isNavigating) return;
+
+            int destinationId = destination.getId();
+
+            if (destinationId == R.id.homeFragment) {
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle("Home");
+                }
+            } else if (destinationId == R.id.hymnalFragment) {
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle("Hymnal");
+                }
+            } else if (destinationId == R.id.communityFragment) {
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle("Community");
+                }
+            } else if (destinationId == R.id.settingsFragment) {
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle("Settings");
+                }
+            }
+        });
+    }
+
+    private void setupBottomNavigation() {
+        // Ensure bottom navigation is visible and enabled
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setEnabled(true);
+
+        // Set default selection (ID must match nav_graph.xml)
+        bottomNavigationView.setSelectedItemId(R.id.homeFragment);
     }
 
     private void setupDrawerContent() {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if (id == R.id.nav_home) {
-                navController.navigate(R.id.homeFragment);
-            } else if (id == R.id.nav_hymnal) {
-                navController.navigate(R.id.hymnalFragment);
-            } else if (id == R.id.nav_community) {
-                navController.navigate(R.id.communityFragment);
-            } else if (id == R.id.nav_settings) {
-                navController.navigate(R.id.settingsFragment);
-            } else if (id == R.id.nav_language) {
-                Toast.makeText(this, "Language settings coming soon", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_about_app) {
-                showAboutDialog();
-            } else if (id == R.id.nav_about_publisher) {
-                showPublisherDialog();
-            } else if (id == R.id.nav_share) {
-                shareApp();
-            } else if (id == R.id.nav_logout) {
-                logout();
+            // 1. Try to handle with NavigationUI (matches IDs in nav_graph.xml)
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            // 2. If not handled by NavigationUI, handle custom menu items
+            if (!handled) {
+                if (id == R.id.nav_language) {
+                    Toast.makeText(this, "Language settings coming soon", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.nav_about_app) {
+                    showAboutDialog();
+                } else if (id == R.id.nav_about_publisher) {
+                    showPublisherDialog();
+                } else if (id == R.id.nav_share) {
+                    shareApp();
+                } else if (id == R.id.nav_logout) {
+                    logout();
+                }
             }
 
+            // Close the drawer
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
@@ -151,7 +149,12 @@ public class MainActivity extends AppCompatActivity {
 
             String name = currentUser.getDisplayName();
             if (name == null || name.isEmpty()) {
-                name = currentUser.getEmail().split("@")[0];
+                String email = currentUser.getEmail();
+                if (email != null) {
+                    name = email.split("@")[0];
+                } else {
+                    name = "User";
+                }
             }
             tvUserName.setText(name);
             tvUserEmail.setText(currentUser.getEmail());
@@ -201,7 +204,22 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // Check if we're on a top-level destination
+            NavDestination currentDestination = navController.getCurrentDestination();
+            if (currentDestination != null) {
+                int currentId = currentDestination.getId();
+                if (currentId == R.id.homeFragment ||
+                        currentId == R.id.hymnalFragment ||
+                        currentId == R.id.communityFragment) {
+                    // On top-level, allow back press to close app
+                    super.onBackPressed();
+                } else {
+                    // Navigate up
+                    navController.navigateUp();
+                }
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 }

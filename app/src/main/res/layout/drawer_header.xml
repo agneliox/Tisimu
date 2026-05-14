@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="user@example.com"
-        android:textColor="@color/white_70"
+        android:textColor="@color/white"
         android:textSize="12sp" />
 
 </LinearLayout>
