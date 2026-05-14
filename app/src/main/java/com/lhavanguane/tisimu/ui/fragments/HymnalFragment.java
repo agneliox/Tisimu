@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
@@ -43,7 +42,7 @@ public class HymnalFragment extends Fragment {
 
     private static final String TAG = "HymnalFragment";
 
-    private androidx.appcompat.widget.Toolbar toolbar;
+    private com.google.android.material.appbar.MaterialToolbar toolbar;
     private TabLayout tabLayout;
     private RecyclerView rvSongs;
     private SearchView searchView;
@@ -67,7 +66,6 @@ public class HymnalFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Enable menu in fragment
         setHasOptionsMenu(true);
     }
 
@@ -84,7 +82,7 @@ public class HymnalFragment extends Fragment {
         selectedHymnalIds = new ArrayList<>();
 
         initViews(view);
-        setupToolbar(view);
+        setupToolbar();
         setupRecyclerView();
         setupSearchView(view);
         setupSwipeRefresh(view);
@@ -102,13 +100,12 @@ public class HymnalFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
     }
 
-    private void setupToolbar(View view) {
-        // Set up the toolbar as the action bar for this fragment
+    private void setupToolbar() {
+        // Set up the toolbar
         if (getActivity() != null) {
-            // Make sure the activity's action bar is hidden
-            ((com.lhavanguane.tisimu.MainActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(null); // Remove navigation icon if any
-            setHasOptionsMenu(true);
+            ((com.lhavanguane.tisimu.MainActivity) requireActivity()).setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(null);
+            toolbar.setTitle("My Hymnal");
         }
     }
 
@@ -118,14 +115,16 @@ public class HymnalFragment extends Fragment {
         rvSongs.setAdapter(adapter);
 
         adapter.setOnSongClickListener(songItem -> {
-            Intent intent = new Intent(requireContext(), SongDetailActivity.class);
-            intent.putExtra("SONG_NUMBER", songItem.getSong().getNumber());
-            intent.putExtra("SONG_TITLE", songItem.getSong().getTitle());
-            intent.putExtra("SONG_LYRICS", songItem.getSong().getLyrics());
-            intent.putExtra("SONG_AUTHOR", songItem.getSong().getAuthor());
-            intent.putExtra("SONG_COMPOSER", songItem.getSong().getComposer());
-            intent.putExtra("HYMNAL_NAME", songItem.getHymnalName());
-            startActivity(intent);
+            if (isAdded() && getContext() != null) {
+                Intent intent = new Intent(requireContext(), SongDetailActivity.class);
+                intent.putExtra("SONG_NUMBER", songItem.getSong().getNumber());
+                intent.putExtra("SONG_TITLE", songItem.getSong().getTitle());
+                intent.putExtra("SONG_LYRICS", songItem.getSong().getLyrics());
+                intent.putExtra("SONG_AUTHOR", songItem.getSong().getAuthor());
+                intent.putExtra("SONG_COMPOSER", songItem.getSong().getComposer());
+                intent.putExtra("HYMNAL_NAME", songItem.getHymnalName());
+                startActivity(intent);
+            }
         });
     }
 
@@ -157,7 +156,9 @@ public class HymnalFragment extends Fragment {
         Set<String> selectedIds = preferencesManager.getSelectedHymnals();
 
         if (selectedIds.isEmpty()) {
-            showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
+            if (isAdded()) {
+                showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
+            }
             return;
         }
 
@@ -166,8 +167,10 @@ public class HymnalFragment extends Fragment {
         pendingLoadCount = selectedHymnalIds.size();
         isLoading = true;
 
-        showProgress(true);
-        setupTabLayout();
+        if (isAdded()) {
+            showProgress(true);
+            setupTabLayout();
+        }
 
         // Load each hymnal
         for (String hymnalId : selectedHymnalIds) {
@@ -193,7 +196,9 @@ public class HymnalFragment extends Fragment {
                     currentHymnalFilter = selectedHymnalIds.get(position - 1);
                 }
                 filterSongs();
-                updateEmptyState();
+                if (isAdded()) {
+                    updateEmptyState();
+                }
             }
 
             @Override
@@ -208,6 +213,11 @@ public class HymnalFragment extends Fragment {
         storageManager.loadHymnal(hymnalId, new HymnalStorageManager.HymnalLoadCallback() {
             @Override
             public void onSuccess(HymnalData hymnal) {
+                // Check if fragment is still attached before updating UI
+                if (!isAdded() || getActivity() == null) {
+                    return;
+                }
+
                 loadedHymnals.put(hymnalId, hymnal);
 
                 // Add all songs from this hymnal to the list
@@ -219,7 +229,9 @@ public class HymnalFragment extends Fragment {
                 int index = selectedHymnalIds.indexOf(hymnalId);
                 if (index != -1 && tabLayout.getTabAt(index + 1) != null) {
                     requireActivity().runOnUiThread(() -> {
-                        tabLayout.getTabAt(index + 1).setText(hymnal.getName());
+                        if (isAdded() && tabLayout.getTabAt(index + 1) != null) {
+                            tabLayout.getTabAt(index + 1).setText(hymnal.getName());
+                        }
                     });
                 }
 
@@ -228,24 +240,33 @@ public class HymnalFragment extends Fragment {
                 if (pendingLoadCount == 0) {
                     isLoading = false;
                     requireActivity().runOnUiThread(() -> {
-                        showProgress(false);
-                        filterSongs();
-                        updateEmptyState();
+                        if (isAdded() && getContext() != null) {
+                            showProgress(false);
+                            filterSongs();
+                            updateEmptyState();
 
-                        String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                            String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                        }
                     });
                 }
             }
 
             @Override
             public void onFailure(String error) {
+                // Check if fragment is still attached
+                if (!isAdded() || getActivity() == null) {
+                    return;
+                }
+
                 pendingLoadCount--;
 
                 if (pendingLoadCount == 0 && loadedHymnals.isEmpty()) {
                     requireActivity().runOnUiThread(() -> {
-                        showProgress(false);
-                        showEmptyState(true, "Failed to load hymnals. Please check your connection and try again.");
+                        if (isAdded() && getContext() != null) {
+                            showProgress(false);
+                            showEmptyState(true, "Failed to load hymnals. Please check your connection and try again.");
+                        }
                     });
                 }
             }
@@ -257,7 +278,7 @@ public class HymnalFragment extends Fragment {
     }
 
     private void filterSongs(String searchQuery) {
-        if (isLoading) return;
+        if (isLoading || !isAdded()) return;
 
         filteredSongs.clear();
 
@@ -282,11 +303,15 @@ public class HymnalFragment extends Fragment {
         adapter.setSongs(filteredSongs);
 
         boolean hasSongs = !filteredSongs.isEmpty();
-        showEmptyState(!hasSongs, "No songs found");
-        rvSongs.setVisibility(hasSongs ? View.VISIBLE : View.GONE);
+        if (isAdded()) {
+            showEmptyState(!hasSongs, "No songs found");
+            rvSongs.setVisibility(hasSongs ? View.VISIBLE : View.GONE);
+        }
     }
 
     private void showProgress(boolean show) {
+        if (!isAdded()) return;
+
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         if (!show) {
             swipeRefreshLayout.setRefreshing(false);
@@ -294,6 +319,8 @@ public class HymnalFragment extends Fragment {
     }
 
     private void showEmptyState(boolean show, String message) {
+        if (!isAdded()) return;
+
         if (show) {
             tvEmptyState.setText(message);
             tvEmptyState.setVisibility(View.VISIBLE);
@@ -304,6 +331,8 @@ public class HymnalFragment extends Fragment {
     }
 
     private void updateEmptyState() {
+        if (!isAdded()) return;
+
         if (filteredSongs.isEmpty() && !isLoading) {
             String message = "No songs available in this hymnal";
             tvEmptyState.setText(message);
@@ -324,8 +353,10 @@ public class HymnalFragment extends Fragment {
     }
 
     private void openHymnalSelection() {
-        Intent intent = new Intent(requireContext(), HymnalSelectionActivity.class);
-        startActivity(intent);
+        if (isAdded()) {
+            Intent intent = new Intent(requireContext(), HymnalSelectionActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -354,8 +385,20 @@ public class HymnalFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // Refresh hymnals when returning to this fragment
-        if (selectedHymnalIds.isEmpty()) {
+        if (selectedHymnalIds.isEmpty() && isAdded()) {
             refreshHymnals();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Clean up to prevent memory leaks
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(null);
+        }
+        if (tabLayout != null) {
+            tabLayout.clearOnTabSelectedListeners();
         }
     }
 }

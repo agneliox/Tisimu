@@ -258,8 +258,16 @@ public class HymnalStorageManager {
 
                     HymnalData hymnal = gson.fromJson(jsonBuilder.toString(), HymnalData.class);
 
+//                    if (callback != null) {
+//                        mainHandler.post(() -> callback.onSuccess(hymnal));
+//                    }
+                    // In the loadHymnal method, ensure callbacks are only called if not null
                     if (callback != null) {
-                        mainHandler.post(() -> callback.onSuccess(hymnal));
+                        mainHandler.post(() -> {
+                            if (callback != null) {
+                                callback.onSuccess(hymnal);
+                            }
+                        });
                     }
                 }
             } catch (Exception e) {
