@@ -34,10 +34,11 @@
                 android:id="@+id/tvGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
                 android:text="Hello, Guest"
                 android:textAppearance="?attr/textAppearanceHeadlineSmall"
                 android:textColor="?attr/colorPrimary"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -47,17 +48,18 @@
                 android:text="Welcome to Tisimu"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:gravity="center"
-                android:layout_marginBottom="32dp" />
+                android:gravity="start"
+                android:layout_marginBottom="32dp"
+                android:visibility="invisible"/>
 
             <!-- Daily Verse Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Today's Verse"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginBottom="24dp" />
 
             <TextView
@@ -65,10 +67,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Loading..."
-                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:lineSpacingExtra="8dp"
                 android:textColor="?attr/colorOnSurface"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginBottom="16dp" />
 
             <TextView
@@ -76,9 +78,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
-                android:gravity="center" />
+                android:gravity="start" />
 
         </LinearLayout>
 

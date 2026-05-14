@@ -7,6 +7,7 @@ public class HymnalManifest {
     private String lastUpdated;
     private List<HymnalInfo> hymnals;
 
+
     public int getVersion() { return version; }
     public void setVersion(int version) { this.version = version; }
 
@@ -29,6 +30,8 @@ public class HymnalManifest {
         private String author;
         private boolean isDownloaded;
         private boolean needsUpdate;
+
+        private boolean isSelected;
 
         // Getters and setters
         public String getId() { return id; }
@@ -66,5 +69,13 @@ public class HymnalManifest {
 
         public boolean isNeedsUpdate() { return needsUpdate; }
         public void setNeedsUpdate(boolean needsUpdate) { this.needsUpdate = needsUpdate; }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
     }
 }

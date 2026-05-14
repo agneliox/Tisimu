@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.lhavanguane.tisimu.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.HymnalData;
 import com.lhavanguane.tisimu.models.HymnalManifest;
@@ -42,13 +43,13 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hymnal_selection);
 
-        Log.d(TAG, "onCreate started");
-
-        // Initialize managers
         storageManager = new HymnalStorageManager(this);
         preferencesManager = PreferencesManager.getInstance(this);
         hymnals = new ArrayList<>();
         selectedHymnals = new ArrayList<>();
+
+        // Load previously selected hymnals
+        loadPreviouslySelectedHymnals();
 
         initViews();
         setupToolbar();
@@ -57,16 +58,27 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         loadManifest();
     }
 
+    private void loadPreviouslySelectedHymnals() {
+        // Get previously selected hymnal IDs from preferences
+        for (String id : preferencesManager.getSelectedHymnals()) {
+            // Create placeholder objects for selected hymnals
+            HymnalManifest.HymnalInfo hymnal = new HymnalManifest.HymnalInfo();
+            hymnal.setId(id);
+            hymnal.setDownloaded(storageManager.isHymnalDownloaded(id));
+            selectedHymnals.add(hymnal);
+        }
+    }
+
     private void initViews() {
-        toolbar = findViewById(R.id.hymnalSelectionToolbar);
+        toolbar = findViewById(R.id.toolbar);
         rvHymnals = findViewById(R.id.rvHymnals);
         btnContinue = findViewById(R.id.btnContinue);
-        Log.d(TAG, "Views initialized");
     }
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Select Hymnals");
         }
     }
@@ -101,13 +113,9 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                 updateContinueButton();
             }
         });
-
-        Log.d(TAG, "RecyclerView setup complete");
     }
 
     private void loadManifest() {
-        Log.d(TAG, "Loading manifest...");
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading hymnals...");
         progressDialog.setCancelable(false);
@@ -116,55 +124,43 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         storageManager.fetchManifest(new HymnalStorageManager.ManifestCallback() {
             @Override
             public void onSuccess(HymnalManifest manifest) {
-                Log.d(TAG, "Manifest loaded successfully");
-
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
 
-                if (manifest != null && manifest.getHymnals() != null && !manifest.getHymnals().isEmpty()) {
-                    Log.d(TAG, "Found " + manifest.getHymnals().size() + " hymnals");
-
+                if (manifest != null && manifest.getHymnals() != null) {
                     hymnals.clear();
                     hymnals.addAll(manifest.getHymnals());
 
-                    // Check which hymnals are already selected
+                    // Mark which hymnals are already downloaded and selected
                     for (HymnalManifest.HymnalInfo hymnal : hymnals) {
-                        if (preferencesManager.isHymnalSelected(hymnal.getId())) {
-                            selectedHymnals.add(hymnal);
-                            Log.d(TAG, "Previously selected: " + hymnal.getName());
+                        hymnal.setDownloaded(storageManager.isHymnalDownloaded(hymnal.getId()));
+
+                        // Check if this hymnal was previously selected
+                        for (HymnalManifest.HymnalInfo selected : selectedHymnals) {
+                            if (selected.getId().equals(hymnal.getId())) {
+                                hymnal.setSelected(true);
+                                break;
+                            }
                         }
-                        Log.d(TAG, "Hymnal: " + hymnal.getName() + " - Downloaded: " + hymnal.isDownloaded());
                     }
 
                     adapter.setHymnals(hymnals);
                     updateContinueButton();
-
-                    if (hymnals.isEmpty()) {
-                        Toast.makeText(HymnalSelectionActivity.this, "No hymnals available", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Log.e(TAG, "Manifest or hymnals list is null or empty");
-                    Toast.makeText(HymnalSelectionActivity.this, "No hymnals found in manifest", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(String error) {
-                Log.e(TAG, "Failed to load manifest: " + error);
-
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
-
                 Toast.makeText(HymnalSelectionActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void downloadHymnal(HymnalManifest.HymnalInfo hymnal) {
-        Log.d(TAG, "Downloading: " + hymnal.getName());
-
         ProgressDialog downloadDialog = new ProgressDialog(this);
         downloadDialog.setMessage("Downloading " + hymnal.getName() + "...");
         downloadDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -186,13 +182,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                     downloadDialog.dismiss();
                 }
                 hymnal.setDownloaded(true);
-
-                // Refresh the adapter to show the updated state
-                int position = hymnals.indexOf(hymnal);
-                if (position != -1) {
-                    adapter.notifyItemChanged(position);
-                }
-
+                adapter.notifyDataSetChanged();
                 Toast.makeText(HymnalSelectionActivity.this, hymnal.getName() + " downloaded!", Toast.LENGTH_SHORT).show();
                 updateContinueButton();
             }
@@ -202,7 +192,6 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                 if (downloadDialog != null && downloadDialog.isShowing()) {
                     downloadDialog.dismiss();
                 }
-                Log.e(TAG, "Download failed: " + error);
                 Toast.makeText(HymnalSelectionActivity.this, "Download failed: " + error, Toast.LENGTH_LONG).show();
             }
         });
@@ -211,17 +200,13 @@ public class HymnalSelectionActivity extends AppCompatActivity {
     private void deleteHymnal(HymnalManifest.HymnalInfo hymnal) {
         storageManager.deleteHymnal(hymnal.getId());
         hymnal.setDownloaded(false);
+        hymnal.setSelected(false);
 
         // Also remove from selected
         selectedHymnals.remove(hymnal);
         preferencesManager.removeSelectedHymnal(hymnal.getId());
 
-        // Refresh the adapter
-        int position = hymnals.indexOf(hymnal);
-        if (position != -1) {
-            adapter.notifyItemChanged(position);
-        }
-
+        adapter.notifyDataSetChanged();
         Toast.makeText(this, hymnal.getName() + " removed", Toast.LENGTH_SHORT).show();
         updateContinueButton();
     }
@@ -240,11 +225,20 @@ public class HymnalSelectionActivity extends AppCompatActivity {
     private void setupListeners() {
         btnContinue.setOnClickListener(v -> {
             if (!selectedHymnals.isEmpty()) {
-                Intent intent = new Intent(HymnalSelectionActivity.this, SongListActivity.class);
+                // Navigate to MainActivity which will show the HymnalFragment
+                Intent intent = new Intent(HymnalSelectionActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("SELECTED_TAB", 1); // 1 = Hymnal tab (index of hymnal in bottom nav)
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

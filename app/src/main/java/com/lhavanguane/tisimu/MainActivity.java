@@ -66,6 +66,26 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNavigation();
         setupDrawerContent();
         updateUserInfo();
+
+        // Handle which tab to show (coming from HymnalSelectionActivity)
+        handleIntentTabSelection();
+    }
+
+    private void handleIntentTabSelection() {
+        int selectedTab = getIntent().getIntExtra("SELECTED_TAB", -1);
+        if (selectedTab != -1 && bottomNavigationView != null) {
+            // Navigate to the selected tab
+            if (selectedTab == 0) {
+                bottomNavigationView.setSelectedItemId(R.id.homeFragment);
+                navController.navigate(R.id.homeFragment);
+            } else if (selectedTab == 1) {
+                bottomNavigationView.setSelectedItemId(R.id.hymnalFragment);
+                navController.navigate(R.id.hymnalFragment);
+            } else if (selectedTab == 2) {
+                bottomNavigationView.setSelectedItemId(R.id.communityFragment);
+                navController.navigate(R.id.communityFragment);
+            }
+        }
     }
 
     private void initViews() {

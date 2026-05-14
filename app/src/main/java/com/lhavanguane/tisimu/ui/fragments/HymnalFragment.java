@@ -349,14 +349,28 @@ public class HymnalFragment extends Fragment {
         filteredSongs.clear();
         loadedHymnals.clear();
         selectedHymnalIds.clear();
-        loadSelectedHymnals();
+
+        // Reload selected hymnals from preferences
+        Set<String> selectedIds = preferencesManager.getSelectedHymnals();
+        if (!selectedIds.isEmpty()) {
+            selectedHymnalIds.addAll(selectedIds);
+            pendingLoadCount = selectedHymnalIds.size();
+            isLoading = true;
+
+            showProgress(true);
+            setupTabLayout();
+
+            for (String hymnalId : selectedHymnalIds) {
+                loadHymnal(hymnalId);
+            }
+        } else {
+            showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
+        }
     }
 
     private void openHymnalSelection() {
-        if (isAdded()) {
-            Intent intent = new Intent(requireContext(), HymnalSelectionActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(requireContext(), HymnalSelectionActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -385,9 +399,7 @@ public class HymnalFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // Refresh hymnals when returning to this fragment
-        if (selectedHymnalIds.isEmpty() && isAdded()) {
-            refreshHymnals();
-        }
+        refreshHymnals();
     }
 
     @Override
