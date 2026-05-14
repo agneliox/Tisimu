@@ -92,7 +92,7 @@ public class HymnalFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.hymnalToolbar);
         tabLayout = view.findViewById(R.id.tabLayout);
         rvSongs = view.findViewById(R.id.rvSongs);
         progressBar = view.findViewById(R.id.progressBar);
@@ -105,7 +105,7 @@ public class HymnalFragment extends Fragment {
         if (getActivity() != null) {
             ((com.lhavanguane.tisimu.MainActivity) requireActivity()).setSupportActionBar(toolbar);
             toolbar.setNavigationIcon(null);
-            toolbar.setTitle("My Hymnal");
+
         }
     }
 

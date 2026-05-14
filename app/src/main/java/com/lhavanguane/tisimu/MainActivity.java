@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.ui.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,19 +114,24 @@ public class MainActivity extends AppCompatActivity {
 
             if (destinationId == R.id.homeFragment) {
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Home");
+                    getSupportActionBar().setDisplayShowTitleEnabled(false);
+//                    .setTitle("Home");
                 }
             } else if (destinationId == R.id.hymnalFragment) {
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Hymnal");
+                    getSupportActionBar().setDisplayShowTitleEnabled(false);
+//                    getSupportActionBar();
+//                            .setTitle("Hymnal");
                 }
             } else if (destinationId == R.id.communityFragment) {
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Community");
+                    getSupportActionBar();
+//                    .setTitle("Community");
                 }
             } else if (destinationId == R.id.profileFragment) {
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Me");
+                    getSupportActionBar();
+//                    .setTitle("Me");
                 }
             } else if (destinationId == R.id.settingsFragment) {
                 if (getSupportActionBar() != null) {
@@ -190,6 +196,13 @@ public class MainActivity extends AppCompatActivity {
             }
             tvUserName.setText(name);
             tvUserEmail.setText(currentUser.getEmail());
+
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle args = new Bundle();
+            args.putString("userName", name);
+            Toast.makeText(this, "userName: " + name, Toast.LENGTH_SHORT).show();
+            homeFragment.setArguments(args);
+
         }
     }
 

@@ -58,7 +58,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.hymnalSelectionToolbar);
         rvHymnals = findViewById(R.id.rvHymnals);
         btnContinue = findViewById(R.id.btnContinue);
         Log.d(TAG, "Views initialized");

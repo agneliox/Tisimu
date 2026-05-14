@@ -63,4 +63,5 @@
     <string name="user_email">user@tisumu.com</string>
     <string name="word">Word</string>
     <string name="me">Me</string>
+    <string name="hello">Hello</string>
 </resources>

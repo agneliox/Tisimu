@@ -6,14 +6,14 @@
     android:orientation="vertical"
     android:background="?attr/colorSurface">
 
-    <!-- Fragment-specific Toolbar -->
+    <!-- Fragment-specific Toolbar with navigation icon -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/homeToolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
-        app:title=""
+        app:title="Home"
         app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/home_fragment_menu"
         app:navigationIcon="@drawable/ic_menu"
@@ -29,14 +29,36 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- Greeting Section -->
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hello, Guest"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textColor="?attr/colorPrimary"
+                android:gravity="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvWelcomeMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Tisimu"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:gravity="center"
+                android:layout_marginBottom="32dp" />
+
+            <!-- Daily Verse Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Daily Verse"
-                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                android:text="Today's Verse"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textColor="?attr/colorPrimary"
                 android:gravity="center"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="24dp" />
 
             <TextView
                 android:id="@+id/tvDailyVerse"
