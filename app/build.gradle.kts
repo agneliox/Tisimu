@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.preference)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

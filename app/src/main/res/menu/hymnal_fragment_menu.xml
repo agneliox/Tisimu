@@ -8,10 +8,10 @@
         android:icon="@drawable/ic_hymn_book"
         app:showAsAction="ifRoom" />
 
-<!--    <item-->
-<!--        android:id="@+id/action_refresh"-->
-<!--        android:title="Refresh"-->
-<!--        android:icon="@drawable/ic_refresh"-->
-<!--        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/action_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="ifRoom" />
 
 </menu>

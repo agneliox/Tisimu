@@ -26,6 +26,7 @@ roomCompiler = "2.8.4"
 lifecycle = "2.10.0"
 googleFirebaseAppdistribution = "5.2.1"
 swiperefreshlayout = "1.2.0"
+preference = "1.2.1"
 
 [libraries]
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -56,6 +57,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

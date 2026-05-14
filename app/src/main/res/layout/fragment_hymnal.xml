@@ -6,13 +6,15 @@
     android:orientation="vertical"
     android:background="?attr/colorSurface">
 
-    <!-- Fragment-specific Toolbar -->
+    <!-- Make sure the toolbar has the correct ID -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/hymnalToolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:title="My Hymnal"
+        app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/hymnal_fragment_menu" />
 
     <!-- Search Bar -->
@@ -32,7 +34,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Tab Layout for Hymnal Filtering -->
+    <!-- Tab Layout -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -71,7 +73,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Songs RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSongs"
             android:layout_width="match_parent"

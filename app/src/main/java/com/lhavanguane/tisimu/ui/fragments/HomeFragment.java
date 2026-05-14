@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         tvWelcomeMessage = view.findViewById(R.id.tvWelcomeMessage);
         tvDailyVerse = view.findViewById(R.id.tvDailyVerse);
         tvVerseReference = view.findViewById(R.id.tvVerseReference);
-        toolbar = view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.homeToolbar);
 
         setupToolbar();
         displayUserGreeting();

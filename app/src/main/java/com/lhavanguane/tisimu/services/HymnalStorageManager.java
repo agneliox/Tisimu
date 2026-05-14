@@ -318,4 +318,31 @@ public class HymnalStorageManager {
             executorService.shutdown();
         }
     }
+
+    // In HymnalStorageManager.java, in the downloadHymnal method
+    private void saveHymnalToFile(String hymnalId, String json) {
+        try {
+            File hymnalFile = new File(hymnalDirectory, hymnalId + ".json");
+            try (FileWriter writer = new FileWriter(hymnalFile)) {
+                writer.write(json);
+            }
+            android.util.Log.d(TAG, "Hymnal saved to: " + hymnalFile.getAbsolutePath());
+            android.util.Log.d(TAG, "File size: " + hymnalFile.length() + " bytes");
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error saving hymnal", e);
+        }
+    }
+
+    // In HymnalStorageManager.java
+    public void listDownloadedHymnals() {
+        File[] files = hymnalDirectory.listFiles();
+        if (files != null) {
+            android.util.Log.d(TAG, "Downloaded hymnals:");
+            for (File file : files) {
+                android.util.Log.d(TAG, "  - " + file.getName() + " (" + file.length() + " bytes)");
+            }
+        } else {
+            android.util.Log.d(TAG, "No downloaded hymnals found");
+        }
+    }
 }
