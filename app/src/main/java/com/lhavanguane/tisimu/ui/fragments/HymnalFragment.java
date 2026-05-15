@@ -123,7 +123,7 @@ public class HymnalFragment extends Fragment {
                 }
             });
 
-            toolbar.setTitle("My Hymnal");
+            toolbar.setTitle(R.string.my_hymnal);
 
             // Inflate the menu programmatically to ensure it's attached
             toolbar.inflateMenu(R.menu.hymnal_fragment_menu);
@@ -202,7 +202,7 @@ public class HymnalFragment extends Fragment {
 
         if (selectedIds.isEmpty()) {
             if (isAdded()) {
-                showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
+                showEmptyState(true, getString(R.string.try_a_different_search_or_select_more_hymnals));
                 showProgress(false);
             }
             isLoading = false;
@@ -240,7 +240,7 @@ public class HymnalFragment extends Fragment {
                     updateEmptyState();
 
                     if (!loadedHymnals.isEmpty()) {
-                        String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
+                        String message = getString(R.string.copy_success, String.valueOf(allSongs.size()), getString(R.string._0_songs).replace("0", ""));
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -252,7 +252,7 @@ public class HymnalFragment extends Fragment {
         if (tabLayout == null) return;
 
         tabLayout.removeAllTabs();
-        tabLayout.addTab(tabLayout.newTab().setText("All"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.all_selected_hymnals));
 
         for (String hymnalId : selectedHymnalIds) {
             tabLayout.addTab(tabLayout.newTab().setText(hymnalId));
@@ -350,7 +350,7 @@ public class HymnalFragment extends Fragment {
 
         boolean hasSongs = !filteredSongs.isEmpty();
         if (isAdded()) {
-            showEmptyState(!hasSongs, "No songs found");
+            showEmptyState(!hasSongs, getString(R.string.no_songs_found));
             if (rvSongs != null) {
                 rvSongs.setVisibility(hasSongs ? View.VISIBLE : View.GONE);
             }
@@ -390,7 +390,7 @@ public class HymnalFragment extends Fragment {
         if (!isAdded()) return;
 
         if (filteredSongs.isEmpty() && !isLoading) {
-            String message = "No songs available in this hymnal";
+            String message = getString(R.string.no_songs_found);
             if (tvEmptyState != null) {
                 tvEmptyState.setText(message);
                 tvEmptyState.setVisibility(View.VISIBLE);

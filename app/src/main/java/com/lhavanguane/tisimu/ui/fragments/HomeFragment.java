@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-            toolbar.setTitle("Home");
+            toolbar.setTitle(R.string.home);
             toolbar.inflateMenu(R.menu.home_fragment_menu);
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.action_refresh_verse) {
@@ -152,11 +152,11 @@ public class HomeFragment extends Fragment {
                 tvGreeting.setText(getString(R.string.hello, firstName));
                 tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
             } else {
-                tvGreeting.setText(getString(R.string.hello, "! 👋"));
+                tvGreeting.setText(R.string.hello_hand);
                 tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
             }
         } else {
-            tvGreeting.setText(getString(R.string.hello,"! 👋"));
+            tvGreeting.setText(R.string.hello_hand);
             tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
         }
     }
@@ -167,7 +167,7 @@ public class HomeFragment extends Fragment {
         if (verse != null) {
             displayVerse(verse);
         } else {
-            showError("Unable to load today's verse");
+            showError(getString(R.string.unable_to_load_verse));
         }
     }
 
@@ -198,7 +198,7 @@ public class HomeFragment extends Fragment {
 
     private void refreshVerse() {
         loadDailyVerse();
-        Toast.makeText(getContext(), "Verse refreshed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.refresh_verse, Toast.LENGTH_SHORT).show();
     }
 
     private void showError(String message) {

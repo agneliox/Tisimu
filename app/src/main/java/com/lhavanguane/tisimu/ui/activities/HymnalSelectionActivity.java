@@ -40,6 +40,8 @@ public class HymnalSelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hymnal_selection);
 
@@ -79,7 +81,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Select Hymnals");
+            getSupportActionBar().setTitle(R.string.select_hymnals);
         }
     }
 
@@ -117,7 +119,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
 
     private void loadManifest() {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading hymnals...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -155,14 +157,14 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
-                Toast.makeText(HymnalSelectionActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
+                Toast.makeText(HymnalSelectionActivity.this, getString(R.string.error_prefix, error), Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void downloadHymnal(HymnalManifest.HymnalInfo hymnal) {
         ProgressDialog downloadDialog = new ProgressDialog(this);
-        downloadDialog.setMessage("Downloading " + hymnal.getName() + "...");
+        downloadDialog.setMessage(getString(R.string.downloading_hymnal, hymnal.getName()));
         downloadDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         downloadDialog.setMax(100);
         downloadDialog.setCancelable(false);
@@ -183,7 +185,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                 }
                 hymnal.setDownloaded(true);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(HymnalSelectionActivity.this, hymnal.getName() + " downloaded!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HymnalSelectionActivity.this, getString(R.string.hymnal_downloaded, hymnal.getName()), Toast.LENGTH_SHORT).show();
                 updateContinueButton();
             }
 
@@ -192,7 +194,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
                 if (downloadDialog != null && downloadDialog.isShowing()) {
                     downloadDialog.dismiss();
                 }
-                Toast.makeText(HymnalSelectionActivity.this, "Download failed: " + error, Toast.LENGTH_LONG).show();
+                Toast.makeText(HymnalSelectionActivity.this, getString(R.string.download_failed, error), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -207,7 +209,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         preferencesManager.removeSelectedHymnal(hymnal.getId());
 
         adapter.notifyDataSetChanged();
-        Toast.makeText(this, hymnal.getName() + " removed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.hymnal_removed, hymnal.getName()), Toast.LENGTH_SHORT).show();
         updateContinueButton();
     }
 
@@ -216,9 +218,9 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         btnContinue.setEnabled(hasSelected);
 
         if (hasSelected) {
-            btnContinue.setText("Continue (" + selectedHymnals.size() + " selected)");
+            btnContinue.setText(getString(R.string.continue_text) + " (" + selectedHymnals.size() + ")");
         } else {
-            btnContinue.setText("Select a hymnal to continue");
+            btnContinue.setText(R.string.select_hymnals);
         }
     }
 

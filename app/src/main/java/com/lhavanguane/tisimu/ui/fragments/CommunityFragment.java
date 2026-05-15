@@ -37,7 +37,7 @@ public class CommunityFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_notifications) {
-            Toast.makeText(getContext(), "Notifications coming soon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.more_settings_coming_soon, Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

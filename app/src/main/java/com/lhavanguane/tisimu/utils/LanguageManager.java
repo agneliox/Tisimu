@@ -18,8 +18,8 @@ public class LanguageManager {
     private SharedPreferences prefs;
 
     // Supported languages
-    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es"};
-    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español"};
+    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es", "ts"};
+    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español", "Xitsonga"};
 
     private LanguageManager(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);

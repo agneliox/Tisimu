@@ -51,7 +51,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
 
             String type = "chorus".equals(section.getType()) ? 
                     context.getString(R.string.label_chorus) : context.getString(R.string.label_verse);
-            Toast.makeText(context, type + " " + section.getLabel() + " copied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.copy_success, type, section.getLabel()), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -72,7 +72,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("all_verses", allText.toString());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(context, "All lyrics copied to clipboard", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.all_lyrics_copied, Toast.LENGTH_SHORT).show();
     }
 
     public String getAllSectionsText() {

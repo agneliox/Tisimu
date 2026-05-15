@@ -68,7 +68,7 @@
     <string name="more_settings_coming_soon">Mais definições a caminho ...</string>
     <string name="dark_mode">Modo Escuro</string>
     <string name="navigation_drawer_open">Abrir</string>
-    <string name="today_s_verse">Today\'s Verse</string>
+    <string name="today_s_verse">Versículo do Dia</string>
     <string name="loading">A carregar ...</string>
     <string name="hymnal">Hinario</string>
     <string name="community">Comunidade</string>
@@ -110,4 +110,16 @@
     <string name="copy_success">%1$s %2$s copiado!</string>
     <string name="item_selected">%1$s %2$s selecionado</string>
     <string name="shared_via_tisimu">Partilhado via Tisimu App</string>
+    <string name="reflection">💭 Reflexão</string>
+    <string name="today_s_application">🎯 Aplicação do Dia</string>
+    <string name="question_to_ponder">🤔 Questão a Considerar</string>
+    <string name="prayer">🙏 Oração</string>
+    <string name="title">Título</string>
+    <string name="audio">Áudio</string>
+    <string name="video_link">Link do Vídeo</string>
+    <string name="record_audio">Gravar Áudio</string>
+    <string name="choose_from_device">Escolher do Dispositivo</string>
+    <string name="add_a_comment">Adicionar um comentário&#8230;</string>
+    <string name="post">Publicar</string>
+    <string name="reply">Responder</string>
 </resources>

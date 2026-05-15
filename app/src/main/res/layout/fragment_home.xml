@@ -71,7 +71,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="📖 Today's Verse"
+                            android:text="@string/today_s_verse"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorPrimary"
                             android:layout_marginBottom="12dp" />
@@ -80,7 +80,7 @@
                             android:id="@+id/tvDailyVerse"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Loading..."
+                            android:text="@string/loading"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:lineSpacingExtra="6dp"
                             android:textColor="?attr/colorOnSurface"
@@ -118,7 +118,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="💭 Reflection"
+                            android:text="@string/reflection"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textColor="?attr/colorPrimary"
                             android:layout_marginBottom="8dp" />
@@ -164,7 +164,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="🎯 Today's Application"
+                            android:text="@string/today_s_application"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textColor="?attr/colorPrimary"
                             android:layout_marginBottom="8dp" />
@@ -201,7 +201,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="🤔 Question to Ponder"
+                            android:text="@string/question_to_ponder"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textColor="?attr/colorPrimary"
                             android:layout_marginBottom="8dp" />
@@ -239,7 +239,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="🙏 Prayer"
+                            android:text="@string/prayer"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textColor="?attr/colorPrimary"
                             android:layout_marginBottom="8dp" />

@@ -14,6 +14,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);

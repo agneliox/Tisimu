@@ -50,6 +50,8 @@ public class SongListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_list);
 
@@ -77,7 +79,7 @@ public class SongListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("My Library");
+            getSupportActionBar().setTitle(R.string.gospel_hymns_library);
         }
     }
 
@@ -105,7 +107,7 @@ public class SongListActivity extends AppCompatActivity {
         Set<String> selectedIds = preferencesManager.getSelectedHymnals();
 
         if (selectedIds.isEmpty()) {
-            Toast.makeText(this, "No hymnals selected. Please go back and select hymnals.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.try_a_different_search_or_select_more_hymnals, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -114,7 +116,7 @@ public class SongListActivity extends AppCompatActivity {
         selectedHymnalIds.addAll(selectedIds);
         pendingLoadCount = selectedHymnalIds.size();
 
-        Toast.makeText(this, "Loading " + pendingLoadCount + " hymnal(s)...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.loading_hymnals, pendingLoadCount), Toast.LENGTH_SHORT).show();
 
         // Setup tab layout for filtering
         setupTabLayout();
@@ -126,7 +128,7 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout() {
-        tabLayout.addTab(tabLayout.newTab().setText("All"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.all_selected_hymnals));
 
         for (String hymnalId : selectedHymnalIds) {
             // We'll update tab titles after loading hymnal names
@@ -181,8 +183,10 @@ public class SongListActivity extends AppCompatActivity {
                         filterSongs();
                         updateToolbarTitle();
 
-                        String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
-                        Toast.makeText(SongListActivity.this, message, Toast.LENGTH_SHORT).show();
+                        String message = getString(R.string.copy_success, String.valueOf(allSongs.size()), getString(R.string._0_songs).replace("0", "").trim()) + " " + getString(R.string.from) + " " + loadedHymnals.size() + " " + getString(R.string.hymnal);
+                        // Let's refine this, we need a better string for "Loaded X songs from Y hymnals"
+                        // I'll add "loaded_info" to strings.xml
+                        Toast.makeText(SongListActivity.this, getString(R.string.loaded_info, allSongs.size(), loadedHymnals.size()), Toast.LENGTH_SHORT).show();
                     });
                 }
             }
@@ -194,7 +198,7 @@ public class SongListActivity extends AppCompatActivity {
 
                 if (pendingLoadCount == 0 && loadedHymnals.isEmpty()) {
                     runOnUiThread(() -> {
-                        Toast.makeText(SongListActivity.this, "Failed to load any hymnals", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SongListActivity.this, R.string.failed_load_hymnals, Toast.LENGTH_LONG).show();
                         finish();
                     });
                 }
@@ -231,7 +235,7 @@ public class SongListActivity extends AppCompatActivity {
 
         // Update empty state
         if (filteredSongs.isEmpty()) {
-            Toast.makeText(this, "No songs found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_songs_found, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -241,13 +245,13 @@ public class SongListActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             if (currentHymnalFilter == null) {
-                getSupportActionBar().setTitle("My Library");
-                getSupportActionBar().setSubtitle(totalSongs + " songs • " + hymnalCount + " hymnals");
+                getSupportActionBar().setTitle(R.string.gospel_hymns_library);
+                getSupportActionBar().setSubtitle(totalSongs + " " + getString(R.string._0_songs).replace("0", "") + " • " + hymnalCount + " " + getString(R.string.hymnal).toLowerCase());
             } else {
                 HymnalData hymnal = loadedHymnals.get(currentHymnalFilter);
                 if (hymnal != null) {
                     getSupportActionBar().setTitle(hymnal.getName());
-                    getSupportActionBar().setSubtitle(hymnal.getSongs().size() + " songs");
+                    getSupportActionBar().setSubtitle(hymnal.getSongs().size() + " " + getString(R.string._0_songs).replace("0", ""));
                 }
             }
         }

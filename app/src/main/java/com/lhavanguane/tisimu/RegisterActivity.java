@@ -27,6 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
@@ -69,38 +71,38 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Validation
         if (TextUtils.isEmpty(fullName)) {
-            etFullName.setError("Full name is required");
+            etFullName.setError(getString(R.string.full_name));
             etFullName.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Email is required");
+            etEmail.setError(getString(R.string.email));
             etEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Password is required");
+            etPassword.setError(getString(R.string.password));
             etPassword.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            etPassword.setError("Password must be at least 6 characters");
+            etPassword.setError(getString(R.string.password));
             etPassword.requestFocus();
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            etConfirmPassword.setError("Passwords do not match");
+            etConfirmPassword.setError(getString(R.string.confirm_password));
             etConfirmPassword.requestFocus();
             return;
         }
 
         // Show loading
         btnRegister.setEnabled(false);
-        btnRegister.setText("Creating account...");
+        btnRegister.setText(R.string.loading);
 
         // Create user with Firebase
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -114,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         // TODO: Save user profile (fullName) to Firebase Firestore or Realtime Database
 
-                        Toast.makeText(RegisterActivity.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.hello, fullName), Toast.LENGTH_SHORT).show();
 
                         // Navigate to HymnalSelectionActivity
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -125,8 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
                         // Registration failed
                         String errorMessage = task.getException() != null ?
                                 task.getException().getMessage() :
-                                "Registration failed";
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + errorMessage, Toast.LENGTH_LONG).show();
+                                getString(R.string.registration_failed).replace(": %1$s", "");
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registration_failed, errorMessage), Toast.LENGTH_LONG).show();
                     }
                 });
     }

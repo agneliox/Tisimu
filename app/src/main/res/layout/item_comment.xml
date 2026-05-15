@@ -53,7 +53,7 @@
                 android:id="@+id/tvLikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 likes"
+                android:text="@string/_0_likes"
                 android:textSize="12sp"
                 android:layout_marginEnd="16dp" />
 
@@ -61,7 +61,7 @@
                 android:id="@+id/tvReply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reply"
+                android:text="@string/reply"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 

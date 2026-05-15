@@ -59,8 +59,8 @@ public class LyricsFragment extends Fragment {
         }
 
         // Set default values if null
-        if (songTitle == null) songTitle = "Unknown Title";
-        if (songLyrics == null) songLyrics = "Lyrics not available";
+        if (songTitle == null) songTitle = getString(R.string.song_title);
+        if (songLyrics == null) songLyrics = getString(R.string.no_songs_found);
 
         initViews(view);
         setupRecyclerView();
@@ -242,6 +242,6 @@ public class LyricsFragment extends Fragment {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, songTitle);
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)));
     }
 }

@@ -101,7 +101,7 @@ public class CommentsFragment extends Fragment {
             @Override
             public void onLikeClick(com.lhavanguane.tisimu.data.database.entities.Comment comment) {
                 viewModel.likeComment(comment);
-                Toast.makeText(requireContext(), "Liked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.liked, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -128,9 +128,9 @@ public class CommentsFragment extends Fragment {
                         FirebaseAuth.getInstance().getCurrentUser().getEmail() : "Anonymous";
                 viewModel.postComment(commentText, userName);
                 etComment.setText("");
-                Toast.makeText(requireContext(), "Comment posted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.comment_posted, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(requireContext(), "Please enter a comment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.please_enter_comment, Toast.LENGTH_SHORT).show();
             }
         });
     }

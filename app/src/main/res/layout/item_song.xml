@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Song Title"
+                android:text="@string/song_title"
                 android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:textColor="?attr/colorOnSurface" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Hymnal Name"
+                android:text="@string/hymnal_name"
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:visibility="gone" />
@@ -60,7 +60,7 @@
             android:id="@+id/ivChevron"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Open"
+            android:contentDescription="@string/open"
             android:src="@drawable/ic_chevron_right"
             app:tint="?attr/colorOnSurfaceVariant" />
 

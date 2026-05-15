@@ -175,7 +175,7 @@ public class MelodiesFragment extends Fragment {
             String description = etDescription.getText().toString().trim();
 
             if (title.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter a title", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.please_enter_title, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -186,21 +186,21 @@ public class MelodiesFragment extends Fragment {
                 String userName = FirebaseAuth.getInstance().getCurrentUser() != null ?
                         FirebaseAuth.getInstance().getCurrentUser().getEmail() : "Anonymous";
                 viewModel.addMelodyProposal(title, "audio", audioUrl, description, userName);
-                Toast.makeText(requireContext(), "Audio melody proposed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.melody_proposed_audio, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             } else if (selectedTypeId == R.id.chipVideo) {
                 String videoUrl = etVideoUrl.getText().toString().trim();
                 if (videoUrl.isEmpty()) {
-                    Toast.makeText(requireContext(), "Please enter video URL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.please_enter_video_url, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String userName = FirebaseAuth.getInstance().getCurrentUser() != null ?
                         FirebaseAuth.getInstance().getCurrentUser().getEmail() : "Anonymous";
                 viewModel.addMelodyProposal(title, "video", videoUrl, description, userName);
-                Toast.makeText(requireContext(), "Video melody proposed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.melody_proposed_video, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             } else {
-                Toast.makeText(requireContext(), "Please select a type (Audio or Video)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.please_select_type, Toast.LENGTH_SHORT).show();
             }
         });
 

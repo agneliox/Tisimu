@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
-        app:title="My Hymnal"
+        app:title="@string/my_hymnal"
         app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/hymnal_fragment_menu" />
 
@@ -29,7 +29,7 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="Search songs by number, title, or lyrics"
+            app:queryHint="@string/search"
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="No songs found"
+        android:text="@string/no_songs_found"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceBodyLarge"
         android:textColor="?attr/colorOnSurfaceVariant"

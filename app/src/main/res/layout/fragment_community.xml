@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Community"
+                android:text="@string/community"
                 android:textAppearance="?attr/textAppearanceHeadlineMedium"
                 android:textColor="?attr/colorPrimary"
                 android:gravity="center"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Coming Soon!"
+                android:text="@string/more_settings_coming_soon"
                 android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textColor="?attr/colorPrimary"
                 android:gravity="center"
@@ -54,7 +54,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Connect with other believers, share your favorite hymns, and discover new worship songs."
+                android:text="@string/join_the_tisimu_community"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:gravity="center"

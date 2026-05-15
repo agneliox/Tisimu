@@ -73,8 +73,8 @@ public class SongDetailActivity extends AppCompatActivity {
         structuredVerses = (List<HymnalData.LyricsSection>) getIntent().getSerializableExtra("STRUCTURED_VERSES");
 
         // Set default values if null
-        if (songTitle == null) songTitle = "Unknown Title";
-        if (songLyrics == null) songLyrics = "Lyrics not available";
+        if (songTitle == null) songTitle = getString(R.string.song_title);
+        if (songLyrics == null) songLyrics = getString(R.string.no_songs_found);
     }
 
     private void initViews() {
@@ -253,7 +253,7 @@ public class SongDetailActivity extends AppCompatActivity {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, songTitle);
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)));
     }
 
     @Override

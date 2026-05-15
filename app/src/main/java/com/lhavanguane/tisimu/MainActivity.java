@@ -253,7 +253,6 @@ public class MainActivity extends AppCompatActivity {
             HomeFragment homeFragment = new HomeFragment();
             Bundle args = new Bundle();
             args.putString("userName", name);
-            Toast.makeText(this, "userName: " + name, Toast.LENGTH_SHORT).show();
             homeFragment.setArguments(args);
 
         }

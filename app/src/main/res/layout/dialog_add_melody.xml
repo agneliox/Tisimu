@@ -24,7 +24,7 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title" />
+            android:hint="@string/title" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,13 +39,13 @@
         android:id="@+id/chipAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Audio" />
+        android:text="@string/audio" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chipVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Video Link" />
+        android:text="@string/video_link" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -61,7 +61,7 @@
             android:id="@+id/btnRecordAudio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Record Audio"
+            android:text="@string/record_audio"
             android:textAllCaps="false"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Choose from Device"
+            android:text="@string/choose_from_device"
             android:textAllCaps="false"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 

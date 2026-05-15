@@ -20,6 +20,8 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 

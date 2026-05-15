@@ -142,6 +142,14 @@ public class DailyVerseManager {
             defaultVerse.setApplication("Comparte este amor hoy.");
             defaultVerse.setReflection("¿Cómo has experimentado el amor de Dios?");
             defaultVerse.setPrayer("Gracias, Señor, por Tu amor.");
+        } else if ("ts".equals(language)) {
+            defaultVerse.setVerse("Hikuva Xikwembu xi rhandzile misava swonghasi...");
+            defaultVerse.setReference("Yohane 3:16");
+            defaultVerse.setDevotionalTitle("Rirhandzu ra Xikwembu");
+            defaultVerse.setDevotionalBody("Xikwembu xa ku rhandza swinene.");
+            defaultVerse.setApplication("Avelana rirhandzu leri namuntlha.");
+            defaultVerse.setReflection("U ri vonise ku yini rirhandzu ra Xikwembu?");
+            defaultVerse.setPrayer("Ndzi nkhensa rirhandzu ra Wena, Yehovha.");
         } else {
             defaultVerse.setVerse("For God so loved the world...");
             defaultVerse.setReference("John 3:16");

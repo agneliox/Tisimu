@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate
+        com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -46,25 +48,25 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Email required");
+            etEmail.setError(getString(R.string.email));
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Password required");
+            etPassword.setError(getString(R.string.password));
             return;
         }
 
         btnLogin.setEnabled(false);
-        btnLogin.setText("Logging in...");
+        btnLogin.setText(R.string.loading);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     btnLogin.setEnabled(true);
-                    btnLogin.setText("Login");
+                    btnLogin.setText(R.string.login);
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, R.string.welcome_back, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                        PreferencesManager prefs = PreferencesManager.getInstance(this);
 //                        Intent intent;
