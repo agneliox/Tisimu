@@ -13,6 +13,12 @@ android {
         }
     }
 
+    sourceSets {
+        named("main") {
+            assets.srcDirs("src/main/assets")
+        }
+    }
+
     defaultConfig {
         applicationId = "com.lhavanguane.tisimu"
         minSdk = 24
@@ -85,5 +91,5 @@ dependencies {
     // Navigation Component
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation("androidx.core:core-splashscreen:1.2.0")
+    implementation(libs.core.splashscreen.v120)
 }

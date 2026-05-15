@@ -1,0 +1,533 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-01-15T10:00:00Z",
+  "schemaVersion": "1.0",
+  "languages": ["en", "pt", "es"],
+  "defaultLanguage": "en",
+  "verses": {
+    "en": {
+      "2026-01-01": {
+        "verse": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+        "reference": "John 3:16",
+        "translation": "NIV",
+        "category": "salvation",
+        "season": "new_year",
+        "devotional": {
+          "title": "A Love Beyond Measure",
+          "body": "God's love isn't measured by our worthiness, but by His character. He gave His best when we deserved His worst. As you begin this new year, know that you are deeply loved.",
+          "application": "Today, receive God's love fully. Then share it with someone who needs to know they are loved too.",
+          "reflection": "How would your life change if you truly believed God loves you this much?",
+          "prayer": "Father, thank You for loving me first. Help me to receive Your love and extend it to others today and throughout this year."
+        },
+        "themes": ["love", "grace", "salvation"],
+        "tags": ["popular", "foundational"],
+        "difficulty": "beginner"
+      },
+      "2026-01-02": {
+        "verse": "I can do all things through Christ who strengthens me.",
+        "reference": "Philippians 4:13",
+        "translation": "NKJV",
+        "category": "strength",
+        "season": "general",
+        "devotional": {
+          "title": "Strength for Every Situation",
+          "body": "This isn't about superhuman abilities—it's about relying on Christ's power in every circumstance, whether abundance or need. His strength is made perfect in your weakness.",
+          "application": "What challenge are you facing today? Surrender it to Christ and trust His strength to carry you through.",
+          "reflection": "Where are you trying to do things in your own strength instead of relying on Christ?",
+          "prayer": "Lord, I confess my weakness. Fill me with Your strength and help me trust You completely today."
+        },
+        "themes": ["strength", "faith", "perseverance"],
+        "tags": ["encouragement", "popular"],
+        "difficulty": "beginner"
+      },
+      "2026-01-03": {
+        "verse": "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.",
+        "reference": "Psalm 46:10",
+        "translation": "NIV",
+        "category": "peace",
+        "season": "general",
+        "devotional": {
+          "title": "Finding Peace in Stillness",
+          "body": "In our noisy, hurried world, God invites us to pause. Being still isn't passive—it's an active choice to trust that He is in control when nothing else seems to be.",
+          "application": "Take 5 minutes today to sit in silence. Put away your phone. Just breathe and remember: He is God.",
+          "reflection": "What keeps you from being still before God? What fears or anxieties need to be surrendered?",
+          "prayer": "God, quiet my racing thoughts. Help me to rest in the truth that You are sovereign over everything."
+        },
+        "themes": ["peace", "trust", "rest"],
+        "tags": ["anxiety", "stress"],
+        "difficulty": "beginner"
+      },
+      "2026-01-04": {
+        "verse": "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+        "reference": "Proverbs 3:5-6",
+        "translation": "NIV",
+        "category": "trust",
+        "season": "general",
+        "devotional": {
+          "title": "Beyond Your Understanding",
+          "body": "Your understanding is limited—you see only part of the picture. God sees the whole. Trusting Him means releasing the need to figure everything out yourself.",
+          "application": "Identify one area where you've been leaning on your own understanding. Surrender it to God today.",
+          "reflection": "Why is it hard to trust God with things you don't understand?",
+          "prayer": "Lord, I surrender my need to control and understand everything. Help me to trust You completely."
+        },
+        "themes": ["trust", "wisdom", "guidance"],
+        "tags": ["direction", "decisions"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-05": {
+        "verse": "Come to me, all you who are weary and burdened, and I will give you rest.",
+        "reference": "Matthew 11:28",
+        "translation": "NIV",
+        "category": "rest",
+        "season": "general",
+        "devotional": {
+          "title": "An Invitation to Rest",
+          "body": "Jesus doesn't say 'come to me when you have it all together.' He invites the weary, the burdened, the exhausted. His rest isn't escape—it's renewal.",
+          "application": "What burdens are you carrying that were never meant for your shoulders? Lay them down at Jesus' feet today.",
+          "reflection": "Why do we often try to hide our weariness instead of bringing it to Jesus?",
+          "prayer": "Jesus, I come to You just as I am—tired and carrying too much. Give me Your rest."
+        },
+        "themes": ["rest", "peace", "grace"],
+        "tags": ["burnout", "encouragement"],
+        "difficulty": "beginner"
+      },
+      "2026-01-06": {
+        "verse": "The Lord is my shepherd; I shall not want.",
+        "reference": "Psalm 23:1",
+        "translation": "KJV",
+        "category": "provision",
+        "season": "general",
+        "devotional": {
+          "title": "Lack Nothing",
+          "body": "A shepherd provides everything the sheep needs—guidance, protection, food, water, rest. When the Lord is your shepherd, you lack nothing essential. Not because you have everything you want, but because you have everything you need.",
+          "application": "Instead of focusing on what you lack today, thank God for what you already have in Him.",
+          "reflection": "What 'wants' have you been treating as 'needs'?",
+          "prayer": "Lord, You are my Shepherd. Help me to trust that You provide exactly what I need."
+        },
+        "themes": ["provision", "trust", "guidance"],
+        "tags": ["classic", "comfort"],
+        "difficulty": "beginner"
+      },
+      "2026-01-07": {
+        "verse": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
+        "reference": "Philippians 4:6",
+        "translation": "NIV",
+        "category": "anxiety",
+        "season": "general",
+        "devotional": {
+          "title": "Pray Instead of Panic",
+          "body": "Anxiety often feels like a wave we can't stop. But Paul gives a practical alternative: pray about everything. Not just the big things—every situation. And don't forget the thanksgiving.",
+          "application": "When you feel anxious today, pause and pray. Turn your worry into a conversation with God.",
+          "reflection": "What would change if you prayed as quickly as you worried?",
+          "prayer": "Father, help me to bring every worry to You in prayer, trusting that You hear and care."
+        },
+        "themes": ["prayer", "peace", "anxiety"],
+        "tags": ["mental health", "stress"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-08": {
+        "verse": "I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.",
+        "reference": "John 16:33",
+        "translation": "NIV",
+        "category": "peace",
+        "season": "general",
+        "devotional": {
+          "title": "Peace Despite Trouble",
+          "body": "Jesus was brutally honest: you will face trouble. But He didn't leave you hopeless. His peace isn't the absence of problems—it's the presence of His victory in the middle of them.",
+          "application": "What trouble are you facing today? Remember: Jesus has already overcome it.",
+          "reflection": "How does knowing Jesus has already won change how you face your struggles?",
+          "prayer": "Jesus, thank You that Your victory is greater than any trouble I face. Help me to live in that peace today."
+        },
+        "themes": ["peace", "victory", "hope"],
+        "tags": ["encouragement", "trials"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-09": {
+        "verse": "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!",
+        "reference": "2 Corinthians 5:17",
+        "translation": "NIV",
+        "category": "transformation",
+        "season": "general",
+        "devotional": {
+          "title": "A Fresh Start",
+          "body": "Your past doesn't define you—Christ does. When you are in Him, you are a new creation. Not a fixer-upper, not a work in progress—a NEW creation. The old is gone.",
+          "application": "Stop rehearsing your past mistakes. You are not who you used to be. Live like the new creation you are.",
+          "reflection": "What 'old' narrative are you still believing about yourself?",
+          "prayer": "Lord, thank You for making me new. Help me to let go of the past and embrace my identity in You."
+        },
+        "themes": ["transformation", "grace", "identity"],
+        "tags": ["freedom", "fresh start"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-10": {
+        "verse": "I sought the Lord, and he answered me; he delivered me from all my fears.",
+        "reference": "Psalm 34:4",
+        "translation": "NIV",
+        "category": "fear",
+        "season": "general",
+        "devotional": {
+          "title": "Fear's Antidote",
+          "body": "Fear has a way of making us feel alone. But David discovered the antidote: seeking the Lord. Not running from fear, but running TO God. And He answers. He delivers.",
+          "application": "What fear has been controlling you? Bring it directly to God today. Ask Him to deliver you.",
+          "reflection": "Have you been running from your fears or running to God with them?",
+          "prayer": "Lord, I bring my fears to You. You are greater than anything I'm afraid of. Deliver me and give me courage."
+        },
+        "themes": ["fear", "deliverance", "prayer"],
+        "tags": ["courage", "anxiety"],
+        "difficulty": "beginner"
+      },
+      "2026-01-11": {
+        "verse": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
+        "reference": "Romans 8:28",
+        "translation": "NIV",
+        "category": "hope",
+        "season": "general",
+        "devotional": {
+          "title": "All Things for Good",
+          "body": "Not some things—ALL things. Even the painful, confusing, disappointing things. God is weaving everything together for your good. Not necessarily your comfort, but your good—the good of becoming more like Christ.",
+          "application": "Look back at a hard season. Can you see now how God was working it for good? Trust Him with your current struggles.",
+          "reflection": "Is there an area where you're struggling to believe God can bring good out of it?",
+          "prayer": "God, I trust that You are working all things—even this—for my good. Help me to see with eyes of faith."
+        },
+        "themes": ["hope", "sovereignty", "trust"],
+        "tags": ["encouragement", "trials"],
+        "difficulty": "advanced"
+      },
+      "2026-01-12": {
+        "verse": "The name of the Lord is a fortified tower; the righteous run to it and are safe.",
+        "reference": "Proverbs 18:10",
+        "translation": "NIV",
+        "category": "protection",
+        "season": "general",
+        "devotional": {
+          "title": "A Safe Place",
+          "body": "In ancient times, a fortified tower was the place of ultimate safety during attack. God's name is that for you. When danger comes—real or perceived—you have somewhere to run.",
+          "application": "Where do you typically run when afraid? Practice running to God's name first.",
+          "reflection": "What makes you feel safe? How does God compare?",
+          "prayer": "Lord, You are my safe place. Teach me to run to You first in every moment of fear."
+        },
+        "themes": ["protection", "safety", "trust"],
+        "tags": ["security", "anxiety"],
+        "difficulty": "beginner"
+      },
+      "2026-01-13": {
+        "verse": "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
+        "reference": "Joshua 1:9",
+        "translation": "NIV",
+        "category": "courage",
+        "season": "general",
+        "devotional": {
+          "title": "Strength for the Journey",
+          "body": "God doesn't just give a command; He gives a promise to back it up. 'Be strong and courageous' isn't optional—it's a command rooted in His presence. You don't face anything alone.",
+          "application": "What step of courage do you need to take today? Take it, knowing God is with you.",
+          "reflection": "What would you attempt if you truly believed God was with you?",
+          "prayer": "Lord, give me strength and courage for today. Remind me constantly that You are with me wherever I go."
+        },
+        "themes": ["courage", "presence", "strength"],
+        "tags": ["encouragement", "fear"],
+        "difficulty": "beginner"
+      },
+      "2026-01-14": {
+        "verse": "Let the peace of Christ rule in your hearts, to which indeed you were called in one body. And be thankful.",
+        "reference": "Colossians 3:15",
+        "translation": "NIV",
+        "category": "peace",
+        "season": "general",
+        "devotional": {
+          "title": "Let Peace Rule",
+          "body": "The word 'rule' here means to act as an umpire. When conflict arises—within yourself or with others—let peace be the final decision-maker. And anchor it all in gratitude.",
+          "application": "Before reacting to anything today, pause. Ask: 'What would peace look like here?' Then choose it.",
+          "reflection": "What situations tend to steal your peace most easily?",
+          "prayer": "Jesus, let Your peace be the umpire in my heart today. Help me to choose peace over panic."
+        },
+        "themes": ["peace", "gratitude", "community"],
+        "tags": ["relationships", "anger"],
+        "difficulty": "advanced"
+      },
+      "2026-01-15": {
+        "verse": "My flesh and my heart may fail, but God is the strength of my heart and my portion forever.",
+        "reference": "Psalm 73:26",
+        "translation": "NIV",
+        "category": "strength",
+        "season": "general",
+        "devotional": {
+          "title": "When You Fail",
+          "body": "Your body will give out. Your courage will falter. Your resolve will weaken. But God never will. He is your strength when you have none left. He is your portion—all you truly need.",
+          "application": "What area are you pretending to have strength you don't actually have? Admit your weakness to God today.",
+          "reflection": "Why is it hard to admit weakness? What would change if you did?",
+          "prayer": "God, I admit that I fail. Be my strength today. Be everything I need."
+        },
+        "themes": ["strength", "dependence", "weakness"],
+        "tags": ["burnout", "honesty"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-16": {
+        "verse": "For we live by faith, not by sight.",
+        "reference": "2 Corinthians 5:7",
+        "translation": "NIV",
+        "category": "faith",
+        "season": "general",
+        "devotional": {
+          "title": "Beyond What You See",
+          "body": "Sight is limited to what's right in front of you. Faith sees what's not yet visible. Your circumstances may scream one thing, but faith hears God's promise louder.",
+          "application": "What situation looks hopeless by sight? Choose to believe God's promise over what you see.",
+          "reflection": "Have you been living by sight or by faith? What's the difference in how you feel?",
+          "prayer": "Lord, increase my faith. Help me to trust You even when I can't see the outcome."
+        },
+        "themes": ["faith", "trust", "hope"],
+        "tags": ["doubt", "uncertainty"],
+        "difficulty": "advanced"
+      },
+      "2026-01-17": {
+        "verse": "Therefore confess your sins to each other and pray for each other so that you may be healed. The prayer of a righteous person is powerful and effective.",
+        "reference": "James 5:16",
+        "translation": "NIV",
+        "category": "community",
+        "season": "general",
+        "devotional": {
+          "title": "Healing Through Honesty",
+          "body": "Healing often requires honesty. Confession isn't about shame—it's about freedom. When we bring our struggles into the light with trusted people, prayer becomes powerful and effective.",
+          "application": "Is there someone you can be completely honest with today? Consider sharing a struggle and asking for prayer.",
+          "reflection": "What are you hiding that needs to be brought into the light?",
+          "prayer": "Lord, give me the courage to be honest. Bring people into my life who will pray for me and love me through my struggles."
+        },
+        "themes": ["community", "confession", "prayer"],
+        "tags": ["accountability", "healing"],
+        "difficulty": "advanced"
+      },
+      "2026-01-18": {
+        "verse": "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.' Therefore I will boast all the more gladly about my weaknesses, so that Christ's power may rest on me.",
+        "reference": "2 Corinthians 12:9",
+        "translation": "NIV",
+        "category": "grace",
+        "season": "general",
+        "devotional": {
+          "title": "Strength in Weakness",
+          "body": "Paul had a 'thorn' he begged God to remove. Instead of removal, God gave a promise: 'My grace is enough.' Sometimes God's answer isn't deliverance but deeper dependence.",
+          "application": "What's your 'thorn'? Instead of begging for its removal, ask God to show you His power through it.",
+          "reflection": "How might God be using your weakness to display His strength?",
+          "prayer": "Lord, Your grace is enough for me. Let Your power be shown through my weakness today."
+        },
+        "themes": ["grace", "weakness", "power"],
+        "tags": ["suffering", "perspective"],
+        "difficulty": "advanced"
+      },
+      "2026-01-19": {
+        "verse": "Rejoice always, pray continually, give thanks in all circumstances; for this is God's will for you in Christ Jesus.",
+        "reference": "1 Thessalonians 5:16-18",
+        "translation": "NIV",
+        "category": "gratitude",
+        "season": "general",
+        "devotional": {
+          "title": "Always, Continually, In All Things",
+          "body": "Three impossible commands: rejoice always (even when sad). Pray continually (even when busy). Give thanks in all circumstances (even when painful). Not because your feelings cooperate, but because God is good regardless.",
+          "application": "Find one thing to thank God for today—even if everything else feels hard.",
+          "reflection": "What's one small way you can rejoice and give thanks today?",
+          "prayer": "Lord, teach me to rejoice always, pray continually, and give thanks in everything. Change my perspective."
+        },
+        "themes": ["gratitude", "prayer", "joy"],
+        "tags": ["attitude", "mindset"],
+        "difficulty": "advanced"
+      },
+      "2026-01-20": {
+        "verse": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+        "reference": "Jeremiah 29:11",
+        "translation": "NIV",
+        "category": "hope",
+        "season": "general",
+        "devotional": {
+          "title": "A Hopeful Future",
+          "body": "God's plans aren't vague. He knows exactly what He's doing. His plans are for your good—not to harm you. Even when the path seems dark, He's leading you toward hope and a future.",
+          "application": "What area of your life feels uncertain? Trust that God's plans are still good.",
+          "reflection": "How does knowing God has specific plans for you change your perspective on today?",
+          "prayer": "Lord, I trust Your plans for my life. Help me to walk forward in hope, even when I can't see the whole path."
+        },
+        "themes": ["hope", "future", "purpose"],
+        "tags": ["encouragement", "direction"],
+        "difficulty": "beginner"
+      },
+      "2026-01-21": {
+        "verse": "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
+        "reference": "Ephesians 4:32",
+        "translation": "NIV",
+        "category": "forgiveness",
+        "season": "general",
+        "devotional": {
+          "title": "Forgiven People Forgive",
+          "body": "You've been forgiven an impossible debt. The appropriate response is to extend that same forgiveness to others. Not because they deserve it, but because you didn't either.",
+          "application": "Is there someone you need to forgive today? Take the first step—even if just in your heart.",
+          "reflection": "What makes forgiveness so difficult? How has God forgiven you?",
+          "prayer": "Lord, thank You for forgiving me. Help me to extend that same forgiveness to others today."
+        },
+        "themes": ["forgiveness", "compassion", "grace"],
+        "tags": ["relationships", "bitterness"],
+        "difficulty": "advanced"
+      },
+      "2026-01-22": {
+        "verse": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control. Against such things there is no law.",
+        "reference": "Galatians 5:22-23",
+        "translation": "NIV",
+        "category": "fruit",
+        "season": "general",
+        "devotional": {
+          "title": "What's Growing in You?",
+          "body": "The Spirit isn't producing rules—He's producing character. These nine qualities are what naturally grow when you're connected to Jesus. Not by trying harder, but by abiding more.",
+          "application": "Which of these fruits is most absent in your life right now? Ask the Spirit to grow it.",
+          "reflection": "What would change in your relationships if these fruits were more evident?",
+          "prayer": "Holy Spirit, produce Your fruit in me. Make me more like Jesus today."
+        },
+        "themes": ["fruit", "character", "spirit"],
+        "tags": ["growth", "discipleship"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-23": {
+        "verse": "He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy and to walk humbly with your God.",
+        "reference": "Micah 6:8",
+        "translation": "NIV",
+        "category": "justice",
+        "season": "general",
+        "devotional": {
+          "title": "What God Really Wants",
+          "body": "Not more religious rituals—justice, mercy, humility. God is less interested in your attendance and more interested in how you treat the vulnerable, extend grace, and walk closely with Him.",
+          "application": "How can you act justly, love mercy, and walk humbly today in practical ways?",
+          "reflection": "Are you prioritizing religious activity over what God actually requires?",
+          "prayer": "Lord, align my heart with Yours. Help me to live a life of justice, mercy, and humility."
+        },
+        "themes": ["justice", "mercy", "humility"],
+        "tags": ["action", "service"],
+        "difficulty": "advanced"
+      },
+      "2026-01-24": {
+        "verse": "Therefore, since we are surrounded by such a great cloud of witnesses, let us throw off everything that hinders and the sin that so easily entangles. And let us run with perseverance the race marked out for us.",
+        "reference": "Hebrews 12:1",
+        "translation": "NIV",
+        "category": "perseverance",
+        "season": "general",
+        "devotional": {
+          "title": "Run Your Race",
+          "body": "You're not competing with anyone else. There's a race uniquely marked out for you. Your job is to run it—not someone else's. And that means letting go of whatever slows you down.",
+          "application": "What's entangling you right now? What do you need to throw off to run better?",
+          "reflection": "Are you running your race or someone else's?",
+          "prayer": "Lord, help me to let go of everything that holds me back. Give me perseverance to run my race."
+        },
+        "themes": ["perseverance", "focus", "discipline"],
+        "tags": ["comparison", "distraction"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-25": {
+        "verse": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
+        "reference": "1 Corinthians 13:4-5",
+        "translation": "NIV",
+        "category": "love",
+        "season": "general",
+        "devotional": {
+          "title": "The Shape of Love",
+          "body": "Love isn't just a feeling—it's actions. Patience when you'd rather rush. Kindness when you'd rather criticize. Not keeping score when you've been wronged. This is the shape of real love.",
+          "application": "Which of these descriptions of love is hardest for you? Ask God to grow you there.",
+          "reflection": "How would your closest relationships change if you loved this way?",
+          "prayer": "Lord, teach me to love like this. Patient. Kind. Not keeping score."
+        },
+        "themes": ["love", "character", "relationships"],
+        "tags": ["marriage", "family"],
+        "difficulty": "advanced"
+      },
+      "2026-01-26": {
+        "verse": "Don't worry about anything; instead, pray about everything. Tell God what you need, and thank him for all he has done.",
+        "reference": "Philippians 4:6",
+        "translation": "NLT",
+        "category": "prayer",
+        "season": "general",
+        "devotional": {
+          "title": "Pray Your Worries",
+          "body": "Worry is like a rocking chair—it gives you something to do but gets you nowhere. Prayer moves things. When you worry, you carry the weight. When you pray, God carries it.",
+          "application": "Take your biggest worry right now and turn it into a prayer. Speak it out loud.",
+          "reflection": "What would change if you prayed as much as you worried?",
+          "prayer": "Lord, I give You my worries. Replace my anxiety with Your peace as I pray."
+        },
+        "themes": ["prayer", "peace", "trust"],
+        "tags": ["anxiety", "worry"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-27": {
+        "verse": "Your word is a lamp to guide my feet and a light to my path.",
+        "reference": "Psalm 119:105",
+        "translation": "NLT",
+        "category": "scripture",
+        "season": "general",
+        "devotional": {
+          "title": "Light for the Next Step",
+          "body": "A lamp doesn't show the whole journey—just the next few feet. That's how Scripture works. It doesn't always reveal the entire plan, but it always shows the next faithful step.",
+          "application": "What's one verse you can apply to today's decisions? Let it guide your feet.",
+          "reflection": "Are you waiting for the whole picture before you take a step?",
+          "prayer": "Lord, Your Word is my light. Show me the next step to take today."
+        },
+        "themes": ["scripture", "guidance", "wisdom"],
+        "tags": ["bible reading", "direction"],
+        "difficulty": "beginner"
+      },
+      "2026-01-28": {
+        "verse": "I pray that the eyes of your heart may be enlightened in order that you may know the hope to which he has called you, the riches of his glorious inheritance in his holy people.",
+        "reference": "Ephesians 1:18",
+        "translation": "NIV",
+        "category": "revelation",
+        "season": "general",
+        "devotional": {
+          "title": "Seeing with the Heart",
+          "body": "Your physical eyes see circumstances. Your heart's eyes see truth. Paul prays for enlightened hearts—not more information, but deeper revelation of your hope, your riches, your identity.",
+          "application": "Ask God to open the eyes of your heart today. What do you need to see differently?",
+          "reflection": "What truth about God do you need to see more clearly?",
+          "prayer": "Lord, open the eyes of my heart. Help me to see my hope, my inheritance, and my identity in You."
+        },
+        "themes": ["revelation", "hope", "identity"],
+        "tags": ["perspective", "vision"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-29": {
+        "verse": "Therefore, as God's chosen people, holy and dearly loved, clothe yourselves with compassion, kindness, humility, gentleness and patience.",
+        "reference": "Colossians 3:12",
+        "translation": "NIV",
+        "category": "character",
+        "season": "general",
+        "devotional": {
+          "title": "Get Dressed",
+          "body": "Every morning you choose clothes. Paul says choose character the same way. Put on compassion. Button up kindness. Wrap yourself in humility. These are your true identity markers.",
+          "application": "Which of these 'clothes' do you need to put on today before you leave the house?",
+          "reflection": "What would happen if you dressed in compassion as intentionally as you dress your body?",
+          "prayer": "Lord, help me to clothe myself with compassion, kindness, humility, gentleness, and patience today."
+        },
+        "themes": ["character", "compassion", "humility"],
+        "tags": ["daily life", "relationships"],
+        "difficulty": "intermediate"
+      },
+      "2026-01-30": {
+        "verse": "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
+        "reference": "Psalm 34:18",
+        "translation": "NIV",
+        "category": "comfort",
+        "season": "general",
+        "devotional": {
+          "title": "Closer Than You Think",
+          "body": "When your heart is breaking, God doesn't stand at a distance offering advice. He draws near. He sits with you in the rubble. He saves the crushed—not from pain, but through it.",
+          "application": "If you're hurting today, know this: God is close. He sees. He cares. You're not alone.",
+          "reflection": "How have you experienced God's nearness in past pain?",
+          "prayer": "Lord, I need You close today. Comfort my broken heart. Be my salvation."
+        },
+        "themes": ["comfort", "presence", "healing"],
+        "tags": ["grief", "sadness"],
+        "difficulty": "beginner"
+      }
+    },
+    "pt": {},
+    "es": {}
+  },
+  "themes": {
+    "en": ["love", "grace", "salvation", "strength", "faith", "hope", "peace", "joy", "wisdom", "courage", "forgiveness", "prayer", "scripture", "character", "comfort", "justice", "mercy", "humility", "perseverance", "transformation", "trust", "guidance", "provision", "rest", "presence", "community", "confession", "gratitude", "fruit", "revelation", "identity"],
+    "pt": [],
+    "es": []
+  },
+  "seasons": {
+    "en": ["advent", "lent", "easter", "christmas", "new_year", "general"],
+    "pt": [],
+    "es": []
+  }
+}
