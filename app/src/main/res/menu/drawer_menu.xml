@@ -5,55 +5,55 @@
         <item
             android:id="@+id/homeFragment"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="@string/home" />
 
         <item
             android:id="@+id/hymnalFragment"
             android:icon="@drawable/ic_hymn_book"
-            android:title="My Hymnal" />
+            android:title="@string/my_hymnal" />
 
         <item
             android:id="@+id/communityFragment"
             android:icon="@drawable/ic_community"
-            android:title="Community" />
+            android:title="@string/community" />
     </group>
 
-    <item android:title="Settings">
+    <item android:title="@string/settings">
         <menu>
             <item
                 android:id="@+id/settingsFragment"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                android:title="@string/settings" />
 
             <item
                 android:id="@+id/nav_language"
                 android:icon="@drawable/ic_language"
-                android:title="Change Language" />
+                android:title="@string/change_language" />
         </menu>
     </item>
 
-    <item android:title="About">
+    <item android:title="@string/about">
         <menu>
             <item
                 android:id="@+id/nav_about_app"
                 android:icon="@drawable/ic_info"
-                android:title="About the App" />
+                android:title="@string/about_the_app" />
 
             <item
                 android:id="@+id/nav_about_publisher"
                 android:icon="@drawable/ic_person"
-                android:title="About the Publisher" />
+                android:title="@string/about_the_publisher" />
         </menu>
     </item>
 
     <item
         android:id="@+id/nav_share"
         android:icon="@drawable/ic_share"
-        android:title="Share the App" />
+        android:title="@string/share_the_app" />
 
     <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/ic_logout"
-        android:title="Logout" />
+        android:title="@string/logout" />
 
 </menu>

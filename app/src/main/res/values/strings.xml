@@ -66,6 +66,24 @@
     <string name="word">Word</string>
     <string name="me">Me</string>
     <string name="hello">Hello</string>
+    <string name="more_settings_coming_soon">More settings coming soon...</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="today_s_verse">Today\'s Verse</string>
+    <string name="loading">Loading...</string>
+    <string name="hymnal">Hymnal</string>
+    <string name="community">Community</string>
+    <string name="notifications">Notifications</string>
+    <string name="home">Home</string>
+    <string name="my_hymnal">My Hymnal</string>
+    <string name="settings">Settings</string>
+    <string name="change_language">Change Language</string>
+    <string name="about">About</string>
+    <string name="about_the_app">About the App</string>
+    <string name="about_the_publisher">About the Publisher</string>
+    <string name="share_the_app">Share the App</string>
+    <string name="logout">Logout</string>
+    <string name="refresh_verse">Refresh Verse</string>
+    <string name="refresh">Refresh</string>
 
 
 </resources>

@@ -2,6 +2,8 @@ package com.lhavanguane.tisimu.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import androidx.preference.PreferenceManager;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +28,7 @@ public class PreferencesManager {
     public void addSelectedHymnal(String hymnalId) {
         Set<String> selected = getSelectedHymnals();
         selected.add(hymnalId);
+        Log.d("PreferencesManager", "Adding hymnal ID: " + hymnalId);
         prefs.edit().putStringSet(KEY_SELECTED_HYMNAL_IDS, selected).apply();
     }
 

@@ -9,12 +9,12 @@
     <item
         android:id="@+id/hymnalFragment"
         android:icon="@drawable/ic_hymn_book"
-        android:title="Hymnal" />
+        android:title="@string/hymnal" />
 
     <item
         android:id="@+id/communityFragment"
         android:icon="@drawable/ic_community"
-        android:title="Community" />
+        android:title="@string/community" />
 
     <item
         android:id="@+id/profileFragment"

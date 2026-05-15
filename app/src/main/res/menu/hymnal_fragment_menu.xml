@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/action_select_hymnals"
-        android:title="Select Hymnals"
+        android:title="@string/select_hymnals"
         android:icon="@drawable/ic_hymn_book"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_refresh"
-        android:title="Refresh"
+        android:title="@string/refresh"
         android:icon="@drawable/ic_refresh"
         app:showAsAction="ifRoom" />
 
