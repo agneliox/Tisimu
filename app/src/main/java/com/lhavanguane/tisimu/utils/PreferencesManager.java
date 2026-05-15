@@ -39,7 +39,8 @@ public class PreferencesManager {
     }
 
     public Set<String> getSelectedHymnals() {
-        return prefs.getStringSet(KEY_SELECTED_HYMNAL_IDS, new HashSet<>());
+        Set<String> set = prefs.getStringSet(KEY_SELECTED_HYMNAL_IDS, new HashSet<>());
+        return new HashSet<>(set);
     }
 
     public void clearSelectedHymnals() {

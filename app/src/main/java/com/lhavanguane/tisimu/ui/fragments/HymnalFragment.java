@@ -36,6 +36,7 @@ import com.lhavanguane.tisimu.ui.adapters.SongAdapter;
 import com.lhavanguane.tisimu.utils.PreferencesManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class HymnalFragment extends Fragment {
         setupRecyclerView();
         setupSearchView(view);
         setupSwipeRefresh(view);
-        loadSelectedHymnals();
+        // loadSelectedHymnals(); // Removed to avoid redundant loading, onResume calls refreshHymnals()
 
         return view;
     }
@@ -190,6 +191,11 @@ public class HymnalFragment extends Fragment {
     }
 
     private void loadSelectedHymnals() {
+        if (isLoading) {
+            android.util.Log.d(TAG, "Already loading, skipping loadSelectedHymnals");
+            return;
+        }
+
         Set<String> selectedIds = preferencesManager.getSelectedHymnals();
 
         android.util.Log.d(TAG, "loadSelectedHymnals - Selected IDs: " + selectedIds);
@@ -199,13 +205,19 @@ public class HymnalFragment extends Fragment {
                 showEmptyState(true, "No hymnals selected. Tap the menu icon to select hymnals.");
                 showProgress(false);
             }
+            isLoading = false;
             return;
         }
 
-        selectedHymnalIds.clear();
-        selectedHymnalIds.addAll(selectedIds);
-        pendingLoadCount = selectedHymnalIds.size();
         isLoading = true;
+        selectedHymnalIds.clear();
+        List<String> sortedIds = new ArrayList<>(selectedIds);
+        Collections.sort(sortedIds);
+        selectedHymnalIds.addAll(sortedIds);
+
+        allSongs.clear();
+        loadedHymnals.clear();
+        pendingLoadCount = selectedHymnalIds.size();
 
         if (isAdded()) {
             showProgress(true);
@@ -215,6 +227,24 @@ public class HymnalFragment extends Fragment {
         // Load each hymnal
         for (String hymnalId : selectedHymnalIds) {
             loadHymnal(hymnalId);
+        }
+    }
+
+    private void checkLoadComplete() {
+        if (pendingLoadCount <= 0) {
+            isLoading = false;
+            if (isAdded()) {
+                requireActivity().runOnUiThread(() -> {
+                    showProgress(false);
+                    filterSongs();
+                    updateEmptyState();
+
+                    if (!loadedHymnals.isEmpty()) {
+                        String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     }
 
@@ -276,20 +306,7 @@ public class HymnalFragment extends Fragment {
                 }
 
                 pendingLoadCount--;
-
-                if (pendingLoadCount == 0) {
-                    isLoading = false;
-                    requireActivity().runOnUiThread(() -> {
-                        if (isAdded() && getContext() != null) {
-                            showProgress(false);
-                            filterSongs();
-                            updateEmptyState();
-
-                            String message = "Loaded " + allSongs.size() + " songs from " + loadedHymnals.size() + " hymnal(s)";
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                checkLoadComplete();
             }
 
             @Override
@@ -299,15 +316,7 @@ public class HymnalFragment extends Fragment {
                 }
 
                 pendingLoadCount--;
-
-                if (pendingLoadCount == 0 && loadedHymnals.isEmpty()) {
-                    requireActivity().runOnUiThread(() -> {
-                        if (isAdded() && getContext() != null) {
-                            showProgress(false);
-                            showEmptyState(true, "Failed to load hymnals. Please check your connection and try again.");
-                        }
-                    });
-                }
+                checkLoadComplete();
             }
         });
     }
@@ -400,12 +409,6 @@ public class HymnalFragment extends Fragment {
     }
 
     private void refreshHymnals() {
-        // Clear existing data
-        allSongs.clear();
-        filteredSongs.clear();
-        loadedHymnals.clear();
-        selectedHymnalIds.clear();
-
         // Reload from preferences
         loadSelectedHymnals();
     }
