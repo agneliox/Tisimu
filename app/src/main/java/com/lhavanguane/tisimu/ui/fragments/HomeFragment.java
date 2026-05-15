@@ -149,15 +149,15 @@ public class HomeFragment extends Fragment {
             }
 
             if (!firstName.isEmpty()) {
-                tvGreeting.setText("Hello, " + firstName + "! 👋");
-                tvWelcomeMessage.setText("Welcome back to Tisimu");
+                tvGreeting.setText(getString(R.string.hello, firstName));
+                tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
             } else {
-                tvGreeting.setText("Hello, Beloved! 👋");
-                tvWelcomeMessage.setText("Welcome to Tisimu");
+                tvGreeting.setText(getString(R.string.hello, "! 👋"));
+                tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
             }
         } else {
-            tvGreeting.setText("Hello, Guest! 👋");
-            tvWelcomeMessage.setText("Welcome to Tisimu");
+            tvGreeting.setText(getString(R.string.hello,"! 👋"));
+            tvWelcomeMessage.setText(R.string.welcome_to_tisimu);
         }
     }
 
@@ -202,8 +202,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void showError(String message) {
-        tvDailyVerse.setText("Unable to load verse");
-        tvVerseReference.setText("Please check your connection");
+        tvDailyVerse.setText(R.string.unable_to_load_verse);
+        tvVerseReference.setText(R.string.check_connection);
         devotionalCard.setVisibility(View.GONE);
         applicationCard.setVisibility(View.GONE);
         reflectionCard.setVisibility(View.GONE);

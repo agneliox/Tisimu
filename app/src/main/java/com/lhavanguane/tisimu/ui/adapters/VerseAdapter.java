@@ -49,7 +49,8 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
             ClipData clip = ClipData.newPlainText("verse", text);
             clipboard.setPrimaryClip(clip);
 
-            String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+            String type = "chorus".equals(section.getType()) ? 
+                    context.getString(R.string.label_chorus) : context.getString(R.string.label_verse);
             Toast.makeText(context, type + " " + section.getLabel() + " copied", Toast.LENGTH_SHORT).show();
         }
     }
@@ -130,10 +131,11 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
         void bind(HymnalData.LyricsSection section, int position) {
             // Set label based on section type
             String label = "";
-            if ("verse".equals(section.getType())) {
-//                label = "Verse " + section.getLabel();
-            } else if ("chorus".equals(section.getType())) {
-                label = "Chorus: " + section.getLabel();
+            Context context = itemView.getContext();
+            if ("chorus".equals(section.getType())) {
+                label = context.getString(R.string.chorus_label_prefix, section.getLabel());
+            } else if ("verse".equals(section.getType())) {
+                label = context.getString(R.string.verse_label_prefix, section.getLabel());
             } else {
                 label = section.getLabel() != null ? section.getLabel() : "";
             }

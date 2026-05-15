@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.ui.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate and setContentView
+        LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
 
         // Enable dynamic colors for Android 12+
@@ -180,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             // 2. If not handled by NavigationUI, handle custom menu items
             if (!handled) {
                 if (id == R.id.nav_language) {
-                    Toast.makeText(this, "Language settings coming soon", Toast.LENGTH_SHORT).show();
+                    showLanguageSelectionDialog();
                 } else if (id == R.id.nav_about_app) {
                     showAboutDialog();
                 } else if (id == R.id.nav_about_publisher) {
@@ -196,6 +199,36 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+    }
+
+    private void showLanguageSelectionDialog() {
+        LanguageManager languageManager = LanguageManager.getInstance(this);
+        String currentLang = languageManager.getCurrentLanguage();
+        int checkedItem = 0;
+
+        for (int i = 0; i < LanguageManager.SUPPORTED_LANGUAGES.length; i++) {
+            if (LanguageManager.SUPPORTED_LANGUAGES[i].equals(currentLang)) {
+                checkedItem = i;
+                break;
+            }
+        }
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(R.string.change_language)
+                .setSingleChoiceItems(LanguageManager.LANGUAGE_NAMES, checkedItem, (dialog, which) -> {
+                    String selectedLang = LanguageManager.SUPPORTED_LANGUAGES[which];
+                    if (!selectedLang.equals(currentLang)) {
+                        languageManager.setLanguage(this, selectedLang);
+                        // Restart activity to apply language changes
+                        Intent intent = new Intent(this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                    dialog.dismiss();
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void updateUserInfo() {
@@ -228,26 +261,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAboutDialog() {
         new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("About Tisimu")
-                .setMessage("Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline.\n\nVersion: 1.0\n\nDeveloped with ❤️ for gospel music lovers.")
-                .setPositiveButton("OK", null)
+                .setTitle(R.string.about_tisimu)
+                .setMessage(R.string.about_tisimu_message)
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
     private void showPublisherDialog() {
         new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("About the Publisher")
-                .setMessage("Tisimu is developed and maintained by Agnelio Xavier, a passionate developer dedicated to creating tools that help people connect with their faith through music and scripture.\n\nContact: agnelioxavier@gmail.com")
-                .setPositiveButton("OK", null)
+                .setTitle(R.string.about_publisher)
+                .setMessage(R.string.about_publisher_message)
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
     private void shareApp() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out Tisimu! A beautiful gospel hymnal reader for Android.\n\nDownload it here: https://github.com/agneliox/Tisimu");
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_app_subject));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)));
     }
 
     private void logout() {
@@ -256,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.logged_out_successfully, Toast.LENGTH_SHORT).show();
     }
 
     @Override

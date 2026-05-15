@@ -65,7 +65,7 @@
     <string name="user_email">user@tisumu.com</string>
     <string name="word">Word</string>
     <string name="me">Me</string>
-    <string name="hello">Hello</string>
+    <string name="hello">Hello %1$s!  👋</string>
     <string name="more_settings_coming_soon">More settings coming soon...</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="today_s_verse">Today\'s Verse</string>
@@ -84,6 +84,32 @@
     <string name="logout">Logout</string>
     <string name="refresh_verse">Refresh Verse</string>
     <string name="refresh">Refresh</string>
+    <string name="hello_hand">Hello! 👋</string>
+    <string name="check_connection">Please check your connection</string>
+    <string name="unable_to_load_verse">Unable to load verse</string>
 
 
+    <string name="label_verse">Verse</string>
+    <string name="label_chorus">Chorus</string>
+    <string name="words_by">Words by: %1$s</string>
+    <string name="music_by">Music by: %1$s</string>
+    <string name="hymn_prefix">Hymn %1$s</string>
+    <string name="verse_label_prefix">Verse %1$s</string>
+    <string name="chorus_label_prefix">Chorus: %1$s</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="language_change_message">The app will restart to apply %1$s. Continue?</string>
+    <string name="language_changed_restarting">Language changed. App restarting...</string>
+    <string name="about_tisimu">About Tisimu</string>
+    <string name="about_tisimu_message">Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline.\n\nVersion: 1.0\n\nDeveloped with ❤️ for gospel music lovers.</string>
+    <string name="about_publisher">About the Publisher</string>
+    <string name="about_publisher_message">Tisimu is developed and maintained by Agnelio Xavier, a passionate developer dedicated to creating tools that help people connect with their faith through music and scripture.\n\nContact: agnelioxavier@gmail.com</string>
+    <string name="share_app_subject">Tisimu - Gospel Hymnal Reader</string>
+    <string name="share_app_text">Check out Tisimu! A beautiful gospel hymnal reader for Android.\n\nDownload it here: https://github.com/agneliox/Tisimu</string>
+    <string name="share_via">Share via</string>
+    <string name="logged_out_successfully">Logged out successfully</string>
+    <string name="ok">OK</string>
+    <string name="copy_success">%1$s %2$s copied!</string>
+    <string name="item_selected">%1$s %2$s selected</string>
+    <string name="shared_via_tisimu">Shared via Tisimu App</string>
 </resources>

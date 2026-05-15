@@ -92,34 +92,36 @@ public class LyricsFragment extends Fragment {
             @Override
             public void onVerseLongClick(HymnalData.LyricsSection section, int position) {
                 // Long press already copies in adapter, just show confirmation
-                String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+                String type = "chorus".equals(section.getType()) ? getString(R.string.label_chorus) : getString(R.string.label_verse);
                 Toast.makeText(getContext(),
-                        type + " " + section.getLabel() + " copied!", Toast.LENGTH_SHORT).show();
+                        getString(R.string.copy_success, type, section.getLabel()), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onVerseClick(HymnalData.LyricsSection section, int position) {
                 // Handle verse selection (already highlighted in adapter)
-                String type = "verse".equals(section.getType()) ? "Verse" : "Chorus";
+                String type = "chorus".equals(section.getType()) ? getString(R.string.label_chorus) : getString(R.string.label_verse);
                 Toast.makeText(getContext(),
-                        type + " " + section.getLabel() + " selected", Toast.LENGTH_SHORT).show();
+                        getString(R.string.item_selected, type, section.getLabel()), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void displaySongInfo() {
-        chipSongNumber.setText("Hymn " + String.format("%03d", songNumber));
+        if (chipSongNumber != null) {
+            chipSongNumber.setText(getString(R.string.hymn_prefix, String.format("%03d", songNumber)));
+        }
         tvSongTitle.setText(songTitle);
 
         if (songAuthor != null && !songAuthor.isEmpty() && !songAuthor.equals("null")) {
-            tvAuthor.setText("Words by: " + songAuthor);
+            tvAuthor.setText(getString(R.string.words_by, songAuthor));
             tvAuthor.setVisibility(View.VISIBLE);
         } else {
             tvAuthor.setVisibility(View.GONE);
         }
 
         if (songComposer != null && !songComposer.isEmpty() && !songComposer.equals("null")) {
-            tvComposer.setText("Music by: " + songComposer);
+            tvComposer.setText(getString(R.string.music_by, songComposer));
             tvComposer.setVisibility(View.VISIBLE);
         } else {
             tvComposer.setVisibility(View.GONE);
@@ -222,10 +224,10 @@ public class LyricsFragment extends Fragment {
     private void shareAllLyrics() {
         StringBuilder shareContent = new StringBuilder();
         shareContent.append(songTitle).append("\n");
-        shareContent.append("Hymn ").append(String.format("%03d", songNumber)).append("\n\n");
+        shareContent.append(getString(R.string.hymn_prefix, String.format("%03d", songNumber))).append("\n\n");
 
         if (songAuthor != null && !songAuthor.isEmpty()) {
-            shareContent.append("By: ").append(songAuthor).append("\n\n");
+            shareContent.append(getString(R.string.words_by, songAuthor)).append("\n\n");
         }
 
         if (verseAdapter != null) {
@@ -234,7 +236,7 @@ public class LyricsFragment extends Fragment {
             shareContent.append(songLyrics);
         }
 
-        shareContent.append("\n\nShared via Tisimu App");
+        shareContent.append("\n\n").append(getString(R.string.shared_via_tisimu));
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");

@@ -136,13 +136,13 @@ public class SettingsFragment extends Fragment {
         String languageName = languageManager.getLanguageName(newLanguage);
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("Change Language")
-                .setMessage("The app will restart to apply " + languageName + ". Continue?")
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setTitle(R.string.change_language)
+                .setMessage(getString(R.string.language_change_message, languageName))
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
                     languageManager.setLanguage(requireContext(), newLanguage);
                     restartApp();
                 })
-                .setNegativeButton("No", (dialog, which) -> {
+                .setNegativeButton(R.string.no, (dialog, which) -> {
                     // Revert spinner selection
                     String currentLang = languageManager.getCurrentLanguage();
                     for (int i = 0; i < LanguageManager.SUPPORTED_LANGUAGES.length; i++) {
@@ -160,6 +160,6 @@ public class SettingsFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         requireActivity().finish();
-        Toast.makeText(requireContext(), "Language changed. App restarting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), R.string.language_changed_restarting, Toast.LENGTH_SHORT).show();
     }
 }
