@@ -122,4 +122,6 @@
     <string name="add_a_comment">Adicionar um comentário&#8230;</string>
     <string name="post">Publicar</string>
     <string name="reply">Responder</string>
+    <string name="community_avatar">Community Avatar</string>
+    <string name="community_name">Community Name</string>
 </resources>

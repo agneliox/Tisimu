@@ -145,4 +145,6 @@
     <string name="downloading_hymnal">Downloading %1$s&#8230;</string>
     <string name="download_failed">Download failed: %1$s</string>
     <string name="discover">Discover</string>
+    <string name="community_avatar">Community Avatar</string>
+    <string name="community_name">Community Name</string>
 </resources>
