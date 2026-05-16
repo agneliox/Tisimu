@@ -10,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -25,10 +29,6 @@ import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.DailyVerse;
 import com.lhavanguane.tisimu.services.DailyVerseManager;
 import com.lhavanguane.tisimu.utils.LanguageManager;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -50,20 +50,25 @@ public class HomeFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private DailyVerseManager dailyVerseManager;
-    private LanguageManager languageManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(requireActivity());
         setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
         dailyVerseManager = DailyVerseManager.getInstance(requireContext());
-        languageManager = LanguageManager.getInstance(requireContext());
+        LanguageManager languageManager = LanguageManager.getInstance(requireContext());
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         initViews(view);
         setupToolbar();

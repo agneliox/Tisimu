@@ -3,6 +3,7 @@ package com.lhavanguane.tisimu.ui.activities;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
 import com.lhavanguane.tisimu.ui.adapters.CommunityAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CommunitySelectionActivity extends AppCompatActivity {
 
@@ -102,7 +104,8 @@ public class CommunitySelectionActivity extends AppCompatActivity {
             @Override
             public void onFailure(Exception e) {
                 showProgress(false);
-                Toast.makeText(CommunitySelectionActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(CommunitySelectionActivity.this, "Error Check: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("Error Check","Error Check: " + e.getMessage());
             }
         });
     }
@@ -161,8 +164,8 @@ public class CommunitySelectionActivity extends AppCompatActivity {
         builder.setView(dialogView);
 
         builder.setPositiveButton("Create", (dialog, which) -> {
-            String name = etName.getText().toString().trim();
-            String description = etDescription.getText().toString().trim();
+            String name = Objects.requireNonNull(etName.getText()).toString().trim();
+            String description = Objects.requireNonNull(etDescription.getText()).toString().trim();
             boolean isPrivate = chipGroup.getCheckedChipId() == R.id.chipPrivate;
 
             if (name.isEmpty()) {

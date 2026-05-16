@@ -1,15 +1,14 @@
 package com.lhavanguane.tisimu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,20 +26,20 @@ import com.lhavanguane.tisimu.ui.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
     private FirebaseAuth mAuth;
-    private boolean isNavigating = false;
+    private final boolean isNavigating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Apply language before super.onCreate and setContentView
         LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
+//        EdgeToEdge.enable(this);
+
 
         // Enable dynamic colors for Android 12+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initViews();
-//        setupToolbar();
         setupNavigation();
         setupBottomNavigation();
         setupDrawerContent();
@@ -104,24 +102,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(findViewById(R.id.toolbar));
-//
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, findViewById(R.id.toolbar),
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-    }
-    // Add these methods to MainActivity if not already present
 
     public DrawerLayout getDrawerLayout() {
         return drawerLayout;
     }
-
-//    public ActionBarDrawerToggle getDrawerToggle() {
-//        return drawerToggle;
-//    }
 
     private void setupNavigation() {
         // Simply link the bottom navigation with NavController
@@ -296,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, drawerLayout) || super.onSupportNavigateUp();
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
