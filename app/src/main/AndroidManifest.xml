@@ -7,7 +7,6 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -18,8 +17,14 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_hymn_book"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Tisimu">
+        android:theme="@style/Theme.Tisimu"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.activities.CommunityDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.CommunitySelectionActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activities.ProfileActivity"
             android:exported="false" />
@@ -44,6 +49,7 @@
             android:theme="@style/Theme.Tisimu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

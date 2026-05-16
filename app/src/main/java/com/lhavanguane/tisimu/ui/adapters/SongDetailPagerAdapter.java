@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.lhavanguane.tisimu.ui.fragments.CommentsFragment;
+//import com.lhavanguane.tisimu.ui.fragments.CommentsFragment;
 import com.lhavanguane.tisimu.ui.fragments.LyricsFragment;
 import com.lhavanguane.tisimu.ui.fragments.MelodiesFragment;
 
@@ -32,7 +32,7 @@ public class SongDetailPagerAdapter extends FragmentStateAdapter {
                 lyricsFragment.setArguments(lyricsBundle);
                 return lyricsFragment;
             case 1:
-                return new CommentsFragment();
+//                return new CommentsFragment();
             case 2:
                 return new MelodiesFragment();
             default:

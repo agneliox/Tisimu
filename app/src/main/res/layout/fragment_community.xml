@@ -6,68 +6,59 @@
     android:orientation="vertical"
     android:background="?attr/colorSurface">
 
-    <!-- Fragment-specific Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/communityToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:title="Communities"
         app:titleTextColor="?attr/colorOnSurface"
-        app:menu="@menu/community_fragment_menu" />
+        app:menu="@menu/community_fragment_menu"
+        app:navigationIcon="@drawable/ic_menu"
+        app:navigationIconTint="?attr/colorOnSurface" />
 
-    <FrameLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="24dp">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/ic_community"
-                android:alpha="0.5" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCommunities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:clipToPadding="false" />
 
             <TextView
+                android:id="@+id/tvEmptyState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/community"
-                android:textAppearance="?attr/textAppearanceHeadlineMedium"
-                android:textColor="?attr/colorPrimary"
-                android:gravity="center"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/more_settings_coming_soon"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
-                android:textColor="?attr/colorPrimary"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/join_the_tisimu_community"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:layout_gravity="center"
+                android:text="No communities yet"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
+                android:visibility="gone"
+                android:padding="32dp" />
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:indeterminateTint="?attr/colorPrimary" />
+        </FrameLayout>
 
-        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="@android:color/white" />
 
 </LinearLayout>
