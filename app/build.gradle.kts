@@ -92,4 +92,6 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.core.splashscreen.v120)
+
+    implementation(libs.circleimageview)
 }

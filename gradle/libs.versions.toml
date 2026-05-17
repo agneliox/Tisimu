@@ -1,5 +1,6 @@
 [versions]
 agp = "9.1.1"
+circleimageview = "3.1.0"
 coreSplashscreen = "1.0.1"
 coreSplashscreenVersion = "1.2.0"
 exoplayerCore = "2.19.1"
@@ -30,6 +31,7 @@ swiperefreshlayout = "1.2.0"
 preference = "1.2.1"
 
 [libraries]
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 core-splashscreen-v120 = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreenVersion" }
 exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayerCore" }

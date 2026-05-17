@@ -4,7 +4,14 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+
+    <!-- House body -->
     <path
-        android:fillColor="#000000"
-        android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z"/>
+
+        android:strokeColor="?attr/colorOnSurface"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3,9l9,-7 9,7v11c0,1.1 -0.9,2 -2,2h-4v-7h-6v7H5c-1.1,0 -2,-0.9 -2,-2V9z" />
+
 </vector>

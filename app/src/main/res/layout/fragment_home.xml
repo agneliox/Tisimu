@@ -15,7 +15,7 @@
         app:title="Home"
         app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/home_fragment_menu"
-        app:navigationIcon="@drawable/ic_menu"
+        app:navigationIcon="@drawable/ic_menu_2_bars"
         app:navigationIconTint="?attr/colorOnSurface" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -55,12 +55,13 @@
                     android:layout_marginBottom="24dp" />
 
                 <!-- Verse Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    app:cardCornerRadius="16dp"-->
+<!--                    app:cardElevation="2dp"-->
+<!--                    >-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -97,7 +98,7 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
                 <!-- Devotional Card -->
                 <com.google.android.material.card.MaterialCardView

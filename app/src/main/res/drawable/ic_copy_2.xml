@@ -5,27 +5,21 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
 
-    <!-- Circle outline -->
+    <!-- Two overlapping rectangles -->
     <path
+
         android:strokeColor="?attr/colorOnSurface"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M12,4c-4.4,0 -8,3.6 -8,8s3.6,8 8,8 8,-3.6 8,-8 -3.6,-8 -8,-8z" />
+        android:pathData="M9,15h-4c-0.5,0 -1,-0.5 -1,-1V5c0,-0.5 0.5,-1 1,-1h9c0.5,0 1,0.5 1,1v4" />
 
-    <!-- 'i' dot -->
     <path
 
         android:strokeColor="?attr/colorOnSurface"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
-        android:pathData="M12,7v1" />
-
-    <!-- 'i' stem -->
-    <path
-        android:strokeColor="?attr/colorOnSurface"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:pathData="M12,10v6" />
+        android:strokeLineJoin="round"
+        android:pathData="M15,9h4c0.5,0 1,0.5 1,1v9c0,0.5 -0.5,1 -1,1h-9c-0.5,0 -1,-0.5 -1,-1v-4" />
 
 </vector>

@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
 
-            toolbar.setNavigationIcon(R.drawable.ic_menu);
+            toolbar.setNavigationIcon(R.drawable.ic_menu_2);
             toolbar.setNavigationOnClickListener(v -> {
                 DrawerLayout drawerLayout = ((MainActivity) requireActivity()).getDrawerLayout();
                 if (drawerLayout != null && !drawerLayout.isDrawerOpen(GravityCompat.START)) {

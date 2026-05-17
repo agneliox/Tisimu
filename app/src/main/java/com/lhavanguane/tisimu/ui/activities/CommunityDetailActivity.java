@@ -25,6 +25,8 @@ import com.lhavanguane.tisimu.models.Community;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
 import com.lhavanguane.tisimu.ui.adapters.CommunityPagerAdapter;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CommunityDetailActivity extends AppCompatActivity {
 
     private MaterialToolbar toolbar;
@@ -32,7 +34,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
-    private ShapeableImageView ivCommunityAvatar;
+    private CircleImageView ivCommunityAvatar;
     private ImageView ivCommunityCover;
     private TextView tvCommunityNameExpanded;
     private ChipGroup chipGroupStats;
@@ -85,7 +87,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("");
+//            getSupportActionBar().setTitle(currentCommunity.getName());
         }
 
         // Set toolbar title when collapsed
@@ -100,11 +102,13 @@ public class CommunityDetailActivity extends AppCompatActivity {
             float scrollPercent = Math.abs(verticalOffset) / (float) totalScrollRange;
 
             // Show/hide chip group based on scroll
-            if (scrollPercent > 0.8f) {
-                chipGroupStats.setVisibility(View.GONE);
-            } else {
-                chipGroupStats.setVisibility(View.GONE);
-            }
+//            if (scrollPercent > 0.8f) {
+//                chipGroupStats.setVisibility(View.GONE);
+//            } else {
+//                chipGroupStats.setVisibility(View.GONE);
+//            }
+
+
         });
     }
 
@@ -156,6 +160,8 @@ public class CommunityDetailActivity extends AppCompatActivity {
         // Update collapsed toolbar title
         collapsingToolbarLayout.setTitle(currentCommunity.getName());
 
+        toolbar.setTitle(currentCommunity.getName());
+
         // Update member count chip
         chipMemberCount.setText(currentCommunity.getMemberCount() + " members");
 
@@ -172,22 +178,22 @@ public class CommunityDetailActivity extends AppCompatActivity {
         }
 
         // Load avatar (placeholder for now - can be expanded to load from URL)
-        if (currentCommunity.getCoverImageUrl() != null && !currentCommunity.getCoverImageUrl().isEmpty()) {
-            Glide.with(this)
-                    .load(currentCommunity.getCoverImageUrl())
-                    .placeholder(R.drawable.ic_community_avatar)
-                    .error(R.drawable.ic_community_avatar)
-                    .into(ivCommunityAvatar);
+//        if (currentCommunity.getCoverImageUrl() != null && !currentCommunity.getCoverImageUrl().isEmpty()) {
+//            Glide.with(this)
+//                    .load(currentCommunity.getCoverImageUrl())
+//                    .placeholder(R.drawable.ic_community_avatar)
+//                    .error(R.drawable.ic_community_avatar)
+//                    .into(ivCommunityAvatar);
 
 //            Glide.with(this)
 //                    .load(currentCommunity.getCoverImageUrl())
 //                    .placeholder(R.drawable.ic_hymn_book)
 //                    .error(R.drawable.ic_hymn_book)
 //                    .into(ivCommunityCover);
-        } else {
-            ivCommunityAvatar.setImageResource(R.drawable.ic_community_avatar);
+//        } else {
+//            ivCommunityAvatar.setImageResource(R.drawable.ic_community_avatar);
 //            ivCommunityCover.setImageResource(R.drawable.ic_hymn_book);
-        }
+//        }
     }
 
     @Override

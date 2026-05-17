@@ -122,6 +122,16 @@
     <string name="add_a_comment">Adicionar um comentário&#8230;</string>
     <string name="post">Publicar</string>
     <string name="reply">Responder</string>
+    <string name="download_failed">A descarga falhou: %1$s</string>
+    <string name="discover">Explorar</string>
     <string name="community_avatar">Community Avatar</string>
     <string name="community_name">Community Name</string>
+    <string name="hymnal_downloaded">%1$s descarregado!</string>
+    <string name="dark_mode_enabled">Modo escuro activado</string>
+    <string name="downloading_hymnal">Baixando %1$s&#8230;</string>
+    <string name="loaded_info">Carregou %1$d hinos de %2$d hinário</string>
+    <string name="from">de</string>
+    <string name="failed_load_hymnals">Falhou o carregamento de hinario</string>
+    <string name="hymnal_removed">%1$s removido</string>
+    <string name="liked">Gostou!</string>
 </resources>
