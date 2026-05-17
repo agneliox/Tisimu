@@ -15,3 +15,8 @@
 local.properties
 app/google-services.json
 app/tisimu-app-firebase-adminsdk-fbsvc-f3de8eaede.json
+
+# Signing properties
+signing.properties
+*.keystore
+*.jks
