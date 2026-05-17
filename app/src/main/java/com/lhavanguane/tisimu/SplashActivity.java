@@ -56,8 +56,11 @@ public class SplashActivity extends AppCompatActivity {
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "App Install");
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-// Set Crashlytics user ID
-        FirebaseCrashlytics.getInstance().setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        // Set Crashlytics user ID if logged in
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            FirebaseCrashlytics.getInstance().setUserId(user.getUid());
+        }
     }
 
     @Override
