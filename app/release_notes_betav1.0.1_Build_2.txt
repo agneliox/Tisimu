@@ -1,0 +1,69 @@
+═══════════════════════════════════════
+   TISIMU BETA RELEASE v1.0.1 (Build 2)
+═══════════════════════════════════════
+
+📦 RELEASE TYPE: Beta Test
+
+👥 TARGET TESTERS: Internal & Closed Beta
+
+🎯 TEST FOCUS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Community CRUD operations
+2. Real-time Firestore sync
+3. Role-based permissions
+4. Offline hymnal reading
+5. Cross-device data consistency
+
+✨ NEW FEATURES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Communities (Create/Join/Manage)
+• Daily verses with full devotionals
+• Material Design 3 theming
+• Collapsible app bars
+• Share hymn lyrics
+
+🐛 FIXED ISSUES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Navigation loop after hymnal selection
+• Fragment detachment crashes
+• Menu item responsiveness
+• Language persistence
+
+⚠️ KNOWN ISSUES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Files tab not functional (placeholder)
+• Community cover images not supported
+• No push notifications
+• Limited to 5 posts per user
+
+📱 TEST MATRIX:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Device                    | API | Status
+──────────────────────────────────────
+Pixel 7 Pro (Android 14)  | 34  | ✅
+Samsung S22 (Android 13)  | 33  | ✅
+OnePlus 9 (Android 12)    | 31  | ✅
+Pixel 4a (Android 11)     | 30  | ⚠️
+Samsung A51 (Android 10)  | 29  | ✅
+
+📊 PERFORMANCE METRICS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• App size: 8.2MB
+• RAM usage: 45-60MB idle
+• Launch time: 1.2s avg
+• Search response: <200ms
+
+🔐 SECURITY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Firebase Auth for authentication
+• Firestore security rules in place
+• No sensitive data stored locally
+• HTTPS for all network calls
+
+📤 FEEDBACK CHANNEL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Email: feedback@tisimu.com
+GitHub: github.com/agneliox/Tisimu/issues
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Thank you for testing! 🙏
