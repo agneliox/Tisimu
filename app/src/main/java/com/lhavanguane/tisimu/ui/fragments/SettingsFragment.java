@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -23,6 +24,7 @@ import com.lhavanguane.tisimu.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
+import com.lhavanguane.tisimu.utils.ThemeManager;
 
 public class SettingsFragment extends Fragment {
 
@@ -34,12 +36,14 @@ public class SettingsFragment extends Fragment {
     private MaterialButton btnAbout;
 
     private LanguageManager languageManager;
+    private ThemeManager themeManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         languageManager = LanguageManager.getInstance(requireContext());
+        themeManager = ThemeManager.getInstance(requireContext());
 
         initViews(view);
         setupLanguageSpinner();
@@ -58,64 +62,43 @@ public class SettingsFragment extends Fragment {
         btnAbout = view.findViewById(R.id.btnAbout);
     }
 
-    private void setupListeners() {
-        btnSendFeedback.setOnClickListener(v -> openFeedbackForm());
-        btnRateApp.setOnClickListener(v -> openRateDialog());
-        btnShareApp.setOnClickListener(v -> shareApp());
-        btnAbout.setOnClickListener(v -> showAboutDialog());
+    private void setupDarkModeSwitch() {
+        // Set initial state based on saved preference
+        boolean isDarkMode = themeManager.isDarkMode();
+        switchDarkMode.setChecked(isDarkMode);
+
+        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Show restart dialog for theme change
+            showThemeRestartDialog(isChecked);
+        });
     }
 
-    private void openFeedbackForm() {
-        // Build URL with device info
-        String deviceInfo = Build.MANUFACTURER + " " + Build.MODEL;
-        String androidVersion = Build.VERSION.RELEASE;
-        String appVersion = BuildConfig.VERSION_NAME;
+    private void showThemeRestartDialog(boolean enableDarkMode) {
+        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
 
-        // Create intent to open browser with feedback form
-        // You can add device info as URL parameters if your form accepts them
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
-        startActivity(browserIntent);
-
-        // Optional: Show toast reminding user to include device info
-        Toast.makeText(requireContext(),
-                "Please include your device model and Android version in the feedback",
-                Toast.LENGTH_LONG).show();
-    }
-
-    private void openRateDialog() {
         new AlertDialog.Builder(requireContext())
-                .setTitle("Rate Tisimu")
-                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
-                .setPositiveButton("Rate Now", (dialog, which) -> {
-                    // Open Google Play Store rating (when published)
-                    // For now, open feedback form
-                    openFeedbackForm();
+                .setTitle("Change Theme")
+                .setMessage("The app will restart to apply " + modeName + ". Continue?")
+                .setPositiveButton("Apply", (dialog, which) -> {
+                    // Save theme preference
+                    themeManager.setDarkMode(enableDarkMode);
+                    // Restart app to apply theme
+                    restartApp();
                 })
-                .setNegativeButton("Later", null)
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    // Revert switch state
+                    switchDarkMode.setChecked(!enableDarkMode);
+                })
                 .show();
     }
 
-    private void shareApp() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
-                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
-                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
-    }
-
-    private void showAboutDialog() {
-        new AlertDialog.Builder(requireContext())
-                .setTitle("About Tisimu")
-                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
-                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
-                        "join communities, and receive daily verses.\n\n" +
-                        "Developed with ❤️ for gospel music lovers.\n\n" +
-                        "*****")
-                .setPositiveButton("OK", null)
-                .show();
+    private void restartApp() {
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        requireActivity().finish();
+        // Add a little delay for smooth transition
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private void setupLanguageSpinner() {
@@ -171,18 +154,52 @@ public class SettingsFragment extends Fragment {
                 .show();
     }
 
-    private void restartApp() {
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        requireActivity().finish();
+    private void setupListeners() {
+        btnSendFeedback.setOnClickListener(v -> openFeedbackForm());
+        btnRateApp.setOnClickListener(v -> openRateDialog());
+        btnShareApp.setOnClickListener(v -> shareApp());
+        btnAbout.setOnClickListener(v -> showAboutDialog());
     }
 
-    private void setupDarkModeSwitch() {
-        // Dark mode implementation
-        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Implement dark mode
-            Toast.makeText(requireContext(), "Dark mode coming soon", Toast.LENGTH_SHORT).show();
-        });
+    private void openFeedbackForm() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
+        startActivity(browserIntent);
+        Toast.makeText(requireContext(),
+                "Please include your device model and Android version in the feedback",
+                Toast.LENGTH_LONG).show();
+    }
+
+    private void openRateDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Rate Tisimu")
+                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
+                .setPositiveButton("Rate Now", (dialog, which) -> {
+                    openFeedbackForm();
+                })
+                .setNegativeButton("Later", null)
+                .show();
+    }
+
+    private void shareApp() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
+                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
+                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+    }
+
+    private void showAboutDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("About Tisimu")
+                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
+                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
+                        "join communities, and receive daily verses.\n\n" +
+                        "Developed with ❤️ for gospel music lovers.\n\n" +
+                        "* * * * *")
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

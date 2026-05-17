@@ -262,7 +262,7 @@ public class HymnalFragment extends Fragment {
         if (tabLayout == null) return;
 
         tabLayout.removeAllTabs();
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.all_selected_hymnals));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.all));
 
         for (String hymnalId : selectedHymnalIds) {
             tabLayout.addTab(tabLayout.newTab().setText(hymnalId));

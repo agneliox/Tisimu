@@ -134,4 +134,5 @@
     <string name="failed_load_hymnals">Falhou o carregamento de hinario</string>
     <string name="hymnal_removed">%1$s removido</string>
     <string name="liked">Gostou!</string>
+    <string name="all">Todos</string>
 </resources>
