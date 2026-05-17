@@ -1,17 +1,17 @@
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.appdistribution)
+    alias(libs.plugins.google.firebase.crashlytics)
+
 }
 
 android {
     namespace = "com.lhavanguane.tisimu"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     sourceSets {
         named("main") {
@@ -24,26 +24,46 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            val signingProperties = Properties()
+            val propertiesFile = file("signing.properties")
+            if (propertiesFile.exists()) {
+                signingProperties.load(propertiesFile.inputStream())
+                storeFile = rootProject.file(signingProperties.getProperty("STORE_FILE_PATH"))
+                storePassword = signingProperties.getProperty("STORE_PASSWORD")
+                keyAlias = signingProperties.getProperty("KEY_ALIAS")
+                keyPassword = signingProperties.getProperty("KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
         debug {
             firebaseAppDistribution {
-                serviceCredentialsFile="$rootDir/tisimu-app-firebase-adminsdk-fbsvc-f3de8eaede.json"
-                testers="tester1@example.com, tester2@example.com"
-                releaseNotes="Debug build for internal testing"
+                serviceCredentialsFile = "$rootDir/tisimu-app-firebase-adminsdk-fbsvc-f3de8eaede.json"
+                testers = "agnelio.lhavanguane@gmail.com, ndjanga@gmail.com"
+                releaseNotes = "Debug build for internal testing"
             }
         }
         release {
+            firebaseAppDistribution {
+                serviceCredentialsFile = "$rootDir/tisimu-app-firebase-adminsdk-fbsvc-f3de8eaede.json"
+                testers = "agnelio.lhavanguane@gmail.com, ndjanga@gmail.com"
+                releaseNotes = "Release build"
+            }
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -69,6 +89,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.swiperefreshlayout)
     implementation(libs.preference)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

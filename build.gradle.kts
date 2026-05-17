@@ -3,4 +3,12 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.google.firebase.appdistribution) apply false
+    alias(libs.plugins.google.firebase.crashlytics) apply false
+}
+
+buildscript {
+    dependencies {
+        // Add Firebase App Distribution plugin
+        classpath("com.google.firebase:firebase-appdistribution-gradle:4.2.0")
+    }
 }

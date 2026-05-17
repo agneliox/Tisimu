@@ -1,6 +1,7 @@
 package com.lhavanguane.tisimu.ui.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.lhavanguane.tisimu.MainActivity;
 import com.lhavanguane.tisimu.R;
@@ -39,6 +41,7 @@ public class SettingsFragment extends Fragment {
     private SwitchMaterial switchDarkMode;
     private Spinner spinnerLanguage;
     private LanguageManager languageManager;
+    MaterialButton btnSendFeedback;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -87,11 +90,31 @@ public class SettingsFragment extends Fragment {
 
         switchDarkMode = view.findViewById(R.id.switchDarkMode);
         spinnerLanguage = view.findViewById(R.id.spinnerLanguage);
+        btnSendFeedback = view.findViewById(R.id.btnSendFeedback);
+
 
         setupLanguageSpinner();
         setupDarkModeSwitch();
+        setupSendFeedbackButton();
+
 
         return view;
+    }
+
+    private void setupSendFeedbackButton() {
+        btnSendFeedback.setOnClickListener(v -> {
+            // Implement your feedback sending logic here
+            Toast.makeText(requireContext(), "Feedback sent!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"agnelio.lhavanguane@gmail.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback ${BuildConfig.VERSION_NAME}");
+            intent.putExtra(Intent.EXTRA_TEXT, "Your feedback goes here...");
+
+            if(intent.resolveActivity(requireActivity().getPackageManager()) != null){
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupDarkModeSwitch() {

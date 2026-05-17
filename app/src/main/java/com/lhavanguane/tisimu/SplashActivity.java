@@ -6,8 +6,10 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.lhavanguane.tisimu.ui.activities.HymnalSelectionActivity;
 import com.lhavanguane.tisimu.ui.activities.SongListActivity;
 import com.lhavanguane.tisimu.utils.PreferencesManager;
@@ -46,6 +48,16 @@ public class SplashActivity extends AppCompatActivity {
             }
             finish();
         }, SPLASH_DELAY);
+
+        // In MainActivity or SplashActivity
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "app_install");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "App Install");
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+// Set Crashlytics user ID
+        FirebaseCrashlytics.getInstance().setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
     @Override
