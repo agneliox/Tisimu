@@ -1,76 +1,282 @@
 package com.lhavanguane.tisimu.ui.fragments;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.BuildConfig;
+import com.lhavanguane.tisimu.MainActivity;
 import com.lhavanguane.tisimu.R;
+import com.lhavanguane.tisimu.LoginActivity;
+import com.lhavanguane.tisimu.utils.Constants;
+import com.lhavanguane.tisimu.utils.LanguageManager;
+import com.lhavanguane.tisimu.utils.ThemeManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ShapeableImageView ivAvatar;
+    private TextView tvUserName;
+    private TextView tvUserEmail;
+    private TextView tvMemberSince;
+    private TextView tvCommunitiesCount;
+    private TextView tvHymnalsCount;
+    private TextView tvFavoritesCount;
+    private TextView tvCurrentLanguage;
+    private SwitchMaterial switchDarkMode;
+    private MaterialButton btnLogout;
+    private TextView tvAppVersion;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View layoutEditProfile;
+    private View layoutChangePassword;
+    private View layoutSendFeedback;
+    private View layoutRateApp;
+    private View layoutShareApp;
+    private View layoutAbout;
 
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
+    private FirebaseAuth mAuth;
+    private LanguageManager languageManager;
+    private ThemeManager themeManager;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        languageManager = LanguageManager.getInstance(requireContext());
+        themeManager = ThemeManager.getInstance(requireContext());
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        initViews(view);
+        setupUserInfo();
+        setupStats();
+        setupLanguageDisplay();
+        setupDarkModeSwitch();
+        setupClickListeners();
+        setupVersionInfo();
+
+        return view;
+    }
+
+    private void initViews(View view) {
+        ivAvatar = view.findViewById(R.id.ivAvatar);
+        tvUserName = view.findViewById(R.id.tvUserName);
+        tvUserEmail = view.findViewById(R.id.tvUserEmail);
+        tvMemberSince = view.findViewById(R.id.tvMemberSince);
+        tvCommunitiesCount = view.findViewById(R.id.tvCommunitiesCount);
+        tvHymnalsCount = view.findViewById(R.id.tvHymnalsCount);
+        tvFavoritesCount = view.findViewById(R.id.tvFavoritesCount);
+        tvCurrentLanguage = view.findViewById(R.id.tvCurrentLanguage);
+        switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
+        btnLogout = view.findViewById(R.id.btnLogout);
+        tvAppVersion = view.findViewById(R.id.tvAppVersion);
+
+        layoutEditProfile = view.findViewById(R.id.layoutEditProfile);
+        layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
+        layoutSendFeedback = view.findViewById(R.id.layoutSendFeedback);
+        layoutRateApp = view.findViewById(R.id.layoutRateApp);
+        layoutShareApp = view.findViewById(R.id.layoutShareApp);
+        layoutAbout = view.findViewById(R.id.layoutAbout);
+    }
+
+    private void setupUserInfo() {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            // Set user name
+            String displayName = user.getDisplayName();
+            if (displayName != null && !displayName.isEmpty()) {
+                tvUserName.setText(displayName);
+            } else {
+                String email = user.getEmail();
+                if (email != null) {
+                    String nameFromEmail = email.split("@")[0];
+                    tvUserName.setText(nameFromEmail);
+                } else {
+                    tvUserName.setText("User");
+                }
+            }
+
+            // Set user email
+            tvUserEmail.setText(user.getEmail() != null ? user.getEmail() : "No email");
+
+            // Set member since (using user creation time if available)
+            if (user.getMetadata() != null && user.getMetadata().getCreationTimestamp() > 0) {
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
+                String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
+                tvMemberSince.setText("Member since " + date);
+            } else {
+                tvMemberSince.setText("Member");
+            }
+
+            // Load avatar (placeholder - can be expanded later)
+            // For now, keep default avatar
+        } else {
+            tvUserName.setText("Guest User");
+            tvUserEmail.setText("Not logged in");
+            tvMemberSince.setText("");
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    private void setupStats() {
+        // TODO: Load actual counts from database/preferences
+        // Communities count - from CommunityManager
+        // Hymnals count - from PreferencesManager
+        // Favorites count - from FavoritesManager (when implemented)
 
-        return view;
+        // Placeholder values
+        tvCommunitiesCount.setText("0");
+        tvHymnalsCount.setText("0");
+        tvFavoritesCount.setText("0");
+    }
+
+    private void setupLanguageDisplay() {
+        String currentLangCode = languageManager.getCurrentLanguage();
+        String languageName = languageManager.getLanguageName(currentLangCode);
+        tvCurrentLanguage.setText(languageName);
+    }
+
+    private void setupDarkModeSwitch() {
+        boolean isDarkMode = themeManager.isDarkMode();
+        switchDarkMode.setChecked(isDarkMode);
+
+        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            showThemeRestartDialog(isChecked);
+        });
+    }
+
+    private void showThemeRestartDialog(boolean enableDarkMode) {
+        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Change Theme")
+                .setMessage("The app will restart to apply " + modeName + ". Continue?")
+                .setPositiveButton("Apply", (dialog, which) -> {
+                    themeManager.setDarkMode(enableDarkMode);
+                    restartApp();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    switchDarkMode.setChecked(!enableDarkMode);
+                })
+                .show();
+    }
+
+    private void setupClickListeners() {
+        layoutEditProfile.setOnClickListener(v -> showEditProfileDialog());
+        layoutChangePassword.setOnClickListener(v -> showChangePasswordDialog());
+        layoutSendFeedback.setOnClickListener(v -> openFeedbackForm());
+        layoutRateApp.setOnClickListener(v -> openRateDialog());
+        layoutShareApp.setOnClickListener(v -> shareApp());
+        layoutAbout.setOnClickListener(v -> showAboutDialog());
+        btnLogout.setOnClickListener(v -> logout());
+    }
+
+    private void showEditProfileDialog() {
+        // TODO: Implement edit profile
+        Toast.makeText(requireContext(), "Edit Profile coming soon", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showChangePasswordDialog() {
+        // TODO: Implement change password via Firebase
+        Toast.makeText(requireContext(), "Change Password coming soon", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openFeedbackForm() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
+        startActivity(browserIntent);
+        Toast.makeText(requireContext(),
+                "Please include your device model and Android version in the feedback",
+                Toast.LENGTH_LONG).show();
+    }
+
+    private void openRateDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Rate Tisimu")
+                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
+                .setPositiveButton("Rate Now", (dialog, which) -> {
+                    openFeedbackForm();
+                })
+                .setNegativeButton("Later", null)
+                .show();
+    }
+
+    private void shareApp() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
+                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
+                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+    }
+
+    private void showAboutDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("About Tisimu")
+                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
+                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
+                        "join communities, and receive daily verses.\n\n" +
+                        "Developed with ❤️ for gospel music lovers.\n\n" +
+                        "* * * * *")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    private void logout() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    mAuth.signOut();
+                    Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    requireActivity().finish();
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void restartApp() {
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        requireActivity().finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    private void setupVersionInfo() {
+        tvAppVersion.setText("Version " + BuildConfig.VERSION_NAME);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh data when returning to profile
+        setupUserInfo();
+        setupLanguageDisplay();
     }
 }
