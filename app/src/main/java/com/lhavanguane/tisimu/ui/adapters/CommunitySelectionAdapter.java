@@ -17,7 +17,7 @@ import com.lhavanguane.tisimu.models.Community;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
+public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySelectionAdapter.ViewHolder> {
 
     private List<Community> communities = new ArrayList<>();
     private OnCommunityActionListener listener;
@@ -40,7 +40,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_community, parent, false);
+                .inflate(R.layout.item_community_selection, parent, false);
         return new ViewHolder(view);
     }
 
@@ -91,8 +91,13 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                 chipVisibility.setChipIconResource(R.drawable.ic_public);
             }
 
-            // Hide join button for joined communities (this fragment only shows joined communities)
-            btnJoin.setVisibility(View.GONE);
+            // Show join button for discover screen
+            btnJoin.setVisibility(View.VISIBLE);
+            btnJoin.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onJoinClick(community);
+                }
+            });
 
             btnView.setOnClickListener(v -> {
                 if (listener != null) {

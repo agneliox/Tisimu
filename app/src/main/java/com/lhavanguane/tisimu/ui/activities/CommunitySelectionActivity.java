@@ -1,31 +1,27 @@
 package com.lhavanguane.tisimu.ui.activities;
 
+import android.content.Intent;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.Community;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
-import com.lhavanguane.tisimu.ui.adapters.CommunityAdapter;
+import com.lhavanguane.tisimu.ui.adapters.CommunitySelectionAdapter;  // Create a separate adapter for selection
 
 import java.util.List;
-import java.util.Objects;
 
 public class CommunitySelectionActivity extends AppCompatActivity {
 
@@ -34,19 +30,13 @@ public class CommunitySelectionActivity extends AppCompatActivity {
     private MaterialButton btnCreateCommunity;
 
     private CommunityFirestoreManager communityManager;
-    private CommunityAdapter adapter;
+    private CommunitySelectionAdapter adapter;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_community_selection);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_community_selection), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         communityManager = CommunityFirestoreManager.getInstance();
 
@@ -72,11 +62,11 @@ public class CommunitySelectionActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        adapter = new CommunityAdapter();
+        adapter = new CommunitySelectionAdapter();
         rvCommunities.setLayoutManager(new LinearLayoutManager(this));
         rvCommunities.setAdapter(adapter);
 
-        adapter.setOnCommunityActionListener(new CommunityAdapter.OnCommunityActionListener() {
+        adapter.setOnCommunityActionListener(new CommunitySelectionAdapter.OnCommunityActionListener() {
             @Override
             public void onJoinClick(Community community) {
                 showJoinDialog(community);
@@ -104,8 +94,7 @@ public class CommunitySelectionActivity extends AppCompatActivity {
             @Override
             public void onFailure(Exception e) {
                 showProgress(false);
-                Toast.makeText(CommunitySelectionActivity.this, "Error Check: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d("Error Check","Error Check: " + e.getMessage());
+                Toast.makeText(CommunitySelectionActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -141,7 +130,7 @@ public class CommunitySelectionActivity extends AppCompatActivity {
             public void onSuccess() {
                 showProgress(false);
                 Toast.makeText(CommunitySelectionActivity.this, "Joined " + community.getName() + "!", Toast.LENGTH_SHORT).show();
-                finish();
+                finish(); // Go back to communities list
             }
 
             @Override
@@ -152,11 +141,19 @@ public class CommunitySelectionActivity extends AppCompatActivity {
         });
     }
 
+    private void openCommunityDetail(Community community) {
+        // Navigate to CommunityDetailActivity
+        Intent intent = new Intent(CommunitySelectionActivity.this, CommunityDetailActivity.class);
+        intent.putExtra("COMMUNITY_ID", community.getId());
+        intent.putExtra("COMMUNITY_NAME", community.getName());
+        startActivity(intent);
+    }
+
     private void showCreateCommunityDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Create New Community");
 
-        android.view.View dialogView = getLayoutInflater().inflate(R.layout.dialog_create_community, null);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_create_community, null);
         TextInputEditText etName = dialogView.findViewById(R.id.etCommunityName);
         TextInputEditText etDescription = dialogView.findViewById(R.id.etCommunityDescription);
         com.google.android.material.chip.ChipGroup chipGroup = dialogView.findViewById(R.id.chipGroupVisibility);
@@ -164,8 +161,8 @@ public class CommunitySelectionActivity extends AppCompatActivity {
         builder.setView(dialogView);
 
         builder.setPositiveButton("Create", (dialog, which) -> {
-            String name = Objects.requireNonNull(etName.getText()).toString().trim();
-            String description = Objects.requireNonNull(etDescription.getText()).toString().trim();
+            String name = etName.getText().toString().trim();
+            String description = etDescription.getText().toString().trim();
             boolean isPrivate = chipGroup.getCheckedChipId() == R.id.chipPrivate;
 
             if (name.isEmpty()) {
@@ -198,14 +195,6 @@ public class CommunitySelectionActivity extends AppCompatActivity {
                 Toast.makeText(CommunitySelectionActivity.this, "Failed to create: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void openCommunityDetail(Community community) {
-        // Navigate to CommunityDetailActivity
-        android.content.Intent intent = new android.content.Intent(CommunitySelectionActivity.this, CommunityDetailActivity.class);
-        intent.putExtra("COMMUNITY_ID", community.getId());
-        intent.putExtra("COMMUNITY_NAME", community.getName());
-        startActivity(intent);
     }
 
     private void setupListeners() {
