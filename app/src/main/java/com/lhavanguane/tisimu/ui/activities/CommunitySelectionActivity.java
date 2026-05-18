@@ -58,7 +58,7 @@ public class CommunitySelectionActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.communitySelectionToolbar);
         rvCommunities = findViewById(R.id.rvCommunities);
         btnCreateCommunity = findViewById(R.id.btnCreateCommunity);
     }

@@ -78,7 +78,7 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.song_detail_toolbar);
         tvSongDetailNumber = findViewById(R.id.tvSongDetailNumber);
         tvSongTitle = findViewById(R.id.tvSongTitle);
         tvAuthor = findViewById(R.id.tvAuthor);

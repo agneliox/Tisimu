@@ -70,7 +70,7 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.songListActivityToolbar);
         tabLayout = findViewById(R.id.tabLayout);
         rvSongs = findViewById(R.id.rvSongs);
     }

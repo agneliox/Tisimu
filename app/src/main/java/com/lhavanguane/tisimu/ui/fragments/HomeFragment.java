@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.homeFragmentToolbar);
         tvGreeting = view.findViewById(R.id.tvGreeting);
         tvWelcomeMessage = view.findViewById(R.id.tvWelcomeMessage);
         tvDailyVerse = view.findViewById(R.id.tvDailyVerse);
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
 
         if (getActivity() != null) {
             ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
-
+            toolbar.setTitle("");
             toolbar.setNavigationIcon(R.drawable.ic_menu_2);
             toolbar.setNavigationOnClickListener(v -> {
                 DrawerLayout drawerLayout = ((MainActivity) requireActivity()).getDrawerLayout();
@@ -113,7 +113,6 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-            toolbar.setTitle(R.string.home);
             toolbar.inflateMenu(R.menu.home_fragment_menu);
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.action_refresh_verse) {

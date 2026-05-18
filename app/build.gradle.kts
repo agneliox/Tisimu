@@ -6,18 +6,17 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.appdistribution)
     alias(libs.plugins.google.firebase.crashlytics)
+}
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 android {
     namespace = "com.lhavanguane.tisimu"
     compileSdk = 36
-
-    sourceSets {
-        named("main") {
-            assets.srcDirs("src/main/assets")
-        }
-    }
 
     defaultConfig {
         applicationId = "com.lhavanguane.tisimu"
@@ -27,6 +26,12 @@ android {
         versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        named("main") {
+            assets.srcDirs("src/main/assets")
+        }
     }
 
     signingConfigs {
@@ -71,8 +76,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

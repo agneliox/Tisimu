@@ -106,7 +106,7 @@ public class HymnalFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.hymnalFragmentToolbar);
         tabLayout = view.findViewById(R.id.tabLayout);
         rvSongs = view.findViewById(R.id.rvSongs);
         progressBar = view.findViewById(R.id.progressBar);
