@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
 
     private LinearLayout llCollapsibleContent;
     private LinearLayout llExpandButton;
-    private TextView tvExpandLabel;
+//    private TextView tvExpandLabel;
     private ImageView ivChevronExpand;
 
     private PreferencesManager preferencesManager;
@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
 
         llCollapsibleContent = view.findViewById(R.id.llCollapsibleContent);
         llExpandButton = view.findViewById(R.id.llExpandButton);
-        tvExpandLabel = view.findViewById(R.id.tvExpandLabel);
+//        tvExpandLabel = view.findViewById(R.id.tvExpandLabel);
         ivChevronExpand = view.findViewById(R.id.ivChevronExpand);
     }
 
@@ -236,11 +236,11 @@ public class HomeFragment extends Fragment {
     private void updateExpandCollapseUI() {
         if (isExpanded) {
             llCollapsibleContent.setVisibility(View.VISIBLE);
-            tvExpandLabel.setText("Read Less");
+//            tvExpandLabel.setText("Read Less");
             ivChevronExpand.setImageResource(R.drawable.ic_chevron_up);
         } else {
             llCollapsibleContent.setVisibility(View.GONE);
-            tvExpandLabel.setText("Read More");
+//            tvExpandLabel.setText("Read More");
             ivChevronExpand.setImageResource(R.drawable.ic_chevron_down);
         }
     }
