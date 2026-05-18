@@ -43,10 +43,10 @@ public class CommunityFragment extends Fragment {
     private RecyclerView rvCommunities;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvEmptyState;
-    private FloatingActionButton fabAdd;
 
     private CommunityFirestoreManager communityManager;
     private CommunityAdapter adapter;
+    private FloatingActionButton fabDiscover;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class CommunityFragment extends Fragment {
         rvCommunities = view.findViewById(R.id.rvCommunities);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
-        fabAdd = view.findViewById(R.id.fabAdd);
+        fabDiscover = view.findViewById(R.id.fabDiscover);
     }
 
     private void setupToolbar() {
@@ -160,7 +160,9 @@ public class CommunityFragment extends Fragment {
     }
 
     private void setupListeners() {
-        fabAdd.setOnClickListener(v -> openCommunitySelection());
+        if (fabDiscover != null) {
+            fabDiscover.setOnClickListener(v -> openCommunitySelection());
+        }
     }
 
     private void openCommunitySelection() {
@@ -173,6 +175,15 @@ public class CommunityFragment extends Fragment {
         intent.putExtra("COMMUNITY_ID", community.getId());
         intent.putExtra("COMMUNITY_NAME", community.getName());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_discover) {
+            openCommunitySelection();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

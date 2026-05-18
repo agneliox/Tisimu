@@ -14,11 +14,8 @@ import com.google.android.material.chip.Chip;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.Community;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
 
@@ -65,6 +62,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         private TextView tvMemberCount;
         private TextView tvCreatedBy;
         private Chip chipVisibility;
+        private MaterialButton btnJoin;
         private MaterialButton btnView;
 
         ViewHolder(@NonNull View itemView) {
@@ -75,6 +73,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             tvMemberCount = itemView.findViewById(R.id.tvMemberCount);
             tvCreatedBy = itemView.findViewById(R.id.tvCreatedBy);
             chipVisibility = itemView.findViewById(R.id.chipVisibility);
+            btnJoin = itemView.findViewById(R.id.btnJoin);
             btnView = itemView.findViewById(R.id.btnView);
         }
 
@@ -91,6 +90,15 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                 chipVisibility.setText("Public");
                 chipVisibility.setChipIconResource(R.drawable.ic_public);
             }
+
+            // Show/hide join button based on whether user is already a member
+            // For public communities list, always show join button
+            btnJoin.setVisibility(View.VISIBLE);
+            btnJoin.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onJoinClick(community);
+                }
+            });
 
             btnView.setOnClickListener(v -> {
                 if (listener != null) {

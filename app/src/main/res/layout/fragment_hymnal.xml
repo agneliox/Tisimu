@@ -23,14 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         app:cardCornerRadius="24dp"
-        app:cardElevation="1dp">
+        app:cardElevation="1dp"
+        >
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:queryHint="@string/search"
-            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            android:background="?attr/colorOnSurfaceInverse"
+            />
 
     </com.google.android.material.card.MaterialCardView>
 

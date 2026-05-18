@@ -251,6 +251,8 @@ public class CommunityFirestoreManager {
                 .addOnFailureListener(callback::onFailure);
     }
 
+    // In CommunityFirestoreManager.java, verify the joinCommunity method
+
     public void joinCommunity(String communityId, String joinCode, VoidCallback callback) {
         String userId = getCurrentUserId();
         if (userId == null) {
@@ -294,7 +296,7 @@ public class CommunityFirestoreManager {
                                         .update("memberCount", FieldValue.increment(1))
                                         .addOnSuccessListener(aVoid -> callback.onSuccess())
                                         .addOnFailureListener(callback::onFailure);
-                            });
+                            }).addOnFailureListener(callback::onFailure);
                 })
                 .addOnFailureListener(callback::onFailure);
     }

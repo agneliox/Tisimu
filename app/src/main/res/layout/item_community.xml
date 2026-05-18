@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Header row with name and visibility -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
 
         </LinearLayout>
 
+        <!-- Description -->
         <TextView
             android:id="@+id/tvCommunityDescription"
             android:layout_width="match_parent"
@@ -50,6 +52,7 @@
             android:maxLines="2"
             android:ellipsize="end" />
 
+        <!-- Metadata row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,13 +78,35 @@
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginEnd="12dp" />
 
+        </LinearLayout>
+
+        <!-- Action Buttons Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnJoin"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Join"
+                android:textAllCaps="false"
+                app:cornerRadius="18dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnView"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:text="View"
                 android:textAllCaps="false"
-                app:cornerRadius="18dp" />
+                app:cornerRadius="18dp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
 
         </LinearLayout>
 
