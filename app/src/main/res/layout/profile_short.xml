@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:layout_margin="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userauthor_pic"
+        android:id="@+id/user_pic"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:civ_border_color="#ffffff"
-        app:civ_border_width="2dp"
+        android:src="@drawable/ic_person"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +20,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/profile_author_name"
+        android:id="@+id/profile_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -31,12 +31,12 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/userauthor_pic"
+        app:layout_constraintStart_toEndOf="@+id/user_pic"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlCompat" />
 
     <TextView
-        android:id="@+id/profile_author_email"
+        android:id="@+id/profile_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="2dp"
@@ -46,13 +46,13 @@
          android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.252"
-        app:layout_constraintStart_toEndOf="@+id/userauthor_pic"
+        app:layout_constraintStart_toEndOf="@+id/user_pic"
         app:layout_constraintTop_toBottomOf="@+id/profile_author_name"
 
         tools:ignore="RtlCompat" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/member_since"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
@@ -71,7 +71,7 @@
 
         android:foregroundGravity="left"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_author_email"
+        app:layout_constraintStart_toEndOf="@+id/profile_email"
         app:layout_constraintTop_toBottomOf="@+id/profile_author_name"
 
         app:srcCompat="@drawable/ic_chevron_right" />

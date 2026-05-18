@@ -24,72 +24,73 @@
         android:orientation="vertical">
 
         <!-- Profile Header with Avatar -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16dp"-->
+<!--            app:cardCornerRadius="24dp"-->
+<!--            app:cardElevation="2dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="24dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="24dp">-->
 
-                <!-- Avatar -->
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivAvatar"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:contentDescription="Profile Avatar"
-                    android:src="@drawable/ic_person"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle" />
+<!--                &lt;!&ndash; Avatar &ndash;&gt;-->
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/ivAvatar"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:contentDescription="Profile Avatar"-->
+<!--                    android:src="@drawable/ic_person"-->
+<!--                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle" />-->
 
-                <!-- User Name -->
-                <TextView
-                    android:id="@+id/tvUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="User Name"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:textColor="?attr/colorOnSurface" />
+<!--                &lt;!&ndash; User Name &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvUserName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="User Name"-->
+<!--                    android:textAppearance="?attr/textAppearanceHeadlineSmall"-->
+<!--                    android:textColor="?attr/colorOnSurface" />-->
 
-                <!-- User Email -->
-                <TextView
-                    android:id="@+id/tvUserEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="user@example.com"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
-                <!-- User Email -->
-                <TextView
-                    android:id="@+id/tvSignInMethod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sign in method"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
+<!--                &lt;!&ndash; User Email &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvUserEmail"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="user@example.com"-->
+<!--                    android:textAppearance="?attr/textAppearanceBodyMedium"-->
+<!--                    android:textColor="?attr/colorOnSurfaceVariant" />-->
+<!--                &lt;!&ndash; User Email &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvSignInMethod"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Sign in method"-->
+<!--                    android:textAppearance="?attr/textAppearanceBodyMedium"-->
+<!--                    android:textColor="?attr/colorOnSurfaceVariant" />-->
 
-                <!-- Member Since -->
-                <TextView
-                    android:id="@+id/tvMemberSince"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Member since Jan 2024"
-                    android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorPrimary" />
+<!--                &lt;!&ndash; Member Since &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvMemberSince"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Member since Jan 2024"-->
+<!--                    android:textAppearance="?attr/textAppearanceBodySmall"-->
+<!--                    android:textColor="?attr/colorPrimary" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </com.google.android.material.card.MaterialCardView>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
         <include
-            layout="@layout/profile_short" />
+            layout="@layout/profile_short"
+            />
 
         <!-- Stats Section -->
         <com.google.android.material.card.MaterialCardView

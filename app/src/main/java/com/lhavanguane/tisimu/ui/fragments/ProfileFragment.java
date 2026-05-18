@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -38,6 +39,8 @@ import com.lhavanguane.tisimu.utils.ThemeManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
@@ -65,6 +68,9 @@ public class ProfileFragment extends Fragment {
     private LanguageManager languageManager;
     private ThemeManager themeManager;
     private Toolbar toolbar;
+    private CircleImageView userauthor_pic;
+    private TextView profile_name, profile_email, member_since;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,10 +103,10 @@ public class ProfileFragment extends Fragment {
 
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.profileToolbar);
-        ivAvatar = view.findViewById(R.id.ivAvatar);
-        tvUserName = view.findViewById(R.id.tvUserName);
-        tvUserEmail = view.findViewById(R.id.tvUserEmail);
-        tvMemberSince = view.findViewById(R.id.tvMemberSince);
+//        ivAvatar = view.findViewById(R.id.ivAvatar);
+//        tvUserName = view.findViewById(R.id.tvUserName);
+//        tvUserEmail = view.findViewById(R.id.tvUserEmail);
+//        tvMemberSince = view.findViewById(R.id.tvMemberSince);
         tvCommunitiesCount = view.findViewById(R.id.tvCommunitiesCount);
         tvHymnalsCount = view.findViewById(R.id.tvHymnalsCount);
         tvFavoritesCount = view.findViewById(R.id.tvFavoritesCount);
@@ -108,7 +114,11 @@ public class ProfileFragment extends Fragment {
         switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
         tvAppVersion = view.findViewById(R.id.tvAppVersion);
-        tvSignInMethod = view.findViewById(R.id.tvSignInMethod);
+//        tvSignInMethod = view.findViewById(R.id.tvSignInMethod);
+        userauthor_pic = view.findViewById(R.id.user_pic);
+        profile_name = view.findViewById(R.id.profile_name);
+        profile_email = view.findViewById(R.id.profile_email);
+        member_since = view.findViewById(R.id.member_since);
 
         layoutEditProfile = view.findViewById(R.id.layoutEditProfile);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
@@ -142,7 +152,7 @@ public class ProfileFragment extends Fragment {
             for (UserInfo profile : user.getProviderData()) {
                 if ("google.com".equals(profile.getProviderId())) {
                     // User signed in with Google
-                    tvSignInMethod.setText("Connected with Google");
+//                    tvSignInMethod.setText("Connected with Google");
                     break;
                 }
             }
@@ -152,35 +162,51 @@ public class ProfileFragment extends Fragment {
             // Set user name
             String displayName = user.getDisplayName();
             if (displayName != null && !displayName.isEmpty()) {
-                tvUserName.setText(displayName);
+//                tvUserName.setText(displayName);
+                profile_name.setText(displayName);
             } else {
                 String email = user.getEmail();
                 if (email != null) {
                     String nameFromEmail = email.split("@")[0];
-                    tvUserName.setText(nameFromEmail);
+//                    tvUserName.setText(nameFromEmail);
+                    profile_name.setText(nameFromEmail);
                 } else {
                     tvUserName.setText("User");
+                    profile_name.setText("User");
                 }
             }
 
             // Set user email
-            tvUserEmail.setText(user.getEmail() != null ? user.getEmail() : "No email");
+//            tvUserEmail.setText(user.getEmail() != null ? user.getEmail() : "No email");
+            profile_email.setText(user.getEmail() != null ? user.getEmail() : "No email");
+
 
             // Set member since (using user creation time if available)
             if (user.getMetadata() != null && user.getMetadata().getCreationTimestamp() > 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
                 String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
-                tvMemberSince.setText("Member since " + date);
+//                tvMemberSince.setText("Member since " + date);
+                member_since.setText("Member since " + date);
                 Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
             } else {
-                tvMemberSince.setText("Member");
+//                tvMemberSince.setText("Member");
+                member_since.setText("Member");
             }
 
-            // Load avatar (placeholder - can be expanded later)
-            // For now, keep default avatar
+//            Glide.with(this)
+//                    .load(user.getPhotoUrl())
+//                    .placeholder(R.drawable.ic_person)
+//                    .error(R.drawable.ic_person)
+//                    .into(ivAvatar);
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .placeholder(R.drawable.ic_person)
+                    .error(R.drawable.ic_person)
+                    .into(userauthor_pic);
+
         } else {
-            tvUserName.setText("Guest User");
-            tvUserEmail.setText("Not logged in");
+//            tvUserName.setText("Guest User");
+//            tvUserEmail.setText("Not logged in");
             tvMemberSince.setText("");
         }
     }
