@@ -7,6 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.DailyVerse;
 import com.lhavanguane.tisimu.services.DailyVerseManager;
 import com.lhavanguane.tisimu.utils.LanguageManager;
+import com.lhavanguane.tisimu.utils.PreferencesManager;
 
 public class HomeFragment extends Fragment {
 
@@ -51,6 +54,15 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private DailyVerseManager dailyVerseManager;
 
+    private LinearLayout llCollapsibleContent;
+    private LinearLayout llExpandButton;
+    private TextView tvExpandLabel;
+    private ImageView ivChevronExpand;
+
+    private PreferencesManager preferencesManager;
+
+    private boolean isExpanded = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +71,11 @@ public class HomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         dailyVerseManager = DailyVerseManager.getInstance(requireContext());
         LanguageManager languageManager = LanguageManager.getInstance(requireContext());
+
+        preferencesManager = PreferencesManager.getInstance(requireContext());
+
+        // Load saved expansion state
+        isExpanded = preferencesManager.isDailyVerseExpanded();
     }
 
     @Override
@@ -75,6 +92,7 @@ public class HomeFragment extends Fragment {
         setupSwipeRefresh(view);
         displayUserGreeting();
         loadDailyVerse();
+        setupExpandCollapse();
 
         return view;
     }
@@ -95,6 +113,11 @@ public class HomeFragment extends Fragment {
         applicationCard = view.findViewById(R.id.applicationCard);
         reflectionCard = view.findViewById(R.id.reflectionCard);
         prayerCard = view.findViewById(R.id.prayerCard);
+
+        llCollapsibleContent = view.findViewById(R.id.llCollapsibleContent);
+        llExpandButton = view.findViewById(R.id.llExpandButton);
+        tvExpandLabel = view.findViewById(R.id.tvExpandLabel);
+        ivChevronExpand = view.findViewById(R.id.ivChevronExpand);
     }
 
     private void setupToolbar() {
@@ -198,6 +221,28 @@ public class HomeFragment extends Fragment {
         applicationCard.setVisibility(View.VISIBLE);
         reflectionCard.setVisibility(View.VISIBLE);
         prayerCard.setVisibility(View.VISIBLE);
+    }
+
+    private void setupExpandCollapse() {
+        updateExpandCollapseUI();
+
+        llExpandButton.setOnClickListener(v -> {
+            isExpanded = !isExpanded;
+            preferencesManager.setDailyVerseExpanded(isExpanded);
+            updateExpandCollapseUI();
+        });
+    }
+
+    private void updateExpandCollapseUI() {
+        if (isExpanded) {
+            llCollapsibleContent.setVisibility(View.VISIBLE);
+            tvExpandLabel.setText("Read Less");
+            ivChevronExpand.setImageResource(R.drawable.ic_chevron_up);
+        } else {
+            llCollapsibleContent.setVisibility(View.GONE);
+            tvExpandLabel.setText("Read More");
+            ivChevronExpand.setImageResource(R.drawable.ic_chevron_down);
+        }
     }
 
     private void refreshVerse() {

@@ -11,6 +11,7 @@ import java.util.Set;
 public class PreferencesManager {
     private static final String KEY_SELECTED_HYMNAL_IDS = "selected_hymnal_ids";
 
+    private static final String KEY_DAILY_VERSE_EXPANDED = "daily_verse_expanded";
     private static PreferencesManager instance;
     private final SharedPreferences prefs;
 
@@ -49,5 +50,15 @@ public class PreferencesManager {
 
     public boolean isHymnalSelected(String hymnalId) {
         return getSelectedHymnals().contains(hymnalId);
+    }
+
+
+    // Add these methods
+    public void setDailyVerseExpanded(boolean expanded) {
+        prefs.edit().putBoolean(KEY_DAILY_VERSE_EXPANDED, expanded).apply();
+    }
+
+    public boolean isDailyVerseExpanded() {
+        return prefs.getBoolean(KEY_DAILY_VERSE_EXPANDED, false);
     }
 }
