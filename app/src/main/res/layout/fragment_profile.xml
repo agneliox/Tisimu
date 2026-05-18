@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="?attr/colorSurface">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/profileToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:navigationIcon="@drawable/ic_menu_2"
+        app:navigationIconTint="?attr/colorOnSurface"
+        app:title="@string/profile"
+        app:titleTextColor="?attr/colorOnSurface" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,28 +34,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="24dp"
-                android:gravity="center">
+                android:padding="24dp">
 
                 <!-- Avatar -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivAvatar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:contentDescription="Profile Avatar"
                     android:src="@drawable/ic_person"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
-                    android:contentDescription="Profile Avatar" />
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle" />
 
                 <!-- User Name -->
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="User Name"
                     android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:textColor="?attr/colorOnSurface"
-                    android:layout_marginTop="16dp" />
+                    android:textColor="?attr/colorOnSurface" />
 
                 <!-- User Email -->
                 <TextView
@@ -58,14 +71,17 @@
                     android:id="@+id/tvMemberSince"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Member since Jan 2024"
                     android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_marginTop="8dp" />
+                    android:textColor="?attr/colorPrimary" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <include
+            layout="@layout/profile_short" />
 
         <!-- Stats Section -->
         <com.google.android.material.card.MaterialCardView
@@ -86,8 +102,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvCommunitiesCount"
@@ -115,8 +131,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvHymnalsCount"
@@ -144,8 +160,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvFavoritesCount"
@@ -172,12 +188,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Account"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary"
             android:paddingHorizontal="16dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="Account"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -197,30 +213,28 @@
                     android:id="@+id/layoutEditProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_edit"
-                         />
+                        android:src="@drawable/ic_edit" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Edit Profile"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                        />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -234,30 +248,28 @@
                     android:id="@+id/layoutChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_lock"
-                         />
+                        android:src="@drawable/ic_lock" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Change Password"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                         />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -269,12 +281,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="App Settings"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary"
             android:paddingHorizontal="16dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="App Settings"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -293,39 +305,37 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_language"
-                         />
+                        android:src="@drawable/ic_language" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Language"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <TextView
                         android:id="@+id/tvCurrentLanguage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:text="English"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:layout_marginEnd="8dp" />
+                        android:textColor="?attr/colorOnSurfaceVariant" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                         />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -338,22 +348,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_dark_mode"
-                         />
+                        android:src="@drawable/ic_dark_mode" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -385,12 +394,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Support"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary"
             android:paddingHorizontal="16dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="Support"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -410,30 +419,28 @@
                     android:id="@+id/layoutSendFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_edit"
-                        />
+                        android:src="@drawable/ic_edit" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Send Feedback"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                         />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -447,30 +454,28 @@
                     android:id="@+id/layoutRateApp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_star"
-                        />
+                        android:src="@drawable/ic_star" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Rate App"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                        />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -484,30 +489,28 @@
                     android:id="@+id/layoutShareApp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_share"
-                        />
+                        android:src="@drawable/ic_share" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Share App"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                         />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -521,30 +524,28 @@
                     android:id="@+id/layoutAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_info"
-                        />
+                        android:src="@drawable/ic_info" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="About"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:layout_marginStart="16dp" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                        />
+                        android:src="@drawable/ic_chevron_right" />
 
                 </LinearLayout>
 
@@ -555,28 +556,28 @@
         <!-- Logout Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_margin="16dp"
             android:layout_marginTop="8dp"
+            android:icon="@drawable/ic_logout"
             android:text="Logout"
             android:textAllCaps="false"
-            android:icon="@drawable/ic_logout"
-            app:iconGravity="textStart"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:textColor="?attr/colorError" />
+            android:textColor="?attr/colorError"
+            app:iconGravity="textStart" />
 
         <!-- App Version -->
         <TextView
             android:id="@+id/tvAppVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="Version 1.0.1"
             android:textAppearance="?attr/textAppearanceBodySmall"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:textColor="?attr/colorOnSurfaceVariant" />
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

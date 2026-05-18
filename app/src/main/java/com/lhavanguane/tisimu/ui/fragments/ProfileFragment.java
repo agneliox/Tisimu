@@ -11,8 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -56,10 +63,12 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private LanguageManager languageManager;
     private ThemeManager themeManager;
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(requireActivity());
         mAuth = FirebaseAuth.getInstance();
         languageManager = LanguageManager.getInstance(requireContext());
         themeManager = ThemeManager.getInstance(requireContext());
@@ -68,8 +77,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
         initViews(view);
+        setupToolbar();
         setupUserInfo();
         setupStats();
         setupLanguageDisplay();
@@ -81,6 +95,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        toolbar = view.findViewById(R.id.profileToolbar);
         ivAvatar = view.findViewById(R.id.ivAvatar);
         tvUserName = view.findViewById(R.id.tvUserName);
         tvUserEmail = view.findViewById(R.id.tvUserEmail);
@@ -101,6 +116,22 @@ public class ProfileFragment extends Fragment {
         layoutAbout = view.findViewById(R.id.layoutAbout);
     }
 
+
+    private void setupToolbar() {
+        if (getActivity() != null) {
+            ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
+
+            toolbar.setNavigationIcon(R.drawable.ic_menu_2);
+            toolbar.setNavigationOnClickListener(v -> {
+                DrawerLayout drawerLayout = ((MainActivity) requireActivity()).getDrawerLayout();
+                if (drawerLayout != null && !drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                } else if (drawerLayout != null) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+            });
+        }
+    }
     private void setupUserInfo() {
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -127,6 +158,7 @@ public class ProfileFragment extends Fragment {
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
                 String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
                 tvMemberSince.setText("Member since " + date);
+                Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
             } else {
                 tvMemberSince.setText("Member");
             }

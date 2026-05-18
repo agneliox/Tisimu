@@ -15,7 +15,7 @@
         app:title="Communities"
         app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/community_fragment_menu"
-        app:navigationIcon="@drawable/ic_menu"
+        app:navigationIcon="@drawable/ic_menu_2"
         app:navigationIconTint="?attr/colorOnSurface" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
