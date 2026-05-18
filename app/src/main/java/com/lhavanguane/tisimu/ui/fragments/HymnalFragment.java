@@ -16,7 +16,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -29,7 +28,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
-import com.lhavanguane.tisimu.MainActivity;
+import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.HymnalData;
 import com.lhavanguane.tisimu.models.SongItem;

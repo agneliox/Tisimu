@@ -112,6 +112,9 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     // Add splash screen API
     implementation(libs.core.splashscreen)
+    // Google Sign-In
+    implementation(libs.play.services.auth)
+
 
     // For audio playback
     implementation(libs.exoplayer.core)
@@ -137,17 +140,18 @@ dependencies {
     testImplementation(libs.mockito.core)
 
     // Android Testing
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation(libs.junit.v115)
+    androidTestImplementation(libs.espresso.core.v351)
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.rules)
+    androidTestImplementation(libs.uiautomator)
 
     // Kotlin Coroutines Testing
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test.v173)
 
     // Truth assertions
-    testImplementation("com.google.truth:truth:1.1.5")
-    androidTestImplementation("com.google.truth:truth:1.1.5")
+    testImplementation(libs.truth)
+    androidTestImplementation(libs.truth)
 }
+

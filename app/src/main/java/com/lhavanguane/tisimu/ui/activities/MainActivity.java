@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu;
+package com.lhavanguane.tisimu.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.ui.fragments.HomeFragment;
 

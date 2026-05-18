@@ -3,7 +3,6 @@ package com.lhavanguane.tisimu.ui.fragments;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +26,11 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.lhavanguane.tisimu.BuildConfig;
-import com.lhavanguane.tisimu.MainActivity;
+import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.LoginActivity;
+import com.lhavanguane.tisimu.ui.activities.LoginActivity;
 import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.utils.ThemeManager;
@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvCommunitiesCount;
     private TextView tvHymnalsCount;
     private TextView tvFavoritesCount;
+    private TextView tvSignInMethod;
     private TextView tvCurrentLanguage;
     private SwitchMaterial switchDarkMode;
     private MaterialButton btnLogout;
@@ -107,6 +108,7 @@ public class ProfileFragment extends Fragment {
         switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
         tvAppVersion = view.findViewById(R.id.tvAppVersion);
+        tvSignInMethod = view.findViewById(R.id.tvSignInMethod);
 
         layoutEditProfile = view.findViewById(R.id.layoutEditProfile);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
@@ -134,6 +136,17 @@ public class ProfileFragment extends Fragment {
     }
     private void setupUserInfo() {
         FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            // Check if user signed in with Google
+            for (UserInfo profile : user.getProviderData()) {
+                if ("google.com".equals(profile.getProviderId())) {
+                    // User signed in with Google
+                    tvSignInMethod.setText("Connected with Google");
+                    break;
+                }
+            }
+        }
 
         if (user != null) {
             // Set user name

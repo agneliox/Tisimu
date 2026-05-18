@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tisimu"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".ui.activities.CommunityDetailActivity"
             android:exported="false" />
@@ -39,13 +40,13 @@
             android:name=".ui.activities.HymnalSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Tisimu">
             <intent-filter>
@@ -55,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
 
         <!-- For emulator testing -->
@@ -66,5 +67,9 @@
         <meta-data
             android:name="firebase_emulator_url"
             android:value="http://10.0.2.2:8080" />
+        <!-- Add meta-data for Google Sign-In (optional but recommended) -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 </manifest>

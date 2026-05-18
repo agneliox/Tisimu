@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.lhavanguane.tisimu.MainActivity;
+import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.Community;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;

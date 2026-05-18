@@ -65,6 +65,14 @@
                     android:text="user@example.com"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurfaceVariant" />
+                <!-- User Email -->
+                <TextView
+                    android:id="@+id/tvSignInMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign in method"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
 
                 <!-- Member Since -->
                 <TextView

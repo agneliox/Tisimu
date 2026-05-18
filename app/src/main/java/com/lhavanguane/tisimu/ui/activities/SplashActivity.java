@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu;
+package com.lhavanguane.tisimu.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.lhavanguane.tisimu.ui.activities.HymnalSelectionActivity;
-import com.lhavanguane.tisimu.ui.activities.SongListActivity;
-import com.lhavanguane.tisimu.utils.PreferencesManager;
+import com.lhavanguane.tisimu.R;
 
 public class SplashActivity extends AppCompatActivity {
 
