@@ -45,4 +45,13 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <!-- Add these styles to your app for better disabled button appearance -->
+    <!-- In res/values/styles.xml -->
+
+    <style name="ButtonJoined" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">18dp</item>
+    </style>
+
 </resources>

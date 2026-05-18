@@ -20,6 +20,7 @@ import java.util.List;
 public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySelectionAdapter.ViewHolder> {
 
     private List<Community> communities = new ArrayList<>();
+    private List<String> joinedCommunityIds = new ArrayList<>();
     private OnCommunityActionListener listener;
 
     public interface OnCommunityActionListener {
@@ -34,6 +35,15 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
     public void setCommunities(List<Community> communities) {
         this.communities = communities;
         notifyDataSetChanged();
+    }
+
+    public void setJoinedCommunityIds(List<String> joinedIds) {
+        this.joinedCommunityIds = joinedIds;
+        notifyDataSetChanged();
+    }
+
+    private boolean isUserJoined(String communityId) {
+        return joinedCommunityIds.contains(communityId);
     }
 
     @NonNull
@@ -91,13 +101,25 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
                 chipVisibility.setChipIconResource(R.drawable.ic_public);
             }
 
-            // Show join button for discover screen
-            btnJoin.setVisibility(View.VISIBLE);
-            btnJoin.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onJoinClick(community);
-                }
-            });
+            // Check if user has already joined this community
+            boolean isJoined = isUserJoined(community.getId());
+
+            if (isJoined) {
+                btnJoin.setText("Joined");
+                btnJoin.setEnabled(false);
+                btnJoin.setBackgroundTintList(
+                        itemView.getContext().getColorStateList(com.google.android.material.R.color.design_dark_default_color_error));
+            } else {
+                btnJoin.setText("Join");
+                btnJoin.setEnabled(true);
+                btnJoin.setBackgroundTintList(
+                        itemView.getContext().getColorStateList(R.color.md_theme_primary));
+                btnJoin.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.onJoinClick(community);
+                    }
+                });
+            }
 
             btnView.setOnClickListener(v -> {
                 if (listener != null) {

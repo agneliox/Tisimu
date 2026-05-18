@@ -1,12 +1,12 @@
 package com.lhavanguane.tisimu.ui.activities;
 
-import android.content.Intent;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,8 +19,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.Community;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
-import com.lhavanguane.tisimu.ui.adapters.CommunitySelectionAdapter;  // Create a separate adapter for selection
+import com.lhavanguane.tisimu.ui.adapters.CommunitySelectionAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommunitySelectionActivity extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class CommunitySelectionActivity extends AppCompatActivity {
     private CommunitySelectionAdapter adapter;
     private ProgressDialog progressDialog;
 
+    private List<String> joinedCommunityIds = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class CommunitySelectionActivity extends AppCompatActivity {
         initViews();
         setupToolbar();
         setupRecyclerView();
-        loadCommunities();
+        loadUserJoinedCommunities(); // First load joined communities
         setupListeners();
     }
 
@@ -79,13 +82,36 @@ public class CommunitySelectionActivity extends AppCompatActivity {
         });
     }
 
-    private void loadCommunities() {
+    private void loadUserJoinedCommunities() {
+        communityManager.getUserJoinedCommunities(new CommunityFirestoreManager.CommunitiesCallback() {
+            @Override
+            public void onSuccess(List<Community> joinedCommunities) {
+                // Extract IDs of joined communities
+                joinedCommunityIds.clear();
+                for (Community community : joinedCommunities) {
+                    joinedCommunityIds.add(community.getId());
+                }
+                // Now load public communities
+                loadPublicCommunities();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                // Still try to load public communities even if this fails
+                loadPublicCommunities();
+            }
+        });
+    }
+
+    private void loadPublicCommunities() {
         showProgress(true);
         communityManager.getAllPublicCommunities(new CommunityFirestoreManager.CommunitiesCallback() {
             @Override
             public void onSuccess(List<Community> communities) {
                 showProgress(false);
                 adapter.setCommunities(communities);
+                adapter.setJoinedCommunityIds(joinedCommunityIds);
+
                 if (communities.isEmpty()) {
                     Toast.makeText(CommunitySelectionActivity.this, "No public communities available yet", Toast.LENGTH_SHORT).show();
                 }
@@ -130,7 +156,14 @@ public class CommunitySelectionActivity extends AppCompatActivity {
             public void onSuccess() {
                 showProgress(false);
                 Toast.makeText(CommunitySelectionActivity.this, "Joined " + community.getName() + "!", Toast.LENGTH_SHORT).show();
-                finish(); // Go back to communities list
+
+                // Update the adapter to show this community as joined
+                joinedCommunityIds.add(community.getId());
+                adapter.setJoinedCommunityIds(joinedCommunityIds);
+                adapter.notifyDataSetChanged();
+
+                // Optional: Close activity after a short delay
+                // finish();
             }
 
             @Override
