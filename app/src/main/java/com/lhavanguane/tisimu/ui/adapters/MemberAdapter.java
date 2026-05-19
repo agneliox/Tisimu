@@ -54,7 +54,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.cardView);
+            cardView = itemView.findViewById(R.id.item_Member);
             tvName = itemView.findViewById(R.id.tvName);
             tvEmail = itemView.findViewById(R.id.tvEmail);
             chipRole = itemView.findViewById(R.id.chipRole);
@@ -66,11 +66,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
 
             if (member.isManager()) {
                 chipRole.setText("Manager");
-                chipRole.setChipBackgroundColorResource(R.color.md_theme_primary);
-                chipRole.setTextColor(android.graphics.Color.WHITE);
             } else {
-                chipRole.setText("Member");
-                chipRole.setChipBackgroundColorResource(android.R.color.darker_gray);
+                chipRole.setVisibility(View.GONE);
+
             }
         }
     }

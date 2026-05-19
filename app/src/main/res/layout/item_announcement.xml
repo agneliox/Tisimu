@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
+    android:id="@+id/item_announcement"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/colorOnSurfaceInverse"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="1dp">
@@ -25,17 +26,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Title"
+                android:text="@string/title"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="?attr/colorPrimary" />
+                />
 
             <TextView
                 android:id="@+id/tvImportantBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IMPORTANT"
+                android:text="@string/important"
                 android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="@color/md_theme_error"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -44,7 +44,7 @@
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Content"
+            android:text="@string/content"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="8dp" />
@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Posted by User"
+                android:text="@string/posted_by_user"
                 android:textAppearance="?attr/textAppearanceLabelSmall"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -69,7 +69,7 @@
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="@string/date"
                 android:textAppearance="?attr/textAppearanceLabelSmall"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginEnd="12dp" />
@@ -77,8 +77,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:text="Delete"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
                 android:textAllCaps="false"
                 app:cornerRadius="16dp"
                 style="@style/Widget.Material3.Button.TextButton" />

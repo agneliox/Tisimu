@@ -66,7 +66,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.cardView);
+            cardView = itemView.findViewById(R.id.item_announcement);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvContent = itemView.findViewById(R.id.tvContent);
             tvCreatedBy = itemView.findViewById(R.id.tvCreatedBy);
@@ -87,10 +87,10 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
             if (item.isImportant()) {
                 tvImportantBadge.setVisibility(View.VISIBLE);
-                cardView.setCardBackgroundColor(0xFFFFF3E0);
+//                cardView.setCardBackgroundColor(0xFFFFF3E0);
             } else {
                 tvImportantBadge.setVisibility(View.GONE);
-                cardView.setCardBackgroundColor(0xFFFFFFFF);
+//                cardView.setCardBackgroundColor(0xFFFFFFFF);
             }
 
             btnDelete.setOnClickListener(v -> {

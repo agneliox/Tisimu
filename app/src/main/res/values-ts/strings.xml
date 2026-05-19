@@ -146,4 +146,11 @@
     <string name="join">Join</string>
     <string name="view">View</string>
     <string name="_0_members">0 members</string>
+    <string name="posted_by_user">Posted by User</string>
+    <string name="delete">Delete</string>
+    <string name="date">Date</string>
+    <string name="content">Content</string>
+    <string name="important">IMPORTANT</string>
+    <string name="member_name">Member Name</string>
+    <string name="member">Member</string>
 </resources>
