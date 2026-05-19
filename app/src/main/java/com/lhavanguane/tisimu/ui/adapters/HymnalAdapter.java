@@ -67,7 +67,7 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
         private CardView cardView;
         private ImageView ivCover;
         private TextView tvName, tvDescription, tvDetails;
-        private MaterialButton btnAction;
+        private ImageView btnAction;
         private MaterialCheckBox cbSelect;
 
         ViewHolder(@NonNull View itemView) {
@@ -103,14 +103,14 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
 
             // Update UI based on download status
             if (hymnal.isDownloaded()) {
-                btnAction.setText("DELETE");
-                btnAction.setBackgroundTintList(
-                        itemView.getContext().getColorStateList(com.google.android.material.R.color.material_divider_color));
+                btnAction.setImageResource(R.drawable.ic_delete);
+//                btnAction.setBackgroundTintList(
+//                        itemView.getContext().getColorStateList(com.google.android.material.R.color.material_divider_color));
                 cbSelect.setVisibility(View.VISIBLE);
             } else {
-                btnAction.setText("DOWNLOAD");
-                btnAction.setBackgroundTintList(
-                        itemView.getContext().getColorStateList(com.google.android.material.R.color.material_divider_color));
+                btnAction.setImageResource(R.drawable.ic_download);
+//                btnAction.setBackgroundTintList(
+//                        itemView.getContext().getColorStateList(com.google.android.material.R.color.material_divider_color));
                 cbSelect.setVisibility(View.GONE);
             }
 

@@ -61,19 +61,27 @@
             android:orientation="vertical"
             android:gravity="end">
 
-            <com.google.android.material.button.MaterialButton
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btnAction"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:textAllCaps="false"-->
+<!--                app:cornerRadius="18dp"-->
+<!--                app:icon="@drawable/ic_download"-->
+<!--                />-->
+
+            <ImageView
                 android:id="@+id/btnAction"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="@string/download"
-                android:textSize="12sp"
-                android:textAllCaps="false"
-                app:cornerRadius="18dp" />
+                android:layout_width="32dp"
+                android:layout_height="33dp"
+                android:contentDescription="@string/open"
+                android:src="@drawable/ic_download"
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/cbSelect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:visibility="gone" />
 

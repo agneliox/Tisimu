@@ -4,21 +4,32 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-
-    <!-- Pencil / edit -->
+    
+    <!-- Arrow pointing down into a tray -->
     <path
 
         android:strokeColor="?attr/colorOnSurface"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M17,3l4,4L7,21H3v-4L17,3z" />
-
+        android:pathData="M12,3v12" />
+    
+    <!-- Arrow head (chevron down) -->
     <path
 
         android:strokeColor="?attr/colorOnSurface"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
-        android:pathData="M14,6l4,4" />
+        android:strokeLineJoin="round"
+        android:pathData="M8,11l4,4 4,-4" />
+    
+    <!-- Tray/bottom bar -->
+    <path
+
+        android:strokeColor="?attr/colorOnSurface"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M4,17v3c0,0.5 0.5,1 1,1h14c0.5,0 1,-0.5 1,-1v-3" />
 
 </vector>

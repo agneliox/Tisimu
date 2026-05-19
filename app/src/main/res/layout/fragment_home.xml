@@ -42,7 +42,7 @@
                     android:gravity="center"
                     android:text="@string/hello_hand"
                     android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorOnSurface" />
 
                 <TextView
                     android:id="@+id/tvWelcomeMessage"
@@ -75,7 +75,7 @@
                         android:layout_marginBottom="12dp"
                         android:text="@string/today_s_verse"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorPrimary" />
+                        android:textColor="?attr/colorOnSurface" />
 
                     <TextView
                         android:id="@+id/tvDailyVerse"
@@ -94,7 +94,7 @@
                         android:gravity="end"
                         android:text=""
                         android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorPrimary" />
+                        android:textColor="?attr/colorOnSurface" />
 
                 </LinearLayout>
 
@@ -164,7 +164,7 @@
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/reflection"
                                 android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorPrimary" />
+                                android:textColor="?attr/colorOnSurface" />
 
                             <TextView
                                 android:id="@+id/tvDevotionalTitle"
@@ -209,7 +209,7 @@
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/today_s_application"
                                 android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorPrimary" />
+                                android:textColor="?attr/colorOnSurface" />
 
                             <TextView
                                 android:id="@+id/tvApplication"
@@ -246,7 +246,7 @@
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/question_to_ponder"
                                 android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorPrimary" />
+                                android:textColor="?attr/colorOnSurface" />
 
                             <TextView
                                 android:id="@+id/tvReflection"
@@ -284,7 +284,7 @@
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/prayer"
                                 android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorPrimary" />
+                                android:textColor="?attr/colorOnSurface" />
 
                             <TextView
                                 android:id="@+id/tvPrayer"

@@ -93,105 +93,105 @@
             />
 
         <!-- Stats Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginTop="0dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="1dp">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:cardElevation="1dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="16dp">-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/tvCommunitiesCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                        android:textColor="?attr/colorPrimary" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvCommunitiesCount"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"-->
+<!--                        android:textAppearance="?attr/textAppearanceHeadlineSmall"-->
+<!--                        android:textColor="?attr/colorPrimary" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Communities"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Communities"-->
+<!--                        android:textAppearance="?attr/textAppearanceBodySmall"-->
+<!--                        android:textColor="?attr/colorOnSurfaceVariant" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/colorOutlineVariant" />
+<!--                <View-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="?attr/colorOutlineVariant" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/tvHymnalsCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                        android:textColor="?attr/colorPrimary" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvHymnalsCount"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"-->
+<!--                        android:textAppearance="?attr/textAppearanceHeadlineSmall"-->
+<!--                        android:textColor="?attr/colorPrimary" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hymnals"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Hymnals"-->
+<!--                        android:textAppearance="?attr/textAppearanceBodySmall"-->
+<!--                        android:textColor="?attr/colorOnSurfaceVariant" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/colorOutlineVariant" />
+<!--                <View-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="?attr/colorOutlineVariant" />-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/tvFavoritesCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                        android:textColor="?attr/colorPrimary" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvFavoritesCount"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"-->
+<!--                        android:textAppearance="?attr/textAppearanceHeadlineSmall"-->
+<!--                        android:textColor="?attr/colorPrimary" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Favorites"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Favorites"-->
+<!--                        android:textAppearance="?attr/textAppearanceBodySmall"-->
+<!--                        android:textColor="?attr/colorOnSurfaceVariant" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </com.google.android.material.card.MaterialCardView>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
         <!-- Account Settings Section -->
         <TextView
@@ -202,7 +202,7 @@
             android:paddingBottom="8dp"
             android:text="Account"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary" />
+            android:textColor="?attr/colorOnSurface" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -295,7 +295,7 @@
             android:paddingBottom="8dp"
             android:text="App Settings"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary" />
+            android:textColor="?attr/colorOnSurface" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -408,7 +408,7 @@
             android:paddingBottom="8dp"
             android:text="Support"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorPrimary" />
+            android:textColor="?attr/colorOnSurface" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

@@ -44,13 +44,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
-    private ShapeableImageView ivAvatar;
-    private TextView tvUserName;
-    private TextView tvUserEmail;
-    private TextView tvMemberSince;
-    private TextView tvCommunitiesCount;
-    private TextView tvHymnalsCount;
-    private TextView tvFavoritesCount;
+//    private TextView tvCommunitiesCount;
+//    private TextView tvHymnalsCount;
+//    private TextView tvFavoritesCount;
     private TextView tvSignInMethod;
     private TextView tvCurrentLanguage;
     private SwitchMaterial switchDarkMode;
@@ -107,9 +103,9 @@ public class ProfileFragment extends Fragment {
 //        tvUserName = view.findViewById(R.id.tvUserName);
 //        tvUserEmail = view.findViewById(R.id.tvUserEmail);
 //        tvMemberSince = view.findViewById(R.id.tvMemberSince);
-        tvCommunitiesCount = view.findViewById(R.id.tvCommunitiesCount);
-        tvHymnalsCount = view.findViewById(R.id.tvHymnalsCount);
-        tvFavoritesCount = view.findViewById(R.id.tvFavoritesCount);
+//        tvCommunitiesCount = view.findViewById(R.id.tvCommunitiesCount);
+//        tvHymnalsCount = view.findViewById(R.id.tvHymnalsCount);
+//        tvFavoritesCount = view.findViewById(R.id.tvFavoritesCount);
         tvCurrentLanguage = view.findViewById(R.id.tvCurrentLanguage);
         switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
@@ -171,7 +167,7 @@ public class ProfileFragment extends Fragment {
 //                    tvUserName.setText(nameFromEmail);
                     profile_name.setText(nameFromEmail);
                 } else {
-                    tvUserName.setText("User");
+//                    tvUserName.setText("User");
                     profile_name.setText("User");
                 }
             }
@@ -207,7 +203,7 @@ public class ProfileFragment extends Fragment {
         } else {
 //            tvUserName.setText("Guest User");
 //            tvUserEmail.setText("Not logged in");
-            tvMemberSince.setText("");
+//            tvMemberSince.setText("");
         }
     }
 
@@ -218,9 +214,9 @@ public class ProfileFragment extends Fragment {
         // Favorites count - from FavoritesManager (when implemented)
 
         // Placeholder values
-        tvCommunitiesCount.setText("0");
-        tvHymnalsCount.setText("0");
-        tvFavoritesCount.setText("0");
+//        tvCommunitiesCount.setText("0");
+//        tvHymnalsCount.setText("0");
+//        tvFavoritesCount.setText("0");
     }
 
     private void setupLanguageDisplay() {
