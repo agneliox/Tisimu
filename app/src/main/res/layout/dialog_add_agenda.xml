@@ -16,7 +16,7 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
+            android:hint="@string/title"
             android:inputType="textCapSentences" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -29,8 +29,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Content"
+            android:layout_height="400dp"
+            android:hint="@string/content"
             android:inputType="textMultiLine"
             android:maxLines="5" />
 

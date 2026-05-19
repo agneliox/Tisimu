@@ -1,6 +1,7 @@
 package com.lhavanguane.tisimu.ui.fragments;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.AgendaItem;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
+import com.lhavanguane.tisimu.ui.activities.AgendaDetailActivity;
 import com.lhavanguane.tisimu.ui.adapters.AgendaAdapter;
 
 import java.util.List;
@@ -79,9 +81,17 @@ public class AgendaFragment extends Fragment {
         rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
         rvItems.setAdapter(adapter);
 
-        adapter.setOnAgendaActionListener(item -> {
-            if (isManager) {
-                deleteAgendaItem(item);
+        adapter.setOnAgendaActionListener(new AgendaAdapter.OnAgendaActionListener() {
+            @Override
+            public void onItemClick(AgendaItem item) {
+                openAgendaDetail(item);
+            }
+
+            @Override
+            public void onDeleteClick(AgendaItem item) {
+                if (isManager) {
+                    deleteAgendaItem(item);
+                }
             }
         });
     }
@@ -126,6 +136,12 @@ public class AgendaFragment extends Fragment {
                 Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void openAgendaDetail(AgendaItem item) {
+        Intent intent = new Intent(getContext(), AgendaDetailActivity.class);
+        intent.putExtra("AGENDA_ITEM", item);
+        startActivity(intent);
     }
 
     private void showAddAgendaDialog() {

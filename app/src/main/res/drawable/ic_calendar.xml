@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Calendar body -->
+    <path
+
+        android:strokeColor="?attr/colorOnSurfaceVariant"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M19,4h-1v2h-2V4H8v2H6V4H5c-0.5,0 -1,0.5 -1,1v14c0,0.5 0.5,1 1,1h14c0.5,0 1,-0.5 1,-1V5c0,-0.5 -0.5,-1 -1,-1z" />
+
+    <!-- Top bar (header of calendar) -->
+    <path
+
+        android:strokeColor="?attr/colorOnSurfaceVariant"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M4,8h16" />
+
+</vector>

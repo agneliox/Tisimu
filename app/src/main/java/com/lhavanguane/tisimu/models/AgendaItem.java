@@ -2,13 +2,15 @@ package com.lhavanguane.tisimu.models;
 
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AgendaItem {
+public class AgendaItem implements Serializable {
     private String id;
     private String communityId;
     private String title;
     private String content;
+
     private String createdBy;
     private String createdByUserName;
     @ServerTimestamp

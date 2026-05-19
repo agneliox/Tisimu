@@ -24,6 +24,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
     private OnAgendaActionListener listener;
 
     public interface OnAgendaActionListener {
+        void onItemClick(AgendaItem item);
         void onDeleteClick(AgendaItem item);
     }
 
@@ -58,24 +59,34 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private TextView tvTitle;
-        private TextView tvContent;
+        private TextView tvContentPreview;
         private TextView tvCreatedBy;
         private TextView tvDate;
         private MaterialButton btnDelete;
+        private View clickOverlay;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvContent = itemView.findViewById(R.id.tvContent);
+            tvContentPreview = itemView.findViewById(R.id.tvContentPreview);
             tvCreatedBy = itemView.findViewById(R.id.tvCreatedBy);
             tvDate = itemView.findViewById(R.id.tvDate);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            clickOverlay = itemView.findViewById(R.id.clickOverlay);
         }
 
         void bind(AgendaItem item) {
             tvTitle.setText(item.getTitle());
-            tvContent.setText(item.getContent());
+
+            // Show preview of content (first 100 characters)
+            String content = item.getContent();
+            if (content.length() > 100) {
+                tvContentPreview.setText(content.substring(0, 100) + "...");
+            } else {
+                tvContentPreview.setText(content);
+            }
+
             tvCreatedBy.setText("Added by " + item.getCreatedByUserName());
 
             if (item.getCreatedAt() != null) {
@@ -83,6 +94,14 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
                 tvDate.setText(sdf.format(item.getCreatedAt()));
             }
 
+            // Click on card to open detail
+            clickOverlay.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(item);
+                }
+            });
+
+            // Delete button
             btnDelete.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onDeleteClick(item);
