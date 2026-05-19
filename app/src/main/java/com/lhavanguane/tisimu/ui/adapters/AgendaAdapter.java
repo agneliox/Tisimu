@@ -11,27 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.models.LiturgyItem;
+import com.lhavanguane.tisimu.models.AgendaItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class LiturgyAdapter extends RecyclerView.Adapter<LiturgyAdapter.ViewHolder> {
+public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder> {
 
-    private List<LiturgyItem> items = new ArrayList<>();
-    private OnLiturgyActionListener listener;
+    private List<AgendaItem> items = new ArrayList<>();
+    private OnAgendaActionListener listener;
 
-    public interface OnLiturgyActionListener {
-        void onDeleteClick(LiturgyItem item);
+    public interface OnAgendaActionListener {
+        void onDeleteClick(AgendaItem item);
     }
 
-    public void setOnLiturgyActionListener(OnLiturgyActionListener listener) {
+    public void setOnAgendaActionListener(OnAgendaActionListener listener) {
         this.listener = listener;
     }
 
-    public void setItems(List<LiturgyItem> items) {
+    public void setItems(List<AgendaItem> items) {
         this.items = items;
         notifyDataSetChanged();
     }
@@ -40,13 +40,13 @@ public class LiturgyAdapter extends RecyclerView.Adapter<LiturgyAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_liturgy, parent, false);
+                .inflate(R.layout.item_agenda, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LiturgyItem item = items.get(position);
+        AgendaItem item = items.get(position);
         holder.bind(item);
     }
 
@@ -73,7 +73,7 @@ public class LiturgyAdapter extends RecyclerView.Adapter<LiturgyAdapter.ViewHold
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
 
-        void bind(LiturgyItem item) {
+        void bind(AgendaItem item) {
             tvTitle.setText(item.getTitle());
             tvContent.setText(item.getContent());
             tvCreatedBy.setText("Added by " + item.getCreatedByUserName());

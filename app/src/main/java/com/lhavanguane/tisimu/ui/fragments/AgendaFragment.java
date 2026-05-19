@@ -19,13 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.models.LiturgyItem;
+import com.lhavanguane.tisimu.models.AgendaItem;
 import com.lhavanguane.tisimu.services.CommunityFirestoreManager;
-import com.lhavanguane.tisimu.ui.adapters.LiturgyAdapter;
+import com.lhavanguane.tisimu.ui.adapters.AgendaAdapter;
 
 import java.util.List;
 
-public class LiturgyFragment extends Fragment {
+public class AgendaFragment extends Fragment {
 
     private String communityId;
     private RecyclerView rvItems;
@@ -34,11 +34,11 @@ public class LiturgyFragment extends Fragment {
     private FloatingActionButton fabAdd;
 
     private CommunityFirestoreManager communityManager;
-    private LiturgyAdapter adapter;
+    private AgendaAdapter adapter;
     private boolean isManager = false;
 
-    public static LiturgyFragment newInstance(String communityId) {
-        LiturgyFragment fragment = new LiturgyFragment();
+    public static AgendaFragment newInstance(String communityId) {
+        AgendaFragment fragment = new AgendaFragment();
         Bundle args = new Bundle();
         args.putString("communityId", communityId);
         fragment.setArguments(args);
@@ -62,7 +62,7 @@ public class LiturgyFragment extends Fragment {
         initViews(view);
         setupRecyclerView();
         setupListeners();
-        loadLiturgyItems();
+        loadAgendaItems();
 
         return view;
     }
@@ -75,23 +75,20 @@ public class LiturgyFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        adapter = new LiturgyAdapter();
+        adapter = new AgendaAdapter();
         rvItems.setLayoutManager(new LinearLayoutManager(getContext()));
         rvItems.setAdapter(adapter);
 
-        adapter.setOnLiturgyActionListener(new LiturgyAdapter.OnLiturgyActionListener() {
-            @Override
-            public void onDeleteClick(LiturgyItem item) {
-                if (isManager) {
-                    deleteLiturgyItem(item);
-                }
+        adapter.setOnAgendaActionListener(item -> {
+            if (isManager) {
+                deleteAgendaItem(item);
             }
         });
     }
 
     private void setupListeners() {
         if (fabAdd != null) {
-            fabAdd.setOnClickListener(v -> showAddLiturgyDialog());
+            fabAdd.setOnClickListener(v -> showAddAgendaDialog());
         }
     }
 
@@ -105,18 +102,18 @@ public class LiturgyFragment extends Fragment {
         });
     }
 
-    private void loadLiturgyItems() {
+    private void loadAgendaItems() {
         showProgress(true);
-        communityManager.getLiturgyItems(communityId, new CommunityFirestoreManager.LiturgyCallback() {
+        communityManager.getAgendaItems(communityId, new CommunityFirestoreManager.AgendaCallback() {
             @Override
-            public void onSuccess(List<LiturgyItem> items) {
+            public void onSuccess(List<AgendaItem> items) {
                 showProgress(false);
                 adapter.setItems(items);
 
                 if (items.isEmpty()) {
                     tvEmptyState.setVisibility(View.VISIBLE);
                     rvItems.setVisibility(View.GONE);
-                    tvEmptyState.setText("No liturgy items yet.\n\nTap + to add the first one.");
+                    tvEmptyState.setText("No agenda items yet.\n\nTap + to add the first one.");
                 } else {
                     tvEmptyState.setVisibility(View.GONE);
                     rvItems.setVisibility(View.VISIBLE);
@@ -131,11 +128,11 @@ public class LiturgyFragment extends Fragment {
         });
     }
 
-    private void showAddLiturgyDialog() {
+    private void showAddAgendaDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Add Liturgy Item");
+        builder.setTitle("Add Agenda Item");
 
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_liturgy, null);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_agenda, null);
         EditText etTitle = dialogView.findViewById(R.id.etTitle);
         EditText etContent = dialogView.findViewById(R.id.etContent);
 
@@ -149,20 +146,20 @@ public class LiturgyFragment extends Fragment {
                 return;
             }
 
-            addLiturgyItem(title, content);
+            addAgendaItem(title, content);
         });
         builder.setNegativeButton("Cancel", null);
         builder.show();
     }
 
-    private void addLiturgyItem(String title, String content) {
+    private void addAgendaItem(String title, String content) {
         showProgress(true);
-        communityManager.addLiturgyItem(communityId, title, content, new CommunityFirestoreManager.VoidCallback() {
+        communityManager.addAgendaItem(communityId, title, content, new CommunityFirestoreManager.VoidCallback() {
             @Override
             public void onSuccess() {
                 showProgress(false);
-                loadLiturgyItems();
-                Toast.makeText(getContext(), "Liturgy item added", Toast.LENGTH_SHORT).show();
+                loadAgendaItems();
+                Toast.makeText(getContext(), "Agenda item added", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -173,17 +170,17 @@ public class LiturgyFragment extends Fragment {
         });
     }
 
-    private void deleteLiturgyItem(LiturgyItem item) {
+    private void deleteAgendaItem(AgendaItem item) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Item")
-                .setMessage("Are you sure you want to delete this liturgy item?")
+                .setMessage("Are you sure you want to delete this agenda item?")
                 .setPositiveButton("Delete", (dialog, which) -> {
                     showProgress(true);
-                    communityManager.deleteLiturgyItem(communityId, item.getId(), new CommunityFirestoreManager.VoidCallback() {
+                    communityManager.deleteAgendaItem(communityId, item.getId(), new CommunityFirestoreManager.VoidCallback() {
                         @Override
                         public void onSuccess() {
                             showProgress(false);
-                            loadLiturgyItems();
+                            loadAgendaItems();
                             Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
                         }
 

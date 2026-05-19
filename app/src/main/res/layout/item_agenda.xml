@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorOnSurface" />
+            android:textColor="?attr/colorPrimary" />
 
         <TextView
             android:id="@+id/tvContent"
@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:text="Added by User"
                 android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOnSurface" />
+                android:textColor="?attr/colorOnSurfaceVariant" />
 
             <TextView
                 android:id="@+id/tvDate"
@@ -59,11 +59,11 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:text="Delete"
                 android:textAllCaps="false"
                 app:cornerRadius="16dp"
-                />
+                style="@style/Widget.Material3.Button.TextButton" />
 
         </LinearLayout>
 

@@ -10,7 +10,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.lhavanguane.tisimu.models.Announcement;
 import com.lhavanguane.tisimu.models.Community;
 import com.lhavanguane.tisimu.models.CommunityMember;
-import com.lhavanguane.tisimu.models.LiturgyItem;
+import com.lhavanguane.tisimu.models.AgendaItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,6 @@ public class CommunityFirestoreManager {
     private static final String TAG = "CommunityFirestore";
     private static final String COLLECTION_COMMUNITIES = "communities";
     private static final String COLLECTION_MEMBERS = "members";
-    private static final String COLLECTION_LITURGY = "liturgy";
     private static final String COLLECTION_ANNOUNCEMENTS = "announcements";
     private static final String COLLECTION_FILES = "files";
     private static final String COLLECTION_USER_COMMUNITIES = "user_communities";
@@ -31,6 +30,7 @@ public class CommunityFirestoreManager {
     private static CommunityFirestoreManager instance;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private static final String COLLECTION_AGENDA = "agenda";
 
     private CommunityFirestoreManager() {
         db = FirebaseFirestore.getInstance();
@@ -82,11 +82,6 @@ public class CommunityFirestoreManager {
 
     public interface VoidCallback {
         void onSuccess();
-        void onFailure(Exception e);
-    }
-
-    public interface LiturgyCallback {
-        void onSuccess(List<LiturgyItem> items);
         void onFailure(Exception e);
     }
 
@@ -350,17 +345,22 @@ public class CommunityFirestoreManager {
                 .addOnFailureListener(callback::onFailure);
     }
 
-    // ==================== LITURGY OPERATIONS ====================
+// ==================== AGENDA OPERATIONS ====================
 
-    public void getLiturgyItems(String communityId, LiturgyCallback callback) {
+    public interface AgendaCallback {
+        void onSuccess(List<AgendaItem> items);
+        void onFailure(Exception e);
+    }
+
+    public void getAgendaItems(String communityId, AgendaCallback callback) {
         db.collection(COLLECTION_COMMUNITIES).document(communityId)
-                .collection(COLLECTION_LITURGY)
+                .collection(COLLECTION_AGENDA)
                 .orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<LiturgyItem> items = new ArrayList<>();
+                    List<AgendaItem> items = new ArrayList<>();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        LiturgyItem item = doc.toObject(LiturgyItem.class);
+                        AgendaItem item = doc.toObject(AgendaItem.class);
                         if (item != null) {
                             item.setId(doc.getId());
                             items.add(item);
@@ -371,7 +371,7 @@ public class CommunityFirestoreManager {
                 .addOnFailureListener(callback::onFailure);
     }
 
-    public void addLiturgyItem(String communityId, String title, String content, VoidCallback callback) {
+    public void addAgendaItem(String communityId, String title, String content, VoidCallback callback) {
         String userId = getCurrentUserId();
         if (userId == null) {
             callback.onFailure(new Exception("User not logged in"));
@@ -380,27 +380,27 @@ public class CommunityFirestoreManager {
 
         isUserManager(communityId, userId, isManager -> {
             if (!isManager) {
-                callback.onFailure(new Exception("Only managers can add liturgy items"));
+                callback.onFailure(new Exception("Only managers can add agenda items"));
                 return;
             }
 
-            Map<String, Object> liturgyItem = new HashMap<>();
-            liturgyItem.put("title", title);
-            liturgyItem.put("content", content);
-            liturgyItem.put("createdBy", userId);
-            liturgyItem.put("createdByUserName", getCurrentUserName());
-            liturgyItem.put("createdAt", FieldValue.serverTimestamp());
-            liturgyItem.put("date", new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
+            Map<String, Object> agendaItem = new HashMap<>();
+            agendaItem.put("title", title);
+            agendaItem.put("content", content);
+            agendaItem.put("createdBy", userId);
+            agendaItem.put("createdByUserName", getCurrentUserName());
+            agendaItem.put("createdAt", FieldValue.serverTimestamp());
+            agendaItem.put("date", new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 
             db.collection(COLLECTION_COMMUNITIES).document(communityId)
-                    .collection(COLLECTION_LITURGY)
-                    .add(liturgyItem)
+                    .collection(COLLECTION_AGENDA)
+                    .add(agendaItem)
                     .addOnSuccessListener(documentReference -> callback.onSuccess())
                     .addOnFailureListener(callback::onFailure);
         });
     }
 
-    public void deleteLiturgyItem(String communityId, String itemId, VoidCallback callback) {
+    public void deleteAgendaItem(String communityId, String itemId, VoidCallback callback) {
         String userId = getCurrentUserId();
         if (userId == null) {
             callback.onFailure(new Exception("User not logged in"));
@@ -409,17 +409,44 @@ public class CommunityFirestoreManager {
 
         isUserManager(communityId, userId, isManager -> {
             if (!isManager) {
-                callback.onFailure(new Exception("Only managers can delete liturgy items"));
+                callback.onFailure(new Exception("Only managers can delete agenda items"));
                 return;
             }
 
             db.collection(COLLECTION_COMMUNITIES).document(communityId)
-                    .collection(COLLECTION_LITURGY).document(itemId)
+                    .collection(COLLECTION_AGENDA).document(itemId)
                     .delete()
                     .addOnSuccessListener(aVoid -> callback.onSuccess())
                     .addOnFailureListener(callback::onFailure);
         });
     }
+
+    // ==================== REAL-TIME LISTENERS ====================
+
+    public ListenerRegistration listenToAgendaItems(String communityId, AgendaCallback callback) {
+        return db.collection(COLLECTION_COMMUNITIES).document(communityId)
+                .collection(COLLECTION_AGENDA)
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, error) -> {
+                    if (error != null) {
+                        callback.onFailure(error);
+                        return;
+                    }
+
+                    List<AgendaItem> items = new ArrayList<>();
+                    if (queryDocumentSnapshots != null) {
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            AgendaItem item = doc.toObject(AgendaItem.class);
+                            if (item != null) {
+                                item.setId(doc.getId());
+                                items.add(item);
+                            }
+                        }
+                    }
+                    callback.onSuccess(items);
+                });
+    }
+
 
     // ==================== ANNOUNCEMENTS OPERATIONS ====================
 
@@ -550,31 +577,6 @@ public class CommunityFirestoreManager {
     }
 
     // ==================== REAL-TIME LISTENERS ====================
-
-    public ListenerRegistration listenToLiturgyItems(String communityId, LiturgyCallback callback) {
-        return db.collection(COLLECTION_COMMUNITIES).document(communityId)
-                .collection(COLLECTION_LITURGY)
-                .orderBy("createdAt", Query.Direction.DESCENDING)
-                .addSnapshotListener((queryDocumentSnapshots, error) -> {
-                    if (error != null) {
-                        callback.onFailure(error);
-                        return;
-                    }
-
-                    List<LiturgyItem> items = new ArrayList<>();
-                    if (queryDocumentSnapshots != null) {
-                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                            LiturgyItem item = doc.toObject(LiturgyItem.class);
-                            if (item != null) {
-                                item.setId(doc.getId());
-                                items.add(item);
-                            }
-                        }
-                    }
-                    callback.onSuccess(items);
-                });
-    }
-
     public ListenerRegistration listenToAnnouncements(String communityId, AnnouncementsCallback callback) {
         return db.collection(COLLECTION_COMMUNITIES).document(communityId)
                 .collection(COLLECTION_ANNOUNCEMENTS)

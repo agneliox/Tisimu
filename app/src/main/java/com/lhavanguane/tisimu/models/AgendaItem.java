@@ -1,11 +1,10 @@
 package com.lhavanguane.tisimu.models;
 
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
 
-public class LiturgyItem {
+public class AgendaItem {
     private String id;
     private String communityId;
     private String title;
@@ -16,9 +15,9 @@ public class LiturgyItem {
     private Date createdAt;
     private String date;
 
-    public LiturgyItem() {}
+    public AgendaItem() {}
 
-    public LiturgyItem(String communityId, String title, String content, String createdBy, String createdByUserName) {
+    public AgendaItem(String communityId, String title, String content, String createdBy, String createdByUserName) {
         this.communityId = communityId;
         this.title = title;
         this.content = content;

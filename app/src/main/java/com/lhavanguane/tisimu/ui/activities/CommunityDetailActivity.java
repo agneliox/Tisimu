@@ -96,7 +96,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 (tab, position) -> {
                     switch (position) {
                         case 0:
-                            tab.setText("Liturgy");
+                            tab.setText("Agenda");
                             break;
                         case 1:
                             tab.setText("Announcements");
