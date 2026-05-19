@@ -89,7 +89,7 @@ public class HymnalSelectionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.select_hymnals);
+            getSupportActionBar().setTitle("");
         }
     }
 

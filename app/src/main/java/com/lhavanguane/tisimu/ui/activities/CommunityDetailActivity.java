@@ -71,54 +71,21 @@ public class CommunityDetailActivity extends AppCompatActivity {
         }
 
         initViews();
-        setupToolbar();
-        setupAppBarScrollBehavior();
-        setupViewPager();
         loadCommunityDetails();
+        setupToolbar();
+        setupViewPager();
     }
 
     private void initViews() {
         toolbar = findViewById(R.id.communityDetailToolbar);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
-        appBarLayout = findViewById(R.id.appBarLayout);
-        collapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
-        ivCommunityAvatar = findViewById(R.id.ivCommunityAvatar);
-        ivCommunityCover = findViewById(R.id.ivCommunityCover);
-        tvCommunityNameExpanded = findViewById(R.id.tvCommunityNameExpanded);
-        chipGroupStats = findViewById(R.id.chipGroupStats);
-        chipMemberCount = findViewById(R.id.chipMemberCount);
-        chipVisibility = findViewById(R.id.iconVisibility);
-        chipJoinCode = findViewById(R.id.chipJoinCode);
     }
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().setTitle(currentCommunity.getName());
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Set toolbar title when collapsed
-        collapsingToolbarLayout.setTitle(communityName != null ? communityName : "Community");
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.md_theme_on_surface));
-    }
-
-    private void setupAppBarScrollBehavior() {
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-            int totalScrollRange = appBarLayout.getTotalScrollRange();
-            float scrollPercent = Math.abs(verticalOffset) / (float) totalScrollRange;
-
-            // Show/hide chip group based on scroll
-//            if (scrollPercent > 0.8f) {
-//                chipGroupStats.setVisibility(View.GONE);
-//            } else {
-//                chipGroupStats.setVisibility(View.GONE);
-//            }
-
-
-        });
     }
 
     private void setupViewPager() {
@@ -163,46 +130,15 @@ public class CommunityDetailActivity extends AppCompatActivity {
     private void displayCommunityDetails() {
         if (currentCommunity == null) return;
 
-        // Update expanded name
-        tvCommunityNameExpanded.setText(currentCommunity.getName());
-
-        // Update collapsed toolbar title
-        collapsingToolbarLayout.setTitle(currentCommunity.getName());
-
         toolbar.setTitle(currentCommunity.getName());
-
-        // Update member count chip
-        chipMemberCount.setText(currentCommunity.getMemberCount() + " members");
 
         // Update visibility chip
         if (currentCommunity.isPrivate()) {
-            chipVisibility.setText("Private");
-            chipVisibility.setChipIconResource(R.drawable.ic_lock);
-            chipJoinCode.setVisibility(View.VISIBLE);
-            chipJoinCode.setText("Code: " + currentCommunity.getJoinCode());
+
         } else {
-            chipVisibility.setText("Public");
-            chipVisibility.setChipIconResource(R.drawable.ic_public);
-            chipJoinCode.setVisibility(View.GONE);
+
         }
 
-        // Load avatar (placeholder for now - can be expanded to load from URL)
-//        if (currentCommunity.getCoverImageUrl() != null && !currentCommunity.getCoverImageUrl().isEmpty()) {
-//            Glide.with(this)
-//                    .load(currentCommunity.getCoverImageUrl())
-//                    .placeholder(R.drawable.ic_community_avatar)
-//                    .error(R.drawable.ic_community_avatar)
-//                    .into(ivCommunityAvatar);
-
-//            Glide.with(this)
-//                    .load(currentCommunity.getCoverImageUrl())
-//                    .placeholder(R.drawable.ic_hymn_book)
-//                    .error(R.drawable.ic_hymn_book)
-//                    .into(ivCommunityCover);
-//        } else {
-//            ivCommunityAvatar.setImageResource(R.drawable.ic_community_avatar);
-//            ivCommunityCover.setImageResource(R.drawable.ic_hymn_book);
-//        }
     }
 
     @Override
