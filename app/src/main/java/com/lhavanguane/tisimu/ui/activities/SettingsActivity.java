@@ -1,22 +1,25 @@
-package com.lhavanguane.tisimu.ui.fragments;
+package com.lhavanguane.tisimu.ui.activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
@@ -24,8 +27,9 @@ import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.utils.ThemeManager;
 
-public class SettingsFragment extends Fragment {
+public class SettingsActivity extends AppCompatActivity {
 
+    private MaterialToolbar toolbar;
     private SwitchMaterial switchDarkMode;
     private Spinner spinnerLanguage;
     private MaterialButton btnSendFeedback;
@@ -37,71 +41,48 @@ public class SettingsFragment extends Fragment {
     private ThemeManager themeManager;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_settings);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_settings), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        languageManager = LanguageManager.getInstance(this);
+        themeManager = ThemeManager.getInstance(this);
 
-        languageManager = LanguageManager.getInstance(requireContext());
-        themeManager = ThemeManager.getInstance(requireContext());
-
-        initViews(view);
+        initViews();
+        setupToolbar();
         setupLanguageSpinner();
         setupDarkModeSwitch();
         setupListeners();
-
-        return view;
     }
 
-    private void initViews(View view) {
-        switchDarkMode = view.findViewById(R.id.switchDarkMode);
-        spinnerLanguage = view.findViewById(R.id.spinnerLanguage);
-        btnSendFeedback = view.findViewById(R.id.btnSendFeedback);
-        btnRateApp = view.findViewById(R.id.btnRateApp);
-        btnShareApp = view.findViewById(R.id.btnShareApp);
-        btnAbout = view.findViewById(R.id.btnAbout);
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        switchDarkMode = findViewById(R.id.switchDarkMode);
+        spinnerLanguage = findViewById(R.id.spinnerLanguage);
+        btnSendFeedback = findViewById(R.id.btnSendFeedback);
+        btnRateApp = findViewById(R.id.btnRateApp);
+        btnShareApp = findViewById(R.id.btnShareApp);
+        btnAbout = findViewById(R.id.btnAbout);
     }
 
-    private void setupDarkModeSwitch() {
-        // Set initial state based on saved preference
-        boolean isDarkMode = themeManager.isDarkMode();
-        switchDarkMode.setChecked(isDarkMode);
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Settings");
+        }
 
-        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Show restart dialog for theme change
-            showThemeRestartDialog(isChecked);
-        });
-    }
-
-    private void showThemeRestartDialog(boolean enableDarkMode) {
-        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
-
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Change Theme")
-                .setMessage("The app will restart to apply " + modeName + ". Continue?")
-                .setPositiveButton("Apply", (dialog, which) -> {
-                    // Save theme preference
-                    themeManager.setDarkMode(enableDarkMode);
-                    // Restart app to apply theme
-                    restartApp();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    // Revert switch state
-                    switchDarkMode.setChecked(!enableDarkMode);
-                })
-                .show();
-    }
-
-    private void restartApp() {
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        requireActivity().finish();
-        // Add a little delay for smooth transition
-        android.os.Process.killProcess(android.os.Process.myPid());
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupLanguageSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                requireContext(),
+                this,
                 android.R.layout.simple_spinner_item,
                 LanguageManager.LANGUAGE_NAMES
         );
@@ -118,7 +99,7 @@ public class SettingsFragment extends Fragment {
 
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
                 String newLanguage = LanguageManager.SUPPORTED_LANGUAGES[position];
                 if (!newLanguage.equals(languageManager.getCurrentLanguage())) {
                     showLanguageChangeDialog(newLanguage);
@@ -130,14 +111,39 @@ public class SettingsFragment extends Fragment {
         });
     }
 
+    private void setupDarkModeSwitch() {
+        boolean isDarkMode = themeManager.isDarkMode();
+        switchDarkMode.setChecked(isDarkMode);
+
+        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            showThemeRestartDialog(isChecked);
+        });
+    }
+
+    private void showThemeRestartDialog(boolean enableDarkMode) {
+        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
+
+        new AlertDialog.Builder(this)
+                .setTitle("Change Theme")
+                .setMessage("The app will restart to apply " + modeName + ". Continue?")
+                .setPositiveButton("Apply", (dialog, which) -> {
+                    themeManager.setDarkMode(enableDarkMode);
+                    restartApp();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    switchDarkMode.setChecked(!enableDarkMode);
+                })
+                .show();
+    }
+
     private void showLanguageChangeDialog(String newLanguage) {
         String languageName = languageManager.getLanguageName(newLanguage);
 
-        new AlertDialog.Builder(requireContext())
+        new AlertDialog.Builder(this)
                 .setTitle("Change Language")
                 .setMessage("The app will restart to apply " + languageName + ". Continue?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    languageManager.setLanguage(requireContext(), newLanguage);
+                    languageManager.setLanguage(this, newLanguage);
                     restartApp();
                 })
                 .setNegativeButton("No", (dialog, which) -> {
@@ -152,6 +158,14 @@ public class SettingsFragment extends Fragment {
                 .show();
     }
 
+    private void restartApp() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
     private void setupListeners() {
         btnSendFeedback.setOnClickListener(v -> openFeedbackForm());
         btnRateApp.setOnClickListener(v -> openRateDialog());
@@ -162,13 +176,13 @@ public class SettingsFragment extends Fragment {
     private void openFeedbackForm() {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
         startActivity(browserIntent);
-        Toast.makeText(requireContext(),
+        Toast.makeText(this,
                 "Please include your device model and Android version in the feedback",
                 Toast.LENGTH_LONG).show();
     }
 
     private void openRateDialog() {
-        new AlertDialog.Builder(requireContext())
+        new AlertDialog.Builder(this)
                 .setTitle("Rate Tisimu")
                 .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
                 .setPositiveButton("Rate Now", (dialog, which) -> {
@@ -190,14 +204,20 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showAboutDialog() {
-        new AlertDialog.Builder(requireContext())
+        new AlertDialog.Builder(this)
                 .setTitle("About Tisimu")
                 .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
                         "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
                         "join communities, and receive daily verses.\n\n" +
                         "Developed with ❤️ for gospel music lovers.\n\n" +
-                        "* * * * *")
+                        "Report issues: feedback@tisimu.com")
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

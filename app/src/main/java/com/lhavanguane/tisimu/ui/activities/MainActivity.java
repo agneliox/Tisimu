@@ -141,11 +141,13 @@ public class MainActivity extends AppCompatActivity {
                     getSupportActionBar();
 //                    .setTitle("Me");
                 }
-            } else if (destinationId == R.id.settingsFragment) {
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Settings");
-                }
             }
+//            else if (destinationId == R.id.settingsFragment) {
+//                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+//                if (getSupportActionBar() != null) {
+//                    getSupportActionBar().setTitle("Settings");
+//                }
+//            }
         });
     }
 
@@ -162,27 +164,38 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            // 1. Try to handle with NavigationUI (matches IDs in nav_graph.xml)
-            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
-
-            // 2. If not handled by NavigationUI, handle custom menu items
-            if (!handled) {
-                if (id == R.id.nav_language) {
-                    showLanguageSelectionDialog();
-                } else if (id == R.id.nav_about_app) {
-                    showAboutDialog();
-                } else if (id == R.id.nav_about_publisher) {
-                    showPublisherDialog();
-                } else if (id == R.id.nav_share) {
-                    shareApp();
-                } else if (id == R.id.nav_logout) {
-                    logout();
-                }
+            // Handle menu items that are not part of the navigation graph
+            if (id == R.id.nav_language) {
+                Toast.makeText(this, "Language settings coming soon", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (id == R.id.nav_about_app) {
+                showAboutDialog();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (id == R.id.nav_about_publisher) {
+                showPublisherDialog();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (id == R.id.nav_share) {
+                shareApp();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (id == R.id.nav_settings) {
+                // Open SettingsActivity instead of fragment navigation
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (id == R.id.nav_logout) {
+                logout();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
 
-            // Close the drawer
+            // For navigation items, let NavController handle it
             drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
+            return false;
         });
     }
 

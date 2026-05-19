@@ -21,6 +21,11 @@
         android:theme="@style/Theme.Tisimu"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".ui.activities.AgendaDetailActivity"
             android:exported="false" />
         <activity

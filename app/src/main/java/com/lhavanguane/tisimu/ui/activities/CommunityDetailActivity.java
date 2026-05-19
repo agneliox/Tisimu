@@ -102,9 +102,6 @@ public class CommunityDetailActivity extends AppCompatActivity {
                             tab.setText("Announcements");
                             break;
                         case 2:
-                            tab.setText("Files");
-                            break;
-                        case 3:
                             tab.setText("Members");
                             break;
                     }

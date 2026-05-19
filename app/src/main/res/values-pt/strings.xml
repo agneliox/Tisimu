@@ -151,4 +151,8 @@
     <string name="agenda_content_will_appear_here">Agenda content will appear here...</string>
     <string name="agenda_title">Agenda Title</string>
     <string name="added_by_user">Added by User</string>
+    <string name="created_by_user">Created by User</string>
+    <string name="public_">Public</string>
+    <string name="select_your_preferred_language">Select your preferred language</string>
+    <string name="language">Language</string>
 </resources>

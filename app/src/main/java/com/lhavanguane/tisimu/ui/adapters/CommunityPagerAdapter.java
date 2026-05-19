@@ -29,8 +29,6 @@ public class CommunityPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return AnnouncementsFragment.newInstance(communityId);
             case 2:
-                return FilesFragment.newInstance(communityId);
-            case 3:
                 return MembersFragment.newInstance(communityId);
             default:
                 return AgendaFragment.newInstance(communityId);
@@ -39,6 +37,6 @@ public class CommunityPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }

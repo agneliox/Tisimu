@@ -25,9 +25,6 @@
         android:name="com.lhavanguane.tisimu.ui.fragments.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.lhavanguane.tisimu.ui.fragments.SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+
 
 </navigation>
