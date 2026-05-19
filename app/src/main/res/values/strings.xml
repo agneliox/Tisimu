@@ -151,4 +151,5 @@
     <string name="expand">Expand</string>
     <!-- res/values/strings.xml -->
     <string name="default_web_client_id">636197267643-0bf56r8ptpju3entqqv3a4b4hacjh7m5.apps.googleusercontent.com</string>
+    <string name="no_communities_yet">No communities yet</string>
 </resources>

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:id="@+id/activity_hymnal_selection"
     >
 
     <com.google.android.material.appbar.MaterialToolbar

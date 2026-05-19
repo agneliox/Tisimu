@@ -136,4 +136,5 @@
     <string name="liked">Gostou!</string>
     <string name="all">Todos</string>
     <string name="expand">Expand</string>
+    <string name="no_communities_yet">No communities yet</string>
 </resources>

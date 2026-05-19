@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,8 +44,14 @@ public class HymnalSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Apply language before super.onCreate
         com.lhavanguane.tisimu.utils.LanguageManager.getInstance(this).updateAppLanguage(this);
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hymnal_selection);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_hymnal_selection), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         storageManager = new HymnalStorageManager(this);
         preferencesManager = PreferencesManager.getInstance(this);

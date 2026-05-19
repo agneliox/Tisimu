@@ -64,11 +64,11 @@ public class CommunityFragment extends Fragment {
             return insets;
         });
         initViews(view);
-        setupListeners();
         setupToolbar();
+        setupListeners();
         setupRecyclerView();
         setupSwipeRefresh();
-        loadJoinedCommunities();  // Changed from loadCommunities to loadJoinedCommunities
+        loadJoinedCommunities();
 
         return view;
     }
@@ -82,21 +82,26 @@ public class CommunityFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        if (getActivity() != null) {
-            ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
+        if (toolbar == null) return;
+
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.setSupportActionBar(toolbar);
 
             toolbar.setNavigationIcon(R.drawable.ic_menu_2);
             toolbar.setNavigationOnClickListener(v -> {
-                DrawerLayout drawerLayout = ((MainActivity) requireActivity()).getDrawerLayout();
-                if (drawerLayout != null && !drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                } else if (drawerLayout != null) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                DrawerLayout drawerLayout = mainActivity.getDrawerLayout();
+                if (drawerLayout != null) {
+                    if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawerLayout.openDrawer(GravityCompat.START);
+                    }
                 }
             });
 
             toolbar.setTitle("My Communities");
-            toolbar.inflateMenu(R.menu.community_fragment_menu);
+            // Menu is already inflated in XML, but we can set listener here
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.action_discover) {
                     openCommunitySelection();
@@ -108,6 +113,7 @@ public class CommunityFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
+        if (rvCommunities == null) return;
         adapter = new CommunityAdapter();
         rvCommunities.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvCommunities.setAdapter(adapter);
@@ -128,6 +134,7 @@ public class CommunityFragment extends Fragment {
     }
 
     private void setupSwipeRefresh() {
+        if (swipeRefreshLayout == null) return;
         swipeRefreshLayout.setColorSchemeResources(R.color.md_theme_primary);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             loadJoinedCommunities();
@@ -136,23 +143,28 @@ public class CommunityFragment extends Fragment {
     }
 
     private void loadJoinedCommunities() {
+        if (communityManager == null || adapter == null) return;
         communityManager.getUserJoinedCommunities(new CommunityFirestoreManager.CommunitiesCallback() {
             @Override
             public void onSuccess(List<Community> communities) {
+                if (!isAdded() || adapter == null) return;
                 adapter.setCommunities(communities);
 
                 if (communities.isEmpty()) {
-                    tvEmptyState.setVisibility(View.VISIBLE);
-                    rvCommunities.setVisibility(View.GONE);
-                    tvEmptyState.setText("You haven't joined any communities yet.\n\nTap the + button to discover communities!");
+                    if (tvEmptyState != null) {
+                        tvEmptyState.setVisibility(View.VISIBLE);
+                        tvEmptyState.setText("You haven't joined any communities yet.\n\nTap the + button to discover communities!");
+                    }
+                    if (rvCommunities != null) rvCommunities.setVisibility(View.GONE);
                 } else {
-                    tvEmptyState.setVisibility(View.GONE);
-                    rvCommunities.setVisibility(View.VISIBLE);
+                    if (tvEmptyState != null) tvEmptyState.setVisibility(View.GONE);
+                    if (rvCommunities != null) rvCommunities.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Exception e) {
+                if (!isAdded()) return;
                 Toast.makeText(getContext(), "Error loading communities: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -160,7 +172,9 @@ public class CommunityFragment extends Fragment {
 
     private void setupListeners() {
         if (fabDiscover != null) {
-            fabDiscover.setOnClickListener(v -> openCommunitySelection());
+            fabDiscover.setOnClickListener(v -> {
+                openCommunitySelection();
+            });
         }
     }
 
