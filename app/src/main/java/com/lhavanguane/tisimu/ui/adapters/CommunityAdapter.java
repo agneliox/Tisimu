@@ -3,6 +3,7 @@ package com.lhavanguane.tisimu.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.Community;
 
@@ -59,11 +59,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         private CardView cardView;
         private TextView tvName;
         private TextView tvDescription;
-        private TextView tvMemberCount;
-        private TextView tvCreatedBy;
-        private Chip chipVisibility;
-        private MaterialButton btnJoin;
-        private MaterialButton btnView;
+        private final TextView tvMemberCount;
+        private final TextView tvCreatedBy;
+        private final ImageView iconVisibility;
+        private final MaterialButton btnJoin;
+        private final MaterialButton btnView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,7 +72,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             tvDescription = itemView.findViewById(R.id.tvCommunityDescription);
             tvMemberCount = itemView.findViewById(R.id.tvMemberCount);
             tvCreatedBy = itemView.findViewById(R.id.tvCreatedBy);
-            chipVisibility = itemView.findViewById(R.id.chipVisibility);
+            iconVisibility = itemView.findViewById(R.id.iconVisibility);
             btnJoin = itemView.findViewById(R.id.btnJoin);
             btnView = itemView.findViewById(R.id.btnView);
         }
@@ -84,11 +84,10 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             tvCreatedBy.setText("Created by " + community.getCreatedByUserName());
 
             if (community.isPrivate()) {
-                chipVisibility.setText("Private");
-                chipVisibility.setChipIconResource(R.drawable.ic_lock);
+                iconVisibility.setImageResource(R.drawable.ic_lock);
             } else {
-                chipVisibility.setText("Public");
-                chipVisibility.setChipIconResource(R.drawable.ic_public);
+
+                iconVisibility.setImageResource(R.drawable.ic_people);
             }
 
             // Hide join button for joined communities (this fragment only shows joined communities)

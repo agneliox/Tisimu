@@ -137,4 +137,7 @@
     <string name="all">Todos</string>
     <string name="expand">Expand</string>
     <string name="no_communities_yet">No communities yet</string>
+    <string name="join">Join</string>
+    <string name="view">View</string>
+    <string name="_0_members">0 members</string>
 </resources>

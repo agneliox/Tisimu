@@ -82,7 +82,7 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
             tvDescription = itemView.findViewById(R.id.tvCommunityDescription);
             tvMemberCount = itemView.findViewById(R.id.tvMemberCount);
             tvCreatedBy = itemView.findViewById(R.id.tvCreatedBy);
-            chipVisibility = itemView.findViewById(R.id.chipVisibility);
+            chipVisibility = itemView.findViewById(R.id.iconVisibility);
             btnJoin = itemView.findViewById(R.id.btnJoin);
             btnView = itemView.findViewById(R.id.btnView);
         }

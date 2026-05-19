@@ -88,7 +88,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
         tvCommunityNameExpanded = findViewById(R.id.tvCommunityNameExpanded);
         chipGroupStats = findViewById(R.id.chipGroupStats);
         chipMemberCount = findViewById(R.id.chipMemberCount);
-        chipVisibility = findViewById(R.id.chipVisibility);
+        chipVisibility = findViewById(R.id.iconVisibility);
         chipJoinCode = findViewById(R.id.chipJoinCode);
     }
 
