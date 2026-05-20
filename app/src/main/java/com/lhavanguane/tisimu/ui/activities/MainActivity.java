@@ -194,8 +194,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // For navigation items, let NavController handle it
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return false;
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+            if (handled) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+            return handled;
         });
     }
 
