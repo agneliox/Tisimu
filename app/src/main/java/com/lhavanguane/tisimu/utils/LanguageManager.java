@@ -19,8 +19,8 @@ public class LanguageManager {
     private Context context;
 
     // Supported languages
-    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es"};
-    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español"};
+    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es", "ts"};
+    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español", "Tsonga"};
 
     private LanguageManager(Context context) {
         this.context = context.getApplicationContext();
@@ -98,12 +98,14 @@ public class LanguageManager {
         setLanguage(context, newLanguage);
 
         // Restart the activity
-        android.app.Activity activity = (android.app.Activity) context;
-        android.content.Intent intent = activity.getIntent();
-        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.finish();
-        activity.overridePendingTransition(0, 0);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
+        if (context instanceof android.app.Activity) {
+            android.app.Activity activity = (android.app.Activity) context;
+            android.content.Intent intent = new android.content.Intent(activity, com.lhavanguane.tisimu.ui.activities.MainActivity.class);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            activity.startActivity(intent);
+            activity.finish();
+            // Kill the current process to ensure complete restart and locale application
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 }
