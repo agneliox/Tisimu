@@ -74,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Settings");
+            getSupportActionBar().setTitle(R.string.settings);
         }
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -121,16 +121,16 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void showThemeRestartDialog(boolean enableDarkMode) {
-        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
+        String modeName = enableDarkMode ? getString(R.string.dark_mode) : getString(R.string.light_mode);
 
         new AlertDialog.Builder(this)
-                .setTitle("Change Theme")
-                .setMessage("The app will restart to apply " + modeName + ". Continue?")
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setTitle(R.string.change_theme)
+                .setMessage(getString(R.string.language_change_message, modeName))
+                .setPositiveButton(R.string.apply, (dialog, which) -> {
                     themeManager.setDarkMode(enableDarkMode);
                     restartApp();
                 })
-                .setNegativeButton("Cancel", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
                     switchDarkMode.setChecked(!enableDarkMode);
                 })
                 .show();
@@ -140,13 +140,13 @@ public class SettingsActivity extends AppCompatActivity {
         String languageName = languageManager.getLanguageName(newLanguage);
 
         new AlertDialog.Builder(this)
-                .setTitle("Change Language")
-                .setMessage("The app will restart to apply " + languageName + ". Continue?")
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setTitle(R.string.change_language)
+                .setMessage(getString(R.string.language_change_message, languageName))
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
                     languageManager.setLanguage(this, newLanguage);
                     restartApp();
                 })
-                .setNegativeButton("No", (dialog, which) -> {
+                .setNegativeButton(R.string.no, (dialog, which) -> {
                     // Revert spinner selection
                     String currentLang = languageManager.getCurrentLanguage();
                     for (int i = 0; i < LanguageManager.SUPPORTED_LANGUAGES.length; i++) {
@@ -179,41 +179,37 @@ public class SettingsActivity extends AppCompatActivity {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
         startActivity(browserIntent);
         Toast.makeText(this,
-                "Please include your device model and Android version in the feedback",
+                R.string.feedback_toast,
                 Toast.LENGTH_LONG).show();
     }
 
     private void openRateDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Rate Tisimu")
-                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
-                .setPositiveButton("Rate Now", (dialog, which) -> {
+                .setTitle(getString(R.string.rate_app))
+                .setMessage(R.string.rate_tisimu_message)
+                .setPositiveButton(R.string.rate_now, (dialog, which) -> {
                     openFeedbackForm();
                 })
-                .setNegativeButton("Later", null)
+                .setNegativeButton(R.string.later, null)
                 .show();
     }
 
     private void shareApp() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_app_subject));
         shareIntent.putExtra(Intent.EXTRA_TEXT,
-                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
-                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
-                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
+                getString(R.string.share_app_text) + "\n\n" +
+                        getString(R.string.shared_via_tisimu) + ": " + Constants.FEEDBACK_FORM_URL);
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)));
     }
 
     private void showAboutDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("About Tisimu")
-                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
-                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
-                        "join communities, and receive daily verses.\n\n" +
-                        "Developed with ❤️ for gospel music lovers.\n\n" +
-                        "Report issues: feedback@tisimu.com")
-                .setPositiveButton("OK", null)
+                .setTitle(R.string.about_tisimu)
+                .setMessage(getString(R.string.about_tisimu_message) + "\n\n" +
+                        getString(R.string.report_issues, "feedback@tisimu.com"))
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 

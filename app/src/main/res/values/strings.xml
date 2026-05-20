@@ -150,7 +150,7 @@
     <string name="all">All</string>
     <string name="expand">Expand</string>
     <!-- res/values/strings.xml -->
-    <string name="default_web_client_id">636197267643-0bf56r8ptpju3entqqv3a4b4hacjh7m5.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">636197267643-0bf56r8ptpju3entqqv3a4b4hacjh7m5.apps.googleusercontent.com</string>
     <string name="no_communities_yet">No communities yet</string>
     <string name="join">Join</string>
     <string name="view">View</string>
@@ -168,7 +168,7 @@
     <string name="added_by_user">Added by User</string>
     <string name="created_by_user">Created by User</string>
     <string name="public_">Public</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -193,4 +193,12 @@
     <string name="version_1_0_1">Version: 1.0.1</string>
     <string name="support">Support</string>
     <string name="switch_between_light_and_dark_themes">Switch between light and dark themes</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="apply">Apply</string>
+    <string name="feedback_toast">Please include your device model and Android version in the feedback</string>
+    <string name="rate_tisimu_message">If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="later">Later</string>
+    <string name="report_issues">Report issues: %1$s</string>
 </resources>
