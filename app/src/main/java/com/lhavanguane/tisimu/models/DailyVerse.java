@@ -1,22 +1,41 @@
 package com.lhavanguane.tisimu.models;
 
-public class DailyVerse {
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+public class DailyVerse implements Serializable {
+    private String id;
     private String verse;
     private String reference;
     private String translation;
     private String category;
     private String season;
-    private DevotionalContent devotional;
-    private String[] themes;
-    private String[] tags;
-    private String difficulty;
-
-    // For backward compatibility with flat structure
     private String devotionalTitle;
     private String devotionalBody;
     private String application;
     private String reflection;
     private String prayer;
+    private List<String> themes;
+    private List<String> tags;
+    private String difficulty;
+    private String language;
+    private String date;
+    @ServerTimestamp
+    private Date updatedAt;
+
+    public DailyVerse() {
+
+    }
+
+    // Getters and Setters
+    @Exclude
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getVerse() { return verse; }
     public void setVerse(String verse) { this.verse = verse; }
@@ -33,64 +52,36 @@ public class DailyVerse {
     public String getSeason() { return season; }
     public void setSeason(String season) { this.season = season; }
 
-    public DevotionalContent getDevotional() { return devotional; }
-    public void setDevotional(DevotionalContent devotional) { this.devotional = devotional; }
+    public String getDevotionalTitle() { return devotionalTitle; }
+    public void setDevotionalTitle(String devotionalTitle) { this.devotionalTitle = devotionalTitle; }
 
-    public String[] getThemes() { return themes; }
-    public void setThemes(String[] themes) { this.themes = themes; }
+    public String getDevotionalBody() { return devotionalBody; }
+    public void setDevotionalBody(String devotionalBody) { this.devotionalBody = devotionalBody; }
 
-    public String[] getTags() { return tags; }
-    public void setTags(String[] tags) { this.tags = tags; }
+    public String getApplication() { return application; }
+    public void setApplication(String application) { this.application = application; }
+
+    public String getReflection() { return reflection; }
+    public void setReflection(String reflection) { this.reflection = reflection; }
+
+    public String getPrayer() { return prayer; }
+    public void setPrayer(String prayer) { this.prayer = prayer; }
+
+    public List<String> getThemes() { return themes; }
+    public void setThemes(List<String> themes) { this.themes = themes; }
+
+    public List<String> getTags() { return tags; }
+    public void setTags(List<String> tags) { this.tags = tags; }
 
     public String getDifficulty() { return difficulty; }
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
 
-    // Getters for flat structure (backward compatibility)
-    public String getDevotionalTitle() {
-        return devotional != null ? devotional.getTitle() : devotionalTitle;
-    }
-    public void setDevotionalTitle(String title) { this.devotionalTitle = title; }
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) { this.language = language; }
 
-    public String getDevotionalBody() {
-        return devotional != null ? devotional.getBody() : devotionalBody;
-    }
-    public void setDevotionalBody(String body) { this.devotionalBody = body; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 
-    public String getApplication() {
-        return devotional != null ? devotional.getApplication() : application;
-    }
-    public void setApplication(String application) { this.application = application; }
-
-    public String getReflection() {
-        return devotional != null ? devotional.getReflection() : reflection;
-    }
-    public void setReflection(String reflection) { this.reflection = reflection; }
-
-    public String getPrayer() {
-        return devotional != null ? devotional.getPrayer() : prayer;
-    }
-    public void setPrayer(String prayer) { this.prayer = prayer; }
-
-    public static class DevotionalContent {
-        private String title;
-        private String body;
-        private String application;
-        private String reflection;
-        private String prayer;
-
-        public String getTitle() { return title; }
-        public void setTitle(String title) { this.title = title; }
-
-        public String getBody() { return body; }
-        public void setBody(String body) { this.body = body; }
-
-        public String getApplication() { return application; }
-        public void setApplication(String application) { this.application = application; }
-
-        public String getReflection() { return reflection; }
-        public void setReflection(String reflection) { this.reflection = reflection; }
-
-        public String getPrayer() { return prayer; }
-        public void setPrayer(String prayer) { this.prayer = prayer; }
-    }
+    public Date getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 }

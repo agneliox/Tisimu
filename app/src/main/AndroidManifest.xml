@@ -24,7 +24,7 @@
             android:name=".ui.activities.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".ui.activities.MainActivity"/>
         <activity
             android:name=".ui.activities.AgendaDetailActivity"
             android:exported="false" />

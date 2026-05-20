@@ -16,13 +16,15 @@ public class LanguageManager {
 
     private static LanguageManager instance;
     private SharedPreferences prefs;
+    private Context context;
 
     // Supported languages
-    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es", "ts"};
-    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español", "Xitsonga"};
+    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es"};
+    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español"};
 
     private LanguageManager(Context context) {
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        this.context = context.getApplicationContext();
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static synchronized LanguageManager getInstance(Context context) {
@@ -71,6 +73,10 @@ public class LanguageManager {
         }
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        // Also update the application context
+        Resources appResources = context.getApplicationContext().getResources();
+        appResources.updateConfiguration(config, appResources.getDisplayMetrics());
     }
 
     public void updateAppLanguage(Context context) {
@@ -85,5 +91,19 @@ public class LanguageManager {
             }
         }
         return "English";
+    }
+
+    // Force restart the app to apply language changes
+    public void restartAppForLanguageChange(Context context, String newLanguage) {
+        setLanguage(context, newLanguage);
+
+        // Restart the activity
+        android.app.Activity activity = (android.app.Activity) context;
+        android.content.Intent intent = activity.getIntent();
+        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        activity.finish();
+        activity.overridePendingTransition(0, 0);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
     }
 }

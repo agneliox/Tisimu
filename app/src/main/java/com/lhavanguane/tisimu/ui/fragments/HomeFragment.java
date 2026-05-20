@@ -1,6 +1,7 @@
 package com.lhavanguane.tisimu.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +27,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lhavanguane.tisimu.services.DailyVerseFirestoreManager;
 import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.models.DailyVerse;
@@ -52,7 +54,7 @@ public class HomeFragment extends Fragment {
     private View prayerCard;
 
     private FirebaseAuth mAuth;
-    private DailyVerseManager dailyVerseManager;
+//    private DailyVerseManager dailyVerseManager;
 
     private LinearLayout llCollapsibleContent;
     private LinearLayout llExpandButton;
@@ -63,19 +65,32 @@ public class HomeFragment extends Fragment {
 
     private boolean isExpanded = false;
 
+    private DailyVerseFirestoreManager dailyVerseManager;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(requireActivity());
         setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
-        dailyVerseManager = DailyVerseManager.getInstance(requireContext());
+        dailyVerseManager = DailyVerseFirestoreManager.getInstance(requireContext());
         LanguageManager languageManager = LanguageManager.getInstance(requireContext());
 
         preferencesManager = PreferencesManager.getInstance(requireContext());
 
         // Load saved expansion state
         isExpanded = preferencesManager.isDailyVerseExpanded();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Test Firestore connection
+        dailyVerseManager.testFirestoreConnection();
+
+        // Load daily verse
+        loadDailyVerse();
     }
 
     @Override
@@ -189,13 +204,22 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadDailyVerse() {
-        DailyVerse verse = dailyVerseManager.getTodaysVerse();
+        dailyVerseManager.getTodaysVerse(new DailyVerseFirestoreManager.DailyVerseCallback() {
+            @Override
+            public void onSuccess(DailyVerse verse) {
+                if (verse != null && isAdded()) {
+                    displayVerse(verse);
+                } else {
+                    showError("Unable to load today's verse");
+                }
+            }
 
-        if (verse != null) {
-            displayVerse(verse);
-        } else {
-            showError(getString(R.string.unable_to_load_verse));
-        }
+            @Override
+            public void onError(Exception e) {
+                Log.e("HomeFragment", "Error loading verse", e);
+                showError("Unable to load today's verse");
+            }
+        });
     }
 
     private void displayVerse(DailyVerse verse) {

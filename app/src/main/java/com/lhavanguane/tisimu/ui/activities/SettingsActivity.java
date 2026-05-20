@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.settingsToolbar);
         switchDarkMode = findViewById(R.id.switchDarkMode);
         spinnerLanguage = findViewById(R.id.spinnerLanguage);
         btnSendFeedback = findViewById(R.id.btnSendFeedback);
@@ -147,6 +147,7 @@ public class SettingsActivity extends AppCompatActivity {
                     restartApp();
                 })
                 .setNegativeButton("No", (dialog, which) -> {
+                    // Revert spinner selection
                     String currentLang = languageManager.getCurrentLanguage();
                     for (int i = 0; i < LanguageManager.SUPPORTED_LANGUAGES.length; i++) {
                         if (LanguageManager.SUPPORTED_LANGUAGES[i].equals(currentLang)) {
@@ -163,6 +164,7 @@ public class SettingsActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+        // Kill the current process to ensure complete restart
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 

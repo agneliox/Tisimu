@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 public class ThemeManager {
-    private static final String KEY_DARK_MODE = "dark_mode";
     private static final String KEY_THEME = "app_theme";
 
     // Theme modes
@@ -72,5 +71,16 @@ public class ThemeManager {
     public void toggleDarkMode() {
         boolean isDark = isDarkMode();
         setDarkMode(!isDark);
+    }
+
+    // Restart app to apply theme changes
+    public void restartAppForThemeChange(Context context) {
+        android.app.Activity activity = (android.app.Activity) context;
+        android.content.Intent intent = activity.getIntent();
+        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        activity.finish();
+        activity.overridePendingTransition(0, 0);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
     }
 }
