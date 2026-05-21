@@ -3,6 +3,7 @@ package com.lhavanguane.tisimu;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.google.android.material.color.DynamicColors;
 import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.utils.ThemeManager;
 
@@ -11,6 +12,9 @@ public class TisimuApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Apply Material 3 Dynamic Colors
+        DynamicColors.applyToActivitiesIfAvailable(this);
 
         // Apply saved language preference
         LanguageManager languageManager = LanguageManager.getInstance(this);

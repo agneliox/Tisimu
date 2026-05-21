@@ -63,12 +63,16 @@ public class ThemeManager {
         }
     }
 
-    public boolean isDarkMode() {
+    public boolean isDarkMode(Context context) {
         int themeMode = getThemePreference();
         if (themeMode == THEME_SYSTEM) {
-            int nightMode = AppCompatDelegate.getDefaultNightMode();
-            return nightMode == AppCompatDelegate.MODE_NIGHT_YES;
+            int currentNightMode = context.getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+            return currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
         }
         return themeMode == THEME_DARK;
+    }
+
+    public void setDarkMode(boolean isDark) {
+        saveThemePreference(isDark ? THEME_DARK : THEME_LIGHT);
     }
 }

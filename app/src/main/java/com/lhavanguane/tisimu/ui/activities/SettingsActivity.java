@@ -15,9 +15,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.google.firebase.ai.BuildConfig;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
@@ -37,6 +34,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply language before super.onCreate and setContentView
+        LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_settings);
@@ -45,9 +44,6 @@ public class SettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        themeManager = ThemeManager.getInstance(this);
-        themeManager.applyTheme(themeManager.getThemePreference());
 
         initViews();
         setupClickListeners();
@@ -68,10 +64,10 @@ public class SettingsActivity extends AppCompatActivity {
         tvAppVersion = findViewById(R.id.tvAppVersion);
         languageManager = LanguageManager.getInstance(this);
         themeManager = ThemeManager.getInstance(this);
-//        switchDarkMode = findViewById(R.id.switchDarkModeProfile);
         radioGroupTheme = findViewById(R.id.radioGroupTheme);
         tvCurrentLanguage = findViewById(R.id.tvCurrentLanguage);
     }
+
     private void setupClickListeners() {
         layoutSendFeedback.setOnClickListener(v -> openFeedbackForm());
         layoutRateApp.setOnClickListener(v -> openRateDialog());
@@ -106,42 +102,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
             if (newTheme != themeManager.getThemePreference()) {
-                showThemeChangeDialog(newTheme);
+                themeManager.saveThemePreference(newTheme);
             }
         });
     }
-
-    private void showThemeChangeDialog(int newTheme) {
-        String themeName;
-        if (newTheme == ThemeManager.THEME_LIGHT) {
-            themeName = "Light Mode";
-        } else if (newTheme == ThemeManager.THEME_DARK) {
-            themeName = "Dark Mode";
-        } else {
-            themeName = "System Default";
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle("Change Theme")
-                .setMessage("The app will restart to apply " + themeName + ". Continue?")
-                .setPositiveButton("Apply", (dialog, which) -> {
-                    themeManager.saveThemePreference(newTheme);
-                    restartApp();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    // Revert radio button selection
-                    int currentTheme = themeManager.getThemePreference();
-                    if (currentTheme == ThemeManager.THEME_LIGHT) {
-                        radioGroupTheme.check(R.id.radioLight);
-                    } else if (currentTheme == ThemeManager.THEME_DARK) {
-                        radioGroupTheme.check(R.id.radioDark);
-                    } else {
-                        radioGroupTheme.check(R.id.radioSystem);
-                    }
-                })
-                .show();
-    }
-
 
     private void openFeedbackForm() {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
@@ -176,11 +140,9 @@ public class SettingsActivity extends AppCompatActivity {
     private void showAboutDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("About Tisimu")
-                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
-                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
+                .setMessage("Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
                         "join communities, and receive daily verses.\n\n" +
-                        "Developed with ❤️ for gospel music lovers.\n\n" +
-                        "* * * * *")
+                        "Developed with ❤️ for gospel music lovers.")
                 .setPositiveButton("OK", null)
                 .show();
     }
@@ -191,16 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
         tvCurrentLanguage.setText(languageName);
     }
 
-    private void restartApp() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
-    }
-
     private void setupVersionInfo() {
-        tvAppVersion.setText("Version " + BuildConfig.VERSION_NAME);
+        tvAppVersion.setText(getString(R.string.version_1_0_1));
     }
-
 }
