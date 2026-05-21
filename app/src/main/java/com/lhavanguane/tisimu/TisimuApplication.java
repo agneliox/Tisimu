@@ -6,8 +6,6 @@ import android.content.res.Configuration;
 import com.lhavanguane.tisimu.utils.LanguageManager;
 import com.lhavanguane.tisimu.utils.ThemeManager;
 
-import java.util.Locale;
-
 public class TisimuApplication extends Application {
 
     @Override
@@ -26,9 +24,7 @@ public class TisimuApplication extends Application {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-        // Re-apply language on configuration change
-        LanguageManager languageManager = LanguageManager.getInstance(this);
-        languageManager.updateAppLanguage(this);
+        // Re-apply language on configuration change (e.g., orientation change)
+        LanguageManager.getInstance(this).updateAppLanguage(this);
     }
 }

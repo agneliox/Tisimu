@@ -190,4 +190,8 @@
     <string name="rate_now">Rate Now</string>
     <string name="light_mode">Modo claro</string>
     <string name="change_theme">Alterar tema</string>
+    <string name="change_password">Change Password</string>
+    <string name="system_default">System Default</string>
+    <string name="english">English</string>
+    <string name="app_settings">App Settings</string>
 </resources>

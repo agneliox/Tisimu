@@ -190,4 +190,8 @@
     <string name="rate_now">Califica ahora</string>
     <string name="light_mode">Light Mode</string>
     <string name="change_theme">Cambiar tema</string>
+    <string name="change_password">Change Password</string>
+    <string name="system_default">System Default</string>
+    <string name="english">English</string>
+    <string name="app_settings">App Settings</string>
 </resources>

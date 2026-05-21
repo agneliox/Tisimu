@@ -201,4 +201,8 @@
     <string name="rate_now">Rate Now</string>
     <string name="later">Later</string>
     <string name="report_issues">Report issues: %1$s</string>
+    <string name="change_password">Change Password</string>
+    <string name="system_default">System Default</string>
+    <string name="english">English</string>
+    <string name="app_settings">App Settings</string>
 </resources>

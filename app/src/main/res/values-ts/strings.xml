@@ -189,4 +189,8 @@
     <string name="rate_now">Rate Sweswi</string>
     <string name="light_mode">Mode ya Ku Vonakala</string>
     <string name="change_theme">Cinca Nhlokomhaka</string>
+    <string name="change_password">Change Password</string>
+    <string name="system_default">System Default</string>
+    <string name="english">English</string>
+    <string name="app_settings">App Settings</string>
 </resources>

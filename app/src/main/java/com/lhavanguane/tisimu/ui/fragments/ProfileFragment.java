@@ -28,7 +28,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-import com.lhavanguane.tisimu.BuildConfig;
+//import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.ui.activities.LoginActivity;
@@ -88,9 +88,9 @@ public class ProfileFragment extends Fragment {
         initViews(view);
         setupToolbar();
         setupUserInfo();
-        setupStats();
-        setupLanguageDisplay();
-        setupDarkModeSwitch();
+//        setupStats();
+//        setupLanguageDisplay();
+//        setupDarkModeSwitch();
         setupClickListeners();
         setupVersionInfo();
 
@@ -99,23 +99,14 @@ public class ProfileFragment extends Fragment {
 
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.profileToolbar);
-//        ivAvatar = view.findViewById(R.id.ivAvatar);
-//        tvUserName = view.findViewById(R.id.tvUserName);
-//        tvUserEmail = view.findViewById(R.id.tvUserEmail);
-//        tvMemberSince = view.findViewById(R.id.tvMemberSince);
-//        tvCommunitiesCount = view.findViewById(R.id.tvCommunitiesCount);
-//        tvHymnalsCount = view.findViewById(R.id.tvHymnalsCount);
-//        tvFavoritesCount = view.findViewById(R.id.tvFavoritesCount);
         tvCurrentLanguage = view.findViewById(R.id.tvCurrentLanguage);
-        switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
+//        switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
         tvAppVersion = view.findViewById(R.id.tvAppVersion);
-//        tvSignInMethod = view.findViewById(R.id.tvSignInMethod);
         userauthor_pic = view.findViewById(R.id.user_pic);
         profile_name = view.findViewById(R.id.profile_name);
         profile_email = view.findViewById(R.id.profile_email);
         member_since = view.findViewById(R.id.member_since);
-
         layoutEditProfile = view.findViewById(R.id.layoutEditProfile);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
         layoutSendFeedback = view.findViewById(R.id.layoutSendFeedback);
@@ -158,22 +149,18 @@ public class ProfileFragment extends Fragment {
             // Set user name
             String displayName = user.getDisplayName();
             if (displayName != null && !displayName.isEmpty()) {
-//                tvUserName.setText(displayName);
                 profile_name.setText(displayName);
             } else {
                 String email = user.getEmail();
                 if (email != null) {
                     String nameFromEmail = email.split("@")[0];
-//                    tvUserName.setText(nameFromEmail);
                     profile_name.setText(nameFromEmail);
                 } else {
-//                    tvUserName.setText("User");
                     profile_name.setText("User");
                 }
             }
 
             // Set user email
-//            tvUserEmail.setText(user.getEmail() != null ? user.getEmail() : "No email");
             profile_email.setText(user.getEmail() != null ? user.getEmail() : "No email");
 
 
@@ -181,19 +168,12 @@ public class ProfileFragment extends Fragment {
             if (user.getMetadata() != null && user.getMetadata().getCreationTimestamp() > 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
                 String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
-//                tvMemberSince.setText("Member since " + date);
                 member_since.setText("Member since " + date);
                 Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
             } else {
-//                tvMemberSince.setText("Member");
                 member_since.setText("Member");
             }
 
-//            Glide.with(this)
-//                    .load(user.getPhotoUrl())
-//                    .placeholder(R.drawable.ic_person)
-//                    .error(R.drawable.ic_person)
-//                    .into(ivAvatar);
             Glide.with(this)
                     .load(user.getPhotoUrl())
                     .placeholder(R.drawable.ic_person)
@@ -213,10 +193,6 @@ public class ProfileFragment extends Fragment {
         // Hymnals count - from PreferencesManager
         // Favorites count - from FavoritesManager (when implemented)
 
-        // Placeholder values
-//        tvCommunitiesCount.setText("0");
-//        tvHymnalsCount.setText("0");
-//        tvFavoritesCount.setText("0");
     }
 
     private void setupLanguageDisplay() {
@@ -225,38 +201,15 @@ public class ProfileFragment extends Fragment {
         tvCurrentLanguage.setText(languageName);
     }
 
-    private void setupDarkModeSwitch() {
-        boolean isDarkMode = themeManager.isDarkMode();
-        switchDarkMode.setChecked(isDarkMode);
 
-        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            showThemeRestartDialog(isChecked);
-        });
-    }
-
-    private void showThemeRestartDialog(boolean enableDarkMode) {
-        String modeName = enableDarkMode ? "Dark Mode" : "Light Mode";
-
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Change Theme")
-                .setMessage("The app will restart to apply " + modeName + ". Continue?")
-                .setPositiveButton("Apply", (dialog, which) -> {
-                    themeManager.setDarkMode(enableDarkMode);
-                    restartApp();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    switchDarkMode.setChecked(!enableDarkMode);
-                })
-                .show();
-    }
 
     private void setupClickListeners() {
         layoutEditProfile.setOnClickListener(v -> showEditProfileDialog());
         layoutChangePassword.setOnClickListener(v -> showChangePasswordDialog());
-        layoutSendFeedback.setOnClickListener(v -> openFeedbackForm());
-        layoutRateApp.setOnClickListener(v -> openRateDialog());
-        layoutShareApp.setOnClickListener(v -> shareApp());
-        layoutAbout.setOnClickListener(v -> showAboutDialog());
+//        layoutSendFeedback.setOnClickListener(v -> openFeedbackForm());
+//        layoutRateApp.setOnClickListener(v -> openRateDialog());
+//        layoutShareApp.setOnClickListener(v -> shareApp());
+//        layoutAbout.setOnClickListener(v -> showAboutDialog());
         btnLogout.setOnClickListener(v -> logout());
     }
 
@@ -269,48 +222,48 @@ public class ProfileFragment extends Fragment {
         // TODO: Implement change password via Firebase
         Toast.makeText(requireContext(), "Change Password coming soon", Toast.LENGTH_SHORT).show();
     }
-
-    private void openFeedbackForm() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
-        startActivity(browserIntent);
-        Toast.makeText(requireContext(),
-                "Please include your device model and Android version in the feedback",
-                Toast.LENGTH_LONG).show();
-    }
-
-    private void openRateDialog() {
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Rate Tisimu")
-                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
-                .setPositiveButton("Rate Now", (dialog, which) -> {
-                    openFeedbackForm();
-                })
-                .setNegativeButton("Later", null)
-                .show();
-    }
-
-    private void shareApp() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
-                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
-                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
-    }
-
-    private void showAboutDialog() {
-        new AlertDialog.Builder(requireContext())
-                .setTitle("About Tisimu")
-                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
-                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
-                        "join communities, and receive daily verses.\n\n" +
-                        "Developed with ❤️ for gospel music lovers.\n\n" +
-                        "* * * * *")
-                .setPositiveButton("OK", null)
-                .show();
-    }
+//
+//    private void openFeedbackForm() {
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
+//        startActivity(browserIntent);
+//        Toast.makeText(requireContext(),
+//                "Please include your device model and Android version in the feedback",
+//                Toast.LENGTH_LONG).show();
+//    }
+//
+//    private void openRateDialog() {
+//        new AlertDialog.Builder(requireContext())
+//                .setTitle("Rate Tisimu")
+//                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
+//                .setPositiveButton("Rate Now", (dialog, which) -> {
+//                    openFeedbackForm();
+//                })
+//                .setNegativeButton("Later", null)
+//                .show();
+//    }
+//
+//    private void shareApp() {
+//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//        shareIntent.setType("text/plain");
+//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
+//        shareIntent.putExtra(Intent.EXTRA_TEXT,
+//                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
+//                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
+//                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
+//        startActivity(Intent.createChooser(shareIntent, "Share via"));
+//    }
+//
+//    private void showAboutDialog() {
+//        new AlertDialog.Builder(requireContext())
+//                .setTitle("About Tisimu")
+//                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
+//                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
+//                        "join communities, and receive daily verses.\n\n" +
+//                        "Developed with ❤️ for gospel music lovers.\n\n" +
+//                        "* * * * *")
+//                .setPositiveButton("OK", null)
+//                .show();
+//    }
 
     private void logout() {
         new AlertDialog.Builder(requireContext())
@@ -336,7 +289,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setupVersionInfo() {
-        tvAppVersion.setText("Version " + BuildConfig.VERSION_NAME);
+//        tvAppVersion.setText("Version " + BuildConfig.VERSION_NAME);
     }
 
     @Override
@@ -344,6 +297,6 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         // Refresh data when returning to profile
         setupUserInfo();
-        setupLanguageDisplay();
+//        setupLanguageDisplay();
     }
 }

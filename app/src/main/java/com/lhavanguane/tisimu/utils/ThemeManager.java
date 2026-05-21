@@ -50,37 +50,25 @@ public class ThemeManager {
         return prefs.getInt(KEY_THEME, THEME_SYSTEM);
     }
 
+    public String getThemeName() {
+        switch (getThemePreference()) {
+            case THEME_LIGHT:
+                return "Light";
+            case THEME_DARK:
+                return "Dark";
+            case THEME_SYSTEM:
+                return "System Default";
+            default:
+                return "System Default";
+        }
+    }
+
     public boolean isDarkMode() {
         int themeMode = getThemePreference();
         if (themeMode == THEME_SYSTEM) {
-            // Check system setting
             int nightMode = AppCompatDelegate.getDefaultNightMode();
             return nightMode == AppCompatDelegate.MODE_NIGHT_YES;
         }
         return themeMode == THEME_DARK;
-    }
-
-    public void setDarkMode(boolean enabled) {
-        if (enabled) {
-            saveThemePreference(THEME_DARK);
-        } else {
-            saveThemePreference(THEME_LIGHT);
-        }
-    }
-
-    public void toggleDarkMode() {
-        boolean isDark = isDarkMode();
-        setDarkMode(!isDark);
-    }
-
-    // Restart app to apply theme changes
-    public void restartAppForThemeChange(Context context) {
-        android.app.Activity activity = (android.app.Activity) context;
-        android.content.Intent intent = activity.getIntent();
-        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.finish();
-        activity.overridePendingTransition(0, 0);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
     }
 }

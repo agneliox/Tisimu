@@ -1,5 +1,6 @@
 package com.lhavanguane.tisimu.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,15 +17,13 @@ public class LanguageManager {
 
     private static LanguageManager instance;
     private SharedPreferences prefs;
-    private Context context;
 
     // Supported languages
-    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es", "ts"};
-    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español", "Tsonga"};
+    public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es"};
+    public static final String[] LANGUAGE_NAMES = {"English", "Português", "Español"};
 
     private LanguageManager(Context context) {
-        this.context = context.getApplicationContext();
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static synchronized LanguageManager getInstance(Context context) {
@@ -38,13 +37,18 @@ public class LanguageManager {
         return prefs.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE);
     }
 
-    public void setLanguage(Context context, String languageCode) {
+    public void setLanguage(Activity activity, String languageCode) {
         if (!isLanguageSupported(languageCode)) {
             languageCode = DEFAULT_LANGUAGE;
         }
 
         prefs.edit().putString(KEY_LANGUAGE, languageCode).apply();
-        applyLanguage(context, languageCode);
+
+        // Apply the language to the current activity
+        applyLanguage(activity, languageCode);
+
+        // Force recreation of the activity to apply changes
+        activity.recreate();
     }
 
     private boolean isLanguageSupported(String languageCode) {
@@ -74,9 +78,11 @@ public class LanguageManager {
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());
 
-        // Also update the application context
-        Resources appResources = context.getApplicationContext().getResources();
-        appResources.updateConfiguration(config, appResources.getDisplayMetrics());
+        // Also update application context if available
+        if (context.getApplicationContext() != null) {
+            Resources appResources = context.getApplicationContext().getResources();
+            appResources.updateConfiguration(config, appResources.getDisplayMetrics());
+        }
     }
 
     public void updateAppLanguage(Context context) {
@@ -91,21 +97,5 @@ public class LanguageManager {
             }
         }
         return "English";
-    }
-
-    // Force restart the app to apply language changes
-    public void restartAppForLanguageChange(Context context, String newLanguage) {
-        setLanguage(context, newLanguage);
-
-        // Restart the activity
-        if (context instanceof android.app.Activity) {
-            android.app.Activity activity = (android.app.Activity) context;
-            android.content.Intent intent = new android.content.Intent(activity, com.lhavanguane.tisimu.ui.activities.MainActivity.class);
-            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            activity.startActivity(intent);
-            activity.finish();
-            // Kill the current process to ensure complete restart and locale application
-            android.os.Process.killProcess(android.os.Process.myPid());
-        }
     }
 }
