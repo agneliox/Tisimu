@@ -15,7 +15,7 @@
         app:menu="@menu/home_fragment_menu"
         app:navigationIcon="@drawable/ic_menu_2_bars"
         app:navigationIconTint="?attr/colorOnSurface"
-        app:title="Home"
+        app:title="@string/home"
         app:titleTextColor="?attr/colorOnSurface" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

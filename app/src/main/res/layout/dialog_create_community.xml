@@ -16,7 +16,7 @@
             android:id="@+id/etCommunityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Community Name"
+            android:hint="@string/community_name"
             android:inputType="textCapSentences" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,7 +31,7 @@
             android:id="@+id/etCommunityDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
+            android:hint="@string/description"
             android:inputType="textMultiLine"
             android:maxLines="3" />
 
@@ -40,7 +40,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Visibility"
+        android:text="@string/visibility"
         android:textAppearance="?attr/textAppearanceLabelMedium"
         android:layout_marginBottom="8dp" />
 
@@ -54,14 +54,14 @@
             android:id="@+id/chipPublic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Public"
+            android:text="@string/public_"
             android:checked="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipPrivate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Private" />
+            android:text="@string/private_" />
 
     </com.google.android.material.chip.ChipGroup>
 

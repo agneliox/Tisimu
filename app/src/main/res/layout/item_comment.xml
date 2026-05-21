@@ -39,7 +39,7 @@
             android:id="@+id/tvCommentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Comment text here..."
+            android:text="@string/comment_text_here"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp" />

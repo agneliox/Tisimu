@@ -197,6 +197,26 @@
     <string name="select_language">Seleccionar idioma</string>
     <string name="communities">Comunidades</string>
     <string name="created_by">por %s</string>
-    <string name="joined">Joined</string>
+    <string name="joined">Unido</string>
     <string name="members_count">%s miembros</string>
+    <string name="private_">Privado</string>
+    <string name="visibility">Visibilidad</string>
+    <string name="no_items_yet">Aún no hay elementos</string>
+    <string name="mark_as_important">Marcar como importante</string>
+    <string name="member_since">Miembro desde %1$s</string>
+    <string name="favorites">Favoritos</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="account">Cuenta</string>
+    <string name="community_code">Código: %1$s</string>
+    <string name="content_preview">Vista previa del contenido...</string>
+    <string name="coming_soon">Próximamente</string>
+    <string name="create_new_community">Crear nueva comunidad</string>
+    <string name="or_text">O</string>
+    <string name="theme">Tema</string>
+    <string name="read_more">Leer más</string>
+    <string name="read_less">Leer menos</string>
+    <string name="view_profile">Ver perfil</string>
+    <string name="comment_text_here">Texto del comentario aquí...</string>
+    <string name="discover_communities">Descubrir comunidades</string>
+    <string name="songs">Canciones</string>
 </resources>

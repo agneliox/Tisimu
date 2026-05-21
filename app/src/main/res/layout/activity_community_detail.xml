@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Communiteeeee" />
+        app:title="@string/community" />
 
     <!--    <com.google.android.material.appbar.AppBarLayout-->
     <!--        android:id="@+id/appBarLayout"-->

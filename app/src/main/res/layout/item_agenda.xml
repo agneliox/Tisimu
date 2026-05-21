@@ -22,7 +22,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/title"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 />
 
@@ -30,7 +30,7 @@
                 android:id="@+id/tvContentPreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Content preview..."
+                android:text="@string/content_preview"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginTop="8dp"
@@ -49,7 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Added by User"
+                    android:text="@string/added_by_user"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -57,7 +57,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date"
+                    android:text="@string/date"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:layout_marginEnd="12dp" />
@@ -66,7 +66,7 @@
                     android:id="@+id/btnDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete"
+                    android:text="@string/delete"
                     android:textAllCaps="false"
                     app:cornerRadius="16dp"
                     style="@style/Widget.Material3.Button.TextButton" />

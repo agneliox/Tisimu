@@ -101,7 +101,7 @@
                 android:id="@+id/btnView"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:text="View"
+                android:text="@string/view"
                 android:textAllCaps="false"
                 app:cornerRadius="18dp"
                 style="@style/Widget.Material3.Button.OutlinedButton" />

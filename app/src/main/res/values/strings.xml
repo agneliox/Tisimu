@@ -210,4 +210,24 @@
     <string name="created_by">by %s$!</string>
     <string name="joined">Joined</string>
     <string name="members_count">%s$ members</string>
+    <string name="private_">Private</string>
+    <string name="visibility">Visibility</string>
+    <string name="no_items_yet">No items yet</string>
+    <string name="mark_as_important">Mark as Important</string>
+    <string name="member_since">Member since %1$s</string>
+    <string name="favorites">Favorites</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="account">Account</string>
+    <string name="community_code">Code: %1$s</string>
+    <string name="content_preview">Content preview...</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="create_new_community">Create New Community</string>
+    <string name="or_text">OR</string>
+    <string name="theme">Theme</string>
+    <string name="read_more">Read More</string>
+    <string name="read_less">Read Less</string>
+    <string name="view_profile">View profile</string>
+    <string name="comment_text_here">Comment text here...</string>
+    <string name="discover_communities">Discover Communities</string>
+    <string name="songs">Songs</string>
 </resources>
