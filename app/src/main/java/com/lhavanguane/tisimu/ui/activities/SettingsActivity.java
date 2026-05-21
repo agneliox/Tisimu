@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
@@ -25,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     private View layoutRateApp;
     private View layoutShareApp;
     private View layoutAbout;
+    private View layoutLanguage;
     private TextView tvAppVersion;
 
     private LanguageManager languageManager;
@@ -54,6 +56,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.song_detail_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void initViews() {
@@ -61,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
         layoutRateApp = findViewById(R.id.layoutRateApp);
         layoutShareApp = findViewById(R.id.layoutShareApp);
         layoutAbout = findViewById(R.id.layoutAbout);
+        layoutLanguage = findViewById(R.id.layoutLanguage);
         tvAppVersion = findViewById(R.id.tvAppVersion);
         languageManager = LanguageManager.getInstance(this);
         themeManager = ThemeManager.getInstance(this);
@@ -73,6 +83,32 @@ public class SettingsActivity extends AppCompatActivity {
         layoutRateApp.setOnClickListener(v -> openRateDialog());
         layoutShareApp.setOnClickListener(v -> shareApp());
         layoutAbout.setOnClickListener(v -> showAboutDialog());
+        layoutLanguage.setOnClickListener(v -> showLanguageDialog());
+    }
+
+    private void showLanguageDialog() {
+        String[] languages = LanguageManager.LANGUAGE_NAMES;
+        String currentLangCode = languageManager.getCurrentLanguage();
+        int checkedItem = 0;
+        for (int i = 0; i < LanguageManager.SUPPORTED_LANGUAGES.length; i++) {
+            if (LanguageManager.SUPPORTED_LANGUAGES[i].equals(currentLangCode)) {
+                checkedItem = i;
+                break;
+            }
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.select_language)
+                .setSingleChoiceItems(languages, checkedItem, (dialog, which) -> {
+                    String selectedLangCode = LanguageManager.SUPPORTED_LANGUAGES[which];
+                    if (!selectedLangCode.equals(currentLangCode)) {
+                        languageManager.setLanguage(this, selectedLangCode);
+                        // The activity will be recreated by setLanguage
+                    }
+                    dialog.dismiss();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     private void setupThemeRadioGroup() {

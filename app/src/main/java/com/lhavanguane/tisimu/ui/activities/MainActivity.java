@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Handle menu items that are not part of the navigation graph
             if (id == R.id.nav_language) {
-                Toast.makeText(this, "Language settings coming soon", Toast.LENGTH_SHORT).show();
+                showLanguageSelectionDialog();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             } else if (id == R.id.nav_about_app) {
