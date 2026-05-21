@@ -124,7 +124,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             llVerseContainer = itemView.findViewById(R.id.llVerseContainer);
-            tvVerseLabel = itemView.findViewById(R.id.tvVerseLabel);
+//            tvVerseLabel = itemView.findViewById(R.id.tvVerseLabel);
             tvVerseText = itemView.findViewById(R.id.tvVerseText);
         }
 
@@ -140,7 +140,7 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
                 label = section.getLabel() != null ? section.getLabel() : "";
             }
 
-            tvVerseLabel.setText(label);
+//            tvVerseLabel.setText(label);
             tvVerseText.setText(section.getFormattedText());
 
             // Single click - select section

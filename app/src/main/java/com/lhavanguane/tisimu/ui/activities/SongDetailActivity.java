@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +52,13 @@ public class SongDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         LanguageManager.getInstance(this).updateAppLanguage(this);
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_song_detail);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_song_detail), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         // Get data from intent
         getIntentData();
@@ -269,6 +279,11 @@ public class SongDetailActivity extends AppCompatActivity {
             return true;
         } else if (item.getItemId() == R.id.action_share_song) {
             shareAllLyrics();
+            return true;
+        } else if (item.getItemId() == R.id.action_copy_song) {
+            if (verseAdapter != null) {
+                verseAdapter.copyAllSectionsToClipboard(this);
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

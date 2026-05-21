@@ -23,17 +23,17 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Verse Label -->
-        <TextView
-            android:id="@+id/tvVerseLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/bg_verse_label"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="2dp"
-            android:text="@string/verse_1"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvVerseLabel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:background="@drawable/bg_verse_label"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingVertical="2dp"-->
+<!--            android:text="@string/verse_1"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold" />-->
 
         <!-- Verse Text -->
         <TextView
