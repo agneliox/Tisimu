@@ -213,6 +213,14 @@ public class DailyVerseFirestoreManager {
             verse.setApplication("Comparte este amor con alguien hoy.");
             verse.setReflection("¿Cómo has experimentado el amor de Dios en tu vida?");
             verse.setPrayer("Padre, gracias por amarme primero. Ayúdame a compartir este amor hoy.");
+        } else if ("ts".equals(currentLanguage)) {
+            verse.setVerse("Hikuva Xikwembu xi rhandzile misava swonghasi, xi ko xi nyika N’wana wa xona la tswariweke a ri swakwe, leswaku un’wana ni un’wana loyi a pfumelaka eka yena a nga lovi, kambe a va ni vutomi lebyi nga heriki.");
+            verse.setReference("Yohane 3:16");
+            verse.setDevotionalTitle("Rirhandzu ra Xikwembu");
+            verse.setDevotionalBody("Xikwembu xi ku rhandza hi rirhandzu leri nga heriki. Xi nyikele hi N'wana wa xona wa risima loko hina hi nga swi lulamelanga.");
+            verse.setApplication("Avelana rirhandzu leri ni un'wana namuntlha.");
+            verse.setReflection("Xana u ri vonisile ku yini rirhandzu ra Xikwembu evuton’wini bya wena?");
+            verse.setPrayer("Tatana, ndza nkhensa hikuva u rhandzile ku sungula. Ndzi pfune ku avelana rirhandzu leri namuntlha.");
         } else {
             verse.setVerse("For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.");
             verse.setReference("John 3:16");

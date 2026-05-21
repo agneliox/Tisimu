@@ -195,4 +195,8 @@
     <string name="english">English</string>
     <string name="app_settings">App Settings</string>
     <string name="select_language">Seleccionar idioma</string>
+    <string name="communities">Comunidades</string>
+    <string name="created_by">por %s</string>
+    <string name="joined">Joined</string>
+    <string name="members_count">%s miembros</string>
 </resources>

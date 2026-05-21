@@ -80,8 +80,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         void bind(Community community) {
             tvName.setText(community.getName());
             tvDescription.setText(community.getDescription());
-            tvMemberCount.setText(community.getMemberCount() + " members");
-            tvCreatedBy.setText("Created by " + community.getCreatedByUserName());
+            tvMemberCount.setText(itemView.getContext().getString(R.string.members_count, community.getMemberCount() + ""));
+            tvCreatedBy.setText(itemView.getContext().getString(R.string.created_by, community.getCreatedByUserName()));
 
             if (community.isPrivate()) {
                 iconVisibility.setImageResource(R.drawable.ic_lock);

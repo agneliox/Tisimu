@@ -99,8 +99,8 @@ public class CommunityFragment extends Fragment {
                     }
                 }
             });
-
-            toolbar.setTitle("My Communities");
+            // Removed: Redundant menu inflation. Relying on setHasOptionsMenu(true)
+        } else {
             // Menu is already inflated in XML, but we can set listener here
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.action_discover) {

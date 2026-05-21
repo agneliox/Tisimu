@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
         dailyVerseManager.testFirestoreConnection();
 
         // Load daily verse
-        loadDailyVerse();
+        // Removed: Redundant call, handled in onResume
     }
 
     @Override
@@ -106,7 +106,6 @@ public class HomeFragment extends Fragment {
         setupToolbar();
         setupSwipeRefresh(view);
         displayUserGreeting();
-        loadDailyVerse();
         setupExpandCollapse();
 
         return view;
@@ -131,7 +130,6 @@ public class HomeFragment extends Fragment {
 
         llCollapsibleContent = view.findViewById(R.id.llCollapsibleContent);
         llExpandButton = view.findViewById(R.id.llExpandButton);
-//        tvExpandLabel = view.findViewById(R.id.tvExpandLabel);
         ivChevronExpand = view.findViewById(R.id.ivChevronExpand);
     }
 
@@ -151,14 +149,7 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-            toolbar.inflateMenu(R.menu.home_fragment_menu);
-            toolbar.setOnMenuItemClickListener(item -> {
-                if (item.getItemId() == R.id.action_refresh_verse) {
-                    refreshVerse();
-                    return true;
-                }
-                return false;
-            });
+            // Removed: Redundant menu inflation. Relying on setHasOptionsMenu(true)
         }
     }
 

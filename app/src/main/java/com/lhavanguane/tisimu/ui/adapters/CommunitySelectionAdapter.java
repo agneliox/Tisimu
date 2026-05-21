@@ -90,14 +90,14 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
         void bind(Community community) {
             tvName.setText(community.getName());
             tvDescription.setText(community.getDescription());
-            tvMemberCount.setText(community.getMemberCount() + " members");
-            tvCreatedBy.setText("Created by " + community.getCreatedByUserName());
+            tvMemberCount.setText(itemView.getContext().getString(R.string.members_count,community.getMemberCount()));
+            tvCreatedBy.setText(itemView.getContext().getString(R.string.created_by, community.getCreatedByUserName()));
 
             if (community.isPrivate()) {
-                chipVisibility.setText("Private");
+
                 chipVisibility.setChipIconResource(R.drawable.ic_lock);
             } else {
-                chipVisibility.setText("Public");
+
                 chipVisibility.setChipIconResource(R.drawable.ic_public);
             }
 
@@ -105,12 +105,12 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
             boolean isJoined = isUserJoined(community.getId());
 
             if (isJoined) {
-                btnJoin.setText("Joined");
+                btnJoin.setText(R.string.joined);
                 btnJoin.setEnabled(false);
                 btnJoin.setBackgroundTintList(
                         itemView.getContext().getColorStateList(com.google.android.material.R.color.design_dark_default_color_error));
             } else {
-                btnJoin.setText("Join");
+                btnJoin.setText(R.string.join);
                 btnJoin.setEnabled(true);
                 btnJoin.setBackgroundTintList(
                         itemView.getContext().getColorStateList(R.color.md_theme_primary));

@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
         android:theme="@style/ThemeOverlay.Material3.ActionBar"
-        app:title="Communities"
+        app:title="@string/communities"
         app:titleTextColor="?attr/colorOnSurface"
         app:menu="@menu/community_fragment_menu"
         app:navigationIcon="@drawable/ic_menu_2"
@@ -59,7 +59,8 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_add"
-        app:backgroundTint="?attr/colorPrimary"
-        app:tint="@android:color/white" />
+        android:background="?attr/colorOnSurface"
+
+         />
 
 </LinearLayout>
