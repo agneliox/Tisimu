@@ -14,7 +14,7 @@ public class ThemeManager {
     public static final int THEME_SYSTEM = 2;
 
     private static ThemeManager instance;
-    private SharedPreferences prefs;
+    private final SharedPreferences prefs;
 
     private ThemeManager(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);

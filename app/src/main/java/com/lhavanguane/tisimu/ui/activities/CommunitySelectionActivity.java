@@ -38,7 +38,7 @@ public class CommunitySelectionActivity extends AppCompatActivity {
     private CommunitySelectionAdapter adapter;
     private ProgressDialog progressDialog;
 
-    private List<String> joinedCommunityIds = new ArrayList<>();
+    private final List<String> joinedCommunityIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

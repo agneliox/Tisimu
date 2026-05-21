@@ -84,8 +84,7 @@ public class CommunityFragment extends Fragment {
     private void setupToolbar() {
         if (toolbar == null) return;
 
-        if (getActivity() instanceof MainActivity) {
-            MainActivity mainActivity = (MainActivity) getActivity();
+        if (getActivity() instanceof MainActivity mainActivity) {
             mainActivity.setSupportActionBar(toolbar);
 
             toolbar.setNavigationIcon(R.drawable.ic_menu_2);

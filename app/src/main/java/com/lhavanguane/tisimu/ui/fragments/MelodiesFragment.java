@@ -19,7 +19,7 @@ import com.google.android.exoplayer2.MediaItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.data.database.entities.MelodyProposal;
+import com.lhavanguane.tisimu.entities.MelodyProposal;
 import com.lhavanguane.tisimu.ui.adapters.MelodyAdapter;
 import com.lhavanguane.tisimu.viewmodels.SongDetailViewModel;
 
@@ -122,7 +122,7 @@ public class MelodiesFragment extends Fragment {
             }
 
             @Override
-            public void onVideoClick(com.lhavanguane.tisimu.data.database.entities.MelodyProposal melody) {
+            public void onVideoClick(MelodyProposal melody) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(melody.getUrl()));
                 startActivity(intent);
             }

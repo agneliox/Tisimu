@@ -14,7 +14,7 @@ import com.lhavanguane.tisimu.ui.fragments.MelodiesFragment;
 
 public class SongDetailPagerAdapter extends FragmentStateAdapter {
 
-    private int songId;
+    private final int songId;
 
     public SongDetailPagerAdapter(@NonNull FragmentActivity fragmentActivity, int songId) {
         super(fragmentActivity);

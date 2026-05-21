@@ -25,12 +25,12 @@ public class DailyVerseFirestoreManager {
     private static final long CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
 
     private static DailyVerseFirestoreManager instance;
-    private FirebaseFirestore db;
-    private LanguageManager languageManager;
-    private PreferencesManager preferencesManager;
+    private final FirebaseFirestore db;
+    private final LanguageManager languageManager;
+    private final PreferencesManager preferencesManager;
     private DailyVerse cachedVerse;
     private long lastCacheTime;
-    private Context context;
+    private final Context context;
 
     private DailyVerseFirestoreManager(Context context) {
         this.context = context;

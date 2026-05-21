@@ -16,7 +16,7 @@ public class LanguageManager {
     private static final String DEFAULT_LANGUAGE = "en";
 
     private static LanguageManager instance;
-    private SharedPreferences prefs;
+    private final SharedPreferences prefs;
 
     // Supported languages
     public static final String[] SUPPORTED_LANGUAGES = {"en", "pt", "es", "ts"};

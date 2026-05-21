@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.Player;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.data.database.entities.MelodyProposal;
+import com.lhavanguane.tisimu.entities.MelodyProposal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,17 +74,17 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
     }
 
     class MelodyViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvProposerName;
-        private TextView tvLikes;
-        private TextView tvMelodyTitle;
-        private TextView tvDescription;
-        private LinearLayout llAudioPlayer;
+        private final TextView tvProposerName;
+        private final TextView tvLikes;
+        private final TextView tvMelodyTitle;
+        private final TextView tvDescription;
+        private final LinearLayout llAudioPlayer;
         private LinearLayout llVideoPlayer;
-        private com.google.android.material.button.MaterialButton btnPlayAudio;
-        private SeekBar seekBar;
-        private com.google.android.material.button.MaterialButton btnLike;
-        private com.google.android.material.card.MaterialCardView cvVideoThumbnail;
-        private ImageView ivThumbnail;
+        private final com.google.android.material.button.MaterialButton btnPlayAudio;
+        private final SeekBar seekBar;
+        private final com.google.android.material.button.MaterialButton btnLike;
+        private final com.google.android.material.card.MaterialCardView cvVideoThumbnail;
+        private final ImageView ivThumbnail;
 
         MelodyViewHolder(@NonNull View itemView) {
             super(itemView);

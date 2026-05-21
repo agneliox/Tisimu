@@ -6,10 +6,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.lhavanguane.tisimu.data.database.entities.Section;
-import com.lhavanguane.tisimu.data.database.entities.Song;
+import com.lhavanguane.tisimu.entities.Section;
+import com.lhavanguane.tisimu.entities.Song;
 import com.lhavanguane.tisimu.models.SectionWithSongs;
-import com.lhavanguane.tisimu.data.repositories.HymnalRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,15 +16,15 @@ import java.util.List;
 import java.util.Map;
 
 public class SongListViewModel extends AndroidViewModel {
-    private HymnalRepository hymnalRepository;
-    private MutableLiveData<List<SectionWithSongs>> sectionWithSongsLiveData;
-    private MutableLiveData<List<SectionWithSongs>> filteredSectionWithSongsLiveData;
-    private MutableLiveData<Boolean> isLoading;
-    private MutableLiveData<String> searchQuery;
+    private final HymnalRepository hymnalRepository;
+    private final MutableLiveData<List<SectionWithSongs>> sectionWithSongsLiveData;
+    private final MutableLiveData<List<SectionWithSongs>> filteredSectionWithSongsLiveData;
+    private final MutableLiveData<Boolean> isLoading;
+    private final MutableLiveData<String> searchQuery;
 
-    private List<Integer> selectedHymnalIds;
-    private List<Section> allSections;
-    private List<Song> allSongs;
+    private final List<Integer> selectedHymnalIds;
+    private final List<Section> allSections;
+    private final List<Song> allSongs;
     private boolean isSectionsLoaded;
     private boolean isSongsLoaded;
 

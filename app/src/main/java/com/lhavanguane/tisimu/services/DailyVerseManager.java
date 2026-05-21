@@ -26,10 +26,10 @@ public class DailyVerseManager {
     private static final String VERSE_FILE = "daily_verses.json";
 
     private static DailyVerseManager instance;
-    private Context context;
-    private Gson gson;
+    private final Context context;
+    private final Gson gson;
     private Map<String, Map<String, DailyVerse>> versesMap;
-    private LanguageManager languageManager;
+    private final LanguageManager languageManager;
 
     private DailyVerseManager(Context context) {
         this.context = context.getApplicationContext();

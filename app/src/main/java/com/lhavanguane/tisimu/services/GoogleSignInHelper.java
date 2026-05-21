@@ -27,7 +27,7 @@ public class GoogleSignInHelper {
 
     private static GoogleSignInHelper instance;
     private GoogleSignInClient googleSignInClient;
-    private FirebaseAuth firebaseAuth;
+    private final FirebaseAuth firebaseAuth;
     private OnGoogleSignInListener listener;
     private Activity currentActivity;
     private Fragment currentFragment;

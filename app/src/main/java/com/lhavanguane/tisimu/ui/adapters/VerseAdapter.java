@@ -117,9 +117,9 @@ public class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout llVerseContainer;
+        private final LinearLayout llVerseContainer;
         private TextView tvVerseLabel;
-        private TextView tvVerseText;
+        private final TextView tvVerseText;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

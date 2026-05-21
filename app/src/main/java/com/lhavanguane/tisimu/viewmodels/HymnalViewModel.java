@@ -6,16 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.lhavanguane.tisimu.data.database.entities.Hymnal;
-import com.lhavanguane.tisimu.data.repositories.HymnalRepository;
+import com.lhavanguane.tisimu.entities.Hymnal;
 
 import java.util.List;
 
 public class HymnalViewModel extends AndroidViewModel {
-    private HymnalRepository repository;
-    private LiveData<List<Hymnal>> allHymnals;
-    private LiveData<List<Hymnal>> selectedHymnals;
-    private LiveData<Integer> selectedCount;
+    private final HymnalRepository repository;
+    private final LiveData<List<Hymnal>> allHymnals;
+    private final LiveData<List<Hymnal>> selectedHymnals;
+    private final LiveData<Integer> selectedCount;
     public HymnalViewModel(@NonNull Application application) {
         super(application);
         repository = new HymnalRepository(application);

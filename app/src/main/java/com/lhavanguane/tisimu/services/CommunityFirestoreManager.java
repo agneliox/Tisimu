@@ -28,8 +28,8 @@ public class CommunityFirestoreManager {
     private static final String COLLECTION_USER_COMMUNITIES = "user_communities";
 
     private static CommunityFirestoreManager instance;
-    private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
+    private final FirebaseFirestore db;
+    private final FirebaseAuth mAuth;
     private static final String COLLECTION_AGENDA = "agenda";
 
     private CommunityFirestoreManager() {

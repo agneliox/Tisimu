@@ -7,19 +7,18 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.lhavanguane.tisimu.data.database.TisimuDatabase;
-import com.lhavanguane.tisimu.data.database.entities.Comment;
-import com.lhavanguane.tisimu.data.database.entities.MelodyProposal;
-import com.lhavanguane.tisimu.data.database.entities.Song;
-import com.lhavanguane.tisimu.data.database.entities.Suggestion;
+import com.lhavanguane.tisimu.entities.Comment;
+import com.lhavanguane.tisimu.entities.MelodyProposal;
+import com.lhavanguane.tisimu.entities.Song;
+import com.lhavanguane.tisimu.entities.Suggestion;
 
 import java.util.List;
 
 public class SongDetailViewModel extends AndroidViewModel {
-    private TisimuDatabase database;
-    private MutableLiveData<Song> currentSong;
-    private MutableLiveData<List<Comment>> comments;
-    private MutableLiveData<List<MelodyProposal>> melodyProposals;
+    private final TisimuDatabase database;
+    private final MutableLiveData<Song> currentSong;
+    private final MutableLiveData<List<Comment>> comments;
+    private final MutableLiveData<List<MelodyProposal>> melodyProposals;
 
     private int currentSongId;
 

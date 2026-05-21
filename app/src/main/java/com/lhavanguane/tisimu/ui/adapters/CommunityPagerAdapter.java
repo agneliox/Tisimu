@@ -13,7 +13,7 @@ import com.lhavanguane.tisimu.ui.fragments.MembersFragment;
 
 public class CommunityPagerAdapter extends FragmentStateAdapter {
 
-    private String communityId;
+    private final String communityId;
 
     public CommunityPagerAdapter(@NonNull FragmentActivity fragmentActivity, String communityId) {
         super(fragmentActivity);

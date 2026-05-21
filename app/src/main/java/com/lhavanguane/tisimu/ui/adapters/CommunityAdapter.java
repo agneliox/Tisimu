@@ -56,9 +56,9 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView tvName;
-        private TextView tvDescription;
+        private final CardView cardView;
+        private final TextView tvName;
+        private final TextView tvDescription;
         private final TextView tvMemberCount;
         private final TextView tvCreatedBy;
         private final ImageView iconVisibility;

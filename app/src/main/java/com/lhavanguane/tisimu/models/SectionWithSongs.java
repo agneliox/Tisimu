@@ -1,7 +1,7 @@
 package com.lhavanguane.tisimu.models;
 
-import com.lhavanguane.tisimu.data.database.entities.Section;
-import com.lhavanguane.tisimu.data.database.entities.Song;
+import com.lhavanguane.tisimu.entities.Section;
+import com.lhavanguane.tisimu.entities.Song;
 
 import java.util.List;
 

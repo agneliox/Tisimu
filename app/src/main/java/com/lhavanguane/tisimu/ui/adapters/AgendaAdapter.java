@@ -57,13 +57,13 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView tvTitle;
-        private TextView tvContentPreview;
-        private TextView tvCreatedBy;
-        private TextView tvDate;
-        private MaterialButton btnDelete;
-        private View clickOverlay;
+        private final CardView cardView;
+        private final TextView tvTitle;
+        private final TextView tvContentPreview;
+        private final TextView tvCreatedBy;
+        private final TextView tvDate;
+        private final MaterialButton btnDelete;
+        private final View clickOverlay;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

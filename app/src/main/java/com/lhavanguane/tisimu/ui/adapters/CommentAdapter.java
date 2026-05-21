@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.data.database.entities.Comment;
+import com.lhavanguane.tisimu.entities.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +53,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvUserName;
-        private TextView tvTimeAgo;
-        private TextView tvCommentText;
-        private TextView tvLikeCount;
-        private TextView tvReply;
+        private final TextView tvUserName;
+        private final TextView tvTimeAgo;
+        private final TextView tvCommentText;
+        private final TextView tvLikeCount;
+        private final TextView tvReply;
 
         CommentViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -1,6 +1,7 @@
 package com.lhavanguane.tisimu.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HymnalManifest {
     private int version;
@@ -83,7 +84,7 @@ public class HymnalManifest {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             HymnalInfo that = (HymnalInfo) o;
-            return id != null ? id.equals(that.id) : that.id == null;
+            return Objects.equals(id, that.id);
         }
 
         @Override

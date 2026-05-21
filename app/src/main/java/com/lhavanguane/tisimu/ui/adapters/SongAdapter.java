@@ -53,8 +53,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNumber, tvTitle, tvSubtitle;
-        private ImageView ivChevron;
+        private final TextView tvNumber;
+        private final TextView tvTitle;
+        private final TextView tvSubtitle;
+        private final ImageView ivChevron;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

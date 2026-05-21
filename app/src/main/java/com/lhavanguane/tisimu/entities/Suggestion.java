@@ -1,4 +1,4 @@
-package com.lhavanguane.tisimu.data.database.entities;
+package com.lhavanguane.tisimu.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

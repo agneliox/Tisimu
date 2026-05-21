@@ -38,12 +38,12 @@ public class HymnalStorageManager {
     private static final String MANIFEST_URL = "https://raw.githubusercontent.com/" +
             GITHUB_USERNAME + "/" + REPO_NAME + "/" + BRANCH + "/hymnals/manifest.json";
 
-    private Context context;
-    private Gson gson;
-    private OkHttpClient client;
-    private ExecutorService executorService;
-    private File hymnalDirectory;
-    private Handler mainHandler;
+    private final Context context;
+    private final Gson gson;
+    private final OkHttpClient client;
+    private final ExecutorService executorService;
+    private final File hymnalDirectory;
+    private final Handler mainHandler;
 
     public interface ManifestCallback {
         void onSuccess(HymnalManifest manifest);

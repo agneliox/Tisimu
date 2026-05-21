@@ -64,11 +64,13 @@ public class HymnalAdapter extends RecyclerView.Adapter<HymnalAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private ImageView ivCover;
-        private TextView tvName, tvDescription, tvDetails;
-        private ImageView btnAction;
-        private MaterialCheckBox cbSelect;
+        private final CardView cardView;
+        private final ImageView ivCover;
+        private final TextView tvName;
+        private final TextView tvDescription;
+        private final TextView tvDetails;
+        private final ImageView btnAction;
+        private final MaterialCheckBox cbSelect;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

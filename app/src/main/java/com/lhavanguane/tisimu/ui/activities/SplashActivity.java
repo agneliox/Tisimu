@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final long SPLASH_DELAY = 2000;
     private FirebaseAuth mAuth;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

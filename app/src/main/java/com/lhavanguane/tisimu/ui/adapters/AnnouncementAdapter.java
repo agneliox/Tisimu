@@ -56,13 +56,13 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView tvTitle;
-        private TextView tvContent;
-        private TextView tvCreatedBy;
-        private TextView tvDate;
-        private TextView tvImportantBadge;
-        private MaterialButton btnDelete;
+        private final CardView cardView;
+        private final TextView tvTitle;
+        private final TextView tvContent;
+        private final TextView tvCreatedBy;
+        private final TextView tvDate;
+        private final TextView tvImportantBadge;
+        private final MaterialButton btnDelete;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

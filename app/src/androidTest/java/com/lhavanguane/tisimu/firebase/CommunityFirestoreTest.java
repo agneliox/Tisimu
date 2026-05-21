@@ -19,8 +19,8 @@ import static com.google.common.truth.Truth.assertThat;
 public class CommunityFirestoreTest extends FirebaseTestBase {
 
     private String testUserId;
-    private String testUserEmail = "test@example.com";
-    private String testPassword = "password123";
+    private final String testUserEmail = "test@example.com";
+    private final String testPassword = "password123";
 
     @Before
     @Override

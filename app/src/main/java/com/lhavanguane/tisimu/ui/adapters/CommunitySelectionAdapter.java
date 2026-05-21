@@ -66,14 +66,14 @@ public class CommunitySelectionAdapter extends RecyclerView.Adapter<CommunitySel
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView tvName;
-        private TextView tvDescription;
-        private TextView tvMemberCount;
-        private TextView tvCreatedBy;
-        private Chip chipVisibility;
-        private MaterialButton btnJoin;
-        private MaterialButton btnView;
+        private final CardView cardView;
+        private final TextView tvName;
+        private final TextView tvDescription;
+        private final TextView tvMemberCount;
+        private final TextView tvCreatedBy;
+        private final Chip chipVisibility;
+        private final MaterialButton btnJoin;
+        private final MaterialButton btnView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

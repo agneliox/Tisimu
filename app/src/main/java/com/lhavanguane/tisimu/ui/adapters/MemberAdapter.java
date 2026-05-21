@@ -47,10 +47,10 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView tvName;
-        private TextView tvEmail;
-        private Chip chipRole;
+        private final CardView cardView;
+        private final TextView tvName;
+        private final TextView tvEmail;
+        private final Chip chipRole;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

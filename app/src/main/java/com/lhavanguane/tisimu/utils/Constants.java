@@ -1,7 +1,6 @@
 package com.lhavanguane.tisimu.utils;
 
 import com.lhavanguane.tisimu.BuildConfig;
-import com.lhavanguane.tisimu.data.database.entities.Hymnal;
 
 public class Constants {
     // Replace with your actual Google Form URL

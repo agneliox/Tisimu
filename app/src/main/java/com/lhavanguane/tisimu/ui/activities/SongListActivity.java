@@ -90,7 +90,7 @@ public class SongListActivity extends AppCompatActivity {
 
         adapter.setOnSongClickListener(songItem -> {
             if (songItem instanceof SongItem) {
-                SongItem item = (SongItem) songItem;
+                SongItem item = songItem;
                 Intent intent = new Intent(SongListActivity.this, SongDetailActivity.class);
                 intent.putExtra("SONG_NUMBER", item.getSong().getNumber());
                 intent.putExtra("SONG_TITLE", item.getSong().getTitle());
