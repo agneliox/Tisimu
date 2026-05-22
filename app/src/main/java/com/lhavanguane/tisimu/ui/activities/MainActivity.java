@@ -165,11 +165,11 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             // Handle menu items that are not part of the navigation graph
-            if (id == R.id.nav_language) {
-                showLanguageSelectionDialog();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
-            } else if (id == R.id.nav_about_app) {
+//            if (id == R.id.nav_language) {
+//                showLanguageSelectionDialog();
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//                return true;
+            if (id == R.id.nav_about_app) {
                 showAboutDialog();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
