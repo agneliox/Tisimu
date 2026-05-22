@@ -174,7 +174,7 @@
     <string name="share_app">Partilhar Aplicação</string>
     <string name="rate_app">Avaliar Aplicação</string>
     <string name="send_feedback">Enviar Feedback</string>
-    <string name="version_1_0_1">Versão: 1.0.1</string>
+    <string name="version">Versão: %s</string>
     <string name="support">Suporte</string>
     <string name="switch_between_light_and_dark_themes">Alternar entre temas claro e escuro</string>
     <string name="reply_title">Ação de resposta padrão</string>
@@ -219,4 +219,5 @@
     <string name="english">Inglês</string>
     <string name="app_settings">Configurações do aplicativo</string>
     <string name="change_password">Mudar Senha</string>
+    <string name="joined_since">since %s</string>
 </resources>

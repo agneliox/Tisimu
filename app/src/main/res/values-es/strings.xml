@@ -174,7 +174,7 @@
     <string name="share_app">Compartir aplicación</string>
     <string name="rate_app">Calificar aplicación</string>
     <string name="send_feedback">Enviar comentarios</string>
-    <string name="version_1_0_1">Versión: 1.0.1</string>
+    <string name="version">Versión: %s</string>
     <string name="support">Soporte</string>
     <string name="switch_between_light_and_dark_themes">Cambiar entre temas claros y oscuros</string>
     <string name="reply_title">Acción de respuesta predeterminada</string>
@@ -219,4 +219,5 @@
     <string name="comment_text_here">Texto del comentario aquí...</string>
     <string name="discover_communities">Descubrir comunidades</string>
     <string name="songs">Canciones</string>
+    <string name="joined_since">since %s</string>
 </resources>

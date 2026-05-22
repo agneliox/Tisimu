@@ -190,6 +190,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupVersionInfo() {
-        tvAppVersion.setText(getString(R.string.version_1_0_1));
+        tvAppVersion.setText(getString(R.string.version));
     }
 }

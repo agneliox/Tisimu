@@ -2,7 +2,6 @@ package com.lhavanguane.tisimu.ui.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +22,15 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-//import com.lhavanguane.tisimu.BuildConfig;
+
+import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.ui.activities.LoginActivity;
-import com.lhavanguane.tisimu.utils.Constants;
-import com.lhavanguane.tisimu.utils.LanguageManager;
-import com.lhavanguane.tisimu.utils.ThemeManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,27 +40,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
-//    private TextView tvCommunitiesCount;
-//    private TextView tvHymnalsCount;
-//    private TextView tvFavoritesCount;
-    private TextView tvSignInMethod;
-    private TextView tvCurrentLanguage;
-    private SwitchMaterial switchDarkMode;
     private MaterialButton btnLogout;
     private TextView tvAppVersion;
-
     private View layoutEditProfile;
     private View layoutChangePassword;
-    private View layoutSendFeedback;
-    private View layoutRateApp;
-    private View layoutShareApp;
-    private View layoutAbout;
 
     private FirebaseAuth mAuth;
-    private LanguageManager languageManager;
-    private ThemeManager themeManager;
+
     private Toolbar toolbar;
-    private CircleImageView userauthor_pic;
+    private CircleImageView profile_pic;
     private TextView profile_name, profile_email, member_since;
 
 
@@ -73,8 +57,6 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(requireActivity());
         mAuth = FirebaseAuth.getInstance();
-        languageManager = LanguageManager.getInstance(requireContext());
-        themeManager = ThemeManager.getInstance(requireContext());
     }
 
     @Override
@@ -85,12 +67,10 @@ public class ProfileFragment extends Fragment {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         initViews(view);
         setupToolbar();
         setupUserInfo();
-//        setupStats();
-//        setupLanguageDisplay();
-//        setupDarkModeSwitch();
         setupClickListeners();
         setupVersionInfo();
 
@@ -99,22 +79,15 @@ public class ProfileFragment extends Fragment {
 
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.profileToolbar);
-        tvCurrentLanguage = view.findViewById(R.id.tvCurrentLanguage);
-//        switchDarkMode = view.findViewById(R.id.switchDarkModeProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
         tvAppVersion = view.findViewById(R.id.tvAppVersion);
-        userauthor_pic = view.findViewById(R.id.user_pic);
+        profile_pic = view.findViewById(R.id.user_pic);
         profile_name = view.findViewById(R.id.profile_name);
         profile_email = view.findViewById(R.id.profile_email);
         member_since = view.findViewById(R.id.member_since);
         layoutEditProfile = view.findViewById(R.id.layoutEditProfile);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
-        layoutSendFeedback = view.findViewById(R.id.layoutSendFeedback);
-        layoutRateApp = view.findViewById(R.id.layoutRateApp);
-        layoutShareApp = view.findViewById(R.id.layoutShareApp);
-        layoutAbout = view.findViewById(R.id.layoutAbout);
     }
-
 
     private void setupToolbar() {
         if (getActivity() != null) {
@@ -156,63 +129,42 @@ public class ProfileFragment extends Fragment {
                     String nameFromEmail = email.split("@")[0];
                     profile_name.setText(nameFromEmail);
                 } else {
-                    profile_name.setText("User");
+                    profile_name.setText(R.string.guest_user);
                 }
             }
 
             // Set user email
             profile_email.setText(user.getEmail() != null ? user.getEmail() : "No email");
 
-
             // Set member since (using user creation time if available)
             if (user.getMetadata() != null && user.getMetadata().getCreationTimestamp() > 0) {
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
                 String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
-                member_since.setText("Member since " + date);
+                member_since.setText(getString(R.string.joined_since, date));
                 Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
             } else {
-                member_since.setText("Member");
+                member_since.setText(R.string.member_since);
             }
 
             Glide.with(this)
                     .load(user.getPhotoUrl())
                     .placeholder(R.drawable.ic_person)
                     .error(R.drawable.ic_person)
-                    .into(userauthor_pic);
+                    .into(profile_pic);
 
-        } else {
-//            tvUserName.setText("Guest User");
-//            tvUserEmail.setText("Not logged in");
-//            tvMemberSince.setText("");
         }
     }
 
-    private void setupStats() {
-        // TODO: Load actual counts from database/preferences
-        // Communities count - from CommunityManager
-        // Hymnals count - from PreferencesManager
-        // Favorites count - from FavoritesManager (when implemented)
-
-    }
-
-    private void setupLanguageDisplay() {
-        String currentLangCode = languageManager.getCurrentLanguage();
-        String languageName = languageManager.getLanguageName(currentLangCode);
-        tvCurrentLanguage.setText(languageName);
-    }
 
 
 
     private void setupClickListeners() {
         layoutEditProfile.setOnClickListener(v -> showEditProfileDialog());
         layoutChangePassword.setOnClickListener(v -> showChangePasswordDialog());
-//        layoutSendFeedback.setOnClickListener(v -> openFeedbackForm());
-//        layoutRateApp.setOnClickListener(v -> openRateDialog());
-//        layoutShareApp.setOnClickListener(v -> shareApp());
-//        layoutAbout.setOnClickListener(v -> showAboutDialog());
         btnLogout.setOnClickListener(v -> logout());
     }
 
+    // ==================== EDIT PROFILE ====================
     private void showEditProfileDialog() {
         // TODO: Implement edit profile
         Toast.makeText(requireContext(), "Edit Profile coming soon", Toast.LENGTH_SHORT).show();
@@ -222,48 +174,6 @@ public class ProfileFragment extends Fragment {
         // TODO: Implement change password via Firebase
         Toast.makeText(requireContext(), "Change Password coming soon", Toast.LENGTH_SHORT).show();
     }
-//
-//    private void openFeedbackForm() {
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_FORM_URL));
-//        startActivity(browserIntent);
-//        Toast.makeText(requireContext(),
-//                "Please include your device model and Android version in the feedback",
-//                Toast.LENGTH_LONG).show();
-//    }
-//
-//    private void openRateDialog() {
-//        new AlertDialog.Builder(requireContext())
-//                .setTitle("Rate Tisimu")
-//                .setMessage("If you enjoy using Tisimu, please take a moment to rate it. Your feedback helps us improve!")
-//                .setPositiveButton("Rate Now", (dialog, which) -> {
-//                    openFeedbackForm();
-//                })
-//                .setNegativeButton("Later", null)
-//                .show();
-//    }
-//
-//    private void shareApp() {
-//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//        shareIntent.setType("text/plain");
-//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Tisimu - Gospel Hymnal Reader");
-//        shareIntent.putExtra(Intent.EXTRA_TEXT,
-//                "Check out Tisimu! A beautiful gospel hymnal reader with communities, daily verses, and offline hymnals.\n\n" +
-//                        "Download it here: https://github.com/agneliox/Tisimu\n\n" +
-//                        "Share your feedback: " + Constants.FEEDBACK_FORM_URL);
-//        startActivity(Intent.createChooser(shareIntent, "Share via"));
-//    }
-//
-//    private void showAboutDialog() {
-//        new AlertDialog.Builder(requireContext())
-//                .setTitle("About Tisimu")
-//                .setMessage("Version: " + BuildConfig.VERSION_NAME + "\n\n" +
-//                        "Tisimu is a gospel hymnal reader that allows you to download and read hymnals offline, " +
-//                        "join communities, and receive daily verses.\n\n" +
-//                        "Developed with ❤️ for gospel music lovers.\n\n" +
-//                        "* * * * *")
-//                .setPositiveButton("OK", null)
-//                .show();
-//    }
 
     private void logout() {
         new AlertDialog.Builder(requireContext())
@@ -279,17 +189,8 @@ public class ProfileFragment extends Fragment {
                 .setNegativeButton("No", null)
                 .show();
     }
-
-    private void restartApp() {
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        requireActivity().finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
-    }
-
-    private void setupVersionInfo() {
-//        tvAppVersion.setText("Version " + BuildConfig.VERSION_NAME);
+        private void setupVersionInfo() {
+        tvAppVersion.setText(getString(R.string.version, BuildConfig.VERSION_NAME));
     }
 
     @Override
