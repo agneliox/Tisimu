@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -62,35 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(v -> {
             showForgotPasswordDialog();
         });
-    }
-
-    private void showForgotPasswordDialog() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("Reset Password");
-
-        final TextInputEditText input = new TextInputEditText(this);
-        input.setHint("Enter your email");
-        builder.setView(input);
-
-        builder.setPositiveButton("Send", (dialog, which) -> {
-            String email = input.getText().toString().trim();
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(this, "Email is required", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            mAuth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Failed to send reset email", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.show();
     }
 
     private void initViews(){
@@ -176,6 +148,46 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         String error = task.getException() != null ? task.getException().getMessage() : "Login failed";
+                        Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    // ==================== FORGOT PASSWORD ====================
+
+    private void showForgotPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reset Password");
+        builder.setMessage("Enter your email address and we'll send you a link to reset your password.");
+
+        // Create EditText for email input
+        final TextInputEditText input = new TextInputEditText(this);
+        input.setHint("Email address");
+        input.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+        builder.setPositiveButton("Send", (dialog, which) -> {
+            String email = input.getText().toString().trim();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(LoginActivity.this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            sendPasswordResetEmail(email);
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Password reset email sent to " + email, Toast.LENGTH_LONG).show();
+                    } else {
+                        String error = task.getException() != null ?
+                                task.getException().getMessage() :
+                                "Failed to send reset email";
                         Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
                     }
                 });
