@@ -207,7 +207,7 @@
     <string name="app_settings">App Settings</string>
     <string name="select_language">Select Language</string>
     <string name="communities">Communities</string>
-    <string name="created_by">by %s$!</string>
+    <string name="created_by">by %s</string>
     <string name="joined">Joined</string>
     <string name="members_count">%s$ members</string>
     <string name="private_">Private</string>

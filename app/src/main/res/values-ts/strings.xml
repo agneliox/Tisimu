@@ -70,7 +70,7 @@
     <string name="today_s_verse">📖 Ndzimana ya namuntlha</string>
     <string name="loading">swa pfuleka…</string>
     <string name="hymnal">Nhlengeletano</string>
-    <string name="community">Muganga</string>
+    <string name="community">Mintlawa</string>
     <string name="notifications">Switiviso</string>
     <string name="home">Kaya</string>
     <string name="my_hymnal">Nhlengeletano ya mina</string>
@@ -189,6 +189,9 @@
     <string name="rate_now">Rate Sweswi</string>
     <string name="light_mode">Mode ya Ku Vonakala</string>
     <string name="change_theme">Cinca Nhlokomhaka</string>
+    <string name="select_language">Hlawula Ririmi</string>
+    <string name="communities">Mintlawa</string>
+    <string name="created_by">hi %s</string>
     <string name="joined">Joyiniwile</string>
     <string name="members_count">%s swirho</string>
     <string name="private_">Xihundla</string>
@@ -211,4 +214,8 @@
     <string name="comment_text_here">Matsalwa ya nhlamuselo hi laha...</string>
     <string name="discover_communities">Lavisisa Miganga</string>
     <string name="songs">Tinsimu</string>
+    <string name="system_default">Xiyimiso xa Sisiteme</string>
+    <string name="english">Xinghezi</string>
+    <string name="app_settings">Switirhisiwa swa App</string>
+    <string name="change_password">Cinca Phasiwedi</string>
 </resources>

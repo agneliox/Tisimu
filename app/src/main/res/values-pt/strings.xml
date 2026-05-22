@@ -71,7 +71,7 @@
     <string name="today_s_verse">📖 Versículo do Dia</string>
     <string name="loading">A carregar ...</string>
     <string name="hymnal">Hinario</string>
-    <string name="community">Comunidade</string>
+    <string name="community">Grupos</string>
     <string name="notifications">Notificações</string>
     <string name="home">Início</string>
     <string name="my_hymnal">Meu Hinario</string>
@@ -190,6 +190,9 @@
     <string name="rate_now">Rate Now</string>
     <string name="light_mode">Modo claro</string>
     <string name="change_theme">Alterar tema</string>
+    <string name="select_language">Seleccionar idioma</string>
+    <string name="communities">Grupos</string>
+    <string name="created_by">por %s</string>
     <string name="joined">Aderiu</string>
     <string name="members_count">%s membros</string>
     <string name="private_">Privado</string>
@@ -212,4 +215,8 @@
     <string name="comment_text_here">Texto do comentário aqui...</string>
     <string name="discover_communities">Descobrir Comunidades</string>
     <string name="songs">Hinos</string>
+    <string name="system_default">Padrão do sistema</string>
+    <string name="english">Inglês</string>
+    <string name="app_settings">Configurações do aplicativo</string>
+    <string name="change_password">Mudar Senha</string>
 </resources>

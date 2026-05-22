@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_select_hymnals"
         android:title="@string/select_hymnals"
-        android:icon="@drawable/ic_hymn_book"
+        android:icon="@drawable/ic_add"
         app:showAsAction="ifRoom" />
 
     <item
