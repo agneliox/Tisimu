@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +24,12 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.ui.activities.MainActivity;
 import com.lhavanguane.tisimu.R;
@@ -166,13 +169,128 @@ public class ProfileFragment extends Fragment {
 
     // ==================== EDIT PROFILE ====================
     private void showEditProfileDialog() {
-        // TODO: Implement edit profile
-        Toast.makeText(requireContext(), "Edit Profile coming soon", Toast.LENGTH_SHORT).show();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            Toast.makeText(getContext(), "Please log in first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Edit Profile");
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_edit_profile, null);
+        EditText etDisplayName = dialogView.findViewById(R.id.etDisplayName);
+
+        // Pre-fill current display name
+        String currentName = user.getDisplayName();
+        if (currentName != null && !currentName.isEmpty()) {
+            etDisplayName.setText(currentName);
+            etDisplayName.setSelection(currentName.length());
+        }
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String newDisplayName = etDisplayName.getText().toString().trim();
+            if (newDisplayName.isEmpty()) {
+                Toast.makeText(getContext(), "Display name cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            updateDisplayName(newDisplayName);
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    private void updateDisplayName(String newDisplayName) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) return;
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(newDisplayName)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                        setupUserInfo(); // Refresh displayed info
+                    } else {
+                        String error = task.getException() != null ? task.getException().getMessage() : "Update failed";
+                        Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void showChangePasswordDialog() {
         // TODO: Implement change password via Firebase
-        Toast.makeText(requireContext(), "Change Password coming soon", Toast.LENGTH_SHORT).show();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            Toast.makeText(getContext(), "Please log in first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Change Password");
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_password, null);
+        EditText etCurrentPassword = dialogView.findViewById(R.id.etCurrentPassword);
+        EditText etNewPassword = dialogView.findViewById(R.id.etNewPassword);
+        EditText etConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("Change", (dialog, which) -> {
+            String currentPassword = etCurrentPassword.getText().toString().trim();
+            String newPassword = etNewPassword.getText().toString().trim();
+            String confirmPassword = etConfirmPassword.getText().toString().trim();
+
+            // Validate inputs
+            if (currentPassword.isEmpty()) {
+                Toast.makeText(getContext(), "Current password is required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (newPassword.length() < 6) {
+                Toast.makeText(getContext(), "New password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!newPassword.equals(confirmPassword)) {
+                Toast.makeText(getContext(), "New passwords do not match", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            changePassword(currentPassword, newPassword);
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    // ==================== CHANGE PASSWORD ====================
+    private void changePassword(String currentPassword, String newPassword) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null || user.getEmail() == null) return;
+
+        // Re-authenticate user before changing password
+        com.google.firebase.auth.AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPassword);
+
+        user.reauthenticate(credential)
+                .addOnCompleteListener(reAuthTask -> {
+                    if (reAuthTask.isSuccessful()) {
+                        // Re-authentication successful, now update password
+                        user.updatePassword(newPassword)
+                                .addOnCompleteListener(updateTask -> {
+                                    if (updateTask.isSuccessful()) {
+                                        Toast.makeText(getContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                                        // Optionally sign out and ask to login again
+                                        logout();
+                                    } else {
+                                        String error = updateTask.getException() != null ? updateTask.getException().getMessage() : "Password update failed";
+                                        Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    } else {
+                        String error = reAuthTask.getException() != null ? reAuthTask.getException().getMessage() : "Current password is incorrect";
+                        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void logout() {

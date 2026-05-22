@@ -231,4 +231,8 @@
     <string name="discover_communities">Discover Communities</string>
     <string name="songs">Songs</string>
     <string name="joined_since">since %s</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="new_password_min_6_characters">New Password (min 6 characters)</string>
+    <string name="current_password">Current Password</string>
+    <string name="display_name">Display Name</string>
 </resources>
