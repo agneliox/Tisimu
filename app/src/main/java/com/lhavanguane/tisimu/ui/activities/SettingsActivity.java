@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.R;
 import com.lhavanguane.tisimu.utils.Constants;
 import com.lhavanguane.tisimu.utils.LanguageManager;
@@ -190,6 +191,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupVersionInfo() {
-        tvAppVersion.setText(getString(R.string.version));
+        tvAppVersion.setText(getString(R.string.version, BuildConfig.VERSION_NAME));
     }
 }
