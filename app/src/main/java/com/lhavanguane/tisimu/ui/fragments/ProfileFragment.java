@@ -144,7 +144,7 @@ public class ProfileFragment extends Fragment {
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
                 String date = sdf.format(new Date(user.getMetadata().getCreationTimestamp()));
                 member_since.setText(getString(R.string.joined_since, date));
-                Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "URL " + user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
             } else {
                 member_since.setText(R.string.member_since);
             }
@@ -157,9 +157,6 @@ public class ProfileFragment extends Fragment {
 
         }
     }
-
-
-
 
     private void setupClickListeners() {
         layoutEditProfile.setOnClickListener(v -> showEditProfileDialog());
