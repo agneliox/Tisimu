@@ -23,8 +23,8 @@ android {
         applicationId = "com.lhavanguane.tisimu"
         minSdk = 24
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.1.8"
+        versionCode = 9
+        versionName = "1.1.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,6 +64,7 @@ android {
                 releaseNotes = "Release build"
             }
 
+            ndk.debugSymbolLevel = "FULL"
 
             // Enables code-related app optimization.
             isMinifyEnabled = true
