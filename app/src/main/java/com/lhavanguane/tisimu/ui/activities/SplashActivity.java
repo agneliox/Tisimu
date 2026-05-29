@@ -3,6 +3,7 @@ package com.lhavanguane.tisimu.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.lhavanguane.tisimu.BuildConfig;
 import com.lhavanguane.tisimu.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final long SPLASH_DELAY = 2000;
     private FirebaseAuth mAuth;
     private final Handler handler = new Handler();
+    TextView splashAppVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
+
+        splashAppVersion = findViewById(R.id.splash_version);
+        setupVersionInfo();
 
         handler.postDelayed(() -> {
             FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -69,6 +75,10 @@ public class SplashActivity extends AppCompatActivity {
         if (user != null) {
             FirebaseCrashlytics.getInstance().setUserId(user.getUid());
         }
+    }
+
+    private void setupVersionInfo() {
+        splashAppVersion.setText(getString(R.string.version, BuildConfig.VERSION_NAME));
     }
 
     @Override
