@@ -28,6 +28,18 @@
       "author": "Various Authors!"
     },
     {
+      "id": "tinsimu_ta_ku_twanana",
+      "name": "Tinsimu ta ku Twanana",
+      "description": "Hinos Evangélicos em Português",
+      "language": "Tsonga",
+      "totalSongs": 280,
+      "fileUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/tinsimu_ta_ku_twanane.json",
+      "coverUrl": "https://raw.githubusercontent.com/agneliox/tisimu/master/hymnals/covers/tinsimu_ta_ku_twanane.jpg",    
+      "fileSize": 437656,
+      "version": 1,
+      "author": "Various Authors!"
+    },
+    {
       "id": "test",
       "name": "Test Hymnal",
       "description": "Test hymnal for debugging",
