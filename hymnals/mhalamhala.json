@@ -1,7 +1,7 @@
 {
   "id": "mhalamhala_ya_evangeli",
   "name": "Mhalamhala Ya Evangeli",
-  "version": 2,
+  "version": 3,
   "metadata": {
     "description": "Mhalamhala description",
     "language": "Tsonga",
@@ -935,49 +935,49 @@
       "timeSignature": "",
       "verses": [
         {
-          "type": "verse",
-          "number": 1,
-          "label": "1",
-          "lines": [
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 2,
-          "label": "2",
-          "lines": [
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 3,
-          "label": "3",
-          "lines": [
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 4,
-          "label": "4",
-          "lines": [
-            "",
-            "",
-            "",
-            ""
-          ]
-        }
+      "lines": [
+        "Loko ndzi yi vona Hosi",
+        "Yi fa exihambanweni;",
+        "Ndzi fularhela rifuwo",
+        "Ni hikwaswo swa misava."
+      ],
+      "label": "1",
+      "number": 1,
+      "type": "verse"
+    },
+    {
+      "lines": [
+        "Xana ndzi nga tidzunisa",
+        "Loko ndzi languta mhamba?",
+        "Matshan' weni yanga o file.",
+        "Yesu,N'wana wa Xikwembu."
+      ],
+      "number": 2,
+      "label": "2",
+      "type": "verse"
+    },
+    {
+      "lines": [
+        "Languta mitwa nhlokweni,",
+        "Vona ngati mavokweni,",
+        "Yo! Mbanga leyi ya fumu,",
+        "Ho! Rirhandzu le'rikulu."
+      ],
+      "number": 3,
+      "label": "3",
+      "type": "verse"
+    },
+    {
+      "lines": [
+        "Ndzi nga nkhensela ha yini,",
+        "Rirhandzu le' ra ku nghasi?",
+        "Ndzi hava leswo ringana,",
+        "Ndzi nyika xiviri xa nga."
+      ],
+      "number": 4,
+      "label": "4",
+      "type": "verse"
+    }
       ]
     },
     {
@@ -1614,8 +1614,7 @@
             "Tshika ku kanakana,",
             "Sweswi, pfumela Yesu,",
             "Sweswi pfalula nyangwa,",
-            "Pfumela Yesu a nghena",
-            ""
+            "Pfumela Yesu a nghena"
           ]
         },
         {
@@ -1626,8 +1625,7 @@
             "Xana wa lava ku basisiwa?",
             "Pfalula mbilu ya wena.",
             "Ngati ya Yesu yi ta ku hlantswa",
-            "Pfumela Yesu a nghena.",
-            ""
+            "Pfumela Yesu a nghena."
           ]
         },
         {
@@ -1638,8 +1636,7 @@
             "Xana u le xikarhi ka mpfuka?",
             "Pfalula mbilu ya wena.",
             "Yesu o ta ku nyika ku tsaka",
-            "Pfumela Yesu a nghena.",
-            ""
+            "Pfumela Yesu a nghena."
           ]
         },
         {
@@ -1650,8 +1647,7 @@
             "Xana vangana ke, vo ku tsika?",
             "Pfalula mbilu ya wena.",
             "Yesu i nakulorhi wo tiya,",
-            "Pfumela Yesu a nghena.",
-            ""
+            "Pfumela Yesu a nghena."
           ]
         },
         {
@@ -2047,8 +2043,7 @@
             "O ta hi rivalela,",
             "Muponisi Yesu?",
             "A va a hi ponisa.",
-            "Muponisi Yesu.",
-            ""
+            "Muponisi Yesu."
           ]
         },
         {
@@ -4183,8 +4178,7 @@
             "Mi ntshunxiwa ntlan'wini,",
             "Mi ta katekisiwa,",
             "Hi vumbone bya Evangeli",
-            "ya Yesu.",
-            ""
+            "ya Yesu."
           ]
         },
         {
@@ -4213,53 +4207,51 @@
       "timeSignature": "",
       "verses": [
         {
-          "type": "verse",
-          "number": 1,
-          "label": "1",
-          "lines": [
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 2,
-          "label": "2",
-          "lines": [
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 3,
-          "label": "3",
-          "lines": [
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        },
-        {
-          "type": "verse",
-          "number": 4,
-          "label": "4",
-          "lines": [
-            "",
-            "",
-            "",
-            "",
-            ""
-          ]
-        }
+      "label": "1",
+      "lines": [
+        "A ndzi lova endzopen',",
+        "A ndzi tsandzekile,",
+        "Ku tihumesa khelen'",
+        "Ra khombo ni rifu.",
+        "Kambi Hosi yi twile.",
+        "Ku rila ka mina,",
+        "Yi tshambulute voko",
+        "Yi ndzi ntshunxa.",
+        "Ndzi ponile, ndzi ponile,",
+        "Rirhandzu ra Yesu ri hlurile."
+      ],
+      "number": 1,
+      "type": "verse"
+    },
+    {
+      "type": "verse",
+      "number": 2,
+      "lines": [
+        "Mbilu ya nga hinkwayo",
+        "Ndzi yi nyiketile",
+        "E ka Yesu Muferi,",
+        "Ndzi ta n'wi hanyela.",
+        "O ta fuma e mbilwin',",
+        "Xi va xiluvelo",
+        "Xa yena hi masiku, ndzi n'wi",
+        "rhandza."
+      ],
+      "label": "2"
+    },
+    {
+      "label": "3",
+      "type": "verse",
+      "lines": [
+        "N'wina vanhu lendzingwen'",
+        "Sweswi langutelan',",
+        "E ka Yesu le henhla,",
+        "O ta mi ponisa.",
+        "Yena o ta rhulisa timbilu ta n'wina,",
+        "N'wi amukelen' sweswi.",
+        "Wa mi rhandza."
+      ],
+      "number": 3
+    }
       ]
     },
     {
@@ -4657,7 +4649,7 @@
     },
     {
       "number": 65,
-      "title": "",
+      "title": "Yesu wa Ndzi Yimela",
       "author": "",
       "composer": "",
       "key": "",
@@ -10757,7 +10749,7 @@
     },
     {
       "number": 169,
-      "title": "",
+      "title": "Ra ta siku ra nkateko",
       "author": "",
       "composer": "",
       "key": "",
@@ -10778,7 +10770,7 @@
     },
     {
       "number": 170,
-      "title": "",
+      "title": "O ta vuya, o ta vuya.",
       "author": "",
       "composer": "",
       "key": "",
@@ -10804,7 +10796,7 @@
     },
     {
       "number": 171,
-      "title": "",
+      "title": "N'ta n'wi tiva, n'ta n'wi tiva",
       "author": "",
       "composer": "",
       "key": "",
@@ -10826,7 +10818,7 @@
     },
     {
       "number": 172,
-      "title": "",
+      "title": "Yesu u ta vuya kwala misave",
       "author": "",
       "composer": "",
       "key": "",
@@ -10853,7 +10845,7 @@
     },
     {
       "number": 173,
-      "title": "",
+      "title": "Le ntsungeni",
       "author": "",
       "composer": "",
       "key": "",
@@ -10876,7 +10868,7 @@
     },
     {
       "number": 174,
-      "title": "",
+      "title": "Hi ta famba mahlwen'",
       "author": "",
       "composer": "",
       "key": "",
@@ -10897,7 +10889,7 @@
     },
     {
       "number": 175,
-      "title": "",
+      "title": "Tumbela kwale xihundleni",
       "author": "",
       "composer": "",
       "key": "",
@@ -10918,7 +10910,7 @@
     },
     {
       "number": 176,
-      "title": "",
+      "title": "Ndzi ambexe hi ku tenga ka Yes",
       "author": "",
       "composer": "",
       "key": "",
@@ -10940,7 +10932,7 @@
     },
     {
       "number": 177,
-      "title": "",
+      "title": "Hlalela yena Yesu",
       "author": "",
       "composer": "",
       "key": "",
@@ -10961,7 +10953,7 @@
     },
     {
       "number": 178,
-      "title": "",
+      "title": "Yima tan' hi Daniel hamb' u le swa ku",
       "author": "",
       "composer": "",
       "key": "",
@@ -10981,7 +10973,7 @@
     },
     {
       "number": 179,
-      "title": "",
+      "title": "Kombelani mi ta nyikiwa",
       "author": "",
       "composer": "",
       "key": "",
@@ -11010,7 +11002,7 @@
     },
     {
       "number": 180,
-      "title": "",
+      "title": "O pfukile Muferi, O pfukile Muferi",
       "author": "",
       "composer": "",
       "key": "",
@@ -11074,7 +11066,7 @@
     },
     {
       "number": 183,
-      "title": "",
+      "title": "A ndzi koti ku dzivala amintiro ya Hosi",
       "author": "",
       "composer": "",
       "key": "",
@@ -11993,8 +11985,7 @@
             "That Christ should join so freely in the scheme,",
             "Although it meant His death on Calvary,",
             "Did ever human tongue find noble theme,",
-            "Than love divine that ransomed me.",
-            ""
+            "Than love divine that ransomed me."
           ]
         },
         {
@@ -12416,8 +12407,7 @@
             "Entrando no Meu Coração! (bis)",
             "Que mundança em mim fêz.",
             "O meu Jesus,",
-            "Vindo Ele ao meu coração.",
-            ""
+            "Vindo Ele ao meu coração."
           ]
         }
       ]
