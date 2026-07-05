@@ -18,6 +18,12 @@
         app:title="@string/home"
         app:titleTextColor="?attr/colorOnSurface" />
 
+    <!-- 1dp divider under toolbar -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorOutlineVariant" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -31,14 +37,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="32dp">
 
-                <!-- Greeting Section -->
+                <!-- Greeting -->
                 <TextView
                     android:id="@+id/tvGreeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="4dp"
                     android:gravity="center"
                     android:text="@string/hello_hand"
                     android:textAppearance="?attr/textAppearanceHeadlineSmall"
@@ -48,93 +56,74 @@
                     android:id="@+id/tvWelcomeMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="28dp"
                     android:gravity="center"
                     android:text="@string/welcome_to_tisimu"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <!-- Verse Card -->
-                <!--                <com.google.android.material.card.MaterialCardView-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginBottom="16dp"-->
-                <!--                    app:cardCornerRadius="16dp"-->
-                <!--                    app:cardElevation="2dp"-->
-                <!--                    >-->
-
-                <LinearLayout
+                <!-- Daily verse card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:text="@string/today_s_verse"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorOnSurface" />
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                    <TextView
-                        android:id="@+id/tvDailyVerse"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:lineSpacingExtra="6dp"
-                        android:text="@string/loading"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorOnSurface" />
+                        <!-- Section label -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="@string/today_s_verse"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnPrimaryContainer" />
 
-                    <TextView
-                        android:id="@+id/tvVerseReference"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:text=""
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurface" />
+                        <TextView
+                            android:id="@+id/tvDailyVerse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:lineSpacingMultiplier="1.6"
+                            android:text="@string/loading"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnPrimaryContainer" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvVerseReference"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text=""
+                            android:textAppearance="?attr/textAppearanceTitleSmall"
+                            android:textColor="?attr/colorOnPrimaryContainer" />
 
-                <!--                </com.google.android.material.card.MaterialCardView>-->
+                    </LinearLayout>
 
-                <!-- Expand/Collapse Button -->
-                <LinearLayout
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Expand/Collapse button — MD3 Tonal icon button -->
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/llExpandButton"
+                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/read_more"
+                    android:textAllCaps="false"
+                    app:icon="@drawable/ic_chevron_down"
+                    app:iconGravity="end" />
 
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/tvExpandLabel"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginBottom="4dp"-->
-                    <!--                        android:text="Read More"-->
-                    <!--                        android:textAppearance="?attr/textAppearanceLabelMedium"-->
-                    <!--                        />-->
-
-                    <ImageView
-                        android:id="@+id/ivChevronExpand"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/shape_circle"
-                        android:contentDescription="@string/expand"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_chevron_down" />
-
-                </LinearLayout>
-
-                <!-- Collapsible Content -->
+                <!-- Collapsible devotional content -->
                 <LinearLayout
                     android:id="@+id/llCollapsibleContent"
                     android:layout_width="match_parent"
@@ -142,35 +131,33 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <!-- Devotional Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/devotionalCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:visibility="gone"
-                        app:cardCornerRadius="6dp"
-                        >
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="20dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/reflection"
-                                android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorOnSurface" />
+                                android:textAppearance="?attr/textAppearanceLabelLarge" />
 
                             <TextView
                                 android:id="@+id/tvDevotionalTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginBottom="10dp"
                                 android:text=""
                                 android:textAppearance="?attr/textAppearanceTitleMedium"
                                 android:textColor="?attr/colorOnSurface" />
@@ -179,43 +166,41 @@
                                 android:id="@+id/tvDevotionalBody"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:lineSpacingExtra="4dp"
+                                android:lineSpacingMultiplier="1.5"
                                 android:text=""
-                                android:textAppearance="?attr/textAppearanceBodyMedium"
-                                android:textColor="?attr/colorOnSurfaceVariant" />
+                                android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Application Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/applicationCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:visibility="gone"
-                        app:cardCornerRadius="6dp">
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="20dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/today_s_application"
-                                android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorOnSurface" />
+                                android:textAppearance="?attr/textAppearanceLabelLarge" />
 
                             <TextView
                                 android:id="@+id/tvApplication"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:lineSpacingExtra="4dp"
+                                android:lineSpacingMultiplier="1.5"
                                 android:text=""
                                 android:textAppearance="?attr/textAppearanceBodyMedium"
                                 android:textColor="?attr/colorOnSurface" />
@@ -224,73 +209,68 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Reflection Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/reflectionCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:visibility="gone"
-                        app:cardCornerRadius="6dp"
-                        >
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="20dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/question_to_ponder"
-                                android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorOnSurface" />
+                                android:textAppearance="?attr/textAppearanceLabelLarge" />
 
                             <TextView
                                 android:id="@+id/tvReflection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:lineSpacingExtra="4dp"
+                                android:lineSpacingMultiplier="1.5"
                                 android:text=""
                                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="italic" />
 
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Prayer Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/prayerCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:visibility="gone"
-                        app:cardCornerRadius="6dp"
-                        >
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="20dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/prayer"
-                                android:textAppearance="?attr/textAppearanceTitleSmall"
-                                android:textColor="?attr/colorOnSurface" />
+                                android:textAppearance="?attr/textAppearanceLabelLarge" />
 
                             <TextView
                                 android:id="@+id/tvPrayer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:lineSpacingExtra="4dp"
+                                android:lineSpacingMultiplier="1.5"
                                 android:text=""
                                 android:textAppearance="?attr/textAppearanceBodyMedium"
                                 android:textColor="?attr/colorOnSurface" />

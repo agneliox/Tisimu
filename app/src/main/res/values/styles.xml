@@ -1,57 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Card View Style -->
+    <!-- Cards -->
     <style name="CardViewStyle" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardCornerRadius">12dp</item>
-        <item name="cardElevation">2dp</item>
-        <item name="contentPadding">16dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="contentPadding">0dp</item>
     </style>
 
-    <!-- Button Styles -->
+    <style name="CardViewStyle.Filled" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="contentPadding">0dp</item>
+    </style>
+
+    <!-- Buttons — MD3: filled button uses full rounded corners (20dp) -->
     <style name="ButtonStyle" parent="Widget.Material3.Button">
-        <item name="cornerRadius">8dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">8dp</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="ButtonStyleOutlined" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">8dp</item>
+    <style name="ButtonStyle.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="ButtonStyleText" parent="Widget.Material3.Button.TextButton">
-        <item name="cornerRadius">8dp</item>
+    <style name="ButtonStyle.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
-    <!-- Chip Styles -->
-    <style name="ChipStyle" parent="Widget.Material3.Chip.Assist">
-        <item name="chipCornerRadius">8dp</item>
+    <style name="ButtonStyle.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
-    <!-- Top App Bar Style -->
+    <!-- Text inputs — MD3 Outlined -->
+    <style name="TextInputStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    </style>
+
+    <!-- Top App Bar -->
     <style name="TopAppBarStyle" parent="Widget.Material3.Toolbar.Surface">
-        <item name="android:background">@color/md_theme_surface</item>
         <item name="android:elevation">0dp</item>
+        <item name="titleTextAppearance">?attr/textAppearanceTitleLarge</item>
     </style>
 
-    <!-- Bottom Navigation Style -->
+    <!-- Bottom Navigation -->
     <style name="BottomNavigationStyle" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:background">@color/md_theme_surface</item>
-        <item name="elevation">8dp</item>
+        <item name="elevation">3dp</item>
     </style>
 
+    <!-- Shape overlays -->
     <style name="ShapeAppearanceOverlay.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <!-- Add these styles to your app for better disabled button appearance -->
-    <!-- In res/values/styles.xml -->
+    <style name="ShapeAppearanceOverlay.ExtraLarge" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
 
-    <style name="ButtonJoined" parent="Widget.Material3.Button">
-        <item name="android:backgroundTint">@android:color/darker_gray</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="cornerRadius">18dp</item>
+    <!-- Chips -->
+    <style name="ChipStyle" parent="Widget.Material3.Chip.Assist">
+        <item name="chipCornerRadius">8dp</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="DialogStyle" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.ExtraLarge</item>
     </style>
 
 </resources>

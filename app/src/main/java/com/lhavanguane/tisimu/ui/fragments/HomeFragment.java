@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +24,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lhavanguane.tisimu.services.DailyVerseFirestoreManager;
@@ -57,9 +57,7 @@ public class HomeFragment extends Fragment {
 //    private DailyVerseManager dailyVerseManager;
 
     private LinearLayout llCollapsibleContent;
-    private LinearLayout llExpandButton;
-//    private TextView tvExpandLabel;
-    private ImageView ivChevronExpand;
+    private MaterialButton llExpandButton;
 
     private PreferencesManager preferencesManager;
 
@@ -130,7 +128,6 @@ public class HomeFragment extends Fragment {
 
         llCollapsibleContent = view.findViewById(R.id.llCollapsibleContent);
         llExpandButton = view.findViewById(R.id.llExpandButton);
-        ivChevronExpand = view.findViewById(R.id.ivChevronExpand);
     }
 
     private void setupToolbar() {
@@ -251,12 +248,10 @@ public class HomeFragment extends Fragment {
     private void updateExpandCollapseUI() {
         if (isExpanded) {
             llCollapsibleContent.setVisibility(View.VISIBLE);
-//            tvExpandLabel.setText("Read Less");
-            ivChevronExpand.setImageResource(R.drawable.ic_chevron_up);
+            llExpandButton.setIconResource(R.drawable.ic_chevron_up);
         } else {
             llCollapsibleContent.setVisibility(View.GONE);
-//            tvExpandLabel.setText("Read More");
-            ivChevronExpand.setImageResource(R.drawable.ic_chevron_down);
+            llExpandButton.setIconResource(R.drawable.ic_chevron_down);
         }
     }
 

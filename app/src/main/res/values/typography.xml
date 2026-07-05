@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Display styles -->
+
     <style name="TextAppearance.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.02</item>
     </style>
 
     <style name="TextAppearance.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="TextAppearance.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
-    <!-- Headline styles -->
     <style name="TextAppearance.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="TextAppearance.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
@@ -26,43 +28,56 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
-    <!-- Title styles -->
     <style name="TextAppearance.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <style name="TextAppearance.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
     <style name="TextAppearance.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <!-- Body styles -->
+    <!-- Body — slightly more line height for hymnal readability -->
     <style name="TextAppearance.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
     </style>
 
     <style name="TextAppearance.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
     </style>
 
     <style name="TextAppearance.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
 
-    <!-- Label styles -->
+    <!-- Hymnal lyrics — larger line height for comfortable reading -->
+    <style name="TextAppearance.Lyrics" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:lineSpacingMultiplier">1.8</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
     <style name="TextAppearance.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:textColor">?attr/colorPrimary</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
     <style name="TextAppearance.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:letterSpacing">0.02</item>
     </style>
 
     <style name="TextAppearance.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:textColor">?attr/colorOutline</item>
+        <item name="android:letterSpacing">0.04</item>
     </style>
+
 </resources>

@@ -1,16 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Material Design 3 Theme -->
     <style name="Theme.Tisimu" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Status bar color -->
+
+        <!-- System bars -->
         <item name="android:statusBarColor">@color/surface_container</item>
         <item name="android:windowLightStatusBar">true</item>
-
-        <!-- Navigation bar color -->
         <item name="android:navigationBarColor">@color/md_theme_surface</item>
-<!--        <item name="android:windowLightNavigationBar">true</item>-->
 
-        <!-- Material Design 3 color attributes -->
+        <!-- Color scheme -->
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_on_primary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primary_container</item>
@@ -39,47 +36,55 @@
         <item name="colorOutline">@color/md_theme_outline</item>
         <item name="colorOutlineVariant">@color/md_theme_outline_variant</item>
 
-<!--        <item name="colorBackground">@color/md_theme_background</item>-->
+        <item name="android:colorBackground">@color/md_theme_background</item>
         <item name="colorOnBackground">@color/md_theme_on_background</item>
 
-        <!-- Surface colors -->
         <item name="colorSurfaceContainerHighest">@color/surface_container_highest</item>
         <item name="colorSurfaceContainerHigh">@color/surface_container_high</item>
         <item name="colorSurfaceContainer">@color/surface_container</item>
         <item name="colorSurfaceContainerLow">@color/surface_container_low</item>
         <item name="colorSurfaceContainerLowest">@color/surface_container_lowest</item>
 
-        <!-- Typography - using Material 3 defaults -->
-<!--        <item name="textAppearanceHeadline1">@style/TextAppearance.Material3.HeadlineLarge</item>-->
-<!--        <item name="textAppearanceHeadline2">@style/TextAppearance.Material3.Headline2</item>-->
-<!--        <item name="textAppearanceHeadline3">@style/TextAppearance.Material3.Headline3</item>-->
-<!--        <item name="textAppearanceHeadline4">@style/TextAppearance.Material3.Headline4</item>-->
-<!--        <item name="textAppearanceHeadline5">@style/TextAppearance.Material3.Headline5</item>-->
-<!--        <item name="textAppearanceHeadline6">@style/TextAppearance.Material3.Headline6</item>-->
-        <item name="textAppearanceBody1">@style/TextAppearance.Material3.BodyLarge</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.Material3.BodyMedium</item>
+        <!-- Typography -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.LabelSmall</item>
 
-        <!-- Component shapes -->
+        <!-- Shape -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent</item>
 
         <!-- Elevation overlays -->
         <item name="elevationOverlayEnabled">true</item>
-        <item name="elevationOverlayColor">@android:color/black</item>
+        <item name="elevationOverlayColor">@color/md_theme_primary</item>
 
-        <!-- Bottom navigation style -->
-        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
-
-        <!-- Navigation drawer style -->
+        <!-- Components -->
+        <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
         <item name="navigationViewStyle">@style/Widget.Material3.NavigationView</item>
+        <item name="materialButtonStyle">@style/ButtonStyle</item>
+        <item name="materialButtonOutlinedStyle">@style/ButtonStyle.Outlined</item>
+        <item name="textInputStyle">@style/TextInputStyle</item>
+        <item name="materialCardViewStyle">@style/CardViewStyle</item>
+        <item name="materialAlertDialogTheme">@style/DialogStyle</item>
     </style>
 
-    <!-- Splash Screen Theme -->
     <style name="Theme.Tisimu.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_theme_background</item>
+        <item name="windowSplashScreenBackground">@color/md_theme_primary</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_hymn_book</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
         <item name="postSplashScreenTheme">@style/Theme.Tisimu</item>
     </style>
 
