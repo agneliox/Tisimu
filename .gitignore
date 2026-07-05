@@ -10,6 +10,8 @@
 .DS_Store
 /build
 /captures
+/app/release
+.idea/markdown.xml
 .externalNativeBuild
 .cxx
 local.properties
