@@ -309,7 +309,8 @@ public class MainActivity extends AppCompatActivity {
                 int currentId = currentDestination.getId();
                 if (currentId == R.id.homeFragment ||
                         currentId == R.id.hymnalFragment ||
-                        currentId == R.id.communityFragment) {
+                        currentId == R.id.communityFragment ||
+                        currentId == R.id.communitysongsFragment) {
                     // On top-level, allow back press to close app
                     super.onBackPressed();
                 } else {

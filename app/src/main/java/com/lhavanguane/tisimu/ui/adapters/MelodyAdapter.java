@@ -15,29 +15,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.lhavanguane.tisimu.R;
-import com.lhavanguane.tisimu.entities.MelodyProposal;
+import com.lhavanguane.tisimu.models.SongMelody;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyViewHolder> {
 
-    private List<MelodyProposal> melodies = new ArrayList<>();
+    private List<SongMelody> melodies = new ArrayList<>();
     private OnMelodyActionListener actionListener;
     private ExoPlayer exoPlayer;
     private int currentlyPlayingPosition = -1;
 
     public interface OnMelodyActionListener {
-        void onLikeClick(MelodyProposal melody);
-        void onPlayAudio(MelodyProposal melody, int position);
-        void onVideoClick(MelodyProposal melody);
+        void onLikeClick(SongMelody melody);
+        void onPlayAudio(SongMelody melody, int position);
+        void onVideoClick(SongMelody melody);
     }
 
     public void setOnMelodyActionListener(OnMelodyActionListener listener) {
         this.actionListener = listener;
     }
 
-    public void setMelodies(List<MelodyProposal> melodies) {
+    public void setMelodies(List<SongMelody> melodies) {
         this.melodies = melodies;
         notifyDataSetChanged();
     }
@@ -64,7 +64,7 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
 
     @Override
     public void onBindViewHolder(@NonNull MelodyViewHolder holder, int position) {
-        MelodyProposal melody = melodies.get(position);
+        SongMelody melody = melodies.get(position);
         holder.bind(melody, position);
     }
 
@@ -100,7 +100,7 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
             btnLike = itemView.findViewById(R.id.btnLike);
         }
 
-        void bind(MelodyProposal melody, int position) {
+        void bind(SongMelody melody, int position) {
             tvProposerName.setText(melody.getUserName());
             tvLikes.setText(melody.getLikesCount() + " likes");
             tvMelodyTitle.setText(melody.getTitle());
@@ -114,8 +114,9 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
 
             // Format time
             long now = System.currentTimeMillis();
+            long createdMs = melody.getCreatedAt() != null ? melody.getCreatedAt().getTime() : 0L;
             CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
-                    melody.getCreatedAt(), now, DateUtils.MINUTE_IN_MILLIS);
+                    createdMs, now, DateUtils.MINUTE_IN_MILLIS);
 
             if (melody.getType().equals("audio")) {
                 llAudioPlayer.setVisibility(View.VISIBLE);
@@ -140,7 +141,7 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
             });
         }
 
-        private void setupAudioPlayer(MelodyProposal melody, int position) {
+        private void setupAudioPlayer(SongMelody melody, int position) {
             btnPlayAudio.setOnClickListener(v -> {
                 if (actionListener != null) {
                     if (currentlyPlayingPosition == position && exoPlayer != null && exoPlayer.isPlaying()) {
@@ -156,7 +157,7 @@ public class MelodyAdapter extends RecyclerView.Adapter<MelodyAdapter.MelodyView
             });
         }
 
-        private void setupVideoThumbnail(MelodyProposal melody) {
+        private void setupVideoThumbnail(SongMelody melody) {
             // Extract YouTube video ID from URL
             String videoId = extractYouTubeId(melody.getUrl());
             if (videoId != null) {

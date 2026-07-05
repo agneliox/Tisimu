@@ -98,6 +98,7 @@ public class SongListActivity extends AppCompatActivity {
                 intent.putExtra("SONG_AUTHOR", item.getSong().getAuthor());
                 intent.putExtra("SONG_COMPOSER", item.getSong().getComposer());
                 intent.putExtra("HYMNAL_NAME", item.getHymnalName());
+                intent.putExtra("HYMNAL_ID", item.getHymnalId());
                 startActivity(intent);
             }
         });

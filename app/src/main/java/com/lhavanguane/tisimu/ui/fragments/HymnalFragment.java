@@ -15,7 +15,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import com.google.android.material.textfield.TextInputEditText;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -52,7 +54,8 @@ public class HymnalFragment extends Fragment {
     private MaterialToolbar toolbar;
     private TabLayout tabLayout;
     private RecyclerView rvSongs;
-    private SearchView searchView;
+    private TextInputEditText searchView;
+    private TextWatcher searchWatcher;
     private ProgressBar progressBar;
     private TextView tvEmptyState;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -166,6 +169,7 @@ public class HymnalFragment extends Fragment {
                 intent.putExtra("SONG_AUTHOR", songItem.getSong().getAuthor());
                 intent.putExtra("SONG_COMPOSER", songItem.getSong().getComposer());
                 intent.putExtra("HYMNAL_NAME", songItem.getHymnalName());
+                intent.putExtra("HYMNAL_ID", songItem.getHymnalId());
                 startActivity(intent);
             }
         });
@@ -174,19 +178,14 @@ public class HymnalFragment extends Fragment {
     private void setupSearchView(View view) {
         searchView = view.findViewById(R.id.searchView);
         if (searchView != null) {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    filterSongs(query);
-                    return true;
+            searchWatcher = new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    filterSongs(s.toString());
                 }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    filterSongs(newText);
-                    return true;
-                }
-            });
+                @Override public void afterTextChanged(Editable s) {}
+            };
+            searchView.addTextChangedListener(searchWatcher);
         }
     }
 
@@ -467,8 +466,8 @@ public class HymnalFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (searchView != null) {
-            searchView.setOnQueryTextListener(null);
+        if (searchView != null && searchWatcher != null) {
+            searchView.removeTextChangedListener(searchWatcher);
         }
         if (tabLayout != null) {
             tabLayout.clearOnTabSelectedListeners();

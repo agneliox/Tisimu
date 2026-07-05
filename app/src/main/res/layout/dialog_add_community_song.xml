@@ -9,20 +9,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_melody_proposal"
+        android:text="@string/add_a_song"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
         android:layout_marginBottom="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilMelodyTitle"
+        android:id="@+id/tilSongTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTitle"
+            android:id="@+id/etSongTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title" />
@@ -30,18 +31,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilMelodyUrl"
+        android:id="@+id/tilSongLyrics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUrl"
+            android:id="@+id/etSongLyrics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/melody_url_hint"
-            android:inputType="textUri" />
+            android:hint="@string/lyrics_required"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="4"
+            android:gravity="top" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSongAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/author_optional" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,12 +69,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDescription"
+            android:id="@+id/etSongComposer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/description_optional"
-            android:inputType="textMultiLine"
-            android:maxLines="2" />
+            android:hint="@string/composer_optional" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +82,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelMelody"
+            android:id="@+id/btnCancelSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -76,7 +91,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSubmitMelody"
+            android:id="@+id/btnSubmitSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

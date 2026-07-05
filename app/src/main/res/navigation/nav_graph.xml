@@ -21,6 +21,11 @@
         tools:layout="@layout/fragment_community" />
 
     <fragment
+        android:id="@+id/communitysongsFragment"
+        android:name="com.lhavanguane.tisimu.ui.fragments.CommunitySongsFragment"
+        tools:layout="@layout/fragment_community_songs" />
+
+    <fragment
         android:id="@+id/profileFragment"
         android:name="com.lhavanguane.tisimu.ui.fragments.ProfileFragment"
         tools:layout="@layout/fragment_profile" />

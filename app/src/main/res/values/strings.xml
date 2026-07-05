@@ -235,4 +235,29 @@
     <string name="new_password_min_6_characters">New Password (min 6 characters)</string>
     <string name="current_password">Current Password</string>
     <string name="display_name">Display Name</string>
+
+    <!-- Social features -->
+    <string name="melodies">Melodies</string>
+    <string name="no_melodies_yet">No melodies yet</string>
+    <string name="melody_url_hint">Audio or video link URL</string>
+    <string name="melody_added">Melody added</string>
+    <string name="community_songs">Community Songs</string>
+    <string name="add_a_song">Add a Song</string>
+    <string name="song_submitted">Song submitted!</string>
+    <string name="no_community_songs">No songs yet. Be the first to add one!</string>
+    <string name="search_songs">Search songs…</string>
+    <string name="likes">likes</string>
+    <string name="comments">comments</string>
+    <string name="likes_count">0 likes</string>
+    <string name="replying_to">Replying to @%1$s</string>
+    <string name="delete_comment_confirm">Delete this comment?</string>
+    <string name="by_author">by %1$s</string>
+    <string name="title_required">Title is required</string>
+    <string name="url_required">URL is required</string>
+    <string name="lyrics_required">Lyrics *</string>
+    <string name="lyrics_required_error">Lyrics are required</string>
+    <string name="author_optional">Author (optional)</string>
+    <string name="composer_optional">Composer (optional)</string>
+    <string name="sign_in_to_interact">Sign in to like or comment</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
 </resources>

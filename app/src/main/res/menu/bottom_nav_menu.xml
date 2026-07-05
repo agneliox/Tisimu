@@ -17,6 +17,11 @@
         android:title="@string/community" />
 
     <item
+        android:id="@+id/communitysongsFragment"
+        android:icon="@drawable/ic_music_note"
+        android:title="@string/songs" />
+
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person"
         android:title="@string/me" />

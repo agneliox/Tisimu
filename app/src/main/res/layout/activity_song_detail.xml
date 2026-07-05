@@ -1,119 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_song_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
-    android:id="@+id/activity_song_detail">
+    android:orientation="vertical">
 
-    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/song_detail_toolbar"
+        style="@style/TopAppBarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="?attr/colorOnSurface"
         app:title="@string/song_title"
-        />
+        app:titleTextColor="?attr/colorOnSurface" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorOutlineVariant" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="40dp">
 
-            <!-- Song Number Badge -->
-            <TextView
-                android:id="@+id/tvSongDetailNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <!-- Hymn number badge -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:layout_gravity="center"
-                android:text="@string/hymn_001"
-                android:textSize="32sp"
-                android:textStyle="bold"/>
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                app:cardCornerRadius="36dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-            <!-- Song Title -->
+                <TextView
+                    android:id="@+id/tvSongDetailNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/hymn_001"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Song title -->
             <TextView
                 android:id="@+id/tvSongTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/song_title"
-                android:textSize="28sp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-medium" />
+                android:text="@string/song_title"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textColor="?attr/colorOnSurface" />
 
             <!-- Author & Composer -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="28dp"
                 android:gravity="center"
-                android:layout_marginTop="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/author_name"
-                    android:textSize="14sp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvComposer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="@string/composer_name"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
                     android:visibility="gone" />
 
             </LinearLayout>
 
-            <!-- Lyrics Container -->
+            <!-- Social row: likes + comments -->
+            <LinearLayout
+                android:id="@+id/llSocialRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLikeSong"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/likes_count"
+                    app:icon="@drawable/ic_star" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShowComments"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/add_a_comment"
+                    app:icon="@drawable/ic_notifications" />
+
+            </LinearLayout>
+
+            <!-- Melodies section -->
+            <LinearLayout
+                android:id="@+id/llMelodiesSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvMelodiesLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/melodies"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddMelody"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_melody_proposal"
+                        app:icon="@drawable/ic_add" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMelodies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal" />
+
+            </LinearLayout>
+
+            <!-- Lyrics -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVerses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
 
-            <!-- Action Buttons -->
+            <!-- Action buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnShare"
+                    style="@style/ButtonStyle.Outlined"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:text="@string/share_lyrics"
-                    android:textAllCaps="false"
-                    android:icon="@drawable/ic_share"
-                    app:iconGravity="textStart"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    app:icon="@drawable/ic_share"
+                    app:iconGravity="textStart" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCopyAll"
+                    style="@style/ButtonStyle.Outlined"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:text="@string/copy_all"
-                    android:textAllCaps="false"
-                    android:icon="@drawable/ic_copy"
-                    app:iconGravity="textStart"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    app:icon="@drawable/ic_copy"
+                    app:iconGravity="textStart" />
 
             </LinearLayout>
 
